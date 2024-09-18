@@ -1,0 +1,46 @@
+<header class="bg-white fixed-top">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="{{ '/' | relative_url }}">
+                <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="Wales Gene Park Logo" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item {% if page.url == '/' %}active{% endif %}">
+                        <a class="nav-link" href="{{ '/' | relative_url }}">HOME</a>
+                    </li>
+                    <li class="nav-item {% if page.url == '/news' %}active{% endif %}">
+                        <a class="nav-link" href="{{ '/news' | relative_url }}">LATEST NEWS</a>
+                    </li>
+                    <li class="nav-item dropdown {% if page.url contains '/about' %}active{% endif %}">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAbout" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            ABOUT US
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownAbout">
+                            <a class="dropdown-item" href="#">Our Team</a>
+                            <a class="dropdown-item" href="#">History</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown {% if page.url contains '/services' %}active{% endif %}">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownServices" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            OUR GENOMICS SERVICES
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownServices">
+                            <a class="dropdown-item" href="#">Service 1</a>
+                            <a class="dropdown-item" href="#">Service 2</a>
+                        </div>
+                    </li>
+                    <li class="nav-item {% if page.url == '/contact' %}active{% endif %}">
+                        <a class="nav-link" href="{{ '/contact' | relative_url }}">CONTACT US</a>
+                    </li>
+                    <li class="nav-item {% if page.url == '/events' %}active{% endif %}">
+                        <a class="nav-link" href="{{ '/events' | relative_url }}">EVENTS</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>

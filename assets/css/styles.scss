@@ -1,0 +1,196 @@
+---
+---
+
+@import "main";
+
+// Custom styles
+body {
+    font-family: Arial, sans-serif;
+}
+
+// Color scheme
+$primary-color: #e6001f;
+$secondary-color: #ffffff;
+
+// Header styles
+header {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar-light .navbar-nav .nav-link {
+    color: #000000;
+    font-weight: bold;
+    text-transform: uppercase;
+    @include transition(color);
+    
+    &:hover, &:focus {
+      color: $primary-color;
+    }
+  }
+  
+  .navbar-light .navbar-nav .active > .nav-link {
+    color: $primary-color;
+  }
+  
+  // Add padding to body to account for fixed header
+  body {
+    padding-top: 76px; // Adjust this value based on your header height
+  }
+
+// Dividers
+.full-width-divider {
+    height: 2px;
+    background-color: $primary-color;
+    margin: 0;
+}
+
+.short-divider {
+    height: 4px;
+    background-color: $primary-color;
+    max-width: 800px;  // Increased from 100px to 200px
+    margin: 2rem auto;
+  }
+
+// Latest News section
+.latest-news {
+    background-color: $secondary-color;
+    color: $primary-color;
+}
+
+.news-carousel-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .news-carousel {
+      display: flex;
+      transition: transform 0.5s ease;
+      
+      .news-item {
+        flex: 0 0 33.33%;
+        padding: 0 15px;
+        
+        img {
+          width: 100%;
+          height: 200px;
+          object-fit: cover;
+          border-radius: 5px;
+        }
+        
+        h3 {
+          font-size: 1.2rem;
+          margin-top: 1rem;
+          color: $primary-color;
+        }
+      }
+    }
+  
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #ccc;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      
+      &.active {
+        background-color: $primary-color;
+      }
+    }
+  }
+
+// Shortcuts section
+.shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch; // Ensure all items stretch to the same height
+  gap: 20px; // Add some space between items
+
+  .col-md-4 {
+    margin-bottom: 20px; // Add space between rows
+  }
+
+  .card-link {
+    flex: 1 1 calc(33.33% - 40px); // Adjust width and account for gap
+    display: flex;
+    text-decoration: none; // Remove underline from links
+    color: inherit; // Inherit text color
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; // Ensure content is spaced evenly
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    background-color: #fff;
+    text-align: center;
+    width: 100%; // Ensure the card takes full width of the link
+    height: 100%; // Ensure all cards have the same height
+    transition: transform 0.3s ease; // Smooth transition for hover effect
+
+    &:hover {
+      transform: translateY(-10px); // Slight bouncy effect
+    }
+
+    img {
+      width: 100%;
+      height: 200px; // Set a fixed height for images
+      object-fit: cover; // Ensure images cover the area without distortion
+      border-radius: 5px;
+    }
+
+    .card-body {
+      flex-grow: 1; // Ensure the body takes up available space
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start; // Align text at the top
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      height: 50px;
+      color: $primary-color;
+    }
+
+    .card-text {
+      margin-bottom: auto; // Push the text to the top
+      height: 100px;
+    }
+  }
+}
+
+// Twitter feed section
+.twitter-feed {
+    background-color: #f8f9fa;
+}
+
+// Footer styles
+footer {
+    background-color: $secondary-color;
+    border-top: 2px solid $primary-color;
+    
+    a {
+        color: $primary-color;
+    }
+}
+
+// Add styles for post content
+.post-content {
+  max-width: 800px; // Adjust the width as needed
+  margin: 0 auto;
+  padding: 1rem;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #000000;
+  text-align: justify; // Justify the text both left and right
+}
