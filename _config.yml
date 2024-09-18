@@ -1,15 +1,13 @@
 title: Wales Gene Park
 description: >- # this means to ignore newlines until "baseurl:"
   Wales Gene Park
-url: "https://walesgenepark.github.io"
+url: "https://yourgithubusername.github.io"
 baseurl: ""
 
 # Build settings
 markdown: kramdown
 plugins:
   - jekyll-feed
-  - jekyll-relative-links
-
 
 # Ensure the layouts directory is recognized
 layouts_dir: _layouts

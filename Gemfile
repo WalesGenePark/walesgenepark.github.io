@@ -8,7 +8,6 @@ gem 'csv'
 gem 'ostruct'
 gem 'base64'
 gem 'bigdecimal'
-gem 'jekyll-relative-links'
 
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.12"
