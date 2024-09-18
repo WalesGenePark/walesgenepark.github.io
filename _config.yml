@@ -8,6 +8,8 @@ baseurl: ""
 markdown: kramdown
 plugins:
   - jekyll-feed
+  - jekyll-relative-links
+
 
 # Ensure the layouts directory is recognized
 layouts_dir: _layouts
