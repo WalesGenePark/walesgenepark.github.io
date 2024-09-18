@@ -1,0 +1,28 @@
+---
+layout: default
+title: Events
+---
+
+<section class="events py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Events</h2>
+        <div class="calendar-container">
+            <div id="calendar"></div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function() {
+        $('#calendar').fullCalendar({
+            events: '/assets/js/events.json', // Correct path to your events JSON file
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            editable: true,
+            droppable: true
+        });
+    });
+</script>
