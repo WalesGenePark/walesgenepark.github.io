@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "Spotlight on Genomics at University of South Wales"
-date: 2024-08-15
+date: 2024-08-20
 categories: news
-image: /assets/images/spotlight-on-genomics-at-university-of-south-wales_1.jpeg
+image: /assets/images/spotlight-on-genomics-at-university-of-south-wales_5.jpeg
 author:
   name: "Isabella Parker"
   photo: "/assets/images/author-isabella-parker.jpeg"

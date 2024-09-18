@@ -8,49 +8,15 @@ title: Home
         <h2 class="text-center mb-4">Latest News</h2>
         <div class="news-carousel-container">
             <div class="news-carousel">
+                {% assign latest_posts = site.posts | sort: 'date' | reverse %}
+                {% for post in latest_posts %}
                 <div class="news-item">
-                    <a href="{{ 'news/2024/08/15/spotlight-on-genomics-at-university-of-south-wales' | relative_url }}">
-                        <img src="{{ 'assets/images/spotlight-on-genomics-at-university-of-south-wales_1.jpeg' | relative_url }}" alt="Spotlight on Genomics" class="img-fluid">
-                        <h3 class="mt-3">Spotlight on Genomics at University of South Wales</h3>
+                    <a href="{{ post.url | relative_url }}">
+                        <img src="{{ post.image }}" alt="{{ post.title }}" class="img-fluid">
+                        <h3 class="mt-3">{{ post.title }}</h3>
                     </a>
                 </div>
-                <div class="news-item">
-                    <a href="{{ 'news/2024/08/15/spotlight-on-genomics-at-university-of-south-wales' | relative_url }}">
-                        <img src="{{ 'assets/images/spotlight-on-genomics-at-university-of-south-wales_2.jpeg' | relative_url }}" alt="Spotlight on Genomics" class="img-fluid">
-                        <h3 class="mt-3">Spotlight on Genomics at University of South Wales</h3>
-                    </a>
-                </div>
-                <div class="news-item">
-                    <a href="{{ 'news/2024/08/15/spotlight-on-genomics-at-university-of-south-wales' | relative_url }}">
-                        <img src="{{ 'assets/images/spotlight-on-genomics-at-university-of-south-wales_3.jpeg' | relative_url }}" alt="Spotlight on Genomics" class="img-fluid">
-                        <h3 class="mt-3">Spotlight on Genomics at University of South Wales</h3>
-                    </a>
-                </div>
-                <div class="news-item">
-                    <a href="{{ 'news/2024/08/15/spotlight-on-genomics-at-university-of-south-wales' | relative_url }}">
-                        <img src="{{ 'assets/images/spotlight-on-genomics-at-university-of-south-wales_4.jpeg' | relative_url }}" alt="Spotlight on Genomics" class="img-fluid">
-                        <h3 class="mt-3">Spotlight on Genomics at University of South Wales</h3>
-                    </a>
-                </div>
-                <div class="news-item">
-                    <a href="{{ 'news/2024/08/15/spotlight-on-genomics-at-university-of-south-wales' | relative_url }}">
-                        <img src="{{ 'assets/images/spotlight-on-genomics-at-university-of-south-wales_5.jpeg' | relative_url }}" alt="Spotlight on Genomics" class="img-fluid">
-                        <h3 class="mt-3">Spotlight on Genomics at University of South Wales</h3>
-                    </a>
-                </div>
-                <div class="news-item">
-                    <a href="{{ 'news/2024/08/15/spotlight-on-genomics-at-university-of-south-wales' | relative_url }}">
-                        <img src="{{ 'assets/images/spotlight-on-genomics-at-university-of-south-wales_6.jpeg' | relative_url }}" alt="Spotlight on Genomics" class="img-fluid">
-                        <h3 class="mt-3">Spotlight on Genomics at University of South Wales</h3>
-                    </a>
-                </div>
-                <div class="news-item">
-                    <a href="{{ 'news/2024/08/15/spotlight-on-genomics-at-university-of-south-wales' | relative_url }}">
-                        <img src="{{ 'assets/images/spotlight-on-genomics-at-university-of-south-wales_1.jpeg' | relative_url }}" alt="Spotlight on Genomics" class="img-fluid">
-                        <h3 class="mt-3">Spotlight on Genomics at University of South Wales</h3>
-                    </a>
-                </div>
-                <!-- Add more news items here -->
+                {% endfor %}
             </div>
             <div class="carousel-dots"></div>
         </div>
@@ -137,14 +103,14 @@ title: Home
 <!-- Follow Us Section -->
 <section class="follow-us py-5">
     <div class="container text-center">
-      <h2 class="mb-4">Follow Us</h2>
-      <div class="social-icons">
-        <a href="https://x.com/WalesGenePark" target="_blank" class="social-icon">
-          <i class="fa-brands fa-twitter"></i>
-        </a>
-        <a href="https://www.linkedin.com/company/wales-gene-park-parc-geneteg-cymru/" target="_blank" class="social-icon">
-          <i class="fa-brands fa-linkedin"></i>
-        </a>
-      </div>
+        <h2 class="mb-4">Follow Us</h2>
+        <div class="social-icons">
+            <a href="https://x.com/WalesGenePark" target="_blank" class="social-icon">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.linkedin.com/company/wales-gene-park-parc-geneteg-cymru/" target="_blank" class="social-icon">
+                <i class="fab fa-linkedin"></i>
+            </a>
+        </div>
     </div>
-  </section>
+</section>

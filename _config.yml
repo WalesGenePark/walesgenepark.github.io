@@ -12,6 +12,19 @@ plugins:
 # Ensure the layouts directory is recognized
 layouts_dir: _layouts
 
+# Configuration file for a Jekyll site.
+# This section defines the collections settings.
+# 'posts' collection is configured to output generated files.
+# Permalink structure for posts is set to include year, month, day, and title.
+collections:
+  posts:
+    output: true
+    permalink: /news/:year/:month/:day/:title/
+
+# Ensure calendar events is included
+include:
+  - assets/js/events.json
+
 # Exclude from processing
 exclude:
   - Gemfile

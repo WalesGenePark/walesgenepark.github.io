@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Spotlight on Genomics at University of South Wales"
-date: 2024-08-15
+date: 2024-08-18
 categories: news
 image: /assets/images/spotlight-on-genomics-at-university-of-south-wales_1.jpeg
 author:
