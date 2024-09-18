@@ -2,7 +2,7 @@ title: Wales Gene Park
 description: >- # this means to ignore newlines until "baseurl:"
   Wales Gene Park
 url: "https://walesgenepark.github.io"
-baseurl: "/walesgenepark.github.io"
+baseurl: ""
 
 # Build settings
 markdown: kramdown
