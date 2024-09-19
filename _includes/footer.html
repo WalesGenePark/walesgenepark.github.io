@@ -1,22 +1,29 @@
-<footer class="bg-light py-4 mt-5">
+<footer>
     <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <p>&copy; 2024 Wales Gene Park. All rights reserved.</p>
-            </div>
-            <div class="col-md-6 text-right">
-                <a href="#">Privacy Policy</a> |
-                <a href="#">Cookie Policy (UK)</a> |
-                <a href="#">Terms And Conditions</a>
-            </div>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>{{ site.data.translations[page.lang].quick_links }}</h3>
+          <ul>
+            <li><a href="{{ site.baseurl }}/{% if page.lang != site.default_lang %}{{ page.lang }}/{% endif %}">{{ site.data.navigation[page.lang][0].title }}</a></li>
+            <li><a href="{{ site.baseurl }}{{ site.data.navigation[page.lang][1].url }}">{{ site.data.navigation[page.lang][1].title }}</a></li>
+            <li><a href="{{ site.baseurl }}{{ site.data.navigation[page.lang][2].url }}">{{ site.data.navigation[page.lang][2].title }}</a></li>
+          </ul>
         </div>
-        <div class="row mt-3">
-            <div class="col text-center">
-                <!-- Add your partner logos here -->
-                <img src="{{ '/assets/images/partner-logo1.png' | relative_url }}" alt="Partner 1" class="mr-3" height="30">
-                <img src="{{ '/assets/images/partner-logo2.png' | relative_url }}" alt="Partner 2" class="mr-3" height="30">
-                <!-- Add more partner logos as needed -->
-            </div>
+        <div class="footer-section">
+          <h3>{{ site.data.navigation[page.lang][4].title }}</h3>
+          <p>Email: {{ site.email }}</p>
+          <p>Phone: +44 (0)123 456 7890</p>
         </div>
+        <div class="footer-section">
+          <h3>{{ site.data.translations[page.lang].follow_us }}</h3>
+          <div class="social-icons">
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>{{ site.data.translations[page.lang].copyright }}</p>
+      </div>
     </div>
-</footer>
+  </footer>

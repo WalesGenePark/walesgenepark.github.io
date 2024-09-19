@@ -1,15 +1,16 @@
 source "https://rubygems.org"
 
-gem "jekyll", "~> 4.2.0"
-gem "webrick", "~> 1.7"
-gem 'ffi'
-gem 'logger'
-gem 'csv'
-gem 'ostruct'
-gem 'base64'
-gem 'bigdecimal'
+gem "jekyll"
 
-group :jekyll_plugins do
-  gem "jekyll-feed", "~> 0.12"
-  gem "jekyll-seo-tag", "~> 2.6"
+# Include all plugins used in _config.yml
+if File.exist?('_config.yml')
+  require 'yaml'
+  config = YAML.load_file('_config.yml')
+  if config['plugins']
+    config['plugins'].each do |plugin|
+      gem plugin
+    end
+  end
 end
+
+gem "webrick" # Required for Ruby versions 3.0 and above

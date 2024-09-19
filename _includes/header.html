@@ -1,46 +1,34 @@
-<header class="bg-white fixed-top">
+<header id="main-header">
     <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="{{ '/' | relative_url }}">
-                <img src="{{ '/assets/images/WGP-logo-new.jpeg' | relative_url }}" alt="Wales Gene Park Logo" height="65">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item {% if page.url == '/' %}active{% endif %}">
-                        <a class="nav-link" href="{{ '/' | relative_url }}">HOME</a>
-                    </li>
-                    <li class="nav-item {% if page.url == '/news' %}active{% endif %}">
-                        <a class="nav-link" href="{{ 'news' | relative_url }}">LATEST NEWS</a>
-                    </li>
-                    <li class="nav-item dropdown {% if page.url contains '/about' %}active{% endif %}">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAbout" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            ABOUT US
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownAbout">
-                            <a class="dropdown-item" href="#">Our Team</a>
-                            <a class="dropdown-item" href="#">History</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown {% if page.url contains '/services' %}active{% endif %}">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownServices" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            OUR GENOMICS SERVICES
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownServices">
-                            <a class="dropdown-item" href="#">Service 1</a>
-                            <a class="dropdown-item" href="#">Service 2</a>
-                        </div>
-                    </li>
-                    <li class="nav-item {% if page.url == '/contact' %}active{% endif %}">
-                        <a class="nav-link" href="{{ '/contact' | relative_url }}">CONTACT US</a>
-                    </li>
-                    <li class="nav-item {% if page.url == '/events' %}active{% endif %}">
-                        <a class="nav-link" href="{{ 'events' | relative_url }}">EVENTS</a>
-                    </li>
+      <div class="logo">
+        <a href="{{ site.baseurl }}/{% if page.lang != site.default_lang %}{{ page.lang }}/{% endif %}">
+          <img src="{{ site.baseurl }}/assets/images/logo.png" alt="{{ site.title }}">
+        </a>
+      </div>
+      <nav>
+        <ul class="main-menu">
+          {% for item in site.data.navigation[page.lang] %}
+            <li {% if item.submenu %}class="dropdown"{% endif %}>
+              <a href="{{ site.baseurl }}{{ item.url }}" {% if page.url == item.url %}class="active"{% endif %}>
+                {{ item.title }}
+                {% if item.submenu %}<i class="fas fa-chevron-down"></i>{% endif %}
+              </a>
+              {% if item.submenu %}
+                <ul class="submenu">
+                  {% for subitem in item.submenu %}
+                    <li><a href="{{ site.baseurl }}{{ subitem.url }}">{{ subitem.title }}</a></li>
+                  {% endfor %}
                 </ul>
-            </div>
-        </nav>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+      <div class="language-switcher">
+        {% for lang in site.languages %}
+          <button id="lang-{{ lang }}" {% if page.lang == lang %}class="active"{% endif %} onclick="switchLanguage('{{ lang }}')">{{ lang | upcase }}</button>
+        {% endfor %}
+      </div>
     </div>
-</header>
+    <div class="header-divider"></div>
+  </header>

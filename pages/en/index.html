@@ -1,0 +1,23 @@
+---
+layout: default
+lang: "en"
+permalink: /
+---
+
+<section id="latest-news">
+  <h2 class="section-title">Latest news</h2>
+  {% include news-carousel.html %}
+</section>
+
+<section id="quick-links">
+  <h2 class="section-title">Our Services</h2>
+  {% include quick-links.html %}
+</section>
+
+<section id="social-media">
+  <h2 class="section-title">{{ site.data.translations[page.lang].follow_us }}</h2>
+  <div class="social-icons">
+    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+  </div>
+</section>
