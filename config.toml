@@ -11,37 +11,37 @@ defaultContentLanguageInSubdir = false
     [languages.en.menu]
       [[languages.en.menu.main]]
         identifier = "home"
-        name = "Home"
+        name = "HOME"
         url = "/"
         weight = 1
       [[languages.en.menu.main]]
         identifier = "news"
-        name = "Latest News"
+        name = "LATEST NEWS"
         url = "/news/"
         weight = 2
       [[languages.en.menu.main]]
         identifier = "about"
-        name = "About Us"
+        name = "ABOUT US"
         url = "/about/"
         weight = 3
       [[languages.en.menu.main]]
         identifier = "services"
-        name = "Our Genomics Services"
+        name = "OUR GENOMICS SERVICES"
         url = "/services/"
         weight = 4
       [[languages.en.menu.main]]
         identifier = "teams"
-        name = "Our Teams"
+        name = "OUR TEAMS"
         url = "/teams/"
         weight = 5
       [[languages.en.menu.main]]
         identifier = "contact"
-        name = "Contact Us"
+        name = "CONTACT US"
         url = "/contact/"
         weight = 6
       [[languages.en.menu.main]]
         identifier = "events"
-        name = "Events"
+        name = "EVENTS"
         url = "/events/"
         weight = 7
 
@@ -52,37 +52,37 @@ defaultContentLanguageInSubdir = false
     [languages.cy.menu]
       [[languages.cy.menu.main]]
         identifier = "home"
-        name = "Hafan"
+        name = "HAFAN"
         url = "/cy/"
         weight = 1
       [[languages.cy.menu.main]]
         identifier = "news"
-        name = "Newyddion Diweddaraf"
+        name = "NEWYDDION DIWEDDARAF"
         url = "/cy/news/"
         weight = 2
       [[languages.cy.menu.main]]
         identifier = "about"
-        name = "Amdanom Ni"
+        name = "AMDONOM NI"
         url = "/cy/about/"
         weight = 3
       [[languages.cy.menu.main]]
         identifier = "services"
-        name = "Ein Gwasanaethau Genomeg"
+        name = "EIN GWASANAETHAU GENOMEG"
         url = "/cy/services/"
         weight = 4
       [[languages.cy.menu.main]]
         identifier = "teams"
-        name = "Ein Timau"
+        name = "EIN TIMAU"
         url = "/cy/teams/"
         weight = 5
       [[languages.cy.menu.main]]
         identifier = "contact"
-        name = "Cysylltu â Ni"
+        name = "CYSLLTU â NI"
         url = "/cy/contact/"
         weight = 6
       [[languages.cy.menu.main]]
         identifier = "events"
-        name = "Digwyddiadau"
+        name = "DIGWYDDIAU"
         url = "/cy/events/"
         weight = 7
 
