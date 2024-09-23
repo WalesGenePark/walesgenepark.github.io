@@ -1,9 +1,9 @@
 {{ define "main" }}
-<div class="container">
-    <h1 class="text-center py-5">{{ .Title }}</h1>
+<div class="container-fluid"> <!-- Change to container-fluid for full width -->
+    <h1 class="events-title text-center py-5">{{ .Title }}</h1>
     
     <div class="row mb-4">
-        <div class="col">
+        <div class="col-md-6 mx-auto"> <!-- Center the search bar and limit its width -->
             <input type="text" id="eventSearch" class="form-control" placeholder="Search events...">
         </div>
     </div>
@@ -13,30 +13,58 @@
 
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css' rel='stylesheet' />
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/locales-all.min.js'></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+        },
+        views: {
+            dayGridMonth: {
+                dayMaxEventRows: false // remove limit on events per day
+            },
+            listMonth: { buttonText: 'list' }
+        },
         events: [
             {{ range $.Site.Data.events }}
             {
                 title: {{ .title }},
                 start: {{ .start }},
                 end: {{ .end }},
-                allDay: {{ .allDay }}
+                allDay: {{ .allDay }},
+                backgroundColor: 'transparent',
+                borderColor: 'transparent'
             },
             {{ end }}
         ],
         eventContent: function(arg) {
+            let timeText = '';
+            if (!arg.event.allDay) {
+                const start = arg.event.start.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                const end = arg.event.end ? arg.event.end.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : '';
+                timeText = start + (end ? ' - ' + end : '');
+            }
             return {
                 html: `
                     <div class="fc-content">
-                        <div class="fc-time">${arg.timeText}</div>
-                        <div class="fc-title">${arg.event.title}</div>
+                        <div class="fc-event-time">${timeText}</div>
+                        <div class="fc-event-title">${arg.event.title}</div>
                     </div>
                 `
             };
+        },
+        eventDidMount: function(info) {
+            tippy(info.el, {
+                content: `${info.event.title}<br>${info.event.start.toLocaleString()}`,
+                allowHTML: true,
+            });
         }
     });
     calendar.render();

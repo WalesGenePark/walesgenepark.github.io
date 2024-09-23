@@ -1,5 +1,6 @@
 :root {
   --primary-color: #e30613;
+  --primary-color-rgb: 227, 6, 19;
   --secondary-color: #333333;
   --light-gray: #f8f9fa;
   --white: #ffffff;
@@ -420,10 +421,10 @@ footer a:hover {
 
 /* Event Calendar Styles */
 #calendar {
-  max-width: 800px;
-  margin: 0 auto;
-  display: block; /* Ensure it's displayed */
-  visibility: visible; /* Ensure it's visible */
+  max-width: 1200px; /* Increase the max-width to make the calendar wider */
+  margin: 0 auto 60px; /* Add bottom margin to create space before the footer */
+  display: block;
+  visibility: visible;
 }
 
 .month {
@@ -459,20 +460,28 @@ footer a:hover {
 }
 
 /* FullCalendar Styles */
-.fc-timegrid-event .fc-event-time,
-.fc-daygrid-event .fc-event-time {
-    color: red !important;
-    font-weight: bold;
+.fc {
+  color: black !important;
 }
 
-.fc-timegrid-event .fc-event-title,
-.fc-daygrid-event .fc-event-title {
-    color: black;
+.fc .fc-button-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
-.fc-event-title {
-    white-space: normal;
-    overflow: visible;
+.fc .fc-button-primary:hover {
+  background-color: darken(var(--primary-color), 10%);
+  border-color: darken(var(--primary-color), 10%);
+}
+
+.fc .fc-col-header-cell-cushion,
+.fc .fc-daygrid-day-number {
+  color: black;
+}
+
+.fc .fc-event-title,
+.fc .fc-event-time {
+  color: black !important;
 }
 
 /* Search bar styles */
@@ -528,5 +537,101 @@ section {
   color: var(--secondary-color); /* Date of publication in black */
   font-size: 0.9rem;
   margin-top: 0.5rem; /* Add some space above the date */
+}
+
+/* FullCalendar List View Styles */
+.fc-list-event {
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    margin-bottom: 2px;
+}
+
+.fc-list-event-title a {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.fc-list-event-time {
+    color: var(--secondary-color);
+}
+
+.fc-list-day-cushion {
+    background-color: var(--light-gray) !important;
+}
+
+/* FullCalendar Event Styles */
+.fc-daygrid-event {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 2px 0 !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    margin-bottom: 2px !important;
+}
+
+.fc-daygrid-event .fc-event-main {
+    padding: 0 !important;
+}
+
+.fc-daygrid-event .fc-event-title {
+    font-weight: normal !important;
+    font-size: 0.9em !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    line-height: 1.2em !important;
+    max-height: 2.4em !important;
+    color: var(--secondary-color) !important;
+}
+
+.fc-daygrid-event .fc-event-time {
+    font-weight: normal !important;
+    font-size: 0.85em !important;
+    color: var(--primary-color) !important;
+    display: block !important;
+}
+
+/* Adjust the day cell to accommodate wrapped text */
+.fc-daygrid-day-frame {
+    min-height: 100px !important;
+}
+
+/* Style for "more" link */
+.fc-daygrid-more-link {
+    color: var(--primary-color) !important;
+    font-weight: bold !important;
+}
+
+/* Remove background from events */
+.fc-h-event, .fc-v-event {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+/* Ensure consistent text color */
+.fc-event-title, .fc-event-time {
+    color: var(--secondary-color) !important;
+}
+
+/* Adjust the day number style */
+.fc .fc-daygrid-day-number {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Add padding between header and title */
+.events-title {
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+/* Adjust container padding for better responsiveness */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1300px;
+    }
 }
 
