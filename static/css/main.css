@@ -575,44 +575,43 @@ section {
 
 .fc-daygrid-event .fc-event-title {
     font-weight: normal !important;
-    font-size: 0.9em !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 2 !important;
-    -webkit-box-orient: vertical !important;
-    line-height: 1.2em !important;
-    max-height: 2.4em !important;
+    font-size: 1.1em !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    line-height: 1.3em !important;
     color: var(--secondary-color) !important;
 }
 
 .fc-daygrid-event .fc-event-time {
     font-weight: normal !important;
-    font-size: 0.85em !important;
+    font-size: 1em !important;
     color: var(--primary-color) !important;
     display: block !important;
 }
 
-/* Adjust the day cell to accommodate wrapped text */
+/* Adjust day cell sizing */
+.fc-daygrid-day {
+    max-height: 300px !important; /* Limit maximum height */
+    overflow-y: auto !important; /* Add scrollbar if content exceeds max-height */
+}
+
 .fc-daygrid-day-frame {
     min-height: 100px !important;
+    height: auto !important;
+    max-height: 300px !important;
 }
 
-/* Style for "more" link */
-.fc-daygrid-more-link {
-    color: var(--primary-color) !important;
-    font-weight: bold !important;
-}
-
-/* Remove background from events */
-.fc-h-event, .fc-v-event {
-    background-color: transparent !important;
-    border: none !important;
+.fc-daygrid-day-events {
+    padding-bottom: 5px !important;
 }
 
 /* Ensure consistent text color */
-.fc-event-title, .fc-event-time {
+.fc-event-title {
     color: var(--secondary-color) !important;
+}
+
+.fc-event-time {
+    color: var(--primary-color) !important;
 }
 
 /* Adjust the day number style */
@@ -620,6 +619,12 @@ section {
     font-size: 1.2em;
     font-weight: bold;
     color: #333;
+}
+
+/* Style for "more" link if it appears */
+.fc-daygrid-more-link {
+    color: var(--primary-color) !important;
+    font-weight: bold !important;
 }
 
 /* Add padding between header and title */
