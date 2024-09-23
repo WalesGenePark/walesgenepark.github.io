@@ -10,7 +10,7 @@ body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
   color: var(--secondary-color);
-  padding-top: 100px; /* Increased to accommodate larger header */
+  padding-top: 60px; /* Adjust this value to match your header height exactly */
 }
 
 .container {
@@ -38,9 +38,10 @@ a:hover {
   top: 0;
   left: 0;
   right: 0;
-  background-color: var(--white);
-  padding: 10px 0;
-  z-index: 1000;
+  z-index: 1030;
+  background-color: #fff;
+  padding: 5px 0; /* Reduce padding */
+  margin-bottom: 0;
   transition: transform 0.3s ease-in-out;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
@@ -55,12 +56,15 @@ a:hover {
 }
 
 .red-divider-header {
-  height: 3px; /* Slightly thicker divider */
+  height: 3px; /* Ensure this matches the height of your red divider */
   background-color: var(--primary-color);
   width: 100%;
   position: absolute;
   bottom: 0;
   left: 0;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 0; /* Ensure no extra margin below the red divider */
 }
 
 .logo img {
@@ -138,7 +142,8 @@ a:hover {
 #latest-news {
   background-color: var(--white);
   padding: 0.5rem 0; /* Reduced top padding */
-  padding-top: 1rem; /* Adjust as needed */
+  margin-top: 10px; /* Add a small margin to separate from the header */
+  padding-top: 0;
   margin-top: 0; /* Remove any margin */
 }
 
@@ -477,8 +482,7 @@ footer a:hover {
 
 /* Reduce padding in each section */
 section {
-    padding-top: 2rem; /* Adjust as needed */
-    padding-bottom: 2rem; /* Adjust as needed */
+  padding: 0;
 }
 
 /* Language Switcher Styles */
