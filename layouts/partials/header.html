@@ -19,12 +19,12 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="languageDropdown">
             <li>
-              <a class="dropdown-item{{ if eq .Site.Language.Lang "en" }} active-language{{ end }}" href="{{ "/" | relLangURL }}{{ $currentPage.RelPermalink | replaceRE "^/cy/" "/" }}">
+              <a class="dropdown-item{{ if eq .Site.Language.Lang "en" }} active-language{{ end }}" href="{{ .Page.Permalink | relURL | replaceRE "^/cy/" "/" }}">
                 English
               </a>
             </li>
             <li>
-              <a class="dropdown-item{{ if eq .Site.Language.Lang "cy" }} active-language{{ end }}" href="{{ "/cy" | relLangURL }}{{ $currentPage.RelPermalink | replaceRE "^/en/" "/" }}">
+              <a class="dropdown-item{{ if eq .Site.Language.Lang "cy" }} active-language{{ end }}" href="{{ .Page.Permalink | relURL | replaceRE "^/" "/cy/" }}">
                 Cymraeg
               </a>
             </li>
