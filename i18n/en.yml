@@ -1,0 +1,46 @@
+- id: latestNews
+  translation: "Latest News"
+- id: readMore
+  translation: "Read More"
+- id: previous
+  translation: "Previous"
+- id: next
+  translation: "Next"
+- id: forPatientsAndPublic
+  translation: "For Patients and the Public"
+- id: forPatientsAndPublicDesc
+  translation: "Our events and support networks link those living with genetic conditions to advances in genetics and genomics research."
+- id: forResearchersAndBiotechs
+  translation: "For Researchers and Biotechs"
+- id: forResearchersAndBiotechsDesc
+  translation: "We provide researchers and industry partner access to genomics expertise and technologies to advance genetic based research."
+- id: forSchoolsAndColleges
+  translation: "For Schools and Colleges"
+- id: forSchoolsAndCollegesDesc
+  translation: "A packed calendar of events, workshops and conferences for younger learners aims to inspire them about genetics and career options in science."
+- id: forHealthProfessionals
+  translation: "For Health Professionals"
+- id: forHealthProfessionalsDesc
+  translation: "Our specialist networks, conferences and CPD events for health professionals enhance genomics knowledge and improve the patient experience."
+- id: rareDiseasesResearch
+  translation: "Rare Disease Research"
+- id: rareDiseasesResearchDesc
+  translation: "Learn about research projects for patients in Wales and how you can become involved in helping research."
+- id: eventsCalendar
+  translation: "Events Calendar"
+- id: eventsCalendarDesc
+  translation: "We run a packed calendar of events for patients, the public, schools, researchers and health professionals."
+- id: followUs
+  translation: "Follow Us"
+- id: quickLinks
+  translation: "Quick Links"
+- id: contact
+  translation: "Contact"
+- id: legal
+  translation: "Legal"
+- id: privacyPolicy
+  translation: "Privacy Policy"
+- id: cookiePolicy
+  translation: "Cookie Policy"
+- id: termsAndConditions
+  translation: "Terms and Conditions"
