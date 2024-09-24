@@ -1,9 +1,9 @@
-<section id="latest-news"></section>
+<section id="latest-news">
   <div class="container">
     <h2 class="text-center mb-4">{{ i18n "latestNews" }}</h2>
     {{ $newsItems := where .Site.RegularPages "Section" "news" }}
     {{ if gt (len $newsItems) 0 }}
-      <div class="owl-carousel owl-theme" id="latestNewsCarousel">
+      <div class="slick-carousel" id="latestNewsCarousel">
         {{ range $newsItems }}
           <div class="item">
             <div class="card h-100">

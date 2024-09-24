@@ -1,42 +1,49 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Owl Carousel
-    $("#latestNewsCarousel").owlCarousel({
-        loop: true,
-        margin: 20,
-        nav: false, // Disable navigation arrows
-        dots: true, // Enable navigation dots
-        dotsEach: 1, // Show a dot for each item
+    // Initialize Slick Carousel
+    $("#latestNewsCarousel").slick({
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
         autoplay: true,
-        autoplayTimeout: 3000,
-        autoplayHoverPause: true,
-        responsive: {
-            0: {
-                items: 1
+        autoplaySpeed: 3000,
+        dots: true,
+        responsive: [
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 2
+                }
             },
-            768: {
-                items: 2
-            },
-            992: {
-                items: 3
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1
+                }
             }
-        },
-        onInitialized: carouselInitialized
+        ]
     });
 
-    function carouselInitialized(event) {
-        var element = event.target;
-        var items = event.item.count;
-        var size = event.page.size;
-        
-        // Equalize card heights
+    // Equal height for cards
+    function setEqualHeight() {
         var maxHeight = 0;
-        $(element).find('.card').each(function() {
+        $('#latestNewsCarousel .card').each(function() {
+            $(this).css('height', 'auto'); // Reset height
             if ($(this).height() > maxHeight) {
                 maxHeight = $(this).height();
             }
         });
-        $(element).find('.card').height(maxHeight);
+        $('#latestNewsCarousel .card').height(maxHeight);
     }
+
+    // Call setEqualHeight after the carousel is initialized
+    $('#latestNewsCarousel').on('setPosition', function() {
+        setEqualHeight();
+    });
+
+    // Call setEqualHeight on window resize
+    $(window).on('resize', function() {
+        setEqualHeight();
+    });
 
     // Initialize Bootstrap tooltips
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -50,18 +57,11 @@ document.addEventListener('DOMContentLoaded', function() {
         return new bootstrap.Popover(popoverTriggerEl)
     })
 
+    // Ensure dropdowns work
+    var dropdownTriggerList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
+    var dropdownList = dropdownTriggerList.map(function (dropdownTriggerEl) {
+        return new bootstrap.Dropdown(dropdownTriggerEl)
+    })
+
     console.log('Wales Gene Park website loaded successfully!')
 });
-
-// Example function for handling form submissions (if needed)
-function handleFormSubmit(event) {
-    event.preventDefault();
-    // Add your form submission logic here
-    console.log('Form submitted!');
-}
-
-// Example function for loading more content (if needed)
-function loadMoreContent() {
-    // Add your logic to load more content here
-    console.log('Loading more content...');
-}
