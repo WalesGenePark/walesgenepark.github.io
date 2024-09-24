@@ -11,7 +11,7 @@ body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
   color: var(--secondary-color);
-  padding-top: 80px; /* Adjust this value to match your header height exactly */
+  padding-top: 0; /* Remove padding from the top */
   margin: 0; /* Remove default margin */
 }
 
@@ -52,6 +52,15 @@ a:hover {
   color: var(--secondary-color); /* Set navbar text color to black */
 }
 
+.navbar-toggler {
+  border: 1px solid var(--secondary-color); /* Add border to the toggler */
+  background-color: var(--white); /* Set background color */
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
 .red-divider-header {
   height: 3px;
   background-color: var(--primary-color);
@@ -88,5 +97,22 @@ a:hover {
   width: auto; /* Ensure the button width is auto */
   align-self: center; /* Center-align the button */
   margin-top: auto; /* Push the button to the bottom */
+}
+
+/* FullCalendar Styles */
+#calendar {
+  max-width: 1400px; /* Set the maximum width of the calendar */
+  margin: 0 auto; /* Center the calendar */
+}
+
+.fc .fc-col-header-cell, .fc .fc-daygrid-day {
+  border: 1px solid #333; /* Set a darker border color */
+}
+
+.fc-event {
+  font-size: 0.8rem; /* Reduce the font size of events */
+  padding: 5px; /* Add some padding */
+  white-space: normal; /* Ensure text wraps */
+  overflow-wrap: break-word; /* Ensure text wraps */
 }
 

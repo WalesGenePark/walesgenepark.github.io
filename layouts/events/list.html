@@ -12,6 +12,7 @@
 </div>
 
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css' rel='stylesheet' />
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/bootstrap/main.min.css' rel='stylesheet' />
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js'></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/locales-all.min.js'></script>
 <script src="https://unpkg.com/@popperjs/core@2"></script>
@@ -20,6 +21,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
+        themeSystem: 'bootstrap', // Use Bootstrap 5 styles
         initialView: 'dayGridMonth',
         headerToolbar: {
             left: 'prev,next today',
@@ -49,13 +51,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!arg.event.allDay) {
                 const start = arg.event.start.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
                 const end = arg.event.end ? arg.event.end.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : '';
-                timeText = start + (end ? ' - ' + end : '');
+                timeText = `<span style="color: red;">${start} - ${end}</span>`;
             }
             return {
                 html: `
                     <div class="fc-content">
                         <div class="fc-event-time">${timeText}</div>
-                        <div class="fc-event-title">${arg.event.title}</div>
+                        <div class="fc-event-title" style="color: black;">${arg.event.title}</div>
                     </div>
                 `
             };
@@ -65,6 +67,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 content: `${info.event.title}<br>${info.event.start.toLocaleString()}`,
                 allowHTML: true,
             });
+        },
+        datesSet: function() {
+            // Adjust the height of the calendar based on the number of events
+            var eventCount = calendar.getEvents().length;
+            if (eventCount > 10) { // Adjust this number as needed
+                calendarEl.style.height = 'auto'; // Allow the calendar to grow
+            } else {
+                calendarEl.style.height = ''; // Reset to default height
+            }
         }
     });
     calendar.render();

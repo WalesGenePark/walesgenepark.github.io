@@ -99,3 +99,20 @@ a:hover {
   margin-top: auto; /* Push the button to the bottom */
 }
 
+/* FullCalendar Styles */
+#calendar {
+  max-width: 1400px; /* Set the maximum width of the calendar */
+  margin: 0 auto; /* Center the calendar */
+}
+
+.fc .fc-col-header-cell, .fc .fc-daygrid-day {
+  border: 1px solid #333; /* Set a darker border color */
+}
+
+.fc-event {
+  font-size: 0.8rem; /* Reduce the font size of events */
+  padding: 5px; /* Add some padding */
+  white-space: normal; /* Ensure text wraps */
+  overflow-wrap: break-word; /* Ensure text wraps */
+}
+
