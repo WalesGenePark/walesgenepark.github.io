@@ -1,0 +1,166 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Note from '~/components/widgets/Note.astro';
+import Features from '~/components/widgets/Features.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Content from '~/components/widgets/Content.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import NewsCarousel from '~/components/widgets/NewsCarousel.astro';
+
+const metadata = {
+  title: 'Wales Gene Park - Advancing Genomic Medicine',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget -->
+  <Hero
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Our Services',
+        href: '/services',
+        icon: 'tabler:microscope',
+      },
+      { text: 'Contact Us', href: '/contact' },
+    ]}
+    image={{ src: '~/assets/images/hero-image.png', alt: 'Wales Gene Park Research Lab' }}
+  >
+    <Fragment slot="title">
+      Advancing <span class="text-accent dark:text-white highlight">Genomic Medicine</span> in Wales
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Wales Gene Park is dedicated to supporting healthcare professionals, researchers, and the public in understanding and advancing genetic medicine. We provide state-of-the-art genomic services, research support, and educational programs.
+    </Fragment>
+  </Hero>
+
+  <!-- Latest News Section -->
+  <NewsCarousel />
+
+  <!-- Note Widget -->
+  <Note>
+    Supporting the implementation of genomic medicine in the Welsh NHS through research, education, and innovation.
+  </Note>
+
+  <!-- Features Widget -->
+  <Features
+    id="features"
+    tagline="Our Services"
+    title="What We Offer"
+    subtitle="Wales Gene Park provides comprehensive genomic services and support to healthcare professionals, researchers, and the public."
+    items={[
+      {
+        title: 'Genomic Testing',
+        description:
+          'State-of-the-art genomic testing services supporting clinical diagnosis and research.',
+        icon: 'tabler:dna-2',
+      },
+      {
+        title: 'Research Support',
+        description:
+          'Facilitating genomics research through infrastructure, expertise, and collaboration.',
+        icon: 'tabler:microscope',
+      },
+      {
+        title: 'Education & Training',
+        description:
+          'Comprehensive educational programs for healthcare professionals, researchers, and students.',
+        icon: 'tabler:school',
+      },
+      {
+        title: 'Patient Support',
+        description:
+          'Resources and support for patients and families affected by genetic conditions.',
+        icon: 'tabler:heart',
+      },
+      {
+        title: 'Public Engagement',
+        description:
+          'Engaging with the public to increase understanding of genetics and genomics.',
+        icon: 'tabler:users',
+      },
+      {
+        title: 'Clinical Support',
+        description:
+          'Supporting healthcare professionals in implementing genomic medicine.',
+        icon: 'tabler:stethoscope',
+      },
+    ]}
+  />
+
+  <!-- Content Widget -->
+  <Content
+    isReversed
+    tagline="About Us"
+    title="Advancing Genomic Medicine"
+    items={[
+      {
+        title: 'Research Excellence',
+        description:
+          'Supporting cutting-edge genomics research through state-of-the-art facilities and expertise.',
+      },
+      {
+        title: 'Educational Leadership',
+        description:
+          'Providing comprehensive education and training programs in genetics and genomics.',
+      },
+      {
+        title: 'Clinical Integration',
+        description:
+          'Working closely with NHS Wales to implement genomic medicine in clinical practice.',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/research.jpg',
+      alt: 'Genomic Research',
+    }}
+  >
+    <Fragment slot="content">
+      Wales Gene Park is at the forefront of genomic medicine in Wales, working to translate scientific discoveries into clinical benefits for patients.
+    </Fragment>
+  </Content>
+
+  <!-- Stats Widget -->
+  <Stats
+    items={[
+      { name: 'Years of Experience', value: '20+' },
+      { name: 'Research Projects', value: '100+' },
+      { name: 'Educational Events', value: '50+' },
+      { name: 'Healthcare Professionals Trained', value: '1000+' },
+    ]}
+  />
+
+  <!-- BlogLatestPost Widget -->
+  <BlogLatestPosts
+    title="Latest News & Events"
+    information={`Stay up to date with the latest developments in genomic medicine and Wales Gene Park activities.`}
+  />
+
+  <!-- CallToAction Widget -->
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Get Started',
+        href: '/contact',
+        icon: 'tabler:mail',
+      },
+    ]}
+  >
+    <Fragment slot="title">
+      Ready to Work With Us?
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Contact us to learn more about our services and how we can support your genomics needs.
+    </Fragment>
+  </CallToAction>
+</Layout>

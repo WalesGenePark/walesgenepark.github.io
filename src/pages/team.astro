@@ -1,0 +1,104 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+
+const metadata = {
+  title: 'Our Team | Wales Gene Park',
+  description: 'Meet the dedicated professionals behind Wales Gene Park working to advance genomics research and education in Wales.',
+};
+
+const allTeamMembers = await getCollection('team');
+
+// Sort team members by order number and then by name
+const sortedTeamMembers = allTeamMembers.sort((a, b) => {
+  if (a.data.order !== b.data.order) {
+    return a.data.order - b.data.order;
+  }
+  return a.data.name.localeCompare(b.data.name);
+});
+
+// Group team members by category
+const teamByCategory = sortedTeamMembers.reduce((acc, member) => {
+  const category = member.data.category;
+  if (!acc[category]) {
+    acc[category] = [];
+  }
+  acc[category].push(member);
+  return acc;
+}, {});
+
+// Category display names and order
+const categoryConfig = {
+  leadership: { name: 'Leadership Team', order: 1 },
+  research: { name: 'Research Team', order: 2 },
+  education: { name: 'Education & Training', order: 3 },
+  support: { name: 'Patient Support', order: 4 },
+  technical: { name: 'Technical Team', order: 5 },
+};
+
+// Sort categories by order
+const sortedCategories = Object.keys(teamByCategory).sort(
+  (a, b) => categoryConfig[a].order - categoryConfig[b].order
+);
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-6xl">
+    <div class="mb-10 md:mx-auto text-center md:mb-12 max-w-3xl">
+      <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading text-red-600 dark:text-red-400">
+        Our Team
+      </h1>
+      <p class="text-xl text-gray-600 dark:text-slate-400">
+        Meet the dedicated professionals behind Wales Gene Park working to advance genomics research and education in Wales.
+      </p>
+    </div>
+    {sortedCategories.map(category => (
+      <div class="mb-16">
+        <h2 class="text-3xl font-bold mb-8 text-center">
+          {categoryConfig[category].name}
+        </h2>
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {teamByCategory[category].map(member => (
+            <div class="group">
+              <div class="bg-white dark:bg-slate-900 rounded-lg shadow-lg overflow-hidden transition-transform duration-300 group-hover:-translate-y-1 h-full">
+                <div class="p-6 flex flex-col items-center h-full">
+                  {member.data.image ? (
+                    <img
+                      src={member.data.image}
+                      alt={member.data.name}
+                      class="w-32 h-32 rounded-full object-cover mb-4 ring-2 ring-gray-200 dark:ring-gray-700"
+                    />
+                  ) : (
+                    <div class="w-32 h-32 rounded-full bg-gray-200 dark:bg-gray-700 mb-4 flex items-center justify-center">
+                      <Icon name="tabler:user" class="w-16 h-16 text-gray-400 dark:text-gray-500" />
+                    </div>
+                  )}
+                  <h3 class="text-lg font-semibold mb-1 text-center">{member.data.name}</h3>
+                  <p class="text-red-600 dark:text-red-400 mb-3 text-sm text-center">{member.data.title}</p>
+                  <p class="text-gray-600 dark:text-gray-300 text-xs leading-relaxed mb-4 text-center min-h-[4.5rem]">{member.data.bio}</p>
+                  
+                  <div class="mt-auto flex justify-center space-x-4">
+                    <a href={`mailto:${member.data.email}`} class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300">
+                      <Icon name="tabler:mail" class="w-5 h-5" />
+                    </a>
+                    {member.data.socialLinks?.linkedin && (
+                      <a href={member.data.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300">
+                        <Icon name="tabler:brand-linkedin" class="w-5 h-5" />
+                      </a>
+                    )}
+                    {member.data.socialLinks?.twitter && (
+                      <a href={member.data.socialLinks.twitter} target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300">
+                        <Icon name="tabler:brand-twitter" class="w-5 h-5" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </section>
+</Layout>

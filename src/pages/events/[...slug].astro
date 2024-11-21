@@ -1,0 +1,93 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '~/layouts/PageLayout.astro';
+import { Icon } from 'astro-icon/components';
+import { format } from 'date-fns';
+
+export async function getStaticPaths() {
+  const eventEntries = await getCollection('events');
+  return eventEntries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const metadata = {
+  title: `${entry.data.title} | Wales Gene Park Events`,
+  description: entry.data.description,
+};
+
+const eventTypeIcons = {
+  workshop: 'tabler:tool',
+  conference: 'tabler:users-group',
+  seminar: 'tabler:presentation',
+  training: 'tabler:school',
+  'public-event': 'tabler:calendar-event',
+};
+
+const eventTypeLabels = {
+  workshop: 'Workshop',
+  conference: 'Conference',
+  seminar: 'Seminar',
+  training: 'Training',
+  'public-event': 'Public Event',
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
+    <div class="max-w-3xl mx-auto">
+      {entry.data.image && (
+        <img 
+          src={entry.data.image} 
+          class="w-full rounded-lg shadow-lg mb-6" 
+          alt={entry.data.title}
+        />
+      )}
+      
+      <h1 class="text-4xl font-bold leading-tighter tracking-tighter mb-4 font-heading">
+        {entry.data.title}
+      </h1>
+
+      <div class="flex flex-wrap gap-4 mb-6">
+        <div class="flex items-center">
+          <Icon name="tabler:calendar" class="w-4 h-4 mr-2 text-red-600" />
+          <span class="text-sm text-gray-600 dark:text-gray-400">
+            {format(entry.data.startDate, 'EEEE, d MMMM yyyy')}
+          </span>
+        </div>
+        
+        <div class="flex items-center">
+          <Icon name="tabler:clock" class="w-4 h-4 mr-2 text-red-600" />
+          <span class="text-sm text-red-600 dark:text-red-400">
+            {format(entry.data.startDate, 'HH:mm')} - {format(entry.data.endDate, 'HH:mm')}
+          </span>
+        </div>
+
+        <div class="flex items-center">
+          <Icon name={eventTypeIcons[entry.data.type] || 'tabler:calendar-event'} class="w-4 h-4 mr-2 text-red-600" />
+          <span class="bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400 text-sm font-medium px-2.5 py-0.5 rounded">
+            {eventTypeLabels[entry.data.type] || entry.data.type}
+          </span>
+        </div>
+      </div>
+
+      <div class="prose prose-lg max-w-none dark:prose-invert mb-6">
+        <Content />
+      </div>
+
+      <div class="flex justify-between items-center mt-8 border-t pt-8">
+        <a 
+          href="/events" 
+          class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+        >
+          <Icon name="tabler:arrow-left" class="w-4 h-4 mr-2" />
+          Back to Events Calendar
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

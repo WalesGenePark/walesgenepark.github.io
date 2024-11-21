@@ -1,0 +1,39 @@
+---
+title: "Genomics Workshop 2024"
+startDate: 2024-03-15T09:00:00Z
+endDate: 2024-03-15T16:30:00Z
+description: "Join us for a comprehensive workshop on the latest advances in genomics research and their applications in healthcare."
+type: "workshop"
+image: "/src/assets/images/events/workshop.jpg"
+---
+
+# Genomics Workshop 2024
+
+Join us for an exciting day of learning and discussion about the latest advances in genomics research and their applications in healthcare.
+
+## Event Details
+
+- **Date:** March 15, 2024
+- **Time:** 9:00 AM - 4:30 PM
+- **Location:** Wales Gene Park Conference Center
+- **Type:** Workshop
+
+## Program Highlights
+
+1. **Morning Session (9:00 - 12:00)**
+   - Introduction to Modern Genomics
+   - Latest Sequencing Technologies
+   - Data Analysis Techniques
+
+2. **Afternoon Session (1:30 - 4:30)**
+   - Clinical Applications
+   - Case Studies
+   - Hands-on Practice
+
+## Registration
+
+Please register by March 1st, 2024. Space is limited to ensure an optimal learning experience.
+
+## Contact
+
+For more information, please contact us at events@walesgenepark.org
