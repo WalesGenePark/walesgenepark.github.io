@@ -2,60 +2,114 @@
 import Layout from '~/layouts/PageLayout.astro';
 import { getCollection } from 'astro:content';
 import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
 
+// Generate static pages for all news at build time
 export async function getStaticPaths() {
-  const news = await getCollection('news');
-  return news.map((item) => {
-    const [lang, ...slugParts] = item.slug.split('/');
-    return {
-      params: { lang, slug: slugParts.join('/') },
-      props: { item },
-    };
+  const allNews = await getCollection('news');
+  const paths = [];
+
+  // Group news by their base slug (without language prefix)
+  const newsBySlug = allNews.reduce((acc, news) => {
+    const [lang, slug] = news.slug.split('/');
+    if (!acc[slug]) {
+      acc[slug] = { en: null, cy: null };
+    }
+    acc[slug][lang] = news;
+    return acc;
+  }, {});
+
+  // Create paths for both languages for each news item
+  Object.entries(newsBySlug).forEach(([slug, versions]) => {
+    // English version
+    if (versions.en) {
+      paths.push({
+        params: { lang: 'en', slug },
+        props: { 
+          news: versions.en,
+          alternateVersion: versions.cy
+        },
+      });
+    }
+
+    // Welsh version
+    if (versions.cy) {
+      paths.push({
+        params: { lang: 'cy', slug },
+        props: { 
+          news: versions.cy,
+          alternateVersion: versions.en
+        },
+      });
+    }
   });
+
+  return paths;
 }
 
-const { item } = Astro.props;
+const { news, alternateVersion } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
+// Use the news in the requested language, or fall back to the alternate version
+const displayNews = news || alternateVersion;
+
+// Render markdown content
+const { Content } = await displayNews.render();
+
 const metadata = {
-  title: item.data.title,
+  title: displayNews.data.title,
 };
 
-const formatDate = (date: string | Date) => {
-  const d = typeof date === 'string' ? new Date(date) : date;
-  return d.toLocaleDateString(lang === 'cy' ? 'cy-GB' : 'en-GB', {
+const date = new Date(displayNews.data.publishDate);
+
+function formatDate(date: Date, lang: string): string {
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: 'long',
     year: 'numeric',
     month: 'long',
-    day: 'numeric',
-  });
-};
-
-const { Content } = await item.render();
+    day: 'numeric'
+  };
+  return date.toLocaleDateString(lang === 'cy' ? 'cy-GB' : 'en-GB', options);
+}
 ---
 
 <Layout metadata={metadata}>
   <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
-    <div class="text-sm text-gray-500 mb-2">
-      {formatDate(item.data.publishDate || item.data.date)}
+    <div class="mb-8">
+      <a href={`/${lang}/news`} class="inline-flex items-center text-primary hover:underline mb-6">
+        <Icon name="tabler:chevron-left" class="w-5 h-5 mr-1" />
+        {t('nav.news')}
+      </a>
+
+      <h1 class="text-4xl font-bold mb-4">{displayNews.data.title}</h1>
+
+      <div class="flex flex-wrap gap-4 text-gray-600 dark:text-gray-400">
+        <div class="flex items-center">
+          <Icon name="tabler:calendar" class="w-5 h-5 mr-2" />
+          <span>{formatDate(date, lang)}</span>
+        </div>
+
+        {displayNews.data.author && (
+          <div class="flex items-center">
+            <Icon name="tabler:user" class="w-5 h-5 mr-2" />
+            <span>{displayNews.data.author}</span>
+          </div>
+        )}
+      </div>
     </div>
-    
-    <h1 class="text-4xl font-bold mb-8">{item.data.title}</h1>
-    
-    {item.data.image && (
-      <img
-        src={item.data.image}
-        alt={item.data.title}
-        class="w-full h-64 object-cover rounded-lg mb-8"
-      />
+
+    {displayNews.data.image && (
+      <div class="mb-8">
+        <img
+          src={displayNews.data.image}
+          alt={displayNews.data.title}
+          class="w-full h-auto rounded-lg shadow-md"
+        />
+      </div>
     )}
-    
-    {item.data.description && (
-      <p class="text-xl text-gray-600 dark:text-gray-400 mb-8">
-        {item.data.description}
-      </p>
-    )}
-    
+
     <div class="prose dark:prose-invert max-w-none">
       <Content />
     </div>
