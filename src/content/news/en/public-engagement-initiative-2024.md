@@ -1,7 +1,7 @@
 ---
 lang: "en"
 title: "Wales Gene Park Launches Innovative Public Engagement Initiative"
-publishDate: 2024-01-01
+publishDate: 2024-07-01
 description: "A comprehensive program to engage the Welsh public in genomics through interactive exhibitions, workshops, and digital platforms."
 image: "/images/news/public-engagement.jpg"
 fullArticleLink: "https://walesgenepark.github.io/news/public-engagement-initiative-2024"

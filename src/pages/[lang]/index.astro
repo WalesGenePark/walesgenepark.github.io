@@ -3,6 +3,8 @@ import Layout from '~/layouts/PageLayout.astro';
 import { getCollection } from 'astro:content';
 import { getLangFromUrl, useTranslations } from '~/i18n/utils';
 import NewsCarousel from '~/components/widgets/NewsCarousel.astro';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 
 export function getStaticPaths() {
   return [
@@ -60,14 +62,36 @@ const eventsEntries = await getCollection('events', ({ id }) => {
   return id.startsWith(lang + '/');
 });
 
-// Combine and sort by date
-const allEntries = [...newsEntries, ...eventsEntries].sort((a, b) => {
-  const dateA = new Date(a.data.publishDate || a.data.date);
-  const dateB = new Date(b.data.publishDate || b.data.date);
-  return dateB.getTime() - dateA.getTime();
+// Get file stats for sorting
+async function getFileStats(collection: string, entry: any) {
+  const filePath = path.join(process.cwd(), 'src/content', collection, entry.id);
+  try {
+    const stats = await fs.stat(filePath);
+    return stats.mtime;
+  } catch (error) {
+    // If there's an error getting stats, use the frontmatter date as fallback
+    return new Date(entry.data.publishDate || entry.data.date);
+  }
+}
+
+// Add file stats to entries
+const entriesWithStats = await Promise.all([
+  ...newsEntries.map(async (entry) => ({
+    ...entry,
+    mtime: await getFileStats('news', entry),
+  })),
+  ...eventsEntries.map(async (entry) => ({
+    ...entry,
+    mtime: await getFileStats('events', entry),
+  })),
+]);
+
+// Sort by file modification time
+const allEntries = entriesWithStats.sort((a, b) => {
+  return b.mtime.getTime() - a.mtime.getTime();
 });
 
-// Take the first 12 items to show more content
+// Take the first 15 items
 const carouselItems = allEntries.slice(0, 15);
 ---
 

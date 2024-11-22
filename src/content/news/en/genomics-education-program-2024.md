@@ -1,7 +1,7 @@
 ---
 lang: "en"
 title: "Wales Gene Park Launches Comprehensive Genomics Education Program for 2024"
-publishDate: 2024-03-15
+publishDate: 2025-03-15
 description: "A groundbreaking educational initiative bringing genomics knowledge to healthcare professionals and students across Wales."
 image: "/images/news/education-program.jpg"
 readMoreLink: "https://walesgenepark.github.io/news/genomics-education-program-2024"

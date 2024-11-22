@@ -1,7 +1,7 @@
 ---
 lang: "en"
 title: "Wales Gene Park Announces Major International Collaboration on Population Genomics"
-publishDate: 2024-02-15
+publishDate: 2024-10-15
 description: "A groundbreaking partnership with leading genomics institutions worldwide to study genetic diversity in the Welsh population."
 image: "/images/news/collaboration.jpg"
 fullArticleLink: "https://walesgenepark.github.io/news/international-collaboration-2024"

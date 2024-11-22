@@ -1,7 +1,7 @@
 ---
 lang: "cy"
 title: "Parc Geneteg Cymru yn Lansio Rhaglen Addysg Genomeg Gynhwysfawr ar gyfer 2024"
-publishDate: 2024-03-15
+publishDate: 2025-03-15
 description: "Menter addysgol arloesol yn dwyn gwybodaeth genomeg i weithwyr gofal iechyd proffesiynol a myfyrwyr ledled Cymru."
 image: "/images/news/education-program.jpg"
 readMoreLink: "https://walesgenepark.github.io/news/genomics-education-program-2024"
