@@ -3,159 +3,77 @@ import { Icon } from 'astro-icon/components';
 import Logo from '~/components/Logo.astro';
 import ToggleTheme from '~/components/common/ToggleTheme.astro';
 import ToggleMenu from '~/components/common/ToggleMenu.astro';
-import Button from '~/components/ui/Button.astro';
+import LanguagePicker from '~/components/common/LanguagePicker.astro';
+import { getLangFromUrl, useTranslations, getRouteFromKey } from '~/i18n/utils';
 
-import { getHomePermalink } from '~/utils/permalinks';
-import { trimSlash, getAsset } from '~/utils/permalinks';
-import type { CallToAction } from '~/types';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
-interface Link {
-  text?: string;
-  href?: string;
-  ariaLabel?: string;
-  icon?: string;
-}
-
-interface MenuLink extends Link {
-  links?: Array<MenuLink>;
-}
-
-interface SocialLink {
-  ariaLabel: string;
-  icon: string;
-  href: string;
-}
-
-export interface Props {
-  id?: string;
-  links?: Array<MenuLink>;
-  actions?: Array<CallToAction>;
-  socialLinks?: Array<SocialLink>;
-  isSticky?: boolean;
-  isDark?: boolean;
-  isFullWidth?: boolean;
-  showToggleTheme?: boolean;
-  position?: string;
-}
-
-const {
-  id = 'header',
-  links = [],
-  actions = [],
-  socialLinks = [],
-  isSticky = false,
-  isDark = false,
-  isFullWidth = false,
-  showToggleTheme = false,
-  position = 'center',
-} = Astro.props;
-
-const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
+const links = [
+  {
+    text: t('nav.home'),
+    href: `/${lang}`,
+  },
+  {
+    text: t('nav.team'),
+    href: `/${lang}/${getRouteFromKey('team', lang)}`,
+  },
+  {
+    text: t('nav.calendar'),
+    href: `/${lang}/${getRouteFromKey('calendar', lang)}`,
+  },
+  {
+    text: t('nav.news'),
+    href: `/${lang}/${getRouteFromKey('news', lang)}`,
+  },
+  {
+    text: t('nav.contact'),
+    href: `/${lang}/${getRouteFromKey('contact', lang)}`,
+  },
+];
 ---
 
 <header
-  class:list={[
-    { sticky: isSticky, relative: !isSticky, dark: isDark },
-    'top-0 z-40 flex-none mx-auto w-full border-b border-gray-50/0 transition-[opacity] ease-in-out',
-  ]}
-  {...isSticky ? { 'data-aw-sticky-header': true } : {}}
-  {...id ? { id } : {}}
+  class="sticky top-0 z-40 flex-none mx-auto w-full bg-white md:bg-white/90 dark:bg-slate-900 dark:md:bg-slate-900/90 md:backdrop-blur-sm border-b dark:border-b-0"
 >
-  <div class="absolute inset-0"></div>
-  <div class="relative flex items-center justify-between w-full py-3">
-    <!-- Logo Section -->
-    <div class="flex items-center pl-3 md:pl-6">
-      <a href={getHomePermalink()} class="flex items-center">
-        <div class="w-41 h-auto">
-          <Logo />
-        </div>
+  <div class="py-3 px-3 mx-auto w-full md:flex md:justify-between max-w-6xl md:px-4">
+    <div class="flex justify-between">
+      <a class="flex items-center" href={`/${lang}`}>
+        <Logo />
       </a>
+      <div class="flex items-center md:hidden">
+        <ToggleTheme />
+        <ToggleMenu />
+      </div>
     </div>
-
-    <!-- Mobile Menu Toggle -->
-    <div class="flex items-center md:hidden pr-3">
-      <ToggleMenu />
-    </div>
-
-    <!-- Navigation -->
     <nav
-      class="hidden md:flex items-center justify-end flex-1 pr-6 overflow-hidden"
+      class="items-center w-full md:w-auto hidden md:flex text-gray-600 dark:text-slate-200 h-screen md:h-auto"
       aria-label="Main navigation"
+      id="menu"
     >
-      <ul class="flex flex-row gap-6 text-[0.9375rem] font-medium">
+      <ul class="flex flex-col pt-8 md:pt-0 md:flex-row md:self-center w-full md:w-auto text-xl md:text-base">
         {
-          links.map(({ text, href, links }) => (
-            <li class={links?.length ? 'dropdown' : ''}>
-              {links?.length ? (
-                <>
-                  <button
-                    type="button"
-                    class="hover:text-link dark:hover:text-white px-4 py-3 flex items-center"
-                  >
-                    {text}
-                    <Icon name="tabler:chevron-down" class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline" />
-                  </button>
-                  <ul class="dropdown-menu md:backdrop-blur-md dark:md:bg-dark rounded md:absolute pl-4 md:pl-0 md:hidden font-medium md:bg-white/90 md:min-w-[200px] drop-shadow-xl">
-                    {links.map(({ text: text2, href: href2 }) => (
-                      <li>
-                        <a
-                          class:list={[
-                            'py-2 px-4 dark:hover:bg-gray-700 hover:bg-gray-100 dark:hover:text-white hover:text-link inline-block w-full',
-                            { 'text-link dark:text-white': href2 === currentPath },
-                          ]}
-                          href={href2}
-                        >
-                          {text2}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              ) : (
-                <a
-                  class:list={[
-                    'hover:text-link dark:hover:text-white px-4 py-3 flex items-center',
-                    { 'text-link dark:text-white': href === currentPath },
-                  ]}
-                  href={href}
-                >
-                  {text}
-                </a>
-              )}
+          links.map(({ text, href }) => (
+            <li>
+              <a
+                class="font-medium hover:text-gray-900 dark:hover:text-white px-4 py-3 flex items-center transition duration-150 ease-in-out"
+                href={href}
+              >
+                {text}
+              </a>
             </li>
           ))
         }
+        <li class="md:hidden">
+          <LanguagePicker />
+        </li>
       </ul>
-
-      <div class="flex items-center gap-4 ml-6">
-        {
-          socialLinks?.length ? (
-            <div class="flex items-center gap-3">
-              {socialLinks.map(({ ariaLabel, href, icon }) => (
-                <a
-                  href={href}
-                  class="text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
-                  aria-label={ariaLabel}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Icon name={icon} class="w-5 h-5" />
-                </a>
-              ))}
-            </div>
-          ) : null
-        }
-        {
-          actions?.length ? (
-            <span class="hidden sm:flex">
-              {actions.map(({ text, href, class: className }) => (
-                <Button variant="primary" {...{ text, href, class: className }} />
-              ))}
-            </span>
-          ) : null
-        }
-        {showToggleTheme && <ToggleTheme />}
-      </div>
     </nav>
+    <div class="hidden md:flex items-center md:w-auto">
+      <div class="flex">
+        <LanguagePicker />
+        <ToggleTheme iconClass="w-5 h-5" />
+      </div>
+    </div>
   </div>
 </header>

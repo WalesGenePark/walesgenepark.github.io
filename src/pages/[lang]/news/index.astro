@@ -1,0 +1,79 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'cy' } },
+  ];
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const metadata = {
+  title: t('nav.news'),
+};
+
+const news = await getCollection('news', ({ id }) => {
+  return id.startsWith(lang + '/');
+});
+
+const sortedNews = news.sort((a, b) => {
+  const dateA = new Date(a.data.publishDate || a.data.date);
+  const dateB = new Date(b.data.publishDate || b.data.date);
+  return dateB.getTime() - dateA.getTime();
+});
+
+const formatDate = (date: string | Date) => {
+  const d = typeof date === 'string' ? new Date(date) : date;
+  return d.toLocaleDateString(lang === 'cy' ? 'cy-GB' : 'en-GB', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
+    <h1 class="text-4xl font-bold mb-10">{t('nav.news')}</h1>
+    
+    <div class="space-y-8">
+      {sortedNews.map((item) => (
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+          <div class="md:flex">
+            {item.data.image ? (
+              <div class="md:flex-shrink-0">
+                <img
+                  src={item.data.image}
+                  alt={item.data.title}
+                  class="h-48 w-full object-cover md:h-full md:w-48"
+                />
+              </div>
+            ) : (
+              <div class="md:flex-shrink-0 bg-gray-200 dark:bg-gray-700 h-48 w-full md:h-full md:w-48" />
+            )}
+            <div class="p-6">
+              <div class="text-sm text-gray-500 mb-2">
+                {formatDate(item.data.publishDate || item.data.date)}
+              </div>
+              <h2 class="text-xl font-semibold mb-2">
+                <a href={`/${lang}/news/${item.slug}`} class="hover:text-primary">
+                  {item.data.title}
+                </a>
+              </h2>
+              {item.data.description && (
+                <p class="text-gray-600 dark:text-gray-400">
+                  {item.data.description}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>

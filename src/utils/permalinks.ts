@@ -1,10 +1,10 @@
 import slugify from 'limax';
-
-import { SITE, APP_BLOG } from 'astrowind:config';
-
+import { SITE } from 'astrowind:config';
+import { defaultLang } from '~/i18n/config';
 import { trim } from '~/utils/utils';
 
 export const trimSlash = (s: string) => trim(trim(s, '/'));
+
 const createPath = (...params: string[]) => {
   const paths = params
     .map((el) => trimSlash(el))
@@ -21,12 +21,6 @@ export const cleanSlug = (text = '') =>
     .map((slug) => slugify(slug))
     .join('/');
 
-export const BLOG_BASE = cleanSlug(APP_BLOG?.list?.pathname);
-export const CATEGORY_BASE = cleanSlug(APP_BLOG?.category?.pathname);
-export const TAG_BASE = cleanSlug(APP_BLOG?.tag?.pathname) || 'tag';
-
-export const POST_PERMALINK_PATTERN = trimSlash(APP_BLOG?.post?.permalink || `${BLOG_BASE}/%slug%`);
-
 /** */
 export const getCanonical = (path = ''): string | URL => {
   const url = String(new URL(path, SITE.site));
@@ -39,7 +33,7 @@ export const getCanonical = (path = ''): string | URL => {
 };
 
 /** */
-export const getPermalink = (slug = '', type = 'page'): string => {
+export const getPermalink = (slug = '', type = 'page', lang?: string): string => {
   let permalink: string;
 
   if (
@@ -54,32 +48,28 @@ export const getPermalink = (slug = '', type = 'page'): string => {
 
   switch (type) {
     case 'home':
-      permalink = getHomePermalink();
+      permalink = getHomePermalink(lang);
       break;
 
-    case 'blog':
-      permalink = getBlogPermalink();
+    case 'news':
+      permalink = getNewsPermalink(lang);
+      break;
+
+    case 'events':
+      permalink = getEventsPermalink(lang);
+      break;
+
+    case 'team':
+      permalink = getTeamPermalink(lang);
       break;
 
     case 'asset':
       permalink = getAsset(slug);
       break;
 
-    case 'category':
-      permalink = createPath(CATEGORY_BASE, trimSlash(slug));
-      break;
-
-    case 'tag':
-      permalink = createPath(TAG_BASE, trimSlash(slug));
-      break;
-
-    case 'post':
-      permalink = createPath(trimSlash(slug));
-      break;
-
     case 'page':
     default:
-      permalink = createPath(slug);
+      permalink = createPath(lang || '', slug);
       break;
   }
 
@@ -87,10 +77,36 @@ export const getPermalink = (slug = '', type = 'page'): string => {
 };
 
 /** */
-export const getHomePermalink = (): string => getPermalink('/');
+export const getHomePermalink = (lang?: string): string => {
+  if (lang && lang !== defaultLang) {
+    return getPermalink(lang);
+  }
+  return getPermalink('');
+};
 
 /** */
-export const getBlogPermalink = (): string => getPermalink(BLOG_BASE);
+export const getNewsPermalink = (lang?: string): string => {
+  if (lang && lang !== defaultLang) {
+    return getPermalink('news', 'page', lang);
+  }
+  return getPermalink('news');
+};
+
+/** */
+export const getEventsPermalink = (lang?: string): string => {
+  if (lang && lang !== defaultLang) {
+    return getPermalink('events', 'page', lang);
+  }
+  return getPermalink('events');
+};
+
+/** */
+export const getTeamPermalink = (lang?: string): string => {
+  if (lang && lang !== defaultLang) {
+    return getPermalink('team', 'page', lang);
+  }
+  return getPermalink('team');
+};
 
 /** */
 export const getAsset = (path: string): string =>
@@ -104,28 +120,32 @@ export const getAsset = (path: string): string =>
 const definitivePermalink = (permalink: string): string => createPath(BASE_PATHNAME, permalink);
 
 /** */
-export const applyGetPermalinks = (menu: object = {}) => {
+export const applyGetPermalinks = (menu: object = {}, lang?: string) => {
   if (Array.isArray(menu)) {
-    return menu.map((item) => applyGetPermalinks(item));
+    return menu.map((item) => applyGetPermalinks(item, lang));
   } else if (typeof menu === 'object' && menu !== null) {
     const obj = {};
     for (const key in menu) {
       if (key === 'href') {
         if (typeof menu[key] === 'string') {
-          obj[key] = getPermalink(menu[key]);
+          obj[key] = getPermalink(menu[key], 'page', lang);
         } else if (typeof menu[key] === 'object') {
           if (menu[key].type === 'home') {
-            obj[key] = getHomePermalink();
-          } else if (menu[key].type === 'blog') {
-            obj[key] = getBlogPermalink();
+            obj[key] = getHomePermalink(lang);
+          } else if (menu[key].type === 'news') {
+            obj[key] = getNewsPermalink(lang);
+          } else if (menu[key].type === 'events') {
+            obj[key] = getEventsPermalink(lang);
+          } else if (menu[key].type === 'team') {
+            obj[key] = getTeamPermalink(lang);
           } else if (menu[key].type === 'asset') {
             obj[key] = getAsset(menu[key].url);
           } else if (menu[key].url) {
-            obj[key] = getPermalink(menu[key].url, menu[key].type);
+            obj[key] = getPermalink(menu[key].url, menu[key].type, lang);
           }
         }
       } else {
-        obj[key] = applyGetPermalinks(menu[key]);
+        obj[key] = applyGetPermalinks(menu[key], lang);
       }
     }
     return obj;

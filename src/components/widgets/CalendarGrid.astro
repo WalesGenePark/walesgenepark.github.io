@@ -1,0 +1,106 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  events: any[];
+  lang: string;
+  month: number;
+  year: number;
+}
+
+const { events, lang, month, year } = Astro.props;
+
+function getDaysInMonth(month: number, year: number) {
+  return new Date(year, month + 1, 0).getDate();
+}
+
+function getFirstDayOfMonth(month: number, year: number) {
+  return new Date(year, month, 1).getDay();
+}
+
+const daysInMonth = getDaysInMonth(month, year);
+const firstDay = getFirstDayOfMonth(month, year);
+
+const weekDays = {
+  en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+  cy: ['Sul', 'Llun', 'Maw', 'Mer', 'Iau', 'Gwe', 'Sad'],
+};
+
+const monthNames = {
+  en: [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ],
+  cy: [
+    'Ionawr', 'Chwefror', 'Mawrth', 'Ebrill', 'Mai', 'Mehefin',
+    'Gorffennaf', 'Awst', 'Medi', 'Hydref', 'Tachwedd', 'Rhagfyr'
+  ],
+};
+
+const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+const blanks = Array.from({ length: firstDay }, (_, i) => i);
+
+const eventsMap = events.reduce((acc, event) => {
+  const date = new Date(event.data.date);
+  if (date.getMonth() === month && date.getFullYear() === year) {
+    const day = date.getDate();
+    if (!acc[day]) acc[day] = [];
+    acc[day].push(event);
+  }
+  return acc;
+}, {} as Record<number, typeof events>);
+---
+
+<div class="calendar-grid bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+  <div class="calendar-header p-4 bg-primary bg-opacity-10">
+    <h3 class="text-2xl font-bold text-primary text-center">
+      {monthNames[lang as keyof typeof monthNames][month]} {year}
+    </h3>
+  </div>
+  
+  <div class="calendar-weekdays grid grid-cols-7 bg-gray-100 dark:bg-gray-700">
+    {weekDays[lang as keyof typeof weekDays].map((day) => (
+      <div class="p-2 text-center text-sm font-medium">{day}</div>
+    ))}
+  </div>
+  
+  <div class="calendar-days grid grid-cols-7">
+    {blanks.map(() => (
+      <div class="calendar-day p-2 min-h-[100px] border border-gray-200 dark:border-gray-700"></div>
+    ))}
+    
+    {days.map((day) => (
+      <div class="calendar-day p-2 min-h-[100px] border border-gray-200 dark:border-gray-700">
+        <div class="text-sm font-medium mb-1">{day}</div>
+        {eventsMap[day]?.map((event) => (
+          <a
+            href={`/${lang}/calendar/${event.slug.split('/')[1]}`}
+            class="block p-1 mb-1 text-xs bg-primary bg-opacity-10 rounded hover:bg-opacity-20"
+          >
+            <div class="font-medium truncate">{event.data.title}</div>
+            {event.data.time && (
+              <div class="flex items-center text-gray-600 dark:text-gray-400">
+                <Icon name="tabler:clock" class="w-3 h-3 mr-1" />
+                <span>{event.data.time}</span>
+              </div>
+            )}
+          </a>
+        ))}
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+.calendar-grid {
+  @apply w-full;
+}
+
+.calendar-weekdays {
+  @apply border-b border-gray-200 dark:border-gray-700;
+}
+
+.calendar-day:hover {
+  @apply bg-gray-50 dark:bg-gray-800;
+}
+</style>

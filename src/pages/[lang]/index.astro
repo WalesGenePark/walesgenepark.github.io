@@ -1,0 +1,96 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+import NewsCarousel from '~/components/widgets/NewsCarousel.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'cy' } },
+  ];
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const metadata = {
+  title: 'Wales Gene Park',
+};
+
+const content = {
+  en: {
+    title: 'Advancing Genomic Medicine in Wales',
+    description: 'Wales Gene Park is dedicated to supporting healthcare professionals, researchers, and the public in understanding and advancing genetic medicine. We provide state-of-the-art genomic services, research support, and educational programs.',
+    cta: {
+      primary: {
+        text: 'Our Services',
+        href: '/services',
+      },
+      secondary: {
+        text: 'Contact Us',
+        href: '/contact',
+      },
+    },
+  },
+  cy: {
+    title: 'Hyrwyddo Meddygaeth Genomig yng Nghymru',
+    description: 'Mae Parc Genynnau Cymru yn ymroddedig i gefnogi gweithwyr gofal iechyd proffesiynol, ymchwilwyr, a\'r cyhoedd i ddeall a datblygu meddygaeth enetig. Rydym yn darparu gwasanaethau genomig o\'r radd flaenaf, cymorth ymchwil, a rhaglenni addysgol.',
+    cta: {
+      primary: {
+        text: 'Ein Gwasanaethau',
+        href: '/cy/gwasanaethau',
+      },
+      secondary: {
+        text: 'Cysylltu â Ni',
+        href: '/cy/cysylltu',
+      },
+    },
+  },
+};
+
+const pageContent = content[lang as keyof typeof content];
+
+// Get news and events for the carousel
+const newsEntries = await getCollection('news', ({ id }) => {
+  return id.startsWith(lang + '/');
+});
+
+const eventsEntries = await getCollection('events', ({ id }) => {
+  return id.startsWith(lang + '/');
+});
+
+// Combine and sort by date
+const allEntries = [...newsEntries, ...eventsEntries].sort((a, b) => {
+  const dateA = new Date(a.data.publishDate || a.data.date);
+  const dateB = new Date(b.data.publishDate || b.data.date);
+  return dateB.getTime() - dateA.getTime();
+});
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
+    <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-8 font-heading">
+      {pageContent.title}
+    </h1>
+    <p class="text-xl text-gray-600 dark:text-gray-400 mb-12">
+      {pageContent.description}
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4">
+      <a
+        href={pageContent.cta.primary.href}
+        class="btn btn-primary"
+      >
+        {pageContent.cta.primary.text}
+      </a>
+      <a
+        href={pageContent.cta.secondary.href}
+        class="btn"
+      >
+        {pageContent.cta.secondary.text}
+      </a>
+    </div>
+  </section>
+
+  <NewsCarousel items={allEntries.slice(0, 6)} />
+</Layout>

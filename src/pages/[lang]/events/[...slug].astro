@@ -1,0 +1,66 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+
+export async function getStaticPaths() {
+  const events = await getCollection('events', ({ id }) => {
+    return id.startsWith('en/');
+  });
+  
+  return events.map((event) => {
+    const [lang, ...slugParts] = event.slug.split('/');
+    return {
+      params: { lang: 'en', slug: slugParts.join('/') },
+      props: { event },
+    };
+  });
+}
+
+const { event } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const metadata = {
+  title: event.data.title,
+};
+
+const formatDate = (date: string | Date) => {
+  const d = typeof date === 'string' ? new Date(date) : date;
+  return d.toLocaleDateString(lang === 'cy' ? 'cy-GB' : 'en-GB', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+};
+
+const { Content } = await event.render();
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
+    <div class="text-sm text-gray-500 mb-2">
+      {formatDate(event.data.date)}
+    </div>
+    
+    <h1 class="text-4xl font-bold mb-8">{event.data.title}</h1>
+    
+    {event.data.image && (
+      <img
+        src={event.data.image}
+        alt={event.data.title}
+        class="w-full h-64 object-cover rounded-lg mb-8"
+      />
+    )}
+    
+    {event.data.description && (
+      <p class="text-xl text-gray-600 dark:text-gray-400 mb-8">
+        {event.data.description}
+      </p>
+    )}
+    
+    <div class="prose dark:prose-invert max-w-none">
+      <Content />
+    </div>
+  </section>
+</Layout>

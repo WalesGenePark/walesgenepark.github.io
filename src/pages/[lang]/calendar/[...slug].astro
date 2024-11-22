@@ -1,0 +1,92 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '~/layouts/PageLayout.astro';
+import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+import { Icon } from 'astro-icon/components';
+
+export async function getStaticPaths() {
+  const enEvents = await getCollection('events', ({ id }) => id.startsWith('en/'));
+  const cyEvents = await getCollection('events', ({ id }) => id.startsWith('cy/'));
+  
+  return [
+    ...enEvents.map((event) => ({
+      params: {
+        lang: 'en',
+        slug: event.slug.split('/')[1],
+      },
+      props: { event },
+    })),
+    ...cyEvents.map((event) => ({
+      params: {
+        lang: 'cy',
+        slug: event.slug.split('/')[1],
+      },
+      props: { event },
+    })),
+  ];
+}
+
+const { event } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const { Content } = await event.render();
+
+const formatDate = (date: string | Date) => {
+  const d = typeof date === 'string' ? new Date(date) : date;
+  return d.toLocaleDateString(lang === 'cy' ? 'cy-GB' : 'en-GB', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+};
+---
+
+<Layout metadata={{ title: event.data.title }}>
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
+    <div class="flex flex-col gap-3 md:gap-6">
+      <a
+        href={`/${lang}/calendar`}
+        class="inline-flex items-center gap-1 text-blue-600 hover:underline"
+      >
+        <Icon name="tabler:chevron-left" class="w-5 h-5" />
+        {t('nav.calendar')}
+      </a>
+
+      <h1 class="text-4xl font-bold">{event.data.title}</h1>
+
+      <div class="flex flex-wrap gap-4">
+        <div class="flex items-center gap-2">
+          <Icon name="tabler:calendar" class="w-5 h-5" />
+          <span>{formatDate(event.data.date)}</span>
+        </div>
+
+        {event.data.time && (
+          <div class="flex items-center gap-2">
+            <Icon name="tabler:clock" class="w-5 h-5" />
+            <span>{event.data.time}</span>
+          </div>
+        )}
+
+        {event.data.location && (
+          <div class="flex items-center gap-2">
+            <Icon name="tabler:map-pin" class="w-5 h-5" />
+            <span>{event.data.location}</span>
+          </div>
+        )}
+      </div>
+
+      {event.data.image && (
+        <img
+          src={event.data.image}
+          alt={event.data.title}
+          class="w-full rounded-lg shadow-lg"
+        />
+      )}
+
+      <div class="prose max-w-none dark:prose-invert mt-6">
+        <Content />
+      </div>
+    </div>
+  </section>
+</Layout>

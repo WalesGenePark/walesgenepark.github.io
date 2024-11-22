@@ -1,0 +1,118 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+import { Icon } from 'astro-icon/components';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'cy' } },
+  ];
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const metadata = {
+  title: t('nav.calendar'),
+};
+
+const events = await getCollection('events', ({ id }) => {
+  return id.startsWith(lang + '/');
+});
+
+const sortedEvents = events.sort((a, b) => {
+  const dateA = new Date(a.data.date);
+  const dateB = new Date(b.data.date);
+  return dateA.getTime() - dateB.getTime();
+});
+
+const formatDate = (date: string | Date) => {
+  const d = typeof date === 'string' ? new Date(date) : date;
+  return d.toLocaleDateString(lang === 'cy' ? 'cy-GB' : 'en-GB', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+};
+
+// Group events by month and year
+const eventsByMonth = sortedEvents.reduce((acc, event) => {
+  const date = new Date(event.data.date);
+  const monthYear = date.toLocaleString(lang === 'cy' ? 'cy-GB' : 'en-GB', { 
+    month: 'long',
+    year: 'numeric'
+  });
+  
+  if (!acc[monthYear]) {
+    acc[monthYear] = [];
+  }
+  
+  acc[monthYear].push(event);
+  return acc;
+}, {} as Record<string, typeof events>);
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-6xl">
+    <h1 class="text-4xl font-bold mb-10">{t('nav.calendar')}</h1>
+    
+    <div class="calendar-view">
+      {Object.entries(eventsByMonth).map(([monthYear, monthEvents]) => (
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold mb-4 text-primary">{monthYear}</h2>
+          <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+            {monthEvents.map((event, index) => (
+              <div class={`p-6 ${index !== monthEvents.length - 1 ? 'border-b dark:border-gray-700' : ''}`}>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0 w-20 text-center bg-primary bg-opacity-10 rounded-lg p-2">
+                    <div class="text-3xl font-bold text-primary">
+                      {new Date(event.data.date).getDate()}
+                    </div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                      {new Date(event.data.date).toLocaleString(lang === 'cy' ? 'cy-GB' : 'en-GB', { weekday: 'short' })}
+                    </div>
+                  </div>
+                  <div class="ml-6 flex-grow">
+                    <h3 class="text-xl font-semibold mb-2">
+                      <a href={`/${lang}/calendr/${event.slug.split('/')[1]}`} class="hover:text-primary">
+                        {event.data.title}
+                      </a>
+                    </h3>
+                    {event.data.time && (
+                      <div class="flex items-center text-gray-600 dark:text-gray-400 mb-2">
+                        <Icon name="tabler:clock" class="w-4 h-4 mr-2" />
+                        <span>{event.data.time}</span>
+                      </div>
+                    )}
+                    {event.data.location && (
+                      <div class="flex items-center text-gray-600 dark:text-gray-400 mb-2">
+                        <Icon name="tabler:map-pin" class="w-4 h-4 mr-2" />
+                        <span>{event.data.location}</span>
+                      </div>
+                    )}
+                    {event.data.description && (
+                      <p class="text-gray-600 dark:text-gray-400 mt-2">
+                        {event.data.description}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<style>
+.calendar-view {
+  @apply space-y-8;
+}
+
+.calendar-view h2 {
+  @apply capitalize;
+}
+</style>
