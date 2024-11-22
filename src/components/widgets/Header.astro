@@ -48,28 +48,24 @@ const socialLinks = [
 ];
 ---
 
-<header
-  class="sticky top-0 z-40 flex-none mx-auto w-full bg-white md:bg-white/90 dark:bg-slate-900 dark:md:bg-slate-900/90 md:backdrop-blur-sm border-b dark:border-b-0"
->
-  <div class="py-3 px-3 mx-auto w-full md:flex md:justify-between max-w-6xl md:px-4">
-    <div class="flex justify-between items-center">
-      <a class="flex items-center" href={`/${lang}`}>
+<header class="sticky top-0 z-40 w-full bg-white dark:bg-slate-900 border-b dark:border-b-0">
+  <div class="py-3 px-3 mx-auto w-full flex justify-between items-center max-w-6xl">
+    <!-- Logo -->
+    <div class="flex-none">
+      <a href={`/${lang}`} class="flex">
         <Logo />
       </a>
     </div>
 
-    <nav
-      class="items-center w-full md:w-auto hidden md:flex text-gray-600 dark:text-slate-200 h-screen md:h-auto"
-      aria-label="Main navigation"
-      id="menu"
-    >
-      <ul class="flex flex-col pt-8 md:pt-0 md:flex-row md:self-center w-full md:w-auto text-xl md:text-base justify-center">
+    <!-- Desktop Menu -->
+    <nav class="hidden xl:flex items-center gap-6">
+      <ul class="flex items-center gap-6">
         {
           links.map(({ text, href }) => (
             <li>
               <a
-                class="font-medium hover:text-gray-900 dark:hover:text-white px-4 py-3 flex items-center transition duration-150 ease-in-out"
                 href={href}
+                class="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
               >
                 {text}
               </a>
@@ -79,20 +75,19 @@ const socialLinks = [
       </ul>
     </nav>
 
-    <div class="hidden md:flex items-center md:w-auto gap-4">
-      <div class="flex gap-1">
-        {socialLinks.map(({ name, href, icon }) => (
-          <a
-            href={href}
-            class="inline-flex items-center text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-            title={name}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Icon name={icon} class="w-5 h-5" />
-          </a>
-        ))}
-      </div>
+    <!-- Desktop Actions -->
+    <div class="hidden xl:flex items-center gap-4">
+      {socialLinks.map(({ name, href, icon }) => (
+        <a
+          href={href}
+          class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+          title={name}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon name={icon} class="w-5 h-5" />
+        </a>
+      ))}
 
       <div class="flex items-center gap-1 text-sm">
         <a
@@ -113,16 +108,87 @@ const socialLinks = [
       <ToggleTheme iconClass="w-5 h-5" />
     </div>
 
-    <div class="flex items-center md:hidden">
-      <ToggleTheme />
-      <button
-        type="button"
-        class="ml-1.5 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
-        aria-label="Toggle Menu"
-        data-toggle-menu
-      >
-        <Icon name="tabler:menu" class="w-6 h-6" />
-      </button>
+    <!-- Mobile Menu Button -->
+    <button
+      type="button"
+      class="xl:hidden text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+      aria-label="Toggle Menu"
+      data-toggle-menu
+    >
+      <Icon name="tabler:menu" class="w-6 h-6" />
+    </button>
+  </div>
+
+  <!-- Mobile Menu Panel -->
+  <div
+    id="mobile-menu"
+    class="xl:hidden fixed inset-0 z-50 bg-white dark:bg-slate-900 transform translate-x-full transition-transform duration-300 ease-in-out"
+  >
+    <div class="flex flex-col h-full">
+      <div class="flex justify-between items-center p-4 border-b dark:border-gray-800">
+        <span class="text-lg font-bold">Menu</span>
+        <button
+          type="button"
+          class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+          aria-label="Close Menu"
+          data-close-menu
+        >
+          <Icon name="tabler:x" class="w-6 h-6" />
+        </button>
+      </div>
+
+      <nav class="flex-grow overflow-y-auto p-4">
+        <ul class="space-y-4">
+          {
+            links.map(({ text, href }) => (
+              <li>
+                <a
+                  href={href}
+                  class="block text-lg font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                >
+                  {text}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="mt-8 pt-8 border-t dark:border-gray-800">
+          <div class="flex justify-center gap-4 mb-4">
+            {socialLinks.map(({ name, href, icon }) => (
+              <a
+                href={href}
+                class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                title={name}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon name={icon} class="w-6 h-6" />
+              </a>
+            ))}
+          </div>
+
+          <div class="flex justify-center items-center gap-1 text-sm mb-4">
+            <a
+              href={enUrl}
+              class={`px-1 ${lang === 'en' ? 'text-primary font-bold' : 'text-gray-600 dark:text-gray-400'}`}
+            >
+              EN
+            </a>
+            <span class="text-gray-400">|</span>
+            <a
+              href={cyUrl}
+              class={`px-1 ${lang === 'cy' ? 'text-primary font-bold' : 'text-gray-600 dark:text-gray-400'}`}
+            >
+              CY
+            </a>
+          </div>
+
+          <div class="flex justify-center">
+            <ToggleTheme iconClass="w-6 h-6" />
+          </div>
+        </div>
+      </nav>
     </div>
   </div>
 </header>
@@ -130,11 +196,28 @@ const socialLinks = [
 <script>
   document.addEventListener('astro:page-load', () => {
     const toggleMenu = document.querySelector('[data-toggle-menu]');
-    const menu = document.getElementById('menu');
+    const closeMenu = document.querySelector('[data-close-menu]');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-    if (toggleMenu && menu) {
-      toggleMenu.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
+    if (toggleMenu && mobileMenu && closeMenu) {
+      const showMenu = () => {
+        mobileMenu.classList.remove('translate-x-full');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const hideMenu = () => {
+        mobileMenu.classList.add('translate-x-full');
+        document.body.style.overflow = '';
+      };
+
+      toggleMenu.addEventListener('click', showMenu);
+      closeMenu.addEventListener('click', hideMenu);
+
+      // Handle window resize
+      window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1280) {
+          hideMenu();
+        }
       });
     }
   });
