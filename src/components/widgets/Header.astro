@@ -2,9 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import Logo from '~/components/Logo.astro';
 import ToggleTheme from '~/components/common/ToggleTheme.astro';
-import ToggleMenu from '~/components/common/ToggleMenu.astro';
-import LanguagePicker from '~/components/common/LanguagePicker.astro';
-import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '~/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -31,27 +29,41 @@ const links = [
     href: `/${lang}/contact`,
   },
 ];
+
+const currentPath = Astro.url.pathname;
+const enUrl = getLocalizedPath(currentPath, 'en');
+const cyUrl = getLocalizedPath(currentPath, 'cy');
+
+const socialLinks = [
+  {
+    name: 'LinkedIn',
+    href: 'https://www.linkedin.com/company/wales-gene-park',
+    icon: 'tabler:brand-linkedin',
+  },
+  {
+    name: 'Twitter',
+    href: 'https://twitter.com/walesgenepark',
+    icon: 'tabler:brand-twitter',
+  },
+];
 ---
 
 <header
   class="sticky top-0 z-40 flex-none mx-auto w-full bg-white md:bg-white/90 dark:bg-slate-900 dark:md:bg-slate-900/90 md:backdrop-blur-sm border-b dark:border-b-0"
 >
   <div class="py-3 px-3 mx-auto w-full md:flex md:justify-between max-w-6xl md:px-4">
-    <div class="flex justify-between">
+    <div class="flex justify-between items-center">
       <a class="flex items-center" href={`/${lang}`}>
         <Logo />
       </a>
-      <div class="flex items-center md:hidden">
-        <ToggleTheme />
-        <ToggleMenu />
-      </div>
     </div>
+
     <nav
       class="items-center w-full md:w-auto hidden md:flex text-gray-600 dark:text-slate-200 h-screen md:h-auto"
       aria-label="Main navigation"
       id="menu"
     >
-      <ul class="flex flex-col pt-8 md:pt-0 md:flex-row md:self-center w-full md:w-auto text-xl md:text-base">
+      <ul class="flex flex-col pt-8 md:pt-0 md:flex-row md:self-center w-full md:w-auto text-xl md:text-base justify-center">
         {
           links.map(({ text, href }) => (
             <li>
@@ -64,16 +76,66 @@ const links = [
             </li>
           ))
         }
-        <li class="md:hidden">
-          <LanguagePicker />
-        </li>
       </ul>
     </nav>
-    <div class="hidden md:flex items-center md:w-auto">
-      <div class="flex">
-        <LanguagePicker />
-        <ToggleTheme iconClass="w-5 h-5" />
+
+    <div class="hidden md:flex items-center md:w-auto gap-4">
+      <div class="flex gap-1">
+        {socialLinks.map(({ name, href, icon }) => (
+          <a
+            href={href}
+            class="inline-flex items-center text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+            title={name}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name={icon} class="w-5 h-5" />
+          </a>
+        ))}
       </div>
+
+      <div class="flex items-center gap-1 text-sm">
+        <a
+          href={enUrl}
+          class={`px-1 ${lang === 'en' ? 'text-primary font-bold' : 'text-gray-600 dark:text-gray-400'}`}
+        >
+          EN
+        </a>
+        <span class="text-gray-400">|</span>
+        <a
+          href={cyUrl}
+          class={`px-1 ${lang === 'cy' ? 'text-primary font-bold' : 'text-gray-600 dark:text-gray-400'}`}
+        >
+          CY
+        </a>
+      </div>
+
+      <ToggleTheme iconClass="w-5 h-5" />
+    </div>
+
+    <div class="flex items-center md:hidden">
+      <ToggleTheme />
+      <button
+        type="button"
+        class="ml-1.5 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
+        aria-label="Toggle Menu"
+        data-toggle-menu
+      >
+        <Icon name="tabler:menu" class="w-6 h-6" />
+      </button>
     </div>
   </div>
 </header>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const toggleMenu = document.querySelector('[data-toggle-menu]');
+    const menu = document.getElementById('menu');
+
+    if (toggleMenu && menu) {
+      toggleMenu.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+      });
+    }
+  });
+</script>
