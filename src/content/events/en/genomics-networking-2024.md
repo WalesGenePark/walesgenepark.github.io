@@ -1,5 +1,5 @@
 ---
-date: 2024-11-22
+date: 2024-11-15
 lang: "en"
 title: "Wales Genomics Network Evening 2024"
 description: "An evening of networking, knowledge sharing, and collaboration for genomics professionals across Wales. Connect with colleagues, share experiences, and explore potential collaborations in a relaxed environment."

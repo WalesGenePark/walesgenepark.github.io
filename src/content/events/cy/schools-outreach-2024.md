@@ -1,5 +1,5 @@
 ---
-date: 2024-11-22
+date: 2025-01-22
 lang: "cy"
 title: "Rhaglen Allgymorth Ysgolion 2024"
 description: "Wythnos o weithgareddau geneteg ymarferol a rhyngweithiol ar gyfer ysgolion uwchradd ledled Cymru, yn cynnwys arbrofion labordy, gweithdai a sgyrsiau gyrfaoedd."

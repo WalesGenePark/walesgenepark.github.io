@@ -1,5 +1,5 @@
 ---
-date: 2024-11-22
+date: 2024-10-22
 lang: "en"
 title: "Advanced Genetic Counseling Techniques Seminar"
 description: "An intensive half-day seminar focusing on advanced techniques in genetic counseling, including complex case management, ethical considerations, and emerging best practices in patient communication."

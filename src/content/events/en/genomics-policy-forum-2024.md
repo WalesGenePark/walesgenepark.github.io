@@ -1,5 +1,5 @@
 ---
-date: 2024-11-22
+date: 2024-11-15
 lang: "en"
 title: "Wales Genomics Policy Forum 2024"
 description: "A crucial forum bringing together policymakers, healthcare leaders, and genomics experts to shape the future of genomic medicine in Wales. Discuss policy implications, ethical considerations, and implementation strategies."

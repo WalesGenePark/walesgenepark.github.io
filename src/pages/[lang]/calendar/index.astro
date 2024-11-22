@@ -20,42 +20,63 @@ const metadata = {
   title: t('nav.calendar'),
 };
 
+// Get current month and year from URL params or use current date
+const url = new URL(Astro.request.url);
+const today = new Date();
+const currentMonth = parseInt(url.searchParams.get('month') ?? today.getMonth().toString());
+const currentYear = parseInt(url.searchParams.get('year') ?? today.getFullYear().toString());
+
+// Get only events (not news)
 const events = await getCollection('events', ({ id }) => {
   return id.startsWith(lang + '/');
 });
 
+// Sort events by date and time
 const sortedEvents = events.sort((a, b) => {
   const dateA = new Date(a.data.date);
   const dateB = new Date(b.data.date);
+  if (dateA.getTime() === dateB.getTime()) {
+    const timeA = a.data.startTime || '';
+    const timeB = b.data.startTime || '';
+    return timeA.localeCompare(timeB);
+  }
   return dateA.getTime() - dateB.getTime();
 });
 
-// Get unique months from events
-const months = [...new Set(sortedEvents.map(event => {
-  const date = new Date(event.data.date);
-  return `${date.getFullYear()}-${date.getMonth()}`;
-}))].map(monthStr => {
-  const [year, month] = monthStr.split('-').map(Number);
-  return { year, month };
-}).sort((a, b) => {
-  return a.year !== b.year ? a.year - b.year : a.month - b.month;
-});
+const monthNames = {
+  en: [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ],
+  cy: [
+    'Ionawr', 'Chwefror', 'Mawrth', 'Ebrill', 'Mai', 'Mehefin',
+    'Gorffennaf', 'Awst', 'Medi', 'Hydref', 'Tachwedd', 'Rhagfyr'
+  ],
+};
 
 const viewLabels = {
   en: {
     grid: 'Grid View',
-    list: 'List View'
+    list: 'List View',
+    today: 'Today',
   },
   cy: {
     grid: 'Golwg Grid',
-    list: 'Golwg Rhestr'
+    list: 'Golwg Rhestr',
+    today: 'Heddiw',
   }
 };
+
+// Generate navigation data
+const prevMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+const prevYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
+const nextYear = currentMonth === 11 ? currentYear + 1 : currentYear;
 ---
 
 <Layout metadata={metadata}>
   <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-6xl">
-    <div class="flex justify-between items-center mb-10">
+    <div class="flex justify-between items-center mb-8">
       <h1 class="text-4xl font-bold">{t('nav.calendar')}</h1>
       
       <div class="flex items-center bg-white dark:bg-gray-800 rounded-lg shadow">
@@ -77,28 +98,60 @@ const viewLabels = {
         </button>
       </div>
     </div>
+
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg mb-8">
+      <div class="p-4 flex items-center justify-between">
+        <button
+          class="nav-button p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+          data-month={prevMonth}
+          data-year={prevYear}
+          title="Previous Month"
+        >
+          <Icon name="tabler:chevron-left" class="w-5 h-5" />
+        </button>
+
+        <div class="flex items-center space-x-4">
+          <h2 class="text-2xl font-bold">
+            {monthNames[lang as keyof typeof monthNames][currentMonth]} {currentYear}
+          </h2>
+          
+          <button
+            class="nav-button text-sm font-medium px-3 py-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            data-month={today.getMonth()}
+            data-year={today.getFullYear()}
+          >
+            {viewLabels[lang as keyof typeof viewLabels].today}
+          </button>
+        </div>
+
+        <button
+          class="nav-button p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+          data-month={nextMonth}
+          data-year={nextYear}
+          title="Next Month"
+        >
+          <Icon name="tabler:chevron-right" class="w-5 h-5" />
+        </button>
+      </div>
+    </div>
     
     <div id="calendar-views">
       <div id="grid-view" class="space-y-8">
-        {months.map(({ year, month }) => (
-          <CalendarGrid
-            events={sortedEvents}
-            lang={lang}
-            month={month}
-            year={year}
-          />
-        ))}
+        <CalendarGrid
+          events={sortedEvents}
+          lang={lang}
+          currentMonth={currentMonth}
+          currentYear={currentYear}
+        />
       </div>
       
       <div id="list-view" class="hidden space-y-8">
-        {months.map(({ year, month }) => (
-          <CalendarList
-            events={sortedEvents}
-            lang={lang}
-            month={month}
-            year={year}
-          />
-        ))}
+        <CalendarList
+          events={sortedEvents}
+          lang={lang}
+          month={currentMonth}
+          year={currentYear}
+        />
       </div>
     </div>
   </section>
@@ -119,7 +172,8 @@ const viewLabels = {
 </style>
 
 <script>
-function initializeViewToggle() {
+function initializeCalendar() {
+  // View toggle functionality
   const gridView = document.getElementById('grid-view');
   const listView = document.getElementById('list-view');
   const toggleButtons = document.querySelectorAll('.view-toggle');
@@ -140,6 +194,15 @@ function initializeViewToggle() {
       gridView.classList.add('hidden');
       listView.classList.remove('hidden');
     }
+
+    // Store preference
+    localStorage.setItem('calendarView', view);
+  }
+
+  // Load saved preference
+  const savedView = localStorage.getItem('calendarView');
+  if (savedView) {
+    updateView(savedView);
   }
 
   toggleButtons.forEach(button => {
@@ -148,11 +211,34 @@ function initializeViewToggle() {
       if (view) updateView(view);
     });
   });
+
+  // Navigation functionality
+  const navButtons = document.querySelectorAll('.nav-button');
+  navButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const month = button.getAttribute('data-month');
+      const year = button.getAttribute('data-year');
+      if (month && year) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('month', month);
+        url.searchParams.set('year', year);
+        
+        // Use History API for smooth navigation
+        history.pushState({}, '', url.toString());
+        window.location.reload();
+      }
+    });
+  });
 }
 
 // Initialize when the DOM is ready
-document.addEventListener('DOMContentLoaded', initializeViewToggle);
+document.addEventListener('DOMContentLoaded', initializeCalendar);
 
 // Re-initialize when Astro updates the page
-document.addEventListener('astro:page-load', initializeViewToggle);
+document.addEventListener('astro:page-load', initializeCalendar);
+
+// Handle browser back/forward buttons
+window.addEventListener('popstate', () => {
+  window.location.reload();
+});
 </script>

@@ -1,5 +1,5 @@
 ---
-date: 2024-11-22
+date: 2025-01-22
 lang: "en"
 title: "Genomics in Schools: Educational Outreach Day"
 description: "An engaging day of genomics education for secondary school students, featuring hands-on activities, interactive demonstrations, and career insights. Designed to inspire the next generation of genomics professionals."

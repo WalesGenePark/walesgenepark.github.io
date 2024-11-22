@@ -1,5 +1,5 @@
 ---
-date: 2024-11-22
+date: 2024-11-20
 lang: "cy"
 title: "Hyfforddiant Biowybodeg ar gyfer Genomeg Glinigol"
 description: "Cwrs hyfforddi ymarferol un diwrnod yn canolbwyntio ar offer biowybodeg hanfodol a ddefnyddir mewn genomeg glinigol. Wedi'i ddylunio ar gyfer gweithwyr gofal iechyd proffesiynol sy'n dymuno gwella eu sgiliau dadansoddi data genomig."

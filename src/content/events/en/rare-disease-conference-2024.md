@@ -1,5 +1,5 @@
 ---
-date: 2024-11-22
+date: 2024-12-22
 lang: "en"
 title: "Wales Rare Disease Symposium 2024"
 description: "The annual Wales Rare Disease Symposium brings together researchers, clinicians, and patient advocates to discuss the latest advances in rare disease research and treatment. This year's focus is on emerging therapies and diagnostic innovations."

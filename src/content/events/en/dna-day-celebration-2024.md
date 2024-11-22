@@ -1,5 +1,5 @@
 ---
-date: 2024-11-22
+date: 2024-11-20
 lang: "en"
 title: "DNA Day: Discovering Your Genetic Story"
 description: "Join us for an exciting day of hands-on activities, interactive demonstrations, and engaging talks celebrating DNA Day. Perfect for families, students, and anyone curious about genetics and its impact on our lives."

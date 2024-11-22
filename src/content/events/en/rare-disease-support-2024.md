@@ -1,5 +1,5 @@
 ---
-date: 2024-11-22
+date: 2024-12-22
 lang: "en"
 title: "Living with Rare Genetic Conditions: Support Group Meeting"
 description: "A supportive evening for individuals and families affected by rare genetic conditions. Share experiences, learn from experts, and connect with others in the rare disease community."

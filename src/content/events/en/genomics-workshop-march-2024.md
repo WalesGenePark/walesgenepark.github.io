@@ -1,5 +1,5 @@
 ---
-date: 2024-11-22
+date: 2024-08-10
 lang: "en"
 title: "Introduction to Clinical Genomics Workshop"
 description: "A comprehensive two-day workshop designed for healthcare professionals looking to enhance their understanding of clinical genomics. This hands-on session covers fundamental concepts, latest technologies, and practical applications in patient care."

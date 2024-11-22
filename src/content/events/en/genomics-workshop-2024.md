@@ -1,5 +1,5 @@
 ---
-date: 2024-11-22
+date: 2024-11-15
 lang: "en"
 title: "Genomics Workshop 2024"
 description: "Join us for a comprehensive workshop on the latest advances in genomics research and their applications in healthcare."

@@ -1,5 +1,5 @@
 ---
-date: 2024-11-22
+date: 2024-08-10
 lang: "cy"
 title: "Gweithdy Cyflwyniad i Genomeg Glinigol"
 description: "Gweithdy cynhwysfawr deuddydd wedi'i gynllunio ar gyfer gweithwyr gofal iechyd proffesiynol sy'n dymuno gwella eu dealltwriaeth o genomeg glinigol. Mae'r sesiwn ymarferol hon yn cwmpasu cysyniadau sylfaenol, technolegau diweddaraf, a chymwysiadau ymarferol mewn gofal cleifion."

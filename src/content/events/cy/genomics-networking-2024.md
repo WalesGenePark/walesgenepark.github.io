@@ -1,5 +1,5 @@
 ---
-date: 2024-11-22
+date: 2024-11-15
 lang: "cy"
 title: "Digwyddiad Rhwydweithio Genomeg Cymru 2024"
 description: "Ymunwch â chymuned genomeg Cymru ar gyfer noson o rwydweithio, rhannu gwybodaeth, a thrafodaethau am ddatblygiadau diweddaraf ym maes genomeg. Cyfle gwych i gwrdd â chydweithwyr a rhannu syniadau."

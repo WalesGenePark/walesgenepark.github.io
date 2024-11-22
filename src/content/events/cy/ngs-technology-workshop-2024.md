@@ -1,5 +1,5 @@
 ---
-date: 2024-11-22
+date: 2024-11-30
 lang: "cy"
 title: "Gweithdy Technoleg NGS 2024"
 description: "Gweithdy dwys deuddydd yn canolbwyntio ar dechnolegau dilyniannu cenhedlaeth nesaf (NGS), gan gynnwys hyfforddiant ymarferol ar offer modern a dadansoddi data."

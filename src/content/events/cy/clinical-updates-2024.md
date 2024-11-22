@@ -1,5 +1,5 @@
 ---
-date: 2024-11-22
+date: 2024-11-18
 lang: "cy"
 title: "Diweddariad Ymarfer Genomeg Glinigol 2024"
 description: "Diweddariadau hanfodol i weithwyr gofal iechyd proffesiynol ar y datblygiadau diweddaraf mewn genomeg glinigol, gan gynnwys canllawiau profi newydd, protocolau dehongli, ac arferion gorau ar gyfer gofal cleifion."

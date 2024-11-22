@@ -1,5 +1,5 @@
 ---
-date: 2024-11-22
+date: 2024-11-30
 lang: "en"
 title: "Next-Generation Sequencing Technologies Workshop"
 description: "A hands-on workshop exploring the latest advances in NGS technologies, including practical sessions with cutting-edge sequencing platforms and data analysis tools."
