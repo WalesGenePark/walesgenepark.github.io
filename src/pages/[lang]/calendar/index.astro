@@ -3,8 +3,6 @@ import Layout from '~/layouts/PageLayout.astro';
 import { getCollection } from 'astro:content';
 import { getLangFromUrl, useTranslations } from '~/i18n/utils';
 import { Icon } from 'astro-icon/components';
-import CalendarGrid from '~/components/widgets/CalendarGrid.astro';
-import CalendarList from '~/components/widgets/CalendarList.astro';
 
 export function getStaticPaths() {
   return [
@@ -20,13 +18,7 @@ const metadata = {
   title: t('nav.calendar'),
 };
 
-// Get current month and year from URL params or use current date
-const url = new URL(Astro.request.url);
-const today = new Date();
-const currentMonth = parseInt(url.searchParams.get('month') ?? today.getMonth().toString());
-const currentYear = parseInt(url.searchParams.get('year') ?? today.getFullYear().toString());
-
-// Get only events (not news)
+// Get events
 const events = await getCollection('events', ({ id }) => {
   return id.startsWith(lang + '/');
 });
@@ -43,202 +35,239 @@ const sortedEvents = events.sort((a, b) => {
   return dateA.getTime() - dateB.getTime();
 });
 
-const monthNames = {
-  en: [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-  ],
-  cy: [
-    'Ionawr', 'Chwefror', 'Mawrth', 'Ebrill', 'Mai', 'Mehefin',
-    'Gorffennaf', 'Awst', 'Medi', 'Hydref', 'Tachwedd', 'Rhagfyr'
-  ],
-};
+// Split events into upcoming and past
+const today = new Date();
+today.setHours(0, 0, 0, 0);
 
-const viewLabels = {
+const { upcomingEvents, pastEvents } = sortedEvents.reduce(
+  (acc, event) => {
+    const eventDate = new Date(event.data.date);
+    eventDate.setHours(0, 0, 0, 0);
+    
+    if (eventDate >= today) {
+      acc.upcomingEvents.push(event);
+    } else {
+      acc.pastEvents.push(event);
+    }
+    
+    return acc;
+  },
+  { upcomingEvents: [], pastEvents: [] }
+);
+
+// Reverse past events to show most recent first
+pastEvents.reverse();
+
+const labels = {
   en: {
-    grid: 'Grid View',
-    list: 'List View',
-    today: 'Today',
+    upcomingEvents: 'Upcoming Events',
+    pastEvents: 'Past Events',
+    showPastEvents: 'Show Past Events',
+    hidePastEvents: 'Hide Past Events',
+    noUpcomingEvents: 'No upcoming events scheduled',
+    noPastEvents: 'No past events',
   },
   cy: {
-    grid: 'Golwg Grid',
-    list: 'Golwg Rhestr',
-    today: 'Heddiw',
+    upcomingEvents: 'Digwyddiadau i Ddod',
+    pastEvents: 'Digwyddiadau Blaenorol',
+    showPastEvents: 'Dangos Digwyddiadau Blaenorol',
+    hidePastEvents: 'Cuddio Digwyddiadau Blaenorol',
+    noUpcomingEvents: 'Dim digwyddiadau wedi\'u trefnu',
+    noPastEvents: 'Dim digwyddiadau blaenorol',
   }
 };
 
-// Generate navigation data
-const prevMonth = currentMonth === 0 ? 11 : currentMonth - 1;
-const prevYear = currentMonth === 0 ? currentYear - 1 : currentYear;
-const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
-const nextYear = currentMonth === 11 ? currentYear + 1 : currentYear;
+function formatDate(date: Date, lang: string): string {
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  };
+  return date.toLocaleDateString(lang === 'cy' ? 'cy-GB' : 'en-GB', options);
+}
 ---
 
 <Layout metadata={metadata}>
   <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-6xl">
-    <div class="flex justify-between items-center mb-8">
-      <h1 class="text-4xl font-bold">{t('nav.calendar')}</h1>
-      
-      <div class="flex items-center bg-white dark:bg-gray-800 rounded-lg shadow">
-        <button
-          class="view-toggle flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-          data-view="grid"
-          data-active="true"
-        >
-          <Icon name="tabler:layout-grid" class="w-5 h-5 mr-2" />
-          {viewLabels[lang as keyof typeof viewLabels].grid}
-        </button>
-        <button
-          class="view-toggle flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-          data-view="list"
-          data-active="false"
-        >
-          <Icon name="tabler:list" class="w-5 h-5 mr-2" />
-          {viewLabels[lang as keyof typeof viewLabels].list}
-        </button>
-      </div>
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold mb-2">{t('nav.calendar')}</h1>
+      <p class="text-gray-600 dark:text-gray-400">
+        {upcomingEvents.length} {lang === 'en' ? 'upcoming events' : 'digwyddiadau i ddod'}
+      </p>
     </div>
 
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg mb-8">
-      <div class="p-4 flex items-center justify-between">
-        <button
-          class="nav-button p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-          data-month={prevMonth}
-          data-year={prevYear}
-          title="Previous Month"
-        >
-          <Icon name="tabler:chevron-left" class="w-5 h-5" />
-        </button>
+    <!-- Upcoming Events -->
+    <div class="space-y-12 mb-16">
+      <h2 class="text-2xl font-bold text-primary">
+        {labels[lang as keyof typeof labels].upcomingEvents}
+      </h2>
 
-        <div class="flex items-center space-x-4">
-          <h2 class="text-2xl font-bold">
-            {monthNames[lang as keyof typeof monthNames][currentMonth]} {currentYear}
-          </h2>
-          
-          <button
-            class="nav-button text-sm font-medium px-3 py-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-            data-month={today.getMonth()}
-            data-year={today.getFullYear()}
-          >
-            {viewLabels[lang as keyof typeof viewLabels].today}
-          </button>
+      {upcomingEvents.length > 0 ? (
+        <div class="space-y-8">
+          {upcomingEvents.map((event) => {
+            const date = new Date(event.data.date);
+            const startTime = event.data.startTime || '';
+            const endTime = event.data.endTime || '';
+            const timeDisplay = startTime && endTime ? `${startTime} - ${endTime}` : startTime || '';
+
+            return (
+              <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                <a href={`/${lang}/events/${event.slug.split('/')[1]}`} class="block p-6">
+                  <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-16 text-center">
+                      <div class="text-2xl font-bold text-primary">{date.getDate()}</div>
+                      <div class="text-sm text-gray-600 dark:text-gray-400">
+                        {date.toLocaleDateString(lang === 'cy' ? 'cy-GB' : 'en-GB', { month: 'short' })}
+                      </div>
+                    </div>
+                    
+                    <div class="flex-grow">
+                      <h3 class="text-xl font-bold mb-2 group-hover:text-primary">
+                        {event.data.title}
+                      </h3>
+                      
+                      <div class="space-y-2">
+                        <div class="flex items-center text-gray-600 dark:text-gray-400">
+                          <Icon name="tabler:calendar" class="w-4 h-4 mr-2" />
+                          <span class="text-sm">{formatDate(date, lang)}</span>
+                        </div>
+
+                        {timeDisplay && (
+                          <div class="flex items-center text-gray-600 dark:text-gray-400">
+                            <Icon name="tabler:clock" class="w-4 h-4 mr-2" />
+                            <span class="text-sm">{timeDisplay}</span>
+                          </div>
+                        )}
+
+                        {event.data.location && (
+                          <div class="flex items-center text-gray-600 dark:text-gray-400">
+                            <Icon name="tabler:map-pin" class="w-4 h-4 mr-2" />
+                            <span class="text-sm">{event.data.location}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div class="flex-shrink-0">
+                      <Icon name="tabler:chevron-right" class="w-6 h-6 text-gray-400" />
+                    </div>
+                  </div>
+                </a>
+              </div>
+            );
+          })}
         </div>
+      ) : (
+        <p class="text-gray-600 dark:text-gray-400 text-center py-8">
+          {labels[lang as keyof typeof labels].noUpcomingEvents}
+        </p>
+      )}
+    </div>
+
+    <!-- Past Events -->
+    <div class="space-y-8">
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-bold text-gray-600 dark:text-gray-400">
+          {labels[lang as keyof typeof labels].pastEvents}
+        </h2>
 
         <button
-          class="nav-button p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-          data-month={nextMonth}
-          data-year={nextYear}
-          title="Next Month"
+          id="togglePastEvents"
+          class="text-sm font-medium px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+          aria-expanded="true"
+          data-show-text={labels[lang as keyof typeof labels].showPastEvents}
+          data-hide-text={labels[lang as keyof typeof labels].hidePastEvents}
         >
-          <Icon name="tabler:chevron-right" class="w-5 h-5" />
+          {labels[lang as keyof typeof labels].hidePastEvents}
         </button>
       </div>
-    </div>
-    
-    <div id="calendar-views">
-      <div id="grid-view" class="space-y-8">
-        <CalendarGrid
-          events={sortedEvents}
-          lang={lang}
-          currentMonth={currentMonth}
-          currentYear={currentYear}
-        />
-      </div>
-      
-      <div id="list-view" class="hidden space-y-8">
-        <CalendarList
-          events={sortedEvents}
-          lang={lang}
-          month={currentMonth}
-          year={currentYear}
-        />
+
+      <div id="pastEvents" class="space-y-6">
+        {pastEvents.length > 0 ? (
+          <div class="space-y-4">
+            {pastEvents.map((event) => {
+              const date = new Date(event.data.date);
+              const startTime = event.data.startTime || '';
+              const endTime = event.data.endTime || '';
+              const timeDisplay = startTime && endTime ? `${startTime} - ${endTime}` : startTime || '';
+
+              return (
+                <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
+                  <a href={`/${lang}/events/${event.slug.split('/')[1]}`} class="block group">
+                    <div class="flex items-center space-x-4">
+                      <div class="flex-shrink-0 w-16 text-center">
+                        <div class="text-xl font-bold text-gray-400">{date.getDate()}</div>
+                        <div class="text-sm text-gray-400">
+                          {date.toLocaleDateString(lang === 'cy' ? 'cy-GB' : 'en-GB', { month: 'short' })}
+                        </div>
+                      </div>
+                      
+                      <div class="flex-grow">
+                        <h3 class="text-lg font-bold text-gray-600 dark:text-gray-400 group-hover:text-primary">
+                          {event.data.title}
+                        </h3>
+                        
+                        <div class="flex items-center text-gray-500 dark:text-gray-500 mt-1">
+                          <Icon name="tabler:calendar" class="w-4 h-4 mr-2" />
+                          <span class="text-sm">{formatDate(date, lang)}</span>
+                          
+                          {timeDisplay && (
+                            <>
+                              <span class="mx-2">•</span>
+                              <Icon name="tabler:clock" class="w-4 h-4 mr-2" />
+                              <span class="text-sm">{timeDisplay}</span>
+                            </>
+                          )}
+                        </div>
+                      </div>
+
+                      <div class="flex-shrink-0">
+                        <Icon name="tabler:chevron-right" class="w-5 h-5 text-gray-400" />
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <p class="text-gray-600 dark:text-gray-400 text-center py-8">
+            {labels[lang as keyof typeof labels].noPastEvents}
+          </p>
+        )}
       </div>
     </div>
   </section>
 </Layout>
 
-<style>
-.view-toggle {
-  @apply hover:bg-gray-100 dark:hover:bg-gray-700;
-}
-
-.view-toggle[data-active="true"] {
-  @apply bg-primary text-white hover:bg-primary;
-}
-
-.view-toggle[data-active="false"] {
-  @apply text-gray-600 dark:text-gray-300;
-}
-</style>
-
 <script>
-function initializeCalendar() {
-  // View toggle functionality
-  const gridView = document.getElementById('grid-view');
-  const listView = document.getElementById('list-view');
-  const toggleButtons = document.querySelectorAll('.view-toggle');
+function initializeEventList() {
+  const toggleButton = document.getElementById('togglePastEvents');
+  const pastEventsSection = document.getElementById('pastEvents');
+  
+  if (!toggleButton || !pastEventsSection) return;
 
-  if (!gridView || !listView || !toggleButtons.length) return;
-
-  function updateView(view: string) {
-    // Update button states
-    toggleButtons.forEach(btn => {
-      btn.setAttribute('data-active', (btn.getAttribute('data-view') === view).toString());
-    });
-    
-    // Show/hide views
-    if (view === 'grid') {
-      gridView.classList.remove('hidden');
-      listView.classList.add('hidden');
-    } else {
-      gridView.classList.add('hidden');
-      listView.classList.remove('hidden');
-    }
-
-    // Store preference
-    localStorage.setItem('calendarView', view);
+  function updateToggleState(isExpanded) {
+    toggleButton.setAttribute('aria-expanded', isExpanded.toString());
+    toggleButton.textContent = isExpanded 
+      ? toggleButton.getAttribute('data-hide-text')
+      : toggleButton.getAttribute('data-show-text');
+    pastEventsSection.style.display = isExpanded ? 'block' : 'none';
   }
 
-  // Load saved preference
-  const savedView = localStorage.getItem('calendarView');
-  if (savedView) {
-    updateView(savedView);
-  }
+  // Show past events by default
+  updateToggleState(true);
 
-  toggleButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const view = button.getAttribute('data-view');
-      if (view) updateView(view);
-    });
-  });
-
-  // Navigation functionality
-  const navButtons = document.querySelectorAll('.nav-button');
-  navButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const month = button.getAttribute('data-month');
-      const year = button.getAttribute('data-year');
-      if (month && year) {
-        const url = new URL(window.location.href);
-        url.searchParams.set('month', month);
-        url.searchParams.set('year', year);
-        
-        // Use History API for smooth navigation
-        history.pushState({}, '', url.toString());
-        window.location.reload();
-      }
-    });
+  toggleButton.addEventListener('click', () => {
+    const isCurrentlyExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+    updateToggleState(!isCurrentlyExpanded);
   });
 }
 
 // Initialize when the DOM is ready
-document.addEventListener('DOMContentLoaded', initializeCalendar);
+document.addEventListener('DOMContentLoaded', initializeEventList);
 
 // Re-initialize when Astro updates the page
-document.addEventListener('astro:page-load', initializeCalendar);
-
-// Handle browser back/forward buttons
-window.addEventListener('popstate', () => {
-  window.location.reload();
-});
+document.addEventListener('astro:page-load', initializeEventList);
 </script>

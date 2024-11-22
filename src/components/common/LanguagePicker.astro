@@ -1,53 +1,21 @@
 ---
-import { languages, defaultLang } from '~/i18n/config';
+import { languages, defaultLang, routes } from '~/i18n/config';
 import { getLangFromUrl } from '~/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
-const currentPath = Astro.url.pathname;
+const otherLang = lang === 'en' ? 'cy' : 'en';
+const otherLangName = languages[otherLang];
 
-function getAlternateLinks() {
-  const alternates = [];
-  const [, ...segments] = currentPath.split('/');
-  
-  // If we're on the default language path without the prefix
-  if (!segments[0] || !(segments[0] in languages)) {
-    for (const [code, label] of Object.entries(languages)) {
-      if (code === defaultLang) continue;
-      alternates.push({
-        lang: code,
-        label,
-        href: `/${code}${currentPath}`,
-      });
-    }
-  } else {
-    // We're on a language-specific path
-    for (const [code, label] of Object.entries(languages)) {
-      if (code === segments[0]) continue;
-      const href = code === defaultLang
-        ? `/${segments.slice(1).join('/')}`
-        : `/${code}/${segments.slice(1).join('/')}`;
-      alternates.push({ lang: code, label, href });
-    }
-  }
-  
-  return alternates;
-}
+// Get current path without language prefix
+const currentPath = Astro.url.pathname.replace(/^\/(en|cy)\//, '/');
 
-const alternates = getAlternateLinks();
+// Keep the English URL structure but change the language prefix
+const targetUrl = `/${otherLang}${currentPath}${Astro.url.search}`;
 ---
 
-<div class="flex items-center space-x-2">
-  {alternates.map(({ lang: code, label, href }) => (
-    <a
-      href={href}
-      class={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
-        lang === code
-          ? 'bg-primary text-white'
-          : 'hover:bg-gray-100 dark:hover:bg-gray-800'
-      }`}
-      hreflang={code}
-    >
-      {code === 'en' ? 'English' : 'Cymraeg'}
-    </a>
-  ))}
-</div>
+<a
+  href={targetUrl}
+  class="text-sm font-medium px-3 py-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+>
+  {otherLangName}
+</a>

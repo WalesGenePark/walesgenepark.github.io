@@ -2,63 +2,113 @@
 import Layout from '~/layouts/PageLayout.astro';
 import { getCollection } from 'astro:content';
 import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+import { Icon } from 'astro-icon/components';
 
+// Generate static pages for all events at build time
 export async function getStaticPaths() {
-  const events = await getCollection('events', ({ id }) => {
-    return id.startsWith('en/');
+  const allEvents = await getCollection('events');
+  const paths = [];
+
+  // Group events by their base slug (without language prefix)
+  const eventsBySlug = allEvents.reduce((acc, event) => {
+    const [lang, slug] = event.slug.split('/');
+    if (!acc[slug]) {
+      acc[slug] = { en: null, cy: null };
+    }
+    acc[slug][lang] = event;
+    return acc;
+  }, {});
+
+  // Create paths for both languages for each event
+  Object.entries(eventsBySlug).forEach(([slug, versions]) => {
+    // English version
+    if (versions.en) {
+      paths.push({
+        params: { lang: 'en', slug },
+        props: { 
+          event: versions.en,
+          alternateVersion: versions.cy
+        },
+      });
+    }
+
+    // Welsh version
+    if (versions.cy) {
+      paths.push({
+        params: { lang: 'cy', slug },
+        props: { 
+          event: versions.cy,
+          alternateVersion: versions.en
+        },
+      });
+    }
   });
-  
-  return events.map((event) => {
-    const [lang, ...slugParts] = event.slug.split('/');
-    return {
-      params: { lang: 'en', slug: slugParts.join('/') },
-      props: { event },
-    };
-  });
+
+  return paths;
 }
 
-const { event } = Astro.props;
+const { event, alternateVersion } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
+// Use the event in the requested language, or fall back to the alternate version
+const displayEvent = event || alternateVersion;
+
+// Render markdown content
+const { Content } = await displayEvent.render();
+
 const metadata = {
-  title: event.data.title,
+  title: displayEvent.data.title,
 };
 
-const formatDate = (date: string | Date) => {
-  const d = typeof date === 'string' ? new Date(date) : date;
-  return d.toLocaleDateString(lang === 'cy' ? 'cy-GB' : 'en-GB', {
+const date = new Date(displayEvent.data.date);
+const startTime = displayEvent.data.startTime || '';
+const endTime = displayEvent.data.endTime || '';
+const timeDisplay = startTime && endTime ? `${startTime} - ${endTime}` : startTime || '';
+
+function formatDate(date: Date, lang: string): string {
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: 'long',
     year: 'numeric',
     month: 'long',
-    day: 'numeric',
-  });
-};
-
-const { Content } = await event.render();
+    day: 'numeric'
+  };
+  return date.toLocaleDateString(lang === 'cy' ? 'cy-GB' : 'en-GB', options);
+}
 ---
 
 <Layout metadata={metadata}>
   <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
-    <div class="text-sm text-gray-500 mb-2">
-      {formatDate(event.data.date)}
+    <div class="mb-8">
+      <a href={`/${lang}/calendar`} class="inline-flex items-center text-primary hover:underline mb-6">
+        <Icon name="tabler:chevron-left" class="w-5 h-5 mr-1" />
+        {t('nav.calendar')}
+      </a>
+
+      <h1 class="text-4xl font-bold mb-4">{displayEvent.data.title}</h1>
+
+      <div class="flex flex-wrap gap-4 text-gray-600 dark:text-gray-400">
+        <div class="flex items-center">
+          <Icon name="tabler:calendar" class="w-5 h-5 mr-2" />
+          <span>{formatDate(date, lang)}</span>
+        </div>
+
+        {timeDisplay && (
+          <div class="flex items-center">
+            <Icon name="tabler:clock" class="w-5 h-5 mr-2" />
+            <span>{timeDisplay}</span>
+          </div>
+        )}
+
+        {displayEvent.data.location && (
+          <div class="flex items-center">
+            <Icon name="tabler:map-pin" class="w-5 h-5 mr-2" />
+            <span>{displayEvent.data.location}</span>
+          </div>
+        )}
+      </div>
     </div>
-    
-    <h1 class="text-4xl font-bold mb-8">{event.data.title}</h1>
-    
-    {event.data.image && (
-      <img
-        src={event.data.image}
-        alt={event.data.title}
-        class="w-full h-64 object-cover rounded-lg mb-8"
-      />
-    )}
-    
-    {event.data.description && (
-      <p class="text-xl text-gray-600 dark:text-gray-400 mb-8">
-        {event.data.description}
-      </p>
-    )}
-    
+
     <div class="prose dark:prose-invert max-w-none">
       <Content />
     </div>

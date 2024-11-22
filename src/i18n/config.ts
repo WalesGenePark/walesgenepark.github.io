@@ -1,9 +1,42 @@
+interface Route {
+  en: string;
+  cy: string;
+}
+
+export const routes: Record<string, Route> = {
+  '/': {
+    en: '/',
+    cy: '/hafan',
+  },
+  '/calendar': {
+    en: '/calendar',
+    cy: '/calendar', // Keep English URL for both languages
+  },
+  '/events': {
+    en: '/events',
+    cy: '/events', // Keep English URL for both languages
+  },
+  '/team': {
+    en: '/team',
+    cy: '/team', // Keep English URL for both languages
+  },
+  '/news': {
+    en: '/news',
+    cy: '/news', // Keep English URL for both languages
+  },
+  '/contact': {
+    en: '/contact',
+    cy: '/contact', // Keep English URL for both languages
+  },
+};
+
+export const defaultLang = 'en';
+export const showDefaultLang = false;
+
 export const languages = {
   en: 'English',
   cy: 'Cymraeg',
 };
-
-export const defaultLang = 'en';
 
 export const ui = {
   en: {
@@ -12,8 +45,7 @@ export const ui = {
     'nav.calendar': 'Calendar',
     'nav.news': 'News',
     'nav.contact': 'Contact',
-    'home.services': 'Our Services',
-    'home.contact': 'Contact Us',
+    'nav.events': 'Events',
   },
   cy: {
     'nav.home': 'Hafan',
@@ -21,37 +53,6 @@ export const ui = {
     'nav.calendar': 'Calendr',
     'nav.news': 'Newyddion',
     'nav.contact': 'Cysylltu',
-    'home.services': 'Ein Gwasanaethau',
-    'home.contact': 'Cysylltu â Ni',
+    'nav.events': 'Digwyddiadau',
   },
 } as const;
-
-export const routes = {
-  en: {
-    home: '',
-    team: 'team',
-    calendar: 'calendar',
-    news: 'news',
-    contact: 'contact',
-  },
-  cy: {
-    home: '',
-    team: 'tim',
-    calendar: 'calendar',
-    news: 'newyddion',
-    contact: 'cysylltu',
-  },
-} as const;
-
-export const showDefaultLang = false;
-
-type RouteKey = keyof typeof routes[typeof defaultLang];
-
-export function getRouteFromKey(key: RouteKey, lang: keyof typeof languages): string {
-  return routes[lang][key];
-}
-
-export function getLocalizedPath(path: string, lang: keyof typeof languages): string {
-  if (lang === defaultLang && !showDefaultLang) return path;
-  return `/${lang}${path}`;
-}
