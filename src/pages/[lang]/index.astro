@@ -66,6 +66,9 @@ const allEntries = [...newsEntries, ...eventsEntries].sort((a, b) => {
   const dateB = new Date(b.data.publishDate || b.data.date);
   return dateB.getTime() - dateA.getTime();
 });
+
+// Take the first 12 items to show more content
+const carouselItems = allEntries.slice(0, 15);
 ---
 
 <Layout metadata={metadata}>
@@ -92,5 +95,5 @@ const allEntries = [...newsEntries, ...eventsEntries].sort((a, b) => {
     </div>
   </section>
 
-  <NewsCarousel items={allEntries.slice(0, 6)} />
+  <NewsCarousel items={carouselItems} />
 </Layout>
