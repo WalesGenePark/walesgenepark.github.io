@@ -22,7 +22,8 @@ const formatDate = (date: string | Date) => {
 
 const getItemUrl = (item: any) => {
   const collection = item.collection;
-  const baseUrl = `/${lang}/${collection === 'events' ? (lang === 'en' ? 'events' : 'digwyddiadau') : (lang === 'en' ? 'news' : 'newyddion')}`;
+  // Always use English URLs (events/news) regardless of language
+  const baseUrl = `/${lang}/${collection === 'events' ? 'events' : 'news'}`;
   return `${baseUrl}/${item.slug.split('/').slice(1).join('/')}`;
 };
 ---

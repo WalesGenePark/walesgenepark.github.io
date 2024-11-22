@@ -31,15 +31,13 @@ export function getPathWithoutLang(path: string) {
 }
 
 export function getLocalizedPath(path: string, lang: string) {
+  // Special handling for root path
+  if (path === '/' || path === '/en' || path === '/cy') {
+    return `/${lang}`;
+  }
+
   // Remove current language prefix if it exists
   const pathWithoutLang = path.replace(/^\/(en|cy)\//, '/');
-
-  // Special handling for calendar/calendr
-  if (pathWithoutLang.startsWith('/calendar') || pathWithoutLang.startsWith('/calendr')) {
-    const basePath = lang === 'en' ? '/calendar' : '/calendr';
-    const queryString = path.includes('?') ? path.slice(path.indexOf('?')) : '';
-    return `/${lang}${basePath}${queryString}`;
-  }
 
   // Handle other routes
   for (const [key, route] of Object.entries(routes)) {

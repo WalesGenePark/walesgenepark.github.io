@@ -6,27 +6,27 @@ interface Route {
 export const routes: Record<string, Route> = {
   '/': {
     en: '/',
-    cy: '/hafan',
+    cy: '/',
   },
-  '/calendar': {
-    en: '/calendar',
-    cy: '/calendar', // Keep English URL for both languages
+  'calendar': {
+    en: 'calendar',
+    cy: 'calendar',
   },
-  '/events': {
-    en: '/events',
-    cy: '/events', // Keep English URL for both languages
+  'events': {
+    en: 'events',
+    cy: 'events',
   },
-  '/team': {
-    en: '/team',
-    cy: '/team', // Keep English URL for both languages
+  'news': {
+    en: 'news',
+    cy: 'news',
   },
-  '/news': {
-    en: '/news',
-    cy: '/news', // Keep English URL for both languages
+  'team': {
+    en: 'team',
+    cy: 'team',
   },
-  '/contact': {
-    en: '/contact',
-    cy: '/contact', // Keep English URL for both languages
+  'contact': {
+    en: 'contact',
+    cy: 'contact',
   },
 };
 

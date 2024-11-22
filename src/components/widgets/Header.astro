@@ -4,7 +4,7 @@ import Logo from '~/components/Logo.astro';
 import ToggleTheme from '~/components/common/ToggleTheme.astro';
 import ToggleMenu from '~/components/common/ToggleMenu.astro';
 import LanguagePicker from '~/components/common/LanguagePicker.astro';
-import { getLangFromUrl, useTranslations, getRouteFromKey } from '~/i18n/utils';
+import { getLangFromUrl, useTranslations } from '~/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -16,19 +16,19 @@ const links = [
   },
   {
     text: t('nav.team'),
-    href: `/${lang}/${getRouteFromKey('team', lang)}`,
+    href: `/${lang}/team`,
   },
   {
     text: t('nav.calendar'),
-    href: `/${lang}/${getRouteFromKey('calendar', lang)}`,
+    href: `/${lang}/calendar`,
   },
   {
     text: t('nav.news'),
-    href: `/${lang}/${getRouteFromKey('news', lang)}`,
+    href: `/${lang}/news`,
   },
   {
     text: t('nav.contact'),
-    href: `/${lang}/${getRouteFromKey('contact', lang)}`,
+    href: `/${lang}/contact`,
   },
 ];
 ---

@@ -7,10 +7,12 @@ const otherLang = lang === 'en' ? 'cy' : 'en';
 const otherLangName = languages[otherLang];
 
 // Get current path without language prefix
-const currentPath = Astro.url.pathname.replace(/^\/(en|cy)\//, '/');
+const currentPath = Astro.url.pathname;
 
-// Keep the English URL structure but change the language prefix
-const targetUrl = `/${otherLang}${currentPath}${Astro.url.search}`;
+// Special handling for home page and language-only paths
+const targetUrl = currentPath === `/${lang}` || currentPath === '/' || currentPath === ''
+  ? `/${otherLang}`
+  : `/${otherLang}${currentPath.replace(/^\/(en|cy)/, '')}${Astro.url.search}`;
 ---
 
 <a
