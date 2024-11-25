@@ -1,0 +1,117 @@
+---
+import { getCollection } from 'astro:content';
+import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+import type { LanguageCode } from '~/i18n/routes';
+import { Icon } from 'astro-icon/components';
+
+const currentLang = getLangFromUrl(Astro.url) as LanguageCode;
+const t = useTranslations(currentLang);
+
+const team = await getCollection('team', ({ id }) => {
+  return id.startsWith(currentLang + '/');
+});
+
+// Sort team by order if available, then by name
+const sortedTeam = team.sort((a, b) => {
+  if (a.data.order && b.data.order) {
+    return a.data.order - b.data.order;
+  }
+  return a.data.name.localeCompare(b.data.name);
+});
+
+---
+
+<section class="px-4 py-16 mx-auto max-w-6xl lg:py-20">
+  <div class="flex flex-col mb-6 lg:justify-between lg:flex-row md:mb-8">
+    <h2 class="max-w-lg mb-2 text-3xl font-bold tracking-tight sm:text-4xl sm:leading-none lg:mb-5 group font-heading">
+      {t('team.title')}
+    </h2>
+  </div>
+
+  <div class="grid gap-8 row-gap-8 md:grid-cols-2 lg:grid-cols-3">
+    {
+      sortedTeam.map((member) => (
+        <article class="flex flex-col items-center text-center mb-6 transition">
+          <div class="relative w-48 h-48 mb-6 overflow-hidden rounded-full border-4 border-primary-100 dark:border-primary-900">
+            {member.data.image && (
+              <img
+                src={member.data.image}
+                class="w-full h-full object-cover"
+                alt={member.data.name}
+                loading="lazy"
+                decoding="async"
+              />
+            )}
+          </div>
+          <h3 class="mb-2 text-xl font-bold leading-snug font-heading">
+            {member.data.name}
+          </h3>
+          {member.data.title && (
+            <p class="text-primary-600 dark:text-primary-400 font-medium mb-1">{member.data.title}</p>
+          )}
+          {member.data.department && (
+            <p class="text-gray-600 dark:text-gray-400 mb-3">{member.data.department}</p>
+          )}
+          {member.data.bio && (
+            <p class="text-gray-600 dark:text-gray-400 mb-4 px-4">{member.data.bio}</p>
+          )}
+          <div class="flex gap-3 mt-auto">
+            {member.data.email && (
+              <a
+                href={`mailto:${member.data.email}`}
+                class="text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
+                title="Email"
+              >
+                <Icon name="tabler:mail" class="w-5 h-5" />
+              </a>
+            )}
+            {member.data.socialLinks?.linkedin && (
+              <a
+                href={member.data.socialLinks.linkedin}
+                class="text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
+                title="LinkedIn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon name="tabler:brand-linkedin" class="w-5 h-5" />
+              </a>
+            )}
+            {member.data.socialLinks?.twitter && (
+              <a
+                href={member.data.socialLinks.twitter}
+                class="text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
+                title="Twitter"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon name="tabler:brand-twitter" class="w-5 h-5" />
+              </a>
+            )}
+            {member.data.socialLinks?.researchgate && (
+              <a
+                href={member.data.socialLinks.researchgate}
+                class="text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
+                title="ResearchGate"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon name="tabler:books" class="w-5 h-5" />
+              </a>
+            )}
+            {member.data.socialLinks?.orcid && (
+              <a
+                href={member.data.socialLinks.orcid}
+                class="text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
+                title="ORCID"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon name="tabler:fingerprint" class="w-5 h-5" />
+              </a>
+            )}
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

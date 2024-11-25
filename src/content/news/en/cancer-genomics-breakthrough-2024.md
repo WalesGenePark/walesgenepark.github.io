@@ -5,6 +5,8 @@ publishDate: 2024-01-15
 description: "Researchers identify novel genetic signatures that could revolutionize personalized cancer treatment approaches."
 image: "/images/news/cancer-research.jpg"
 fullArticleLink: "https://walesgenepark.github.io/news/cancer-genomics-breakthrough-2024"
+category: "research"
+author: "Dr. Sarah Williams"
 ---
 
 A research team at Wales Gene Park has made a significant breakthrough in cancer genomics, identifying specific genetic signatures that could revolutionize how we approach personalized cancer treatment. This discovery, published in Nature Genetics, represents a major step forward in understanding how genetic variations influence cancer development and treatment response.

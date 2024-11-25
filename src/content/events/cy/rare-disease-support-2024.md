@@ -1,5 +1,7 @@
 ---
-date: 2024-12-22
+date: 2024-02-28T00:00:00.000Z
+startTime: "10:00"
+endTime: "15:00"
 lang: "cy"
 title: "Grŵp Cymorth Clefydau Prin 2024"
 description: "Ymunwch â'n cyfarfod misol ar gyfer teuluoedd a phobl sy'n byw gyda chlefydau prin. Cyfle i rannu profiadau, derbyn cymorth, a chysylltu ag eraill mewn sefyllfa debyg."

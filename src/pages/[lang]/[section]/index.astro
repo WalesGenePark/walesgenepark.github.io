@@ -1,0 +1,87 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+import { isValidSection, getAlternateSection, getSectionTitle, sectionRoutes } from '~/i18n/routes';
+import type { LanguageCode } from '~/i18n/routes';
+import ContactPage from '~/components/widgets/ContactPage.astro';
+import Events from '~/components/widgets/Events.astro';
+import News from '~/components/widgets/News.astro';
+import Team from '~/components/widgets/Team.astro';
+import Policy from '~/components/widgets/Policy.astro';
+
+export function getStaticPaths() {
+  return Object.keys(sectionRoutes).flatMap(section => [
+    { params: { lang: 'en', section } },
+    { params: { lang: 'cy', section } }
+  ]);
+}
+
+const { lang, section } = Astro.params;
+const currentLang = lang as LanguageCode;
+
+// Validate language
+if (!['en', 'cy'].includes(currentLang)) {
+  return Astro.redirect('/en');
+}
+
+// Validate section
+if (!isValidSection(section)) {
+  return Astro.redirect(`/${currentLang}/404`);
+}
+
+const t = useTranslations(currentLang);
+
+// Get alternate language URL (just change language code)
+const alternateUrl = `/${currentLang === 'en' ? 'cy' : 'en'}/${section}`;
+
+const metadata = {
+  title: getSectionTitle(section, currentLang),
+  description: t(`meta.${section}.description`),
+  alternateLinks: [
+    {
+      href: alternateUrl,
+      hreflang: currentLang === 'en' ? 'cy' : 'en'
+    }
+  ],
+  openGraph: {
+    title: getSectionTitle(section, currentLang),
+    description: t(`meta.${section}.description`),
+    type: 'website',
+    locale: currentLang === 'en' ? 'en_GB' : 'cy_GB',
+    alternateLocale: currentLang === 'en' ? 'cy_GB' : 'en_GB',
+    url: new URL(Astro.url.pathname, Astro.site).toString(),
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: getSectionTitle(section, currentLang),
+    description: t(`meta.${section}.description`),
+  },
+  canonical: new URL(Astro.url.pathname, Astro.site).toString(),
+};
+
+// Map base sections to components
+const baseComponents = {
+  contact: ContactPage,
+  events: Events,
+  news: News,
+  team: Team,
+  privacy: Policy,
+  cookies: Policy
+};
+
+// Redirect /calendar to /events
+if (section === 'calendar') {
+  return Astro.redirect(`/${currentLang}/events`);
+}
+
+const SectionComponent = baseComponents[section];
+
+if (!SectionComponent) {
+  return Astro.redirect(`/${currentLang}/404`);
+}
+
+---
+
+<Layout metadata={metadata}>
+  <SectionComponent />
+</Layout>

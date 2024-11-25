@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import { getLangFromUrl } from '~/i18n/utils';
+
+const { section } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+
+const entries = await getCollection(section);
+const content = entries.find(entry => entry.id === `${lang}.md`);
+
+if (!content) {
+  return Astro.redirect(`/${lang}/404`);
+}
+
+const { Content } = await content.render();
+---
+
+<div class="px-4 py-16 mx-auto max-w-6xl lg:py-20">
+  <div class="max-w-3xl mx-auto prose dark:prose-invert">
+    <Content />
+  </div>
+</div>

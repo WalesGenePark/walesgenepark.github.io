@@ -1,5 +1,7 @@
 ---
-date: 2024-11-15
+date: 2024-12-05T00:00:00.000Z
+startTime: "09:00"
+endTime: "17:30"
 lang: "cy"
 title: "Fforwm Polisi Genomeg Cymru 2024"
 description: "Ymunwch â ni ar gyfer fforwm polisi blynyddol Parc Geneteg Cymru, lle byddwn yn trafod polisïau genomeg cyfredol, datblygiadau deddfwriaethol, a'r ffordd ymlaen ar gyfer genomeg yng Nghymru."

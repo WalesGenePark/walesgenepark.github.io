@@ -1,0 +1,85 @@
+---
+import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+import type { LanguageCode } from '~/i18n/routes';
+import { Icon } from 'astro-icon/components';
+
+const currentLang = getLangFromUrl(Astro.url) as LanguageCode;
+const t = useTranslations(currentLang);
+---
+
+<section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
+  <div class="mb-12 text-center">
+    <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading">
+      {t('contact.title')}
+    </h1>
+    <p class="text-xl text-gray-600 dark:text-slate-400">
+      {t('contact.subtitle')}
+    </p>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-10 mx-auto">
+    <!-- Left Column: Address -->
+    <div class="flex flex-col h-full">
+      <div class="bg-white dark:bg-slate-900 rounded-lg shadow-lg p-6 flex-1">
+        <div class="flex items-center mb-4">
+          <Icon name="tabler:map-pin" class="w-6 h-6 text-primary mr-2" />
+          <h2 class="text-xl font-bold">{t('contact.address.title')}</h2>
+        </div>
+        <address class="not-italic text-gray-600 dark:text-slate-400 leading-relaxed">
+          {t('contact.address.line1')}<br />
+          {t('contact.address.line2')}<br />
+          {t('contact.address.line3')}<br />
+          {t('contact.address.line4')}<br />
+          {t('contact.address.line5')}<br />
+          {t('contact.address.line6')}<br />
+          {t('contact.address.line7')}
+        </address>
+      </div>
+    </div>
+
+    <!-- Right Column: Email and Social -->
+    <div class="flex flex-col h-full">
+      <!-- Email -->
+      <div class="bg-white dark:bg-slate-900 rounded-lg shadow-lg p-6 mb-6">
+        <div class="flex items-center mb-4">
+          <Icon name="tabler:mail" class="w-6 h-6 text-primary mr-2" />
+          <h2 class="text-xl font-bold">{t('contact.email.title')}</h2>
+        </div>
+        <a
+          href="mailto:walesgenepark@cardiff.ac.uk"
+          class="text-primary hover:text-primary-dark dark:text-blue-400 dark:hover:text-blue-300 transition duration-150 ease-in-out"
+        >
+          walesgenepark@cardiff.ac.uk
+        </a>
+      </div>
+
+      <!-- Social Media -->
+      <div class="bg-white dark:bg-slate-900 rounded-lg shadow-lg p-6 flex-1">
+        <div class="flex items-center mb-4">
+          <Icon name="tabler:share" class="w-6 h-6 text-primary mr-2" />
+          <h2 class="text-xl font-bold">{t('contact.social.title')}</h2>
+        </div>
+        <div class="flex gap-4">
+          <a
+            href="https://twitter.com/walesgenepark"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-600 hover:text-primary dark:text-slate-400 dark:hover:text-blue-400 transition duration-150 ease-in-out"
+            aria-label="Twitter"
+          >
+            <Icon name="tabler:brand-twitter" class="w-8 h-8" />
+          </a>
+          <a
+            href="https://www.linkedin.com/company/wales-gene-park"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-600 hover:text-primary dark:text-slate-400 dark:hover:text-blue-400 transition duration-150 ease-in-out"
+            aria-label="LinkedIn"
+          >
+            <Icon name="tabler:brand-linkedin" class="w-8 h-8" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

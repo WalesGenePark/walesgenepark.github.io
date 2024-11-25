@@ -1,5 +1,7 @@
 ---
-date: 2024-10-22
+date: 2024-09-15T00:00:00.000Z
+startTime: "13:00"
+endTime: "17:00"
 lang: "cy"
 title: "Seminar Technegau Cwnsela Genetig Uwch"
 description: "Seminar hanner diwrnod dwys yn canolbwyntio ar dechnegau uwch mewn cwnsela genetig, gan gynnwys rheoli achosion cymhleth, ystyriaethau moesegol, ac arferion gorau sy'n dod i'r amlwg mewn cyfathrebu â chleifion."

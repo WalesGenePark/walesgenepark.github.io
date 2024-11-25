@@ -1,5 +1,7 @@
 ---
-date: 2024-11-20
+date: 2024-12-20T00:00:00.000Z
+startTime: "09:00"
+endTime: "17:00"
 lang: "en"
 title: "Advanced Bioinformatics Training Course"
 description: "A comprehensive five-day training course covering advanced bioinformatics tools and techniques for genomic data analysis. Participants will learn practical skills in NGS data analysis, variant calling, and interpretation of results."

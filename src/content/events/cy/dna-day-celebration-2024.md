@@ -1,5 +1,7 @@
 ---
-date: 2024-11-20
+date: 2024-04-25T00:00:00.000Z
+startTime: "10:00"
+endTime: "15:30"
 lang: "cy"
 title: "Dathliad Diwrnod DNA 2024"
 description: "Ymunwch â ni i ddathlu Diwrnod DNA gyda diwrnod llawn o weithgareddau rhyngweithiol, arddangosfeydd, a sgyrsiau addysgiadol am bwysigrwydd DNA a'i rôl mewn meddygaeth fodern."

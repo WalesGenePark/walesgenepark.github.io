@@ -1,5 +1,7 @@
 ---
-date: 2024-11-18
+date: 2024-12-18T00:00:00.000Z
+startTime: "09:30"
+endTime: "16:30"
 lang: "en"
 title: "Clinical Genomics Practice Update 2024"
 description: "Essential updates for healthcare professionals on the latest developments in clinical genomics, including new testing guidelines, interpretation protocols, and best practices for patient care."

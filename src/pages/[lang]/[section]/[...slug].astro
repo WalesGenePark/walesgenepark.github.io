@@ -1,0 +1,115 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+import { isValidSection, getAlternateSection, getSectionTitle, sectionRoutes } from '~/i18n/routes';
+import type { LanguageCode } from '~/i18n/routes';
+
+export async function getStaticPaths() {
+  const collections = {
+    events: await getCollection('events'),
+    news: await getCollection('news'),
+    digwyddiadau: await getCollection('events'),
+    newyddion: await getCollection('news')
+  };
+
+  const paths = [];
+  
+  for (const [section, items] of Object.entries(collections)) {
+    for (const item of items) {
+      const [itemLang, ...slugParts] = item.slug.split('/');
+      const lang = itemLang === 'cy' ? 'cy' : 'en';
+      
+      // Only include this item in the appropriate section
+      const sectionKey = lang === 'cy' ? 
+        (section === 'events' ? 'digwyddiadau' : 'newyddion') : 
+        (section === 'events' ? 'events' : 'news');
+
+      paths.push({
+        params: { 
+          lang,
+          section: sectionKey,
+          slug: slugParts.join('/')
+        },
+        props: { item }
+      });
+    }
+  }
+
+  // Get all unique sections from the route mappings that support slugs
+  const slugSections = new Set(['events', 'news']);
+  const sections = new Set<string>();
+  
+  // Add English routes
+  Object.keys(sectionRoutes).forEach(route => {
+    if (!sectionRoutes[route].en && slugSections.has(route)) {
+      sections.add(route);
+    }
+  });
+
+  // Generate paths for both languages
+  const additionalPaths = Array.from(sections).flatMap(section => {
+    const paths = [
+      // English route
+      { params: { lang: 'en', section, slug: undefined } },
+      // Welsh route
+      { params: { lang: 'cy', section: sectionRoutes[section].cy || section, slug: undefined } }
+    ];
+    return paths;
+  });
+
+  return [...paths, ...additionalPaths];
+}
+
+const { lang, section, slug } = Astro.params;
+const { item } = Astro.props;
+const currentLang = lang as LanguageCode;
+
+// Validate route
+if (!isValidSection(section)) {
+  return Astro.redirect('/404');
+}
+
+const t = useTranslations(currentLang);
+
+// Get alternate language URL for this section
+const alternateSection = getAlternateSection(section, currentLang === 'en' ? 'cy' : 'en');
+const alternateUrl = `/${currentLang === 'en' ? 'cy' : 'en'}/${alternateSection}/${slug}`;
+
+// Get the section title key (always in English for translation purposes)
+const sectionTitleKey = getSectionTitle(section, currentLang);
+
+const metadata = {
+  title: `${item?.data.title} | ${t(`nav.${sectionTitleKey}`)}`,
+  description: item?.data.description,
+  alternateLinks: [
+    {
+      href: alternateUrl,
+      hreflang: currentLang === 'en' ? 'cy' : 'en'
+    }
+  ]
+};
+
+const { Content } = await item?.render();
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
+    <h1 class="text-4xl font-bold leading-tighter tracking-tighter mb-8 font-heading">
+      {item?.data.title}
+    </h1>
+    {item?.data.image && (
+      <img
+        src={item.data.image}
+        class="max-w-full lg:max-w-6xl mx-auto mb-6 sm:rounded-md bg-gray-400 dark:bg-slate-700"
+        alt={item.data.description || ''}
+        loading="eager"
+        width={1200}
+        height={675}
+      />
+    )}
+    <div class="mx-auto prose prose-lg max-w-4xl dark:prose-invert">
+      <Content />
+    </div>
+  </section>
+</Layout>

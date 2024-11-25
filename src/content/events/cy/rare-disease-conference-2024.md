@@ -1,5 +1,7 @@
 ---
-date: 2024-12-22
+date: 2025-07-29T00:00:00.000Z
+startTime: "09:00"
+endTime: "17:30"
 lang: "cy"
 title: "Cynhadledd Clefydau Prin Cymru 2024"
 description: "Ymunwch â ni ar Ddiwrnod Clefydau Prin y Byd ar gyfer cynhadledd undydd yn archwilio'r datblygiadau diweddaraf mewn ymchwil, diagnosis a thriniaeth clefydau prin yng Nghymru."

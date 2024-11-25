@@ -1,0 +1,182 @@
+---
+import { getCollection } from 'astro:content';
+import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+import type { LanguageCode } from '~/i18n/routes';
+
+const currentLang = getLangFromUrl(Astro.url) as LanguageCode;
+const t = useTranslations(currentLang);
+
+// Get all events
+const events = await getCollection('events', ({ id }) => {
+  return id.startsWith(currentLang + '/');
+});
+
+// Get today's date without time
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+// Split and sort events
+const upcomingEvents = events
+  .filter(event => {
+    const eventDate = new Date(event.data.date);
+    eventDate.setHours(0, 0, 0, 0);
+    return eventDate >= today;
+  })
+  .sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime());
+
+const pastEvents = events
+  .filter(event => {
+    const eventDate = new Date(event.data.date);
+    eventDate.setHours(0, 0, 0, 0);
+    return eventDate < today;
+  })
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const formatEventDate = (date: Date) => {
+  return {
+    day: date.getDate(),
+    month: date.toLocaleString(currentLang === 'cy' ? 'cy' : 'en-GB', { month: 'short' }).toUpperCase(),
+    year: date.getFullYear()
+  };
+};
+
+const formatTime = (time: string) => {
+  const [hours, minutes] = time.split(':');
+  const date = new Date();
+  date.setHours(parseInt(hours), parseInt(minutes));
+  return date.toLocaleTimeString(currentLang === 'cy' ? 'cy' : 'en-GB', {
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true
+  });
+};
+---
+
+<section class="px-4 py-16 mx-auto max-w-4xl lg:py-20">
+  <!-- Upcoming Events -->
+  <div class="mb-10">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl sm:leading-none group font-heading mb-8">
+      {t('events.upcomingEvents')}
+    </h2>
+    
+    {upcomingEvents.length === 0 ? (
+      <p class="text-gray-600 dark:text-gray-400">{t('events.noUpcomingEvents')}</p>
+    ) : (
+      <ul class="space-y-8">
+        {upcomingEvents.map((event) => {
+          return (
+            <li class="flex gap-6 items-start pl-4 border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-lg hover:border-primary-300 dark:hover:border-primary-700 transition-all duration-300 ease-in-out">
+              <div class="flex-shrink-0 w-24 text-center">
+                <div class="text-3xl font-bold text-red-600 dark:text-red-500">{formatEventDate(new Date(event.data.date)).day}</div>
+                <div class="text-gray-600 dark:text-gray-400 uppercase text-sm">{formatEventDate(new Date(event.data.date)).month}</div>
+                <div class="text-gray-600 dark:text-gray-400 text-sm">{formatEventDate(new Date(event.data.date)).year}</div>
+              </div>
+              <div class="flex-grow">
+                <h3 class="mb-2 text-xl font-bold leading-snug font-heading">
+                  <a href={`/${currentLang}/events/${event.slug.split('/').slice(1).join('/')}`}
+                     class="hover:text-primary-600 underline underline-offset-4 decoration-1 decoration-dotted transition ease-in duration-200">
+                    {event.data.title}
+                  </a>
+                </h3>
+                {event.data.description && (
+                  <p class="text-gray-700 dark:text-gray-300 line-clamp-2">{event.data.description}</p>
+                )}
+                <div class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                  {event.data.startTime && (
+                    <span>
+                      {t('events.time')}: {formatTime(event.data.startTime)}
+                      {event.data.endTime && ` - ${formatTime(event.data.endTime)}`}
+                    </span>
+                  )}
+                  {event.data.location && (
+                    <span class="ml-4">
+                      {t('events.location')}: {event.data.location}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    )}
+  </div>
+
+  <!-- Past Events -->
+  {pastEvents.length > 0 && (
+    <div class="border-t border-gray-200 dark:border-gray-700 pt-10">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-3xl font-bold tracking-tight sm:text-4xl sm:leading-none group font-heading text-gray-600 dark:text-gray-400">
+          {t('events.pastEvents')}
+        </h2>
+        <button
+          id="togglePastEvents"
+          class="text-sm font-medium text-primary-600 hover:text-primary-800 dark:hover:text-primary-400 transition duration-150 ease-in-out"
+          aria-expanded="false"
+          data-show-text={t('events.showPastEvents')}
+          data-hide-text={t('events.hidePastEvents')}
+        >
+          {t('events.showPastEvents')}
+        </button>
+      </div>
+      
+      <ul id="pastEventsList" class="space-y-8 hidden">
+        {pastEvents.map((event) => {
+          return (
+            <li class="flex gap-6 items-start pl-4 border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-lg hover:border-primary-300 dark:hover:border-primary-700 transition-all duration-300 ease-in-out opacity-75">
+              <div class="flex-shrink-0 w-24 text-center">
+                <div class="text-3xl font-bold text-red-600 dark:text-red-500">{formatEventDate(new Date(event.data.date)).day}</div>
+                <div class="text-gray-500 dark:text-gray-500 uppercase text-sm">{formatEventDate(new Date(event.data.date)).month}</div>
+                <div class="text-gray-500 dark:text-gray-500 text-sm">{formatEventDate(new Date(event.data.date)).year}</div>
+              </div>
+              <div class="flex-grow">
+                <h3 class="mb-2 text-xl font-bold leading-snug font-heading text-gray-600 dark:text-gray-400">
+                  <a href={`/${currentLang}/events/${event.slug.split('/').slice(1).join('/')}`}
+                     class="hover:text-primary-600 underline underline-offset-4 decoration-1 decoration-dotted transition ease-in duration-200">
+                    {event.data.title}
+                  </a>
+                </h3>
+                {event.data.description && (
+                  <p class="text-gray-500 dark:text-gray-500 line-clamp-2">{event.data.description}</p>
+                )}
+                <div class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                  {event.data.startTime && (
+                    <span>
+                      {t('events.time')}: {formatTime(event.data.startTime)}
+                      {event.data.endTime && ` - ${formatTime(event.data.endTime)}`}
+                    </span>
+                  )}
+                  {event.data.location && (
+                    <span class="ml-4">
+                      {t('events.location')}: {event.data.location}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  )}
+</section>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const toggleButton = document.getElementById('togglePastEvents');
+    const pastEventsList = document.getElementById('pastEventsList');
+    let isExpanded = false;
+
+    if (toggleButton && pastEventsList) {
+      const showText = toggleButton.dataset.showText || 'Show Past Events';
+      const hideText = toggleButton.dataset.hideText || 'Hide Past Events';
+
+      toggleButton.addEventListener('click', () => {
+        isExpanded = !isExpanded;
+        pastEventsList.classList.toggle('hidden');
+        toggleButton.setAttribute('aria-expanded', isExpanded.toString());
+        toggleButton.textContent = isExpanded ? hideText : showText;
+      });
+    }
+  });
+</script>

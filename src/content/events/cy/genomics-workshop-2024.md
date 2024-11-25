@@ -1,5 +1,7 @@
 ---
-date: 2024-11-15
+date: 2024-12-15T00:00:00.000Z
+startTime: "09:30"
+endTime: "16:00"
 lang: "cy"
 title: "Gweithdy Genomeg: Dyfodol Meddygaeth Bersonol"
 description: "Gweithdy dwys un diwrnod yn archwilio'r datblygiadau diweddaraf mewn genomeg a'u goblygiadau ar gyfer gofal iechyd personol. Wedi'i anelu at weithwyr gofal iechyd proffesiynol a myfyrwyr."

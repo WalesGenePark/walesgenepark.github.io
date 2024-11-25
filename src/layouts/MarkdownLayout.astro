@@ -1,0 +1,25 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+import type { LanguageCode } from '~/i18n/routes';
+
+const { frontmatter } = Astro.props;
+const currentLang = getLangFromUrl(Astro.url) as LanguageCode;
+const t = useTranslations(currentLang);
+
+const metadata = {
+  title: frontmatter.title,
+  description: frontmatter.description,
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
+    <h1 class="text-4xl font-bold leading-tighter tracking-tighter mb-8 font-heading">
+      {frontmatter.title}
+    </h1>
+    <div class="mx-auto prose prose-lg max-w-4xl dark:prose-invert">
+      <slot />
+    </div>
+  </section>
+</Layout>

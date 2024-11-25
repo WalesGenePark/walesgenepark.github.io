@@ -2,7 +2,9 @@
 title: "Student Careers Fair 2024"
 description: "Join us for our annual careers fair showcasing opportunities in genomics and genetic medicine."
 image: "/images/events/careers-fair-2024.jpg"
-date: 2024-03-15
+date: 2024-03-20T00:00:00.000Z
+startTime: "11:00"
+endTime: "16:00"
 lang: "en"
 ---
 
