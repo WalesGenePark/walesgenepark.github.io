@@ -1,0 +1,149 @@
+---
+---
+
+<div id="youtube-warning" class="modal-overlay hidden">
+  <div class="modal-content">
+    <p>You are about to leave our website and visit YouTube. Please note that YouTube may collect data and use cookies. For more information, visit their <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">privacy policy</a>.</p>
+    <div class="modal-buttons">
+      <button class="proceed-button">Proceed to YouTube</button>
+      <button class="cancel-button">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div id="spotify-warning" class="modal-overlay hidden">
+  <div class="modal-content">
+    <p>You are about to leave our website and visit Spotify. Please note that Spotify may collect data and use cookies. For more information, visit their <a href="https://www.spotify.com/uk/legal/privacy-policy/" target="_blank" rel="noopener">privacy policy</a>.</p>
+    <div class="modal-buttons">
+      <button class="proceed-button">Proceed to Spotify</button>
+      <button class="cancel-button">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .modal-content a {
+    color: #007bff;
+    text-decoration: underline;
+  }
+
+  .modal-content a:hover {
+    text-decoration: none;
+  }
+
+  .modal-buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .proceed-button {
+    background-color: #007bff;
+    color: white;
+  }
+
+  .cancel-button {
+    background-color: #6c757d;
+    color: white;
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  const services = {
+    youtube: {
+      selector: 'a[href*="youtube.com"], a[href*="youtu.be"]',
+      modalId: 'youtube-warning'
+    },
+    spotify: {
+      selector: 'a[href*="spotify.com"], a[href*="open.spotify.com"]',
+      modalId: 'spotify-warning'
+    }
+  };
+
+  let currentUrl = '';
+  let currentModal = null;
+
+  function initExternalWarnings() {
+    // Handle privacy policy links
+    document.querySelectorAll('.modal-content a[href*="privacy"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.open(link.href, '_blank');
+      });
+    });
+
+    // Set up listeners for each service
+    Object.entries(services).forEach(([service, config]) => {
+      const modal = document.getElementById(config.modalId);
+      
+      // Handle links for this service
+      document.querySelectorAll(config.selector).forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          currentUrl = link.href;
+          currentModal = modal;
+          modal.classList.remove('hidden');
+        });
+      });
+    });
+
+    // Handle proceed buttons
+    document.querySelectorAll('.proceed-button').forEach(button => {
+      button.addEventListener('click', () => {
+        if (currentUrl) {
+          window.open(currentUrl, '_blank');
+        }
+        if (currentModal) {
+          currentModal.classList.add('hidden');
+        }
+      });
+    });
+
+    // Handle cancel buttons
+    document.querySelectorAll('.cancel-button').forEach(button => {
+      button.addEventListener('click', () => {
+        if (currentModal) {
+          currentModal.classList.add('hidden');
+        }
+      });
+    });
+  }
+
+  // Initialize when the DOM is loaded
+  document.addEventListener('DOMContentLoaded', initExternalWarnings);
+</script>

@@ -9,6 +9,11 @@ category: "research"
 author: "Dr. Sarah Williams"
 ---
 
+
+Watch the video on <a href="https://www.youtube.com/watch?v=HxfKvTDWMbw" target="_blank" rel="noopener">YouTube</a>.
+
+Listen the podcast on <a href="https://open.spotify.com/episode/7Hgr0eP0AVWiYPPHPqNWiN?si=WBU8zzCOSguYrNxIcgoqBg" target="_blank" rel="noopener">Spotify</a>.
+
 A research team at Wales Gene Park has made a significant breakthrough in cancer genomics, identifying specific genetic signatures that could revolutionize how we approach personalized cancer treatment. This discovery, published in Nature Genetics, represents a major step forward in understanding how genetic variations influence cancer development and treatment response.
 
 The groundbreaking study, led by Professor Catherine Hughes and Dr. Mark Thompson, analyzed genetic data from over 10,000 cancer patients across Wales, focusing on previously unexplored regions of the genome. Their findings reveal complex patterns of genetic variations that significantly influence both cancer susceptibility and treatment outcomes.
