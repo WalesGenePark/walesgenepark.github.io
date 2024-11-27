@@ -3,7 +3,7 @@ lang: "cy"
 title: "Parc Geneteg Cymru yn Agor Cyfleuster Profi Genomig o'r Radd Flaenaf"
 publishDate: 2024-12-01
 description: "Mae buddsoddiad o £15 miliwn yn dwyn galluoedd profi genomig arloesol i Gymru, gan wella gwasanaethau diagnostig a galluoedd ymchwil."
-image: "/images/news/testing-facility.jpg"
+image: "/images/news/new-testing-facility.jpg"
 fullArticleLink: "https://walesgenepark.github.io/news/new-testing-facility-2024"
 ---
 

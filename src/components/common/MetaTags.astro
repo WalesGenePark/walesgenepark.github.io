@@ -1,0 +1,88 @@
+---
+import { SITE, METADATA } from '~/config';
+import type { MetaData } from '~/types/metaData';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: URL;
+  noindex?: boolean;
+  nofollow?: boolean;
+  alternateLinks?: {
+    href: string;
+    hreflang: string;
+  }[];
+  openGraph?: MetaData['openGraph'];
+  twitter?: MetaData['twitter'];
+}
+
+const {
+  title = METADATA.title.default,
+  description = METADATA.description,
+  image = SITE.defaultImage,
+  canonical,
+  noindex = false,
+  nofollow = false,
+  alternateLinks = [],
+  openGraph = {},
+  twitter = {},
+} = Astro.props;
+
+const metaTitle = title ? `${title} — ${SITE.name}` : SITE.title;
+
+const ogData = {
+  basic: {
+    title: openGraph.basic?.title || metaTitle,
+    type: openGraph.basic?.type || 'website',
+    image: openGraph.basic?.image || image,
+    url: openGraph.basic?.url || canonical?.href || Astro.url.href,
+  },
+};
+
+const twitterData = {
+  card: twitter.card || METADATA.twitter.cardType,
+  site: twitter.site || METADATA.twitter.site,
+  creator: twitter.creator || METADATA.twitter.handle,
+  title: twitter.title || metaTitle,
+  description: twitter.description || description,
+  image: twitter.image || image,
+};
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{metaTitle}</title>
+
+<meta name="title" content={metaTitle} />
+{description && <meta name="description" content={description} />}
+
+{canonical && <link rel="canonical" href={canonical.href} />}
+
+{alternateLinks.map(({ href, hreflang }) => (
+  <link rel="alternate" href={href} hreflang={hreflang} />
+))}
+
+<meta name="robots" content={`${noindex ? 'noindex' : 'index'}, ${nofollow ? 'nofollow' : 'follow'}`} />
+
+<!-- Open Graph -->
+<meta property="og:title" content={ogData.basic.title} />
+<meta property="og:type" content={ogData.basic.type} />
+<meta property="og:image" content={ogData.basic.image} />
+<meta property="og:url" content={ogData.basic.url} />
+{description && <meta property="og:description" content={description} />}
+<meta property="og:site_name" content={SITE.name} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content={twitterData.card} />
+<meta name="twitter:site" content={twitterData.site} />
+<meta name="twitter:creator" content={twitterData.creator} />
+<meta name="twitter:title" content={twitterData.title} />
+{twitterData.description && <meta name="twitter:description" content={twitterData.description} />}
+<meta name="twitter:image" content={twitterData.image} />
+
+<!-- Favicons -->
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/manifest.webmanifest" />

@@ -1,28 +1,44 @@
 ---
 import { Icon } from 'astro-icon/components';
-
 import { UI } from 'astrowind:config';
 
 export interface Props {
   label?: string;
   class?: string;
   iconClass?: string;
-  iconName?: string;
 }
 
 const {
   label = 'Toggle between Dark and Light mode',
   class:
-    className = 'text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center',
+    className = 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center transition-all',
   iconClass = 'w-6 h-6',
-  iconName = 'tabler:sun',
 } = Astro.props;
 ---
 
 {
   !(UI.theme && UI.theme.endsWith(':only')) && (
-    <button type="button" class={className} aria-label={label} data-aw-toggle-color-scheme>
-      <Icon name={iconName} class={iconClass} />
+    <button
+      type="button"
+      class={className}
+      aria-label={label}
+      data-aw-toggle-color-scheme
+    >
+      <Icon name="tabler:sun" class={`${iconClass} block dark:hidden`} />
+      <Icon name="tabler:moon" class={`${iconClass} hidden dark:block`} />
     </button>
   )
 }
+
+<script>
+  // Ensure icons update immediately on click
+  document.addEventListener('astro:page-load', () => {
+    const themeToggles = document.querySelectorAll('[data-aw-toggle-color-scheme]');
+    themeToggles.forEach((toggle) => {
+      toggle.addEventListener('click', () => {
+        // Force a reflow to ensure the icon transition is smooth
+        toggle.offsetHeight;
+      });
+    });
+  });
+</script>

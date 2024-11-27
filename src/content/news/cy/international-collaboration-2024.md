@@ -3,7 +3,7 @@ lang: "cy"
 title: "Parc Geneteg Cymru yn Cyhoeddi Cydweithrediad Rhyngwladol Pwysig ar Genomeg Poblogaeth"
 publishDate: 2024-10-15
 description: "Partneriaeth arloesol gyda sefydliadau genomeg blaenllaw ledled y byd i astudio amrywiaeth genetig yn y boblogaeth Gymreig."
-image: "/images/news/collaboration.jpg"
+image: "/images/news/international-collaboration.jpg"
 fullArticleLink: "https://walesgenepark.github.io/news/international-collaboration-2024"
 ---
 

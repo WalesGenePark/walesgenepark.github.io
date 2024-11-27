@@ -1,25 +1,19 @@
 ---
-import { UI } from 'astrowind:config';
+import { SITE } from '~/config';
 
 // TODO: This code is temporary
 ---
 
-<script is:inline define:vars={{ defaultTheme: UI.theme || 'system' }}>
+<script is:inline define:vars={{ defaultTheme: SITE.defaultTheme }}>
   function applyTheme(theme) {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
     }
-    const matches = document.querySelectorAll('[data-aw-toggle-color-scheme] > input');
-
-    if (matches && matches.length) {
-      matches.forEach((elem) => {
-        elem.checked = theme !== 'dark';
-      });
-    }
   }
 
+  // Apply theme on initial page load
   if ((defaultTheme && defaultTheme.endsWith(':only')) || (!localStorage.theme && defaultTheme !== 'system')) {
     applyTheme(defaultTheme.replace(':only', ''));
   } else if (
@@ -29,5 +23,14 @@ import { UI } from 'astrowind:config';
     applyTheme('dark');
   } else {
     applyTheme('light');
+  }
+
+  // Listen for system theme changes
+  if (defaultTheme === 'system') {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.theme) {
+        applyTheme(e.matches ? 'dark' : 'light');
+      }
+    });
   }
 </script>

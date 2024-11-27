@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 const matter = require('gray-matter');
 
 const contentDir = path.join(process.cwd(), 'src/content');

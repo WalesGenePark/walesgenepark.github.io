@@ -1,10 +1,10 @@
 ---
-// Previous imports and interface remain the same
 import { Icon } from 'astro-icon/components';
 import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+import type { NewsEntry, EventEntry } from '~/types/content';
 
 interface Props {
-  items: any[];
+  items: (NewsEntry | EventEntry)[];
 }
 
 const { items } = Astro.props;
@@ -12,7 +12,6 @@ const { items } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-// Previous helper functions remain the same
 const formatDate = (date: string | Date) => {
   const d = typeof date === 'string' ? new Date(date) : date;
   return d.toLocaleDateString(lang === 'cy' ? 'cy-GB' : 'en-GB', {
@@ -22,7 +21,7 @@ const formatDate = (date: string | Date) => {
   });
 };
 
-const getItemUrl = (item: any) => {
+const getItemUrl = (item: NewsEntry | EventEntry) => {
   const collection = item.collection;
   const baseUrl = `/${lang}/${collection === 'events' ? 'events' : 'news'}`;
   return `${baseUrl}/${item.slug.split('/').slice(1).join('/')}`;
@@ -35,12 +34,10 @@ const getTypeLabel = (collection: string) => {
   return lang === 'cy' ? 'Newyddion' : 'News';
 };
 
-// Calculate number of dots needed
 const slidesPerView = 3;
 const numDots = Math.max(1, items.length - slidesPerView + 1);
 ---
 
-<!-- Previous section and title HTML remains the same -->
 <section class="px-4 py-16 mx-auto max-w-6xl lg:py-20">
   <div class="flex flex-col items-center mb-8 text-center">
     <h2 class="text-3xl font-bold tracking-tight sm:text-4xl sm:leading-none mb-4">
@@ -65,7 +62,6 @@ const numDots = Math.max(1, items.length - slidesPerView + 1);
   </div>
 
   <div class="relative" id="carousel">
-    <!-- Navigation Arrows -->
     <div class="absolute inset-y-0 left-0 md:-left-12 flex items-center">
       <button
         class="carousel-prev bg-white dark:bg-slate-900 shadow-lg rounded-full p-3 hover:bg-gray-50 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-primary"
@@ -84,7 +80,6 @@ const numDots = Math.max(1, items.length - slidesPerView + 1);
       </button>
     </div>
 
-    <!-- Carousel Container -->
     <div class="overflow-hidden px-1">
       <div class="carousel-track flex transition-transform duration-300" data-carousel-track>
         {items.map((item, index) => (
@@ -106,7 +101,7 @@ const numDots = Math.max(1, items.length - slidesPerView + 1);
               )}
               <div class="p-6">
                 <div class="text-xs text-gray-500 mb-2">
-                  {formatDate(item.data.publishDate || item.data.date)}
+                  {formatDate('publishDate' in item.data ? item.data.publishDate : item.data.date)}
                 </div>
                 <h3 class="text-xl font-bold leading-snug tracking-tight mb-2">
                   <a
@@ -128,13 +123,12 @@ const numDots = Math.max(1, items.length - slidesPerView + 1);
       </div>
     </div>
 
-    <!-- Dots -->
-    <div class="flex justify-center mt-6 gap-2">
-      {Array.from({ length: numDots }).map((_, index) => (
+    <div class="flex justify-center mt-8 gap-2" data-carousel-dots>
+      {Array.from({ length: numDots }).map((_, i) => (
         <button
-          class="carousel-dot w-2.5 h-2.5 rounded-full bg-gray-300 dark:bg-gray-700 transition-colors duration-200 hover:bg-primary dark:hover:bg-primary"
-          data-index={index}
-          aria-label={`Go to slide ${index + 1}`}
+          class="focus:outline-none transition-colors duration-200"
+          data-dot={i}
+          aria-label={`Go to slide ${i + 1}`}
         />
       ))}
     </div>
@@ -152,24 +146,58 @@ const numDots = Math.max(1, items.length - slidesPerView + 1);
     }
   }
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     .carousel-item {
       flex: 0 0 33.333%;
     }
   }
+
+  [data-dot] {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 9999px;
+    background-color: rgb(209 213 219);
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+  }
+
+  .dark [data-dot] {
+    background-color: rgb(75 85 99);
+  }
+
+  [data-dot][data-active="true"] {
+    background-color: rgb(var(--aw-color-primary));
+  }
 </style>
 
 <script>
+interface CarouselElements {
+  track: HTMLElement;
+  items: NodeListOf<Element>;
+  dots: NodeListOf<Element>;
+  prevButton: HTMLButtonElement;
+  nextButton: HTMLButtonElement;
+}
+
 function initializeCarousel() {
-  const carousels = document.querySelectorAll('#carousel');
+  const carousels = document.querySelectorAll<HTMLElement>('#carousel');
   carousels.forEach(carousel => {
-    const track = carousel.querySelector('[data-carousel-track]') as HTMLElement;
+    const track = carousel.querySelector<HTMLElement>('[data-carousel-track]');
     const items = carousel.querySelectorAll('.carousel-item');
-    const dots = carousel.querySelectorAll('.carousel-dot');
-    const prevButton = carousel.querySelector('.carousel-prev');
-    const nextButton = carousel.querySelector('.carousel-next');
+    const dots = carousel.querySelectorAll('[data-dot]');
+    const prevButton = carousel.querySelector<HTMLButtonElement>('.carousel-prev');
+    const nextButton = carousel.querySelector<HTMLButtonElement>('.carousel-next');
 
     if (!track || !items.length || !dots.length || !prevButton || !nextButton) return;
+
+    const elements: CarouselElements = {
+      track,
+      items,
+      dots,
+      prevButton,
+      nextButton
+    };
 
     let currentIndex = 0;
     const totalSlides = items.length;
@@ -178,7 +206,7 @@ function initializeCarousel() {
 
     const updateDots = (index: number) => {
       dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === index);
+        dot.setAttribute('data-active', (i === index).toString());
       });
     };
 
@@ -187,7 +215,6 @@ function initializeCarousel() {
       track.style.transform = `translateX(-${index * slideWidth}%)`;
       updateDots(index);
 
-      // Update button states
       prevButton.disabled = index === 0;
       nextButton.disabled = index === maxIndex;
       prevButton.style.opacity = index === 0 ? '0.5' : '1';
@@ -217,7 +244,6 @@ function initializeCarousel() {
       });
     });
 
-    // Handle window resize
     let resizeTimeout: number;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
@@ -229,11 +255,9 @@ function initializeCarousel() {
       }, 100);
     });
 
-    // Initialize first slide
     updateSlidePosition(0);
   });
 }
 
-// Initialize on page load
 document.addEventListener('astro:page-load', initializeCarousel);
 </script>

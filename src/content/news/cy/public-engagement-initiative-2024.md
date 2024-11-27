@@ -3,7 +3,7 @@ lang: "cy"
 title: "Parc Geneteg Cymru yn Lansio Menter Ymgysylltu â'r Cyhoedd Arloesol"
 publishDate: 2024-07-01
 description: "Rhaglen gynhwysfawr i ymgysylltu â'r cyhoedd yng Nghymru mewn genomeg trwy arddangosfeydd rhyngweithiol, gweithdai, a llwyfannau digidol."
-image: "/images/news/public-engagement.jpg"
+image: "/images/news/public-engagement-initiative.jpg"
 fullArticleLink: "https://walesgenepark.github.io/news/public-engagement-initiative-2024"
 ---
 

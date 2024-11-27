@@ -5,6 +5,7 @@ import { getLangFromUrl, useTranslations } from '~/i18n/utils';
 import NewsCarousel from '~/components/widgets/NewsCarousel.astro';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import Button from '~/components/ui/Button.astro';
 
 export function getStaticPaths() {
   return [
@@ -104,18 +105,16 @@ const carouselItems = allEntries.slice(0, 15);
       {pageContent.description}
     </p>
     <div class="flex flex-col sm:flex-row gap-4">
-      <a
+      <Button
+        variant="primary"
         href={pageContent.cta.primary.href}
-        class="btn btn-primary"
-      >
-        {pageContent.cta.primary.text}
-      </a>
-      <a
+        text={pageContent.cta.primary.text}
+      />
+      <Button
+        variant="secondary"
         href={pageContent.cta.secondary.href}
-        class="btn"
-      >
-        {pageContent.cta.secondary.text}
-      </a>
+        text={pageContent.cta.secondary.text}
+      />
     </div>
   </section>
 

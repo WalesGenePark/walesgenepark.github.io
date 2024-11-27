@@ -3,7 +3,7 @@ lang: "cy"
 title: "Tîm Ymchwil Parc Genynnau Cymru yn Gwneud Darganfyddiad mewn Genomeg Canser"
 publishDate: 2024-01-15
 description: "Ymchwilwyr yn adnabod llofnodion genetig newydd a allai chwyldroi dulliau triniaeth canser bersonol."
-image: "/images/news/cancer-research.jpg"
+image: "/images/news/cancer-genomics-breakthrough.jpg"
 readMoreLink: "https://walesgenepark.github.io/cy/news/cancer-genomics-breakthrough-2024"
 ---
 

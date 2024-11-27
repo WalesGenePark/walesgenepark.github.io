@@ -84,7 +84,16 @@
 </style>
 
 <script>
-  const services = {
+  interface ServiceConfig {
+    selector: string;
+    modalId: string;
+  }
+
+  interface Services {
+    [key: string]: ServiceConfig;
+  }
+
+  const services: Services = {
     youtube: {
       selector: 'a[href*="youtube.com"], a[href*="youtu.be"]',
       modalId: 'youtube-warning'
@@ -96,11 +105,11 @@
   };
 
   let currentUrl = '';
-  let currentModal = null;
+  let currentModal: HTMLElement | null = null;
 
   function initExternalWarnings() {
     // Handle privacy policy links
-    document.querySelectorAll('.modal-content a[href*="privacy"]').forEach(link => {
+    document.querySelectorAll<HTMLAnchorElement>('.modal-content a[href*="privacy"]').forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
         window.open(link.href, '_blank');
@@ -108,11 +117,12 @@
     });
 
     // Set up listeners for each service
-    Object.entries(services).forEach(([service, config]) => {
+    Object.entries(services).forEach(([_service, config]) => {
       const modal = document.getElementById(config.modalId);
-      
+      if (!modal) return;
+
       // Handle links for this service
-      document.querySelectorAll(config.selector).forEach(link => {
+      document.querySelectorAll<HTMLAnchorElement>(config.selector).forEach(link => {
         link.addEventListener('click', (e) => {
           e.preventDefault();
           currentUrl = link.href;
@@ -123,7 +133,7 @@
     });
 
     // Handle proceed buttons
-    document.querySelectorAll('.proceed-button').forEach(button => {
+    document.querySelectorAll<HTMLButtonElement>('.proceed-button').forEach(button => {
       button.addEventListener('click', () => {
         if (currentUrl) {
           window.open(currentUrl, '_blank');
@@ -135,7 +145,7 @@
     });
 
     // Handle cancel buttons
-    document.querySelectorAll('.cancel-button').forEach(button => {
+    document.querySelectorAll<HTMLButtonElement>('.cancel-button').forEach(button => {
       button.addEventListener('click', () => {
         if (currentModal) {
           currentModal.classList.add('hidden');

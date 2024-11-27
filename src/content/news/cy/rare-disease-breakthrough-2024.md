@@ -3,7 +3,7 @@ lang: "cy"
 title: "Datblygiad Pwysig mewn Ymchwil Clefyd Genetig Prin ym Mharc Geneteg Cymru"
 publishDate: 2024-03-01
 description: "Tîm ymchwil yn adnabod amrywiadau genetig newydd sy'n gysylltiedig â chyflwr etifeddol prin, gan agor posibiliadau newydd ar gyfer triniaeth."
-image: "/images/news/research-lab.jpg"
+image: "/images/news/rare-disease-breakthrough.jpg"
 fullArticleLink: "https://walesgenepark.github.io/news/rare-disease-breakthrough-2024"
 ---
 

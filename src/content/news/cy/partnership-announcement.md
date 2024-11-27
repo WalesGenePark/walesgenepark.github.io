@@ -1,7 +1,7 @@
 ---
 title: "Partneriaeth Newydd gyda Phrifysgol Caerdydd"
 description: "Mae Parc Genynnau Cymru yn cyhoeddi partneriaeth newydd gyda Phrifysgol Caerdydd i ehangu ymchwil genomig."
-image: "/images/news/partnership-2024.jpg"
+image: "/images/news/partnership-announcement.jpg"
 publishDate: 2024-12-01
 lang: "cy"
 ---

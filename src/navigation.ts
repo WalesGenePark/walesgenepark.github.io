@@ -1,6 +1,3 @@
-import { getPermalink } from './utils/permalinks';
-import { getAlternateSection } from './i18n/routes';
-
 export const headerData = {
   en: {
     links: [

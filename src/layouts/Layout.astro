@@ -1,86 +1,97 @@
 ---
 import '~/assets/styles/tailwind.css';
 
-import { I18N } from 'astrowind:config';
-
-import CommonMeta from '~/components/common/CommonMeta.astro';
-import Favicons from '~/components/Favicons.astro';
-import CustomStyles from '~/components/CustomStyles.astro';
-import ApplyColorMode from '~/components/common/ApplyColorMode.astro';
-import Metadata from '~/components/common/Metadata.astro';
-import SiteVerification from '~/components/common/SiteVerification.astro';
-import Analytics from '~/components/common/Analytics.astro';
+import { ViewTransitions } from 'astro:transitions';
+import MetaTags from '~/components/common/MetaTags.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
 import ExternalServiceWarning from '~/components/common/ExternalServiceWarning.astro';
+import LanguagePicker from '~/components/common/LanguagePicker.astro';
+import ApplyColorMode from '~/components/common/ApplyColorMode.astro';
+import { getLangFromUrl } from '~/i18n/utils';
+import { SITE, I18N } from '~/config';
+import type { LanguageCode } from '~/i18n/routes';
+import type { MetaData } from '~/types/metaData';
 
-import { ViewTransitions } from 'astro:transitions';
-
-import type { MetaData as MetaDataType } from '~/types';
-
-import { SITE } from '~/config.mjs';
-import { headerData } from '~/navigation';
-
-export interface Props {
-  metadata?: MetaDataType;
+interface Props {
+  metadata?: MetaData;
 }
 
 const { metadata = {} } = Astro.props;
-const { language, textDirection } = I18N;
-const { links, socialLinks } = headerData;
-
+const lang = getLangFromUrl(Astro.url) as LanguageCode;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
-<!doctype html>
-<html lang={language} dir={textDirection} class="2xl:text-[20px]">
+<!DOCTYPE html>
+<html lang={lang} dir={I18N.textDirection} class="motion-safe:scroll-smooth 2xl:text-[20px]">
   <head>
-    <CommonMeta />
-    <Favicons />
-    <CustomStyles />
+    <MetaTags {...metadata} canonical={canonicalURL} />
+    <ViewTransitions />
     <ApplyColorMode />
-    <Metadata {...metadata} />
-    <SiteVerification />
-    <Analytics />
-
-    <ViewTransitions fallback="swap" />
   </head>
 
-  <body class="antialiased text-default bg-page tracking-tight">
+  <body class="antialiased text-gray-900 dark:text-white bg-white dark:bg-gray-900 tracking-tight">
     <slot />
     <ExternalServiceWarning />
+    <LanguagePicker />
     <BasicScripts />
   </body>
 </html>
 
 <style is:global>
-  :root {
-    --aw-font-sans: 'InterVariable';
-    --aw-font-serif: var(--aw-font-sans);
-    --aw-font-heading: var(--aw-font-sans);
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
 
-    --aw-color-primary: rgb(220 38 38);
-    --aw-color-secondary: rgb(30 58 138);
-    --aw-color-accent: rgb(109 40 217);
+  @layer base {
+    :root {
+      --aw-font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+        sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+      --aw-font-serif: Georgia, Cambria, 'Times New Roman', Times, serif;
+      --aw-font-heading: var(--aw-font-sans);
 
-    --aw-color-text-heading: rgb(0 0 0);
-    --aw-color-text-default: rgb(16 16 16);
-    --aw-color-text-muted: rgb(16 16 16 / 66%);
-    --aw-color-bg-page: rgb(255 255 255);
+      --aw-color-primary: 220 38 38;
+      --aw-color-secondary: 185 28 28;
+      --aw-color-accent: 109 40 217;
+    }
 
-    --aw-color-bg-page-dark: rgb(3 6 32);
+    html {
+      @apply scroll-smooth;
+    }
+
+    body {
+      @apply font-sans antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      @apply font-heading text-gray-900 dark:text-white;
+    }
   }
 
-  .dark {
-    --aw-font-sans: 'InterVariable';
-    --aw-font-serif: var(--aw-font-sans);
-    --aw-font-heading: var(--aw-font-sans);
+  @layer components {
+    .text-default {
+      @apply text-gray-900 dark:text-gray-100;
+    }
 
-    --aw-color-primary: rgb(220 38 38);
-    --aw-color-secondary: rgb(30 58 138);
-    --aw-color-accent: rgb(109 40 217);
+    .text-muted {
+      @apply text-gray-600 dark:text-gray-400;
+    }
+  }
 
-    --aw-color-text-heading: rgb(0 0 0);
-    --aw-color-text-default: rgb(229 236 246);
-    --aw-color-text-muted: rgb(229 236 246 / 66%);
-    --aw-color-bg-page: var(--aw-color-bg-page-dark);
+  @layer utilities {
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  }
+
+  .focus-visible:focus-visible {
+    @apply ring-2 ring-offset-2 ring-primary outline-none;
   }
 </style>
