@@ -1,12 +1,12 @@
 ---
 date: 2024-12-15T00:00:00.000Z
-startTime: "09:30"
-endTime: "16:00"
-lang: "en"
-title: "Genomics Workshop 2024"
-description: "Join us for a comprehensive workshop on the latest advances in genomics research and their applications in healthcare."
-type: "workshop"
-image: "/images/events/genomics-workshop.jpg"
+startTime: '09:30'
+endTime: '16:00'
+lang: 'en'
+title: 'Genomics Workshop 2024'
+description: 'Join us for a comprehensive workshop on the latest advances in genomics research and their applications in healthcare.'
+type: 'workshop'
+image: '/images/events/genomics-workshop.jpg'
 ---
 
 # Genomics Workshop 2024
@@ -23,6 +23,7 @@ Join us for an exciting day of learning and discussion about the latest advances
 ## Program Highlights
 
 1. **Morning Session (9:30 - 12:00)**
+
    - Introduction to Modern Genomics
    - Latest Sequencing Technologies
    - Data Analysis Techniques

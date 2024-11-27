@@ -8,10 +8,7 @@ import type { NewsEntry, EventEntry } from '~/types/content';
 import type { MetaData } from '~/types/metaData';
 
 export function getStaticPaths() {
-  return [
-    { params: { lang: 'en' } },
-    { params: { lang: 'cy' } },
-  ];
+  return [{ params: { lang: 'en' } }, { params: { lang: 'cy' } }];
 }
 
 const lang = getLangFromUrl(Astro.url);
@@ -23,7 +20,8 @@ const metadata: MetaData = {
 const content = {
   en: {
     title: 'Advancing Genomic Medicine in Wales',
-    description: 'Wales Gene Park is dedicated to supporting healthcare professionals, researchers, and the public in understanding and advancing genetic medicine. We provide state-of-the-art genomic services, research support, and educational programs.',
+    description:
+      'Wales Gene Park is dedicated to supporting healthcare professionals, researchers, and the public in understanding and advancing genetic medicine. We provide state-of-the-art genomic services, research support, and educational programs.',
     cta: {
       primary: {
         text: 'Our Services',
@@ -37,7 +35,8 @@ const content = {
   },
   cy: {
     title: 'Hyrwyddo Meddygaeth Genomig yng Nghymru',
-    description: 'Mae Parc Genynnau Cymru yn ymroddedig i gefnogi gweithwyr gofal iechyd proffesiynol, ymchwilwyr, a\'r cyhoedd i ddeall a datblygu meddygaeth enetig. Rydym yn darparu gwasanaethau genomig o\'r radd flaenaf, cymorth ymchwil, a rhaglenni addysgol.',
+    description:
+      "Mae Parc Genynnau Cymru yn ymroddedig i gefnogi gweithwyr gofal iechyd proffesiynol, ymchwilwyr, a'r cyhoedd i ddeall a datblygu meddygaeth enetig. Rydym yn darparu gwasanaethau genomig o'r radd flaenaf, cymorth ymchwil, a rhaglenni addysgol.",
     cta: {
       primary: {
         text: 'Ein Gwasanaethau',
@@ -54,11 +53,11 @@ const content = {
 // Get news and events for the carousel
 const newsEntries = await getCollection('news', ({ id }) => {
   return id.startsWith(lang + '/');
-}).then(entries => entries as unknown as NewsEntry[]);
+}).then((entries) => entries as unknown as NewsEntry[]);
 
 const eventsEntries = await getCollection('events', ({ id }) => {
   return id.startsWith(lang + '/');
-}).then(entries => entries as unknown as EventEntry[]);
+}).then((entries) => entries as unknown as EventEntry[]);
 
 interface EntryWithMTime {
   mtime: Date;
@@ -69,12 +68,12 @@ interface EntryWithMTime {
 const entriesWithStats: EntryWithMTime[] = await Promise.all([
   ...newsEntries.map(async (entry) => ({
     entry,
-    mtime: new Date(entry.data.publishDate)
+    mtime: new Date(entry.data.publishDate),
   })),
   ...eventsEntries.map(async (entry) => ({
     entry,
-    mtime: new Date(entry.data.date)
-  }))
+    mtime: new Date(entry.data.date),
+  })),
 ]);
 
 // Sort by file modification time
@@ -83,8 +82,7 @@ const sortedEntries = entriesWithStats.sort((a, b) => {
 });
 
 // Take the first 15 items
-const carouselItems = sortedEntries.slice(0, 15).map(item => item.entry);
-
+const carouselItems = sortedEntries.slice(0, 15).map((item) => item.entry);
 ---
 
 <Layout metadata={metadata}>
@@ -96,16 +94,8 @@ const carouselItems = sortedEntries.slice(0, 15).map(item => item.entry);
       {content[lang].description}
     </p>
     <div class="flex flex-col sm:flex-row gap-4">
-      <Button
-        variant="primary"
-        href={content[lang].cta.primary.href}
-        text={content[lang].cta.primary.text}
-      />
-      <Button
-        variant="secondary"
-        href={content[lang].cta.secondary.href}
-        text={content[lang].cta.secondary.text}
-      />
+      <Button variant="primary" href={content[lang].cta.primary.href} text={content[lang].cta.primary.text} />
+      <Button variant="secondary" href={content[lang].cta.secondary.href} text={content[lang].cta.secondary.text} />
     </div>
   </section>
 

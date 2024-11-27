@@ -14,14 +14,14 @@ export async function getStaticPaths() {
 
   for (const entry of entries) {
     const [lang, ...slugParts] = entry.slug.split('/');
-    
+
     if (lang === 'en' || lang === 'cy') {
       paths.push({
         params: {
           lang,
-          slug: slugParts.join('/')
+          slug: slugParts.join('/'),
         },
-        props: { entry } as { entry: NewsEntry }
+        props: { entry } as { entry: NewsEntry },
       });
     }
   }
@@ -50,15 +50,15 @@ const metadata = {
   alternateLinks: [
     {
       href: `/${lang === 'en' ? 'cy' : 'en'}/${alternateSection}/${slug}`,
-      hreflang: lang === 'en' ? 'cy' : 'en'
-    }
+      hreflang: lang === 'en' ? 'cy' : 'en',
+    },
   ],
   openGraph: {
     title: entry.data.title,
     description: entry.data.description || '',
     type: 'article',
-    url: `${Astro.site}${lang}/news/${slug}`
-  }
+    url: `${Astro.site}${lang}/news/${slug}`,
+  },
 };
 
 const rendered = await entry.render();
@@ -71,14 +71,16 @@ const rendered = await entry.render();
         {entry.data.title}
       </h1>
     </div>
-    {'image' in entry.data && entry.data.image && (
-      <img
-        src={entry.data.image}
-        class="mx-auto rounded-md shadow-lg mb-6"
-        alt={entry.data.description || ''}
-        loading="lazy"
-      />
-    )}
+    {
+      'image' in entry.data && entry.data.image && (
+        <img
+          src={entry.data.image}
+          class="mx-auto rounded-md shadow-lg mb-6"
+          alt={entry.data.description || ''}
+          loading="lazy"
+        />
+      )
+    }
     <div class="mx-auto prose dark:prose-invert max-w-4xl">
       {rendered.Content}
     </div>

@@ -1,10 +1,10 @@
 ---
-lang: "en"
-title: "Wales Gene Park Opens State-of-the-Art Genomic Testing Facility"
+lang: 'en'
+title: 'Wales Gene Park Opens State-of-the-Art Genomic Testing Facility'
 publishDate: 2024-12-01
-description: "A £15 million investment brings cutting-edge genomic testing capabilities to Wales, enhancing diagnostic services and research capabilities."
-image: "/images/news/new-testing-facility.jpg"
-fullArticleLink: "https://walesgenepark.github.io/news/new-testing-facility-2024"
+description: 'A £15 million investment brings cutting-edge genomic testing capabilities to Wales, enhancing diagnostic services and research capabilities.'
+image: '/images/news/new-testing-facility.jpg'
+fullArticleLink: 'https://walesgenepark.github.io/news/new-testing-facility-2024'
 ---
 
 Wales Gene Park proudly announces the opening of its new state-of-the-art Genomic Testing and Research Facility in Cardiff. This £15 million investment represents a significant advancement in Wales's genomic testing capabilities and positions the country at the forefront of precision medicine in the United Kingdom.
@@ -16,18 +16,21 @@ Facility Overview:
 The new center includes:
 
 1. Advanced Sequencing Laboratory
+
 - Latest generation NovaSeq X Plus sequencing systems
 - High-throughput automated sample processing
 - Dedicated areas for specialized testing protocols
 - Capacity to process over 10,000 samples monthly
 
 2. Bioinformatics Suite
+
 - High-performance computing cluster
 - Advanced data analysis workstations
 - Dedicated software development space
 - Real-time data processing capabilities
 
 3. Clinical Interpretation Center
+
 - Multidisciplinary team workspace
 - Video conferencing facilities for remote consultations
 - Training areas for healthcare professionals
@@ -60,18 +63,21 @@ Operational Impact:
 The new facility enables:
 
 1. Increased Testing Capacity
+
 - 300% increase in sample processing capability
 - Reduced waiting times for results
 - Expanded test menu
 - Support for large-scale research projects
 
 2. Enhanced Quality Control
+
 - Automated quality management systems
 - Real-time monitoring of processes
 - Advanced contamination prevention
 - Improved sample tracking
 
 3. Research Integration
+
 - Dedicated research laboratory space
 - Biobank facility
 - Collaborative workspace for visiting researchers

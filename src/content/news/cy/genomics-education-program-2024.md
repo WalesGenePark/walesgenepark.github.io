@@ -1,10 +1,10 @@
 ---
-lang: "cy"
-title: "Parc Geneteg Cymru yn Lansio Rhaglen Addysg Genomeg Gynhwysfawr ar gyfer 2024"
+lang: 'cy'
+title: 'Parc Geneteg Cymru yn Lansio Rhaglen Addysg Genomeg Gynhwysfawr ar gyfer 2024'
 publishDate: 2025-03-15
-description: "Menter addysgol arloesol yn dwyn gwybodaeth genomeg i weithwyr gofal iechyd proffesiynol a myfyrwyr ledled Cymru."
-image: "/images/news/genomics-education-program.jpg"
-readMoreLink: "https://walesgenepark.github.io/news/genomics-education-program-2024"
+description: 'Menter addysgol arloesol yn dwyn gwybodaeth genomeg i weithwyr gofal iechyd proffesiynol a myfyrwyr ledled Cymru.'
+image: '/images/news/genomics-education-program.jpg'
+readMoreLink: 'https://walesgenepark.github.io/news/genomics-education-program-2024'
 ---
 
 Mae Parc Geneteg Cymru yn falch o gyhoeddi lansiad ein rhaglen addysgol fwyaf uchelgeisiol hyd yma, wedi'i dylunio i bontio'r bwlch rhwng ymchwil genomig arloesol ac ymarfer clinigol. Mae'r fenter gynhwysfawr hon, a fydd yn cael ei chyflwyno ledled Cymru trwy gydol 2024, yn cynrychioli cam sylweddol ymlaen yn ein cenhadaeth i wella llythrennedd genomeg ymhlith gweithwyr gofal iechyd proffesiynol a myfyrwyr.
@@ -24,6 +24,7 @@ Mae'r rhaglen wedi'i datblygu mewn cydweithrediad â GIG Cymru, prifysgolion bla
 Mae Dr Sarah Williams, Cyfarwyddwr Addysg ym Mharc Geneteg Cymru, yn egluro: "Mae'r rhaglen hon yn cynrychioli esblygiad sylweddol yn y ffordd rydym yn ymdrin ag addysg genomeg. Rydym yn symud y tu hwnt i ddulliau addysgu traddodiadol i greu profiad dysgu trochi, ymarferol a fydd â manteision uniongyrchol ar gyfer ymarfer clinigol."
 
 Mae nodweddion allweddol y rhaglen yn cynnwys:
+
 - Diweddariadau rheolaidd ar dechnolegau genomig sy'n dod i'r amlwg a'u cymwysiadau clinigol
 - Sefyllfaoedd dysgu seiliedig ar achosion wedi'u tynnu o brofiadau clinigol go iawn
 - Sesiynau ymarferol ar gwnsela genetig a chyfathrebu â chleifion

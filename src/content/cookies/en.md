@@ -14,6 +14,7 @@ Cookies are small text files that are placed on your device when you visit our w
 ## How We Use Cookies
 
 We use cookies to:
+
 - Remember your preferences
 - Understand how you use our website
 - Improve our website functionality
@@ -22,14 +23,17 @@ We use cookies to:
 ## Types of Cookies We Use
 
 ### Essential Cookies
+
 - Required for the website to function
 - Cannot be disabled
 
 ### Analytics Cookies
+
 - Help us understand how visitors use our website
 - Can be disabled in your browser settings
 
 ### Functional Cookies
+
 - Remember your preferences and settings
 - Enhance your website experience
 

@@ -1,14 +1,14 @@
 ---
 date: 2024-12-20T00:00:00.000Z
-startTime: "09:00"
-endTime: "17:00"
-lang: "en"
-title: "Advanced Bioinformatics Training Course"
-description: "A comprehensive five-day training course covering advanced bioinformatics tools and techniques for genomic data analysis. Participants will learn practical skills in NGS data analysis, variant calling, and interpretation of results."
-location: "Cardiff University Bioinformatics Hub"
-type: "training"
-registrationLink: "https://walesgenepark.github.io/events/bioinformatics-training-2024/register"
-image: "/images/events/bioinformatics-training.jpg"
+startTime: '09:00'
+endTime: '17:00'
+lang: 'en'
+title: 'Advanced Bioinformatics Training Course'
+description: 'A comprehensive five-day training course covering advanced bioinformatics tools and techniques for genomic data analysis. Participants will learn practical skills in NGS data analysis, variant calling, and interpretation of results.'
+location: 'Cardiff University Bioinformatics Hub'
+type: 'training'
+registrationLink: 'https://walesgenepark.github.io/events/bioinformatics-training-2024/register'
+image: '/images/events/bioinformatics-training.jpg'
 ---
 
 An intensive five-day course designed to provide hands-on experience with cutting-edge bioinformatics tools and techniques used in genomic research and clinical diagnostics.
@@ -16,6 +16,7 @@ An intensive five-day course designed to provide hands-on experience with cuttin
 ## Course Overview
 
 ### Day 1: Foundations
+
 - Linux command line basics
 - Version control with Git
 - Python programming essentials
@@ -23,6 +24,7 @@ An intensive five-day course designed to provide hands-on experience with cuttin
 - Setting up analysis environments
 
 ### Day 2: NGS Data Processing
+
 - Quality control and preprocessing
 - Read alignment techniques
 - BAM file manipulation
@@ -30,6 +32,7 @@ An intensive five-day course designed to provide hands-on experience with cuttin
 - Practical exercises
 
 ### Day 3: Variant Calling
+
 - SNV and indel calling
 - Structural variant detection
 - CNV analysis
@@ -37,6 +40,7 @@ An intensive five-day course designed to provide hands-on experience with cuttin
 - Quality assessment
 
 ### Day 4: Clinical Applications
+
 - Variant interpretation
 - Disease gene identification
 - Pathway analysis
@@ -44,6 +48,7 @@ An intensive five-day course designed to provide hands-on experience with cuttin
 - Clinical reporting
 
 ### Day 5: Advanced Topics
+
 - Pipeline development
 - Cloud computing
 - Machine learning applications
@@ -51,6 +56,7 @@ An intensive five-day course designed to provide hands-on experience with cuttin
 - Final project
 
 ## Learning Outcomes
+
 - Master essential bioinformatics tools
 - Develop analysis pipelines
 - Interpret genomic data
@@ -58,6 +64,7 @@ An intensive five-day course designed to provide hands-on experience with cuttin
 - Implement best practices
 
 ## Prerequisites
+
 - Basic programming knowledge
 - Understanding of genetics
 - Laptop with Unix-like OS
@@ -65,6 +72,7 @@ An intensive five-day course designed to provide hands-on experience with cuttin
 - Pre-course reading completion
 
 ## Technical Requirements
+
 - Modern laptop (4+ cores recommended)
 - 8GB+ RAM
 - 50GB free storage
@@ -72,6 +80,7 @@ An intensive five-day course designed to provide hands-on experience with cuttin
 - Stable internet connection
 
 ## Course Materials
+
 - Comprehensive manual
 - Example datasets
 - Analysis scripts
@@ -79,6 +88,7 @@ An intensive five-day course designed to provide hands-on experience with cuttin
 - Online resources access
 
 ## Registration Includes
+
 - Course materials
 - Software licenses
 - Lunch and refreshments
@@ -86,6 +96,7 @@ An intensive five-day course designed to provide hands-on experience with cuttin
 - Post-course support
 
 ## Limited Spaces
+
 - Maximum 20 participants
 - Early registration recommended
 - Waiting list available

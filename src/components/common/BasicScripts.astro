@@ -48,10 +48,10 @@ import { SITE } from '~/config';
       if (defaultTheme.endsWith(':only')) {
         return;
       }
-      
+
       const isDark = document.documentElement.classList.contains('dark');
       const newTheme = isDark ? 'light' : 'dark';
-      
+
       applyTheme(newTheme);
       localStorage.theme = newTheme;
     });

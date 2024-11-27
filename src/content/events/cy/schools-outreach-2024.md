@@ -1,14 +1,14 @@
 ---
 date: 2025-05-15T00:00:00.000Z
-startTime: "10:00"
-endTime: "15:00"
-lang: "cy"
-title: "Rhaglen Allgymorth Ysgolion 2024"
-description: "Wythnos o weithgareddau geneteg ymarferol a rhyngweithiol ar gyfer ysgolion uwchradd ledled Cymru, yn cynnwys arbrofion labordy, gweithdai a sgyrsiau gyrfaoedd."
-location: "Ysgolion ledled Cymru"
-type: "education"
-registrationLink: "https://walesgenepark.github.io/events/schools-outreach-2024/register"
-image: "/images/events/schools-outreach.jpg"
+startTime: '10:00'
+endTime: '15:00'
+lang: 'cy'
+title: 'Rhaglen Allgymorth Ysgolion 2024'
+description: 'Wythnos o weithgareddau geneteg ymarferol a rhyngweithiol ar gyfer ysgolion uwchradd ledled Cymru, yn cynnwys arbrofion labordy, gweithdai a sgyrsiau gyrfaoedd.'
+location: 'Ysgolion ledled Cymru'
+type: 'education'
+registrationLink: 'https://walesgenepark.github.io/events/schools-outreach-2024/register'
+image: '/images/events/schools-outreach.jpg'
 ---
 
 Mae Rhaglen Allgymorth Ysgolion Parc Geneteg Cymru yn darparu profiadau dysgu geneteg cyffrous ac ysbrydoledig i fyfyrwyr ysgol uwchradd ledled Cymru.
@@ -16,6 +16,7 @@ Mae Rhaglen Allgymorth Ysgolion Parc Geneteg Cymru yn darparu profiadau dysgu ge
 ## Am y Rhaglen
 
 Mae ein rhaglen allgymorth yn cynnig:
+
 - Arbrofion labordy ymarferol
 - Gweithdai rhyngweithiol
 - Sgyrsiau gyrfaoedd
@@ -25,18 +26,21 @@ Mae ein rhaglen allgymorth yn cynnig:
 ## Gweithgareddau
 
 ### Arbrofion DNA (Blwyddyn 9-13)
+
 - Echdynnu DNA
 - Electrofforesedd gel
 - PCR
 - Dilyniannu DNA
 
 ### Gweithdai Rhyngweithiol (Blwyddyn 7-13)
+
 - Modelau DNA
 - Etifeddiad genetig
 - Clefydau genetig
 - Moeseg genomeg
 
 ### Sgyrsiau Gyrfaoedd (Blwyddyn 10-13)
+
 - Llwybrau gyrfa mewn geneteg
 - Cyfleoedd swyddi
 - Gofynion cymwysterau
@@ -61,12 +65,14 @@ Mae ein rhaglen allgymorth yn cynnig:
 ## Sut i Gymryd Rhan
 
 ### I Ysgolion
+
 - Cofrestrwch eich diddordeb ar-lein
 - Dewiswch ddyddiadau addas
 - Nodwch anghenion penodol
 - Trefnwch gyfarfod cynllunio
 
 ### I Athrawon
+
 - Lawrlwythwch ddeunyddiau paratoi
 - Mynychwch sesiwn friffio
 - Trefnwch amserlen dosbarth
@@ -75,12 +81,14 @@ Mae ein rhaglen allgymorth yn cynnig:
 ## Gofynion
 
 ### Ar gyfer Arbrofion
+
 - Labordy gwyddoniaeth
 - Cyfarpar diogelwch
 - Goruchwyliaeth athrawon
 - Caniatâd rhieni
 
 ### Ar gyfer Gweithdai
+
 - Ystafell ddosbarth addas
 - Offer arddangos
 - Mynediad i'r rhyngrwyd
@@ -89,6 +97,7 @@ Mae ein rhaglen allgymorth yn cynnig:
 ## Adnoddau
 
 Darperir y canlynol:
+
 - Pecynnau arbrofion
 - Taflenni gwaith
 - Cyflwyniadau

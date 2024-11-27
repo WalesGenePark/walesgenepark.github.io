@@ -1,14 +1,14 @@
 ---
 date: 2024-10-05T00:00:00.000Z
-startTime: "09:00"
-endTime: "17:30"
-lang: "en"
-title: "Wales Genomics Policy Forum 2024"
-description: "A crucial forum bringing together policymakers, healthcare leaders, and genomics experts to shape the future of genomic medicine in Wales. Discuss policy implications, ethical considerations, and implementation strategies."
-location: "Senedd Cymru - Welsh Parliament, Cardiff Bay"
-type: "conference"
-registrationLink: "https://walesgenepark.github.io/events/genomics-policy-forum-2024/register"
-image: "/images/events/genomics-policy-forum.jpg"
+startTime: '09:00'
+endTime: '17:30'
+lang: 'en'
+title: 'Wales Genomics Policy Forum 2024'
+description: 'A crucial forum bringing together policymakers, healthcare leaders, and genomics experts to shape the future of genomic medicine in Wales. Discuss policy implications, ethical considerations, and implementation strategies.'
+location: 'Senedd Cymru - Welsh Parliament, Cardiff Bay'
+type: 'conference'
+registrationLink: 'https://walesgenepark.github.io/events/genomics-policy-forum-2024/register'
+image: '/images/events/genomics-policy-forum.jpg'
 ---
 
 Join key stakeholders and decision-makers for a day of strategic discussions and policy development focusing on the implementation of genomic medicine in Wales.
@@ -18,52 +18,60 @@ Join key stakeholders and decision-makers for a day of strategic discussions and
 ### Morning Session (09:00-12:30)
 
 #### Opening Plenary (09:00-10:15)
+
 - Welcome Address
-  * Minister for Health and Social Services
-  * Chief Medical Officer for Wales
-  * Wales Gene Park Director
+
+  - Minister for Health and Social Services
+  - Chief Medical Officer for Wales
+  - Wales Gene Park Director
 
 - Keynote Presentation
-  * "The Future of Genomic Medicine in Wales"
-  * International perspective
-  * National strategy alignment
-  * Implementation challenges
+  - "The Future of Genomic Medicine in Wales"
+  - International perspective
+  - National strategy alignment
+  - Implementation challenges
 
 #### Policy Sessions (10:30-12:30)
+
 - Current Policy Landscape
-  * NHS Wales Genomics Strategy
-  * UK-wide initiatives
-  * European partnerships
-  * Global collaborations
+
+  - NHS Wales Genomics Strategy
+  - UK-wide initiatives
+  - European partnerships
+  - Global collaborations
 
 - Implementation Challenges
-  * Healthcare integration
-  * Workforce development
-  * Infrastructure requirements
-  * Resource allocation
+  - Healthcare integration
+  - Workforce development
+  - Infrastructure requirements
+  - Resource allocation
 
 ### Afternoon Session (13:30-17:00)
 
 #### Breakout Discussions (13:30-15:00)
+
 1. Clinical Implementation
-   * Service delivery models
-   * Pathway integration
-   * Quality standards
-   * Performance metrics
+
+   - Service delivery models
+   - Pathway integration
+   - Quality standards
+   - Performance metrics
 
 2. Ethical Framework
-   * Consent processes
-   * Data protection
-   * Privacy considerations
-   * Public engagement
+
+   - Consent processes
+   - Data protection
+   - Privacy considerations
+   - Public engagement
 
 3. Economic Impact
-   * Cost-effectiveness
-   * Resource allocation
-   * Funding models
-   * Sustainability plans
+   - Cost-effectiveness
+   - Resource allocation
+   - Funding models
+   - Sustainability plans
 
 #### Closing Session (15:15-17:00)
+
 - Session Summaries
 - Action Planning
 - Policy Recommendations
@@ -72,6 +80,7 @@ Join key stakeholders and decision-makers for a day of strategic discussions and
 ## Key Topics
 
 ### Policy Areas
+
 - Healthcare Integration
 - Ethical Guidelines
 - Data Governance
@@ -80,6 +89,7 @@ Join key stakeholders and decision-makers for a day of strategic discussions and
 - Resource Allocation
 
 ### Strategic Priorities
+
 - Service Accessibility
 - Quality Standards
 - Research Integration
@@ -88,6 +98,7 @@ Join key stakeholders and decision-makers for a day of strategic discussions and
 - Economic Sustainability
 
 ## Stakeholder Groups
+
 - Government Officials
 - NHS Leaders
 - Clinical Directors
@@ -96,6 +107,7 @@ Join key stakeholders and decision-makers for a day of strategic discussions and
 - Patient Advocates
 
 ## Expected Outcomes
+
 - Policy Recommendations
 - Implementation Strategies
 - Action Plans
@@ -104,7 +116,9 @@ Join key stakeholders and decision-makers for a day of strategic discussions and
 - Timeline Proposals
 
 ## Discussion Papers
+
 Available pre-forum:
+
 - Current State Analysis
 - Strategic Options
 - Implementation Models
@@ -113,6 +127,7 @@ Available pre-forum:
 - Public Engagement Strategy
 
 ## Practical Information
+
 - Welsh-English Translation
 - Networking Breaks
 - Exhibition Area
@@ -121,6 +136,7 @@ Available pre-forum:
 - Follow-up Reports
 
 ## Registration Details
+
 - By invitation only
 - Limited capacity
 - Advance registration required

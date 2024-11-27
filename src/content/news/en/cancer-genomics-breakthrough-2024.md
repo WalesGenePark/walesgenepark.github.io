@@ -1,14 +1,13 @@
 ---
-lang: "en"
-title: "Wales Gene Park Research Team Makes Breakthrough in Cancer Genomics"
+lang: 'en'
+title: 'Wales Gene Park Research Team Makes Breakthrough in Cancer Genomics'
 publishDate: 2024-01-15
-description: "Researchers identify novel genetic signatures that could revolutionize personalized cancer treatment approaches."
-image: "/images/news/cancer-genomics-breakthrough.jpg"
-fullArticleLink: "https://walesgenepark.github.io/news/cancer-genomics-breakthrough-2024"
-category: "research"
-author: "Dr. Sarah Williams"
+description: 'Researchers identify novel genetic signatures that could revolutionize personalized cancer treatment approaches.'
+image: '/images/news/cancer-genomics-breakthrough.jpg'
+fullArticleLink: 'https://walesgenepark.github.io/news/cancer-genomics-breakthrough-2024'
+category: 'research'
+author: 'Dr. Sarah Williams'
 ---
-
 
 Watch the video on <a href="https://www.youtube.com/watch?v=HxfKvTDWMbw" target="_blank" rel="noopener">YouTube</a>.
 
@@ -23,12 +22,14 @@ Key Findings:
 The research team identified:
 
 1. Novel Genetic Signatures
+
 - Previously unknown genetic variants associated with treatment response
 - Complex interaction patterns between multiple genes
 - Specific ethnic variations in genetic risk factors
 - New potential therapeutic targets
 
 2. Treatment Response Markers
+
 - Genetic indicators of chemotherapy effectiveness
 - Markers for immunotherapy response
 - Predictors of treatment side effects
@@ -51,12 +52,14 @@ Clinical Implications:
 The discoveries have immediate clinical applications:
 
 1. Treatment Selection
+
 - Better matching of patients to therapies
 - Reduced trial-and-error in treatment selection
 - More accurate prognosis prediction
 - Improved side effect management
 
 2. Risk Assessment
+
 - Enhanced screening protocols
 - Better prevention strategies
 - More accurate risk stratification
@@ -78,12 +81,14 @@ Impact on Patient Care:
 The findings are already influencing patient care through:
 
 1. Clinical Implementation
+
 - New genetic testing protocols
 - Updated treatment guidelines
 - Modified risk assessment tools
 - Enhanced monitoring strategies
 
 2. Patient Benefits
+
 - More precise treatment selection
 - Reduced side effects
 - Better outcome prediction
@@ -94,12 +99,14 @@ Future Directions:
 The research team is now:
 
 1. Expanding the Study
+
 - Including more cancer types
 - Analyzing larger patient populations
 - Investigating additional genetic factors
 - Studying treatment combinations
 
 2. Developing New Tools
+
 - Clinical decision support systems
 - Risk prediction algorithms
 - Treatment response models
@@ -130,12 +137,14 @@ Next Steps:
 The team is focusing on:
 
 1. Clinical Translation
+
 - Developing clinical guidelines
 - Creating physician resources
 - Establishing testing protocols
 - Training healthcare providers
 
 2. Further Research
+
 - Investigating additional genetic markers
 - Studying treatment resistance mechanisms
 - Exploring combination therapies

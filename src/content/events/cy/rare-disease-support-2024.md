@@ -1,14 +1,14 @@
 ---
 date: 2024-02-28T00:00:00.000Z
-startTime: "10:00"
-endTime: "15:00"
-lang: "cy"
-title: "Grŵp Cymorth Clefydau Prin 2024"
+startTime: '10:00'
+endTime: '15:00'
+lang: 'cy'
+title: 'Grŵp Cymorth Clefydau Prin 2024'
 description: "Ymunwch â'n cyfarfod misol ar gyfer teuluoedd a phobl sy'n byw gyda chlefydau prin. Cyfle i rannu profiadau, derbyn cymorth, a chysylltu ag eraill mewn sefyllfa debyg."
-location: "Canolfan Gymunedol Treganna, Caerdydd"
-type: "support-group"
-registrationLink: "https://walesgenepark.github.io/events/rare-disease-support-2024/register"
-image: "/images/events/support-group.jpg"
+location: 'Canolfan Gymunedol Treganna, Caerdydd'
+type: 'support-group'
+registrationLink: 'https://walesgenepark.github.io/events/rare-disease-support-2024/register'
+image: '/images/events/support-group.jpg'
 ---
 
 Croeso i Grŵp Cymorth Clefydau Prin Parc Geneteg Cymru. Mae'r grŵp hwn yn cyfarfod yn fisol i ddarparu cymorth, gwybodaeth a chyfeillgarwch i bobl sy'n byw gyda chlefydau prin a'u teuluoedd.
@@ -16,6 +16,7 @@ Croeso i Grŵp Cymorth Clefydau Prin Parc Geneteg Cymru. Mae'r grŵp hwn yn cyfa
 ## Am y Grŵp
 
 Mae ein grŵp cymorth yn darparu amgylchedd diogel, cyfrinachol a chefnogol lle gall pobl:
+
 - Rannu eu profiadau
 - Dysgu oddi wrth eraill
 - Cael gwybodaeth am adnoddau
@@ -25,23 +26,28 @@ Mae ein grŵp cymorth yn darparu amgylchedd diogel, cyfrinachol a chefnogol lle 
 ## Agenda'r Noson
 
 ### Croeso a Chyflwyniadau (18:30-18:45)
+
 - Croeso gan hwylusydd y grŵp
 - Cyflwyniadau byr gan aelodau newydd (dewisol)
 
 ### Siaradwr Gwadd (18:45-19:30)
+
 - Cyflwyniad arbenigol
 - Sesiwn holi ac ateb
 
 ### Egwyl (19:30-19:45)
+
 - Te a choffi
 - Cyfle i sgwrsio'n anffurfiol
 
 ### Trafodaeth Agored (19:45-20:15)
+
 - Rhannu profiadau
 - Cefnogaeth gan gymheiriaid
 - Trafod heriau cyffredin
 
 ### Crynhoi (20:15-20:30)
+
 - Crynodeb o'r drafodaeth
 - Cyhoeddiadau am y cyfarfod nesaf
 - Awgrymiadau ar gyfer pynciau'r dyfodol

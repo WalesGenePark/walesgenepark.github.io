@@ -16,8 +16,14 @@ const events = defineCollection({
     description: z.string().optional(),
     image: z.string().optional(),
     date: z.date(),
-    startTime: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/).optional(), // Format: "HH:mm" (24-hour)
-    endTime: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/).optional(), // Format: "HH:mm" (24-hour)
+    startTime: z
+      .string()
+      .regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/)
+      .optional(), // Format: "HH:mm" (24-hour)
+    endTime: z
+      .string()
+      .regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/)
+      .optional(), // Format: "HH:mm" (24-hour)
     lang: z.enum(['en', 'cy']),
     location: z.string().optional(),
     type: z.string().optional(),
@@ -36,12 +42,14 @@ const team = defineCollection({
     phone: z.string().optional(),
     order: z.number().optional(),
     category: z.string().optional(),
-    socialLinks: z.object({
-      linkedin: z.string().optional(),
-      twitter: z.string().optional(),
-      researchgate: z.string().optional(),
-      orcid: z.string().optional(),
-    }).optional(),
+    socialLinks: z
+      .object({
+        linkedin: z.string().optional(),
+        twitter: z.string().optional(),
+        researchgate: z.string().optional(),
+        orcid: z.string().optional(),
+      })
+      .optional(),
     lang: z.enum(['en', 'cy']),
   }),
 });

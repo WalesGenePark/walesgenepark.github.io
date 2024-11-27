@@ -35,11 +35,18 @@
     @apply text-gray-900 dark:text-gray-100;
   }
 
-  .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
     @apply text-gray-900 dark:text-white;
   }
 
-  .prose p, .prose ul, .prose ol {
+  .prose p,
+  .prose ul,
+  .prose ol {
     @apply text-gray-900 dark:text-gray-100;
   }
 

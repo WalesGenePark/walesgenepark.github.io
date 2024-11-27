@@ -14,7 +14,7 @@ metadata:
   title:
     default: Wales Gene Park
     template: '%s — Wales Gene Park'
-  description: "Wales Gene Park is a leading organization in genomics research and education, supporting healthcare professionals, researchers, and the public in understanding and advancing genetic medicine."
+  description: 'Wales Gene Park is a leading organization in genomics research and education, supporting healthcare professionals, researchers, and the public in understanding and advancing genetic medicine.'
   robots:
     index: true
     follow: true

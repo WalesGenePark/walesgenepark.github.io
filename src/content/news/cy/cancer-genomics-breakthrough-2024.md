@@ -1,10 +1,10 @@
 ---
-lang: "cy"
-title: "Tîm Ymchwil Parc Genynnau Cymru yn Gwneud Darganfyddiad mewn Genomeg Canser"
+lang: 'cy'
+title: 'Tîm Ymchwil Parc Genynnau Cymru yn Gwneud Darganfyddiad mewn Genomeg Canser'
 publishDate: 2024-01-15
-description: "Ymchwilwyr yn adnabod llofnodion genetig newydd a allai chwyldroi dulliau triniaeth canser bersonol."
-image: "/images/news/cancer-genomics-breakthrough.jpg"
-readMoreLink: "https://walesgenepark.github.io/cy/news/cancer-genomics-breakthrough-2024"
+description: 'Ymchwilwyr yn adnabod llofnodion genetig newydd a allai chwyldroi dulliau triniaeth canser bersonol.'
+image: '/images/news/cancer-genomics-breakthrough.jpg'
+readMoreLink: 'https://walesgenepark.github.io/cy/news/cancer-genomics-breakthrough-2024'
 ---
 
 Mae tîm ymchwil ym Mharc Genynnau Cymru wedi gwneud darganfyddiad arwyddocaol mewn genomeg canser, gan adnabod llofnodion genetig penodol a allai chwyldroi sut rydym yn ymdrin â thriniaeth canser bersonol. Mae'r darganfyddiad hwn, a gyhoeddwyd yn Nature Genetics, yn cynrychioli cam mawr ymlaen mewn deall sut mae amrywiadau genetig yn dylanwadu ar ddatblygiad canser ac ymateb i driniaeth.

@@ -14,6 +14,7 @@ Wales Gene Park is committed to protecting your privacy and ensuring the securit
 ## Information We Collect
 
 We may collect:
+
 - Basic identification and contact information
 - Technical information about your device and how you use our website
 - Information you provide when contacting us or participating in our events
@@ -21,6 +22,7 @@ We may collect:
 ## How We Use Your Information
 
 We use your information to:
+
 - Provide and improve our services
 - Communicate with you about our events and services
 - Ensure website security and prevent fraud
@@ -33,6 +35,7 @@ We implement appropriate technical and organizational measures to protect your p
 ## Your Rights
 
 You have the right to:
+
 - Access your personal data
 - Request correction of your data
 - Request deletion of your data

@@ -30,7 +30,7 @@ const partners = [
 <footer class="relative bg-white dark:bg-slate-900 not-prose">
   <!-- Red divider -->
   <div class="h-1 w-full bg-red-600"></div>
-  
+
   <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-4">
     <!-- Site Name -->
     <div class="text-center">
@@ -60,14 +60,16 @@ const partners = [
     <div class="grid grid-cols-8 gap-1 items-center">
       {/* Empty first column */}
       <div class="w-full"></div>
-      
+
       {/* 6 partner logos */}
-      {partners.map((partner) => (
-        <div class="w-20 h-10 bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-center">
-          <span class="text-xs text-gray-500 dark:text-gray-400">{partner.name}</span>
-        </div>
-      ))}
-      
+      {
+        partners.map((partner) => (
+          <div class="w-20 h-10 bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-center">
+            <span class="text-xs text-gray-500 dark:text-gray-400">{partner.name}</span>
+          </div>
+        ))
+      }
+
       {/* Empty last column */}
       <div class="w-full"></div>
     </div>

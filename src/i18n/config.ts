@@ -8,19 +8,19 @@ export const routes: Record<string, Route> = {
     en: '/',
     cy: '/',
   },
-  'events': {
+  events: {
     en: 'events',
     cy: 'events',
   },
-  'news': {
+  news: {
     en: 'news',
     cy: 'news',
   },
-  'team': {
+  team: {
     en: 'team',
     cy: 'team',
   },
-  'contact': {
+  contact: {
     en: 'contact',
     cy: 'contact',
   },
@@ -30,7 +30,7 @@ export const defaultLang = 'en';
 export const showDefaultLang = false;
 
 export const languages = ['en', 'cy'] as const;
-export type Language = typeof languages[number];
+export type Language = (typeof languages)[number];
 
 export const ui = {
   en: {
@@ -106,9 +106,9 @@ export const ui = {
     'contact.address.line7': 'CF14 7YU',
     'meta.events.description': 'Darganfyddwch ein digwyddiadau a gweithgareddau sydd i ddod',
     'meta.news.description': 'Newyddion a diweddariadau diweddaraf o Barc Genynnau Cymru',
-    'meta.team.description': 'Cwrdd â\'n tîm ymroddedig o weithwyr proffesiynol',
+    'meta.team.description': "Cwrdd â'n tîm ymroddedig o weithwyr proffesiynol",
     'meta.cookies.description': 'Gwybodaeth am sut rydym yn defnyddio cwcis',
     'meta.privacy.description': 'Ein polisi preifatrwydd a gwybodaeth diogelu data',
     'meta.contact.description': 'Cysylltwch â Pharc Genynnau Cymru',
-  }
+  },
 };

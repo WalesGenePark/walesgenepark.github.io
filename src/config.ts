@@ -45,7 +45,8 @@ export const SITE: SiteConfig = {
   origin: 'https://walesgenepark.github.io',
   basePathname: '/',
   title: 'Wales Gene Park',
-  description: 'Wales Gene Park is a Welsh Government funded initiative to promote and facilitate the development and application of genetics and genomics to health and healthcare in Wales.',
+  description:
+    'Wales Gene Park is a Welsh Government funded initiative to promote and facilitate the development and application of genetics and genomics to health and healthcare in Wales.',
   defaultImage: 'https://walesgenepark.github.io/images/default.png',
   defaultTheme: 'system',
   language: 'en',

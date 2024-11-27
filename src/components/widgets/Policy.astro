@@ -12,8 +12,8 @@ const { section } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang as LanguageCode);
 
-const policies = await getCollection('policy', (entry) => entry.data.lang === lang) as PolicyEntry[];
-const entry = policies.find(policy => policy.slug === `${lang}/${section}`);
+const policies = (await getCollection('policy', (entry) => entry.data.lang === lang)) as PolicyEntry[];
+const entry = policies.find((policy) => policy.slug === `${lang}/${section}`);
 const rendered = entry ? await entry.render() : null;
 
 const policyTitle = entry?.data.title || t('policy.title');
@@ -24,16 +24,8 @@ const policyTitle = entry?.data.title || t('policy.title');
     <h2 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading">
       {policyTitle}
     </h2>
-    {entry?.data.description && (
-      <p class="text-xl text-gray-600 dark:text-slate-400">
-        {entry.data.description}
-      </p>
-    )}
+    {entry?.data.description && <p class="text-xl text-gray-600 dark:text-slate-400">{entry.data.description}</p>}
   </div>
 
-  {rendered?.Content && (
-    <div class="prose prose-lg max-w-none dark:prose-invert">
-      {rendered.Content}
-    </div>
-  )}
+  {rendered?.Content && <div class="prose prose-lg max-w-none dark:prose-invert">{rendered.Content}</div>}
 </section>

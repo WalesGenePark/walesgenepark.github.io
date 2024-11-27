@@ -1,14 +1,14 @@
 ---
 date: 2024-08-10T00:00:00.000Z
-startTime: "18:00"
-endTime: "21:00"
-lang: "en"
-title: "Wales Genomics Network Evening 2024"
-description: "An evening of networking, knowledge sharing, and collaboration for genomics professionals across Wales. Connect with colleagues, share experiences, and explore potential collaborations in a relaxed environment."
-location: "Royal Welsh College of Music & Drama, Cardiff"
-type: "public-event"
-registrationLink: "https://walesgenepark.github.io/events/genomics-networking-2024/register"
-image: "/images/events/genomics-networking.jpg"
+startTime: '18:00'
+endTime: '21:00'
+lang: 'en'
+title: 'Wales Genomics Network Evening 2024'
+description: 'An evening of networking, knowledge sharing, and collaboration for genomics professionals across Wales. Connect with colleagues, share experiences, and explore potential collaborations in a relaxed environment.'
+location: 'Royal Welsh College of Music & Drama, Cardiff'
+type: 'public-event'
+registrationLink: 'https://walesgenepark.github.io/events/genomics-networking-2024/register'
+image: '/images/events/genomics-networking.jpg'
 ---
 
 Join colleagues from across the Welsh genomics community for an evening of networking, informal presentations, and collaborative discussions in an elegant setting.
@@ -16,6 +16,7 @@ Join colleagues from across the Welsh genomics community for an evening of netwo
 ## Evening Programme
 
 ### Welcome Reception (17:30-18:15)
+
 - Registration
 - Welcome drinks
 - Canapés
@@ -23,7 +24,9 @@ Join colleagues from across the Welsh genomics community for an evening of netwo
 - Poster browsing
 
 ### Lightning Talks (18:15-19:00)
+
 #### "Innovation Snapshots"
+
 - 5-minute presentations
 - Current projects
 - New initiatives
@@ -31,6 +34,7 @@ Join colleagues from across the Welsh genomics community for an evening of netwo
 - Technology updates
 
 ### Networking Activities (19:00-20:15)
+
 - Structured networking
 - Interest group meetups
 - Collaboration spaces
@@ -38,6 +42,7 @@ Join colleagues from across the Welsh genomics community for an evening of netwo
 - Project discussions
 
 ### Evening Close (20:15-21:00)
+
 - Closing remarks
 - Future events
 - Continued networking
@@ -46,6 +51,7 @@ Join colleagues from across the Welsh genomics community for an evening of netwo
 ## Featured Areas
 
 ### Innovation Showcase
+
 - New Technologies
 - Research Projects
 - Clinical Advances
@@ -53,6 +59,7 @@ Join colleagues from across the Welsh genomics community for an evening of netwo
 - Student Projects
 
 ### Collaboration Zones
+
 - Research Partnerships
 - Clinical Networks
 - Industry Connections
@@ -60,6 +67,7 @@ Join colleagues from across the Welsh genomics community for an evening of netwo
 - Patient Engagement
 
 ### Career Development
+
 - Mentoring Opportunities
 - Job Opportunities
 - Training Programs
@@ -67,6 +75,7 @@ Join colleagues from across the Welsh genomics community for an evening of netwo
 - Professional Development
 
 ## Who Should Attend
+
 - Clinical Scientists
 - Research Scientists
 - Healthcare Professionals
@@ -76,6 +85,7 @@ Join colleagues from across the Welsh genomics community for an evening of netwo
 - Postdoctoral Researchers
 
 ## Networking Opportunities
+
 - Cross-sector networking
 - Collaboration building
 - Project partnerships
@@ -83,6 +93,7 @@ Join colleagues from across the Welsh genomics community for an evening of netwo
 - Career development
 
 ## Exhibition Areas
+
 - Technology displays
 - Project posters
 - Service information
@@ -90,6 +101,7 @@ Join colleagues from across the Welsh genomics community for an evening of netwo
 - Research showcases
 
 ## Special Features
+
 - Professional photographer
 - LinkedIn corner
 - Business card exchange
@@ -97,6 +109,7 @@ Join colleagues from across the Welsh genomics community for an evening of netwo
 - Contact sharing station
 
 ## Catering
+
 - Welcome drinks
 - Premium canapés
 - Refreshments
@@ -104,6 +117,7 @@ Join colleagues from across the Welsh genomics community for an evening of netwo
 - Bar service
 
 ## Venue Facilities
+
 - Central location
 - Accessible venue
 - Multiple networking spaces
@@ -111,6 +125,7 @@ Join colleagues from across the Welsh genomics community for an evening of netwo
 - Presentation facilities
 
 ## Registration Information
+
 - Early bird discount
 - Group bookings
 - Student rates

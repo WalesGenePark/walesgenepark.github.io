@@ -1,14 +1,14 @@
 ---
 date: 2024-09-15T00:00:00.000Z
-startTime: "13:00"
-endTime: "17:00"
-lang: "cy"
-title: "Seminar Technegau Cwnsela Genetig Uwch"
+startTime: '13:00'
+endTime: '17:00'
+lang: 'cy'
+title: 'Seminar Technegau Cwnsela Genetig Uwch'
 description: "Seminar hanner diwrnod dwys yn canolbwyntio ar dechnegau uwch mewn cwnsela genetig, gan gynnwys rheoli achosion cymhleth, ystyriaethau moesegol, ac arferion gorau sy'n dod i'r amlwg mewn cyfathrebu â chleifion."
-location: "Digwyddiad Rhithiol"
-type: "seminar"
-registrationLink: "https://walesgenepark.github.io/events/genetic-counseling-seminar-2024/register"
-image: "/images/events/genetic-counseling-seminar.jpg"
+location: 'Digwyddiad Rhithiol'
+type: 'seminar'
+registrationLink: 'https://walesgenepark.github.io/events/genetic-counseling-seminar-2024/register'
+image: '/images/events/genetic-counseling-seminar.jpg'
 ---
 
 Ymunwch ag arbenigwyr cwnsela genetig blaenllaw ar gyfer seminar rhithiol hanner diwrnod dwys sy'n canolbwyntio ar dechnegau uwch a heriau sy'n dod i'r amlwg ym maes ymarfer cwnsela genetig.
@@ -16,18 +16,21 @@ Ymunwch ag arbenigwyr cwnsela genetig blaenllaw ar gyfer seminar rhithiol hanner
 ## Trosolwg o'r Seminar
 
 ### Sesiwn 1: Rheoli Achosion Cymhleth (13:00-14:15)
+
 - Rheoli ansicrwydd mewn canlyniadau profion genetig
 - Delio â amrywiadau o arwyddocâd anhysbys
 - Strategaethau cyfathrebu teuluol
 - Sesiwn Holi ac Ateb
 
 ### Sesiwn 2: Ystyriaethau Moesegol (14:30-15:45)
+
 - Cyfrinachedd a rhannu gwybodaeth
 - Gwneud penderfyniadau mewn sefyllfaoedd cymhleth
 - Rheoli gwrthdaro buddiannau
 - Trafodaeth panel
 
 ### Sesiwn 3: Arferion Gorau sy'n Dod i'r Amlwg (16:00-17:00)
+
 - Technolegau newydd mewn profion genetig
 - Integreiddio offer digidol
 - Gwella cyfathrebu â chleifion

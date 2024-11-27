@@ -1,10 +1,10 @@
 ---
-lang: "en"
-title: "Wales Gene Park Launches Innovative Public Engagement Initiative"
+lang: 'en'
+title: 'Wales Gene Park Launches Innovative Public Engagement Initiative'
 publishDate: 2024-07-01
-description: "A comprehensive program to engage the Welsh public in genomics through interactive exhibitions, workshops, and digital platforms."
-image: "/images/news/public-engagement-initiative.jpg"
-fullArticleLink: "https://walesgenepark.github.io/news/public-engagement-initiative-2024"
+description: 'A comprehensive program to engage the Welsh public in genomics through interactive exhibitions, workshops, and digital platforms.'
+image: '/images/news/public-engagement-initiative.jpg'
+fullArticleLink: 'https://walesgenepark.github.io/news/public-engagement-initiative-2024'
 ---
 
 Wales Gene Park is excited to announce the launch of "Genomics for All Wales," an ambitious public engagement initiative designed to make genomics accessible and relevant to communities across Wales. This comprehensive program combines innovative digital platforms, interactive exhibitions, and hands-on workshops to bridge the gap between cutting-edge genetic research and public understanding.
@@ -14,6 +14,7 @@ The initiative, funded by a £2.5 million grant from the Welsh Government and su
 Program Components:
 
 1. Mobile Genomics Exhibition
+
 - Interactive DNA extraction demonstrations
 - Virtual reality genetic exploration
 - Hands-on laboratory experiences
@@ -21,6 +22,7 @@ Program Components:
 - Traveling exhibition visiting all Welsh counties
 
 2. Digital Learning Platform
+
 - Online courses for different age groups
 - Interactive genetic inheritance simulations
 - Virtual laboratory tours
@@ -34,6 +36,7 @@ Community Outreach:
 The program includes targeted outreach to:
 
 1. Schools and Universities
+
 - Curriculum-aligned workshops
 - Career guidance sessions
 - Laboratory visit programs
@@ -41,6 +44,7 @@ The program includes targeted outreach to:
 - Student mentoring opportunities
 
 2. Community Groups
+
 - Local health forums
 - Cultural organizations
 - Senior citizen centers
@@ -62,6 +66,7 @@ Digital Resources:
 A comprehensive online presence includes:
 
 1. Educational Portal
+
 - Interactive learning modules
 - Downloadable resources
 - Virtual laboratory tours
@@ -69,6 +74,7 @@ A comprehensive online presence includes:
 - Progress tracking tools
 
 2. Mobile Application
+
 - Genetic concepts explained
 - Quiz games
 - Virtual experiments
@@ -90,6 +96,7 @@ Educational Impact:
 The initiative supports education through:
 
 1. School Programs
+
 - Curriculum enhancement
 - STEM career promotion
 - Teacher professional development
@@ -97,6 +104,7 @@ The initiative supports education through:
 - School-scientist partnerships
 
 2. Adult Learning
+
 - Evening classes
 - Online courses
 - Community workshops
@@ -130,6 +138,7 @@ Future Development:
 Plans for program expansion include:
 
 1. Geographic Reach
+
 - Rural community outreach
 - Mobile laboratory units
 - Remote learning hubs
@@ -137,6 +146,7 @@ Plans for program expansion include:
 - Local ambassador programs
 
 2. Content Development
+
 - New topic areas
 - Advanced modules
 - Industry connections

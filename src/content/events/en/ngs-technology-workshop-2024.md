@@ -1,14 +1,14 @@
 ---
 date: 2024-11-30T00:00:00.000Z
-startTime: "09:00"
-endTime: "17:00"
-lang: "en"
-title: "Next-Generation Sequencing Technologies Workshop"
-description: "A hands-on workshop exploring the latest advances in NGS technologies, including practical sessions with cutting-edge sequencing platforms and data analysis tools."
-location: "Wales Gene Park Sequencing Facility, Cardiff"
-type: "workshop"
-registrationLink: "https://walesgenepark.github.io/events/ngs-technology-workshop-2024/register"
-image: "/images/events/ngs-technology-workshop.jpg"
+startTime: '09:00'
+endTime: '17:00'
+lang: 'en'
+title: 'Next-Generation Sequencing Technologies Workshop'
+description: 'A hands-on workshop exploring the latest advances in NGS technologies, including practical sessions with cutting-edge sequencing platforms and data analysis tools.'
+location: 'Wales Gene Park Sequencing Facility, Cardiff'
+type: 'workshop'
+registrationLink: 'https://walesgenepark.github.io/events/ngs-technology-workshop-2024/register'
+image: '/images/events/ngs-technology-workshop.jpg'
 ---
 
 An intensive two-day workshop providing hands-on experience with the latest NGS platforms and technologies. Perfect for researchers, clinicians, and laboratory professionals looking to enhance their practical sequencing skills.
@@ -18,54 +18,62 @@ An intensive two-day workshop providing hands-on experience with the latest NGS 
 ### Day 1: Technology and Sample Preparation
 
 #### Morning Session (09:30-12:30)
+
 - Introduction to NGS Technologies
-  * Platform comparisons
-  * Applications overview
-  * Technology selection
-  * Cost considerations
+
+  - Platform comparisons
+  - Applications overview
+  - Technology selection
+  - Cost considerations
 
 - Sample Quality Assessment
-  * DNA/RNA extraction methods
-  * Quality control metrics
-  * Sample quantification
-  * Library QC methods
+  - DNA/RNA extraction methods
+  - Quality control metrics
+  - Sample quantification
+  - Library QC methods
 
 #### Afternoon Session (13:30-16:30)
+
 - Library Preparation
-  * Protocol selection
-  * Hands-on library prep
-  * Quality control steps
-  * Troubleshooting tips
+  - Protocol selection
+  - Hands-on library prep
+  - Quality control steps
+  - Troubleshooting tips
 
 ### Day 2: Sequencing and Analysis
 
 #### Morning Session (09:30-12:30)
+
 - Sequencing Run Setup
-  * Platform preparation
-  * Run parameters
-  * Loading techniques
-  * Run monitoring
+
+  - Platform preparation
+  - Run parameters
+  - Loading techniques
+  - Run monitoring
 
 - Data Quality Assessment
-  * Quality metrics
-  * Error patterns
-  * Run validation
-  * Output formats
+  - Quality metrics
+  - Error patterns
+  - Run validation
+  - Output formats
 
 #### Afternoon Session (13:30-16:30)
+
 - Basic Data Analysis
-  * Pipeline overview
-  * Quality filtering
-  * Alignment basics
-  * Results interpretation
+  - Pipeline overview
+  - Quality filtering
+  - Alignment basics
+  - Results interpretation
 
 ## Featured Technologies
+
 - Illumina NovaSeq 6000
 - Oxford Nanopore GridION
 - PacBio Sequel System
 - Ion Torrent platforms
 
 ## Practical Sessions Include
+
 - Sample QC workflows
 - Library preparation
 - Sequencing setup
@@ -73,6 +81,7 @@ An intensive two-day workshop providing hands-on experience with the latest NGS 
 - Troubleshooting
 
 ## Learning Outcomes
+
 - Platform selection skills
 - Sample preparation expertise
 - Quality control mastery
@@ -80,6 +89,7 @@ An intensive two-day workshop providing hands-on experience with the latest NGS 
 - Problem-solving abilities
 
 ## Who Should Attend
+
 - Laboratory Scientists
 - Research Associates
 - PhD Students
@@ -88,6 +98,7 @@ An intensive two-day workshop providing hands-on experience with the latest NGS 
 - Technical Specialists
 
 ## Prerequisites
+
 - Basic molecular biology knowledge
 - Laboratory experience
 - Understanding of genetics
@@ -95,6 +106,7 @@ An intensive two-day workshop providing hands-on experience with the latest NGS 
 - Safety training completion
 
 ## Workshop Materials
+
 - Protocol handbooks
 - Method guides
 - Analysis tutorials
@@ -102,6 +114,7 @@ An intensive two-day workshop providing hands-on experience with the latest NGS 
 - Online resources
 
 ## Technical Requirements
+
 - Laboratory coat
 - Safety glasses
 - Closed-toe shoes
@@ -109,6 +122,7 @@ An intensive two-day workshop providing hands-on experience with the latest NGS 
 - USB drive
 
 ## Registration Includes
+
 - All lab materials
 - Safety equipment
 - Lunch both days
@@ -116,6 +130,7 @@ An intensive two-day workshop providing hands-on experience with the latest NGS 
 - Follow-up support
 
 ## Limited Capacity
+
 - Maximum 12 participants
 - 1:4 instructor ratio
 - Early booking essential

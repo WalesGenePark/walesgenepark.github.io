@@ -11,7 +11,7 @@ export const sectionRoutes: Record<Section, { en: string; cy: string }> = {
   team: { en: 'team', cy: 'tim' },
   contact: { en: 'contact', cy: 'cysylltu' },
   privacy: { en: 'privacy', cy: 'preifatrwydd' },
-  cookies: { en: 'cookies', cy: 'cwcis' }
+  cookies: { en: 'cookies', cy: 'cwcis' },
 };
 
 export function isValidSection(section: string): section is Section {

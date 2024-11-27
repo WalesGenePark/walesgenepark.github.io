@@ -89,7 +89,7 @@ export const ui = {
     'meta.cookies.description': '',
     'meta.privacy.description': '',
     'meta.contact.description': '',
-    'meta.policy.description': ''
+    'meta.policy.description': '',
   },
   cy: {
     'nav.home': 'Hafan',
@@ -135,6 +135,6 @@ export const ui = {
     'meta.cookies.description': '',
     'meta.privacy.description': '',
     'meta.contact.description': '',
-    'meta.policy.description': ''
-  }
+    'meta.policy.description': '',
+  },
 } as const;

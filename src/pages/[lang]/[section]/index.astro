@@ -14,8 +14,8 @@ import Policy from '~/components/widgets/Policy.astro';
 // Get static paths
 export function getStaticPaths() {
   return Object.entries(sectionRoutes).flatMap(([section]) =>
-    languages.map(lang => ({
-      params: { lang, section }
+    languages.map((lang) => ({
+      params: { lang, section },
     }))
   );
 }
@@ -42,15 +42,15 @@ const metadata: MetaData = {
   alternateLinks: [
     {
       href: `/${currentLang === 'en' ? 'cy' : 'en'}/${alternateSection}`,
-      hreflang: currentLang === 'en' ? 'cy' : 'en'
-    }
+      hreflang: currentLang === 'en' ? 'cy' : 'en',
+    },
   ],
   openGraph: {
     title: getSectionTitle(section, currentLang),
     description: t(`meta.${section}.description`),
     type: 'website',
-    url: `${Astro.site}${currentLang}/${section}`
-  }
+    url: `${Astro.site}${currentLang}/${section}`,
+  },
 };
 
 // Map base sections to components
@@ -60,11 +60,11 @@ const baseComponents = {
   news: News,
   team: Team,
   privacy: Policy,
-  cookies: Policy
+  cookies: Policy,
 } as const;
 
 // Redirect /calendar to /events
-if (section === 'calendar' as Section) {
+if (section === ('calendar' as Section)) {
   return Astro.redirect(`/${currentLang}/events`);
 }
 

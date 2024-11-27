@@ -14,6 +14,7 @@ Mae cwcis yn ffeiliau testun bach sy'n cael eu gosod ar eich dyfais pan fyddwch 
 ## Sut Rydym yn Defnyddio Cwcis
 
 Rydym yn defnyddio cwcis i:
+
 - Cofio eich dewisiadau
 - Deall sut rydych yn defnyddio ein gwefan
 - Gwella ymarferoldeb ein gwefan
@@ -22,14 +23,17 @@ Rydym yn defnyddio cwcis i:
 ## Mathau o Gwcis Rydym yn eu Defnyddio
 
 ### Cwcis Hanfodol
+
 - Yn ofynnol i'r wefan weithio
 - Ni ellir eu hanalluogi
 
 ### Cwcis Dadansoddol
+
 - Ein helpu i ddeall sut mae ymwelwyr yn defnyddio ein gwefan
 - Gellir eu hanalluogi yn eich gosodiadau porwr
 
 ### Cwcis Swyddogaethol
+
 - Cofio eich dewisiadau a'ch gosodiadau
 - Gwella eich profiad gwefan
 

@@ -84,8 +84,8 @@ export interface PolicyEntry extends BaseEntry {
 export type ContentEntry = NewsEntry | EventEntry | TeamEntry | PolicyEntry;
 
 export interface ContentEntryMap {
-  'news': NewsEntry;
-  'events': EventEntry;
-  'team': TeamEntry;
-  'policy': PolicyEntry;
+  news: NewsEntry;
+  events: EventEntry;
+  team: TeamEntry;
+  policy: PolicyEntry;
 }

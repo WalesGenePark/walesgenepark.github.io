@@ -1,10 +1,10 @@
 ---
-lang: "en"
-title: "Wales Gene Park Launches Comprehensive Genomics Education Program for 2024"
+lang: 'en'
+title: 'Wales Gene Park Launches Comprehensive Genomics Education Program for 2024'
 publishDate: 2025-03-15
-description: "A groundbreaking educational initiative bringing genomics knowledge to healthcare professionals and students across Wales."
-image: "/images/news/genomics-education-program.jpg"
-readMoreLink: "https://walesgenepark.github.io/news/genomics-education-program-2024"
+description: 'A groundbreaking educational initiative bringing genomics knowledge to healthcare professionals and students across Wales.'
+image: '/images/news/genomics-education-program.jpg'
+readMoreLink: 'https://walesgenepark.github.io/news/genomics-education-program-2024'
 ---
 
 Wales Gene Park is proud to announce the launch of our most ambitious educational program to date, designed to bridge the gap between cutting-edge genomic research and clinical practice. This comprehensive initiative, set to roll out across Wales throughout 2024, represents a significant step forward in our mission to enhance genomics literacy among healthcare professionals and students.
@@ -24,6 +24,7 @@ The program has been developed in collaboration with NHS Wales, leading universi
 Dr. Sarah Williams, Education Director at Wales Gene Park, explains: "This program represents a significant evolution in how we approach genomics education. We're moving beyond traditional teaching methods to create an immersive, practical learning experience that will have immediate benefits for clinical practice."
 
 Key features of the program include:
+
 - Regular updates on emerging genomic technologies and their clinical applications
 - Case-based learning scenarios drawn from real clinical experiences
 - Practical sessions on genetic counseling and patient communication

@@ -17,13 +17,8 @@ const {
 ---
 
 {
-  !(SITE.defaultTheme?.endsWith(':only')) && (
-    <button
-      type="button"
-      class={className}
-      aria-label={label}
-      data-aw-toggle-color-scheme
-    >
+  !SITE.defaultTheme?.endsWith(':only') && (
+    <button type="button" class={className} aria-label={label} data-aw-toggle-color-scheme>
       <Icon name="tabler:sun" class={`${iconClass} block dark:hidden`} />
       <Icon name="tabler:moon" class={`${iconClass} hidden dark:block`} />
     </button>

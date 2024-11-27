@@ -14,6 +14,7 @@ Mae Parc Genynnau Cymru yn ymrwymedig i ddiogelu eich preifatrwydd a sicrhau dio
 ## Gwybodaeth Rydym yn ei Chasglu
 
 Efallai y byddwn yn casglu:
+
 - Gwybodaeth adnabod a chyswllt sylfaenol
 - Gwybodaeth dechnegol am eich dyfais a sut rydych yn defnyddio ein gwefan
 - Gwybodaeth rydych chi'n ei darparu wrth gysylltu â ni neu gymryd rhan yn ein digwyddiadau
@@ -21,6 +22,7 @@ Efallai y byddwn yn casglu:
 ## Sut Rydym yn Defnyddio Eich Gwybodaeth
 
 Rydym yn defnyddio eich gwybodaeth i:
+
 - Darparu a gwella ein gwasanaethau
 - Cyfathrebu â chi am ein digwyddiadau a'n gwasanaethau
 - Sicrhau diogelwch gwefan ac atal twyll
@@ -33,6 +35,7 @@ Rydym yn gweithredu mesurau technegol a sefydliadol priodol i ddiogelu eich gwyb
 ## Eich Hawliau
 
 Mae gennych yr hawl i:
+
 - Cael mynediad at eich data personol
 - Gofyn am gywiro eich data
 - Gofyn am ddileu eich data

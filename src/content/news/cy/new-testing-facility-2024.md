@@ -1,10 +1,10 @@
 ---
-lang: "cy"
+lang: 'cy'
 title: "Parc Geneteg Cymru yn Agor Cyfleuster Profi Genomig o'r Radd Flaenaf"
 publishDate: 2024-12-01
-description: "Mae buddsoddiad o £15 miliwn yn dwyn galluoedd profi genomig arloesol i Gymru, gan wella gwasanaethau diagnostig a galluoedd ymchwil."
-image: "/images/news/new-testing-facility.jpg"
-fullArticleLink: "https://walesgenepark.github.io/news/new-testing-facility-2024"
+description: 'Mae buddsoddiad o £15 miliwn yn dwyn galluoedd profi genomig arloesol i Gymru, gan wella gwasanaethau diagnostig a galluoedd ymchwil.'
+image: '/images/news/new-testing-facility.jpg'
+fullArticleLink: 'https://walesgenepark.github.io/news/new-testing-facility-2024'
 ---
 
 Mae Parc Geneteg Cymru yn falch o gyhoeddi agoriad ei Gyfleuster Profi ac Ymchwil Genomig newydd o'r radd flaenaf yng Nghaerdydd. Mae'r buddsoddiad o £15 miliwn hwn yn cynrychioli cam sylweddol ymlaen yng ngalluoedd profi genomig Cymru ac yn gosod y wlad ar flaen y gad ym maes meddygaeth fanwl yn y Deyrnas Unedig.
@@ -16,18 +16,21 @@ Trosolwg o'r Cyfleuster:
 Mae'r ganolfan newydd yn cynnwys:
 
 1. Labordy Dilyniannu Uwch
+
 - Systemau dilyniannu NovaSeq X Plus o'r genhedlaeth ddiweddaraf
 - Prosesu samplau awtomataidd trwybwn uchel
 - Ardaloedd pwrpasol ar gyfer protocolau profi arbenigol
 - Gallu i brosesu dros 10,000 o samplau'n fisol
 
 2. Swît Biowybodeg
+
 - Clwstwr cyfrifiadurol perfformiad uchel
 - Gweithfannau dadansoddi data uwch
 - Gofod datblygu meddalwedd pwrpasol
 - Galluoedd prosesu data amser real
 
 3. Canolfan Dehongli Clinigol
+
 - Gofod gwaith tîm amlddisgyblaethol
 - Cyfleusterau fideo-gynadledda ar gyfer ymgynghoriadau o bell
 - Ardaloedd hyfforddi ar gyfer gweithwyr gofal iechyd proffesiynol
@@ -60,18 +63,21 @@ Effaith Weithredol:
 Mae'r cyfleuster newydd yn galluogi:
 
 1. Cynyddu Gallu Profi
+
 - Cynnydd o 300% mewn gallu prosesu samplau
 - Amseroedd aros llai am ganlyniadau
 - Dewislen profion ehangach
 - Cefnogaeth ar gyfer prosiectau ymchwil ar raddfa fawr
 
 2. Gwella Rheolaeth Ansawdd
+
 - Systemau rheoli ansawdd awtomataidd
 - Monitro prosesau amser real
 - Atal halogiad uwch
 - Olrhain samplau gwell
 
 3. Integreiddio Ymchwil
+
 - Gofod labordy ymchwil pwrpasol
 - Cyfleuster biofanc
 - Gofod cydweithio ar gyfer ymchwilwyr ymweld

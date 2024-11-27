@@ -11,29 +11,33 @@ import { SITE } from '~/config';
     }
   }
 
-  function initTheme() {
-    // Check for stored theme
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme) {
-      applyTheme(storedTheme);
-      return;
-    }
+  if ((defaultTheme && defaultTheme.endsWith(':only')) || (!localStorage.theme && defaultTheme !== 'system')) {
+    applyTheme(defaultTheme.replace(':only', ''));
+  } else if (
+    localStorage.theme === 'dark' ||
+    (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+  ) {
+    applyTheme('dark');
+  } else {
+    applyTheme('light');
+  }
 
-    // Check system preference if no stored theme
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      applyTheme('dark');
-    } else {
-      applyTheme('light');
+  function attachEvent(selector, event, fn) {
+    const matches = typeof selector === 'string' ? document.querySelectorAll(selector) : selector;
+    if (matches && matches.length) {
+      matches.forEach((elem) => {
+        elem.addEventListener(event, (e) => fn(e, elem), false);
+      });
     }
   }
 
-  // Initialize theme
-  initTheme();
-
-  // Listen for system theme changes if no theme is set
-  if (!localStorage.getItem('theme')) {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-      applyTheme(e.matches ? 'dark' : 'light');
+  window.onload = function () {
+    attachEvent('[data-aw-toggle-color-scheme]', 'click', function () {
+      if (defaultTheme.endsWith(':only')) {
+        return;
+      }
+      document.documentElement.classList.toggle('dark');
+      localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
     });
-  }
+  };
 </script>

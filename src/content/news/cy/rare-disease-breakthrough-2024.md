@@ -1,10 +1,10 @@
 ---
-lang: "cy"
-title: "Datblygiad Pwysig mewn Ymchwil Clefyd Genetig Prin ym Mharc Geneteg Cymru"
+lang: 'cy'
+title: 'Datblygiad Pwysig mewn Ymchwil Clefyd Genetig Prin ym Mharc Geneteg Cymru'
 publishDate: 2024-03-01
 description: "Tîm ymchwil yn adnabod amrywiadau genetig newydd sy'n gysylltiedig â chyflwr etifeddol prin, gan agor posibiliadau newydd ar gyfer triniaeth."
-image: "/images/news/rare-disease-breakthrough.jpg"
-fullArticleLink: "https://walesgenepark.github.io/news/rare-disease-breakthrough-2024"
+image: '/images/news/rare-disease-breakthrough.jpg'
+fullArticleLink: 'https://walesgenepark.github.io/news/rare-disease-breakthrough-2024'
 ---
 
 Mewn datblygiad sylweddol ar gyfer ymchwil i glefydau prin, mae gwyddonwyr ym Mharc Geneteg Cymru wedi adnabod amrywiadau genetig na wyddys amdanynt o'r blaen sy'n gysylltiedig â chyflwr etifeddol prin sy'n effeithio ar deuluoedd Cymreig. Mae'r datblygiad hwn, a gyflawnwyd trwy ddilyniannu genomig uwch a thechnegau dadansoddi data arloesol, yn addawol ar gyfer gwella ein dealltwriaeth o'r cyflwr a allai arwain at ddulliau therapiwtig newydd.
@@ -48,6 +48,7 @@ Gan edrych ymlaen, mae'r tîm ymchwil yn:
 4. Ehangu cydweithrediad â phartneriaid ymchwil rhyngwladol
 
 Mae gan y canfyddiadau oblygiadau sylweddol ar gyfer:
+
 - Diagnosis clinigol a chwnsela genetig
 - Datblygu therapïau wedi'u targedu
 - Deall mecanweithiau clefydau niwrddirywiol

@@ -1,14 +1,14 @@
 ---
 date: 2025-07-29T00:00:00.000Z
-startTime: "09:00"
-endTime: "17:30"
-lang: "en"
-title: "Wales Rare Disease Symposium 2024"
+startTime: '09:00'
+endTime: '17:30'
+lang: 'en'
+title: 'Wales Rare Disease Symposium 2024'
 description: "The annual Wales Rare Disease Symposium brings together researchers, clinicians, and patient advocates to discuss the latest advances in rare disease research and treatment. This year's focus is on emerging therapies and diagnostic innovations."
-location: "Cardiff City Hall"
-type: "conference"
-registrationLink: "https://walesgenepark.github.io/events/rare-disease-conference-2024/register"
-image: "/images/events/rare-disease-conference.jpg"
+location: 'Cardiff City Hall'
+type: 'conference'
+registrationLink: 'https://walesgenepark.github.io/events/rare-disease-conference-2024/register'
+image: '/images/events/rare-disease-conference.jpg'
 ---
 
 The Wales Rare Disease Symposium 2024 is a premier gathering of experts in rare disease research, treatment, and advocacy. This three-day conference will feature international speakers, interactive sessions, and networking opportunities.
@@ -16,6 +16,7 @@ The Wales Rare Disease Symposium 2024 is a premier gathering of experts in rare 
 ## Conference Program
 
 ### Day 1 - Research Updates
+
 - Keynote: "The Future of Rare Disease Treatment"
 - Novel Therapeutic Approaches
 - Diagnostic Innovation
@@ -23,6 +24,7 @@ The Wales Rare Disease Symposium 2024 is a premier gathering of experts in rare 
 - Evening Reception and Poster Session
 
 ### Day 2 - Clinical Practice
+
 - Treatment Guidelines Updates
 - Case Study Presentations
 - Clinical Trial Results
@@ -30,6 +32,7 @@ The Wales Rare Disease Symposium 2024 is a premier gathering of experts in rare 
 - Gala Dinner and Awards Ceremony
 
 ### Day 3 - Patient Focus
+
 - Patient Advocacy Session
 - Access to Treatment Discussion
 - Support Services Workshop
@@ -37,6 +40,7 @@ The Wales Rare Disease Symposium 2024 is a premier gathering of experts in rare 
 - Closing Remarks
 
 ## Featured Speakers
+
 - Prof. Sarah Williams - Oxford University
 - Dr. James Chen - Stanford Medical Center
 - Dr. Emma Thompson - Wales Gene Park
@@ -44,6 +48,7 @@ The Wales Rare Disease Symposium 2024 is a premier gathering of experts in rare 
 - Patient Advocate Panel
 
 ## Conference Highlights
+
 - 50+ Expert Speakers
 - Interactive Workshops
 - Poster Presentations
@@ -51,6 +56,7 @@ The Wales Rare Disease Symposium 2024 is a premier gathering of experts in rare 
 - Industry Exhibition
 
 ## Registration Options
+
 - Full Conference Pass
 - Single Day Attendance
 - Virtual Attendance Option
@@ -58,6 +64,7 @@ The Wales Rare Disease Symposium 2024 is a premier gathering of experts in rare 
 - Early Bird Discount until March 15th
 
 ## Additional Information
+
 - Simultaneous Welsh Translation Available
 - Accommodation Packages
 - Dietary Requirements Accommodated

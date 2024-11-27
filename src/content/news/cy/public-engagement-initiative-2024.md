@@ -1,10 +1,10 @@
 ---
-lang: "cy"
+lang: 'cy'
 title: "Parc Geneteg Cymru yn Lansio Menter Ymgysylltu â'r Cyhoedd Arloesol"
 publishDate: 2024-07-01
 description: "Rhaglen gynhwysfawr i ymgysylltu â'r cyhoedd yng Nghymru mewn genomeg trwy arddangosfeydd rhyngweithiol, gweithdai, a llwyfannau digidol."
-image: "/images/news/public-engagement-initiative.jpg"
-fullArticleLink: "https://walesgenepark.github.io/news/public-engagement-initiative-2024"
+image: '/images/news/public-engagement-initiative.jpg'
+fullArticleLink: 'https://walesgenepark.github.io/news/public-engagement-initiative-2024'
 ---
 
 Mae Parc Geneteg Cymru yn falch o gyhoeddi lansiad "Genomeg i Bawb yng Nghymru," menter ymgysylltu â'r cyhoedd uchelgeisiol wedi'i dylunio i wneud genomeg yn hygyrch ac yn berthnasol i gymunedau ledled Cymru. Mae'r rhaglen gynhwysfawr hon yn cyfuno llwyfannau digidol arloesol, arddangosfeydd rhyngweithiol, a gweithdai ymarferol i bontio'r bwlch rhwng ymchwil genetig arloesol a dealltwriaeth y cyhoedd.
@@ -14,6 +14,7 @@ Mae'r fenter, a ariennir gan grant o £2.5 miliwn gan Lywodraeth Cymru ac a gefn
 Elfennau'r Rhaglen:
 
 1. Arddangosfa Genomeg Symudol
+
 - Arddangosiadau echdynnu DNA rhyngweithiol
 - Archwiliad genetig realiti rhithwir
 - Profiadau labordy ymarferol
@@ -21,6 +22,7 @@ Elfennau'r Rhaglen:
 - Arddangosfa deithiol yn ymweld â phob sir yng Nghymru
 
 2. Llwyfan Dysgu Digidol
+
 - Cyrsiau ar-lein ar gyfer gwahanol grwpiau oedran
 - Efelychiadau etifeddiad genetig rhyngweithiol
 - Teithiau labordy rhithwir
@@ -34,6 +36,7 @@ Allgymorth Cymunedol:
 Mae'r rhaglen yn cynnwys allgymorth wedi'i dargedu at:
 
 1. Ysgolion a Phrifysgolion
+
 - Gweithdai wedi'u halinio â'r cwricwlwm
 - Sesiynau arweiniad gyrfaol
 - Rhaglenni ymweld â labordai
@@ -41,6 +44,7 @@ Mae'r rhaglen yn cynnwys allgymorth wedi'i dargedu at:
 - Cyfleoedd mentora myfyrwyr
 
 2. Grwpiau Cymunedol
+
 - Fforymau iechyd lleol
 - Sefydliadau diwylliannol
 - Canolfannau pobl hŷn
@@ -62,6 +66,7 @@ Adnoddau Digidol:
 Mae presenoldeb ar-lein cynhwysfawr yn cynnwys:
 
 1. Porth Addysgol
+
 - Modiwlau dysgu rhyngweithiol
 - Adnoddau i'w lawrlwytho
 - Teithiau labordy rhithwir
@@ -69,6 +74,7 @@ Mae presenoldeb ar-lein cynhwysfawr yn cynnwys:
 - Offer olrhain cynnydd
 
 2. Ap Symudol
+
 - Cysyniadau genetig wedi'u hegluro
 - Gemau cwis
 - Arbrofion rhithwir
@@ -90,6 +96,7 @@ Effaith Addysgol:
 Mae'r fenter yn cefnogi addysg trwy:
 
 1. Rhaglenni Ysgol
+
 - Gwella'r cwricwlwm
 - Hyrwyddo gyrfaoedd STEM
 - Datblygiad proffesiynol athrawon
@@ -97,6 +104,7 @@ Mae'r fenter yn cefnogi addysg trwy:
 - Partneriaethau ysgol-gwyddonydd
 
 2. Dysgu Oedolion
+
 - Dosbarthiadau nos
 - Cyrsiau ar-lein
 - Gweithdai cymunedol
@@ -130,6 +138,7 @@ Datblygiad i'r Dyfodol:
 Mae cynlluniau ar gyfer ehangu'r rhaglen yn cynnwys:
 
 1. Cyrhaeddiad Daearyddol
+
 - Allgymorth cymunedau gwledig
 - Unedau labordy symudol
 - Canolfannau dysgu o bell
@@ -137,6 +146,7 @@ Mae cynlluniau ar gyfer ehangu'r rhaglen yn cynnwys:
 - Rhaglenni llysgenhadon lleol
 
 2. Datblygu Cynnwys
+
 - Meysydd pwnc newydd
 - Modiwlau uwch
 - Cysylltiadau diwydiant
