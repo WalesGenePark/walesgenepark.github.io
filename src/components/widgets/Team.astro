@@ -1,19 +1,18 @@
 ---
 import { getCollection } from 'astro:content';
 import { getLangFromUrl, useTranslations } from '~/i18n/utils';
-import type { LanguageCode } from '~/i18n/routes';
+import type { TeamEntry } from '~/types/content';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const team = await getCollection('team', ({ data }) => {
-  return data.lang === lang;
-});
+const team = await getCollection('team', (entry) => entry.data.lang === lang) as TeamEntry[];
 
-// Sort team by order if available, then by name
+// Sort team by order
 const sortedTeam = team.sort((a, b) => {
   return (a.data.order || 999) - (b.data.order || 999);
 });
+
 ---
 
 <section class="px-4 py-16 mx-auto max-w-6xl lg:py-20">

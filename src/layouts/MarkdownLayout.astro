@@ -1,11 +1,7 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import { getLangFromUrl, useTranslations } from '~/i18n/utils';
-import type { LanguageCode } from '~/i18n/routes';
 
 const { frontmatter } = Astro.props;
-const currentLang = getLangFromUrl(Astro.url) as LanguageCode;
-const t = useTranslations(currentLang);
 
 const metadata = {
   title: frontmatter.title,

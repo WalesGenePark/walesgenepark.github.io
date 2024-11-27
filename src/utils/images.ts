@@ -22,31 +22,46 @@ export const fetchLocalImages = async () => {
 };
 
 /** */
-export const findImage = async (
-  imagePath?: string | ImageMetadata | null
-): Promise<string | ImageMetadata | undefined | null> => {
-  // Not string
-  if (typeof imagePath !== 'string') {
-    return imagePath;
+export async function findImage(imageRoute: string): Promise<string | ImageMetadata | undefined> {
+  try {
+    if (typeof imageRoute !== 'string') {
+      return undefined;
+    }
+
+    const cleanRoute = imageRoute.replace(/[?#].*$/, '');
+
+    if (!cleanRoute) {
+      return undefined;
+    }
+
+    if (/^https?:/i.test(cleanRoute)) {
+      return cleanRoute;
+    }
+
+    const resolvedRoute = cleanRoute.charAt(0) === '/' ? cleanRoute.substring(1) : cleanRoute;
+
+    if (!resolvedRoute) {
+      return undefined;
+    }
+
+    let imageMetadata: ImageMetadata | undefined;
+
+    for (const [path, image] of Object.entries(import.meta.glob('/src/assets/**/*'))) {
+      if (typeof image !== 'function') continue;
+
+      const normalizedPath = path.replace(/^\/src\/assets\//, '');
+      if (normalizedPath === resolvedRoute) {
+        imageMetadata = (await image()) as unknown as ImageMetadata;
+        break;
+      }
+    }
+
+    return imageMetadata;
+  } catch (e) {
+    console.error(e);
+    return undefined;
   }
-
-  // Absolute paths
-  if (imagePath.startsWith('http://') || imagePath.startsWith('https://') || imagePath.startsWith('/')) {
-    return imagePath;
-  }
-
-  // Relative paths or not "~/assets/"
-  if (!imagePath.startsWith('~/assets/images')) {
-    return imagePath;
-  }
-
-  const images = await fetchLocalImages();
-  const key = imagePath.replace('~/', '/src/');
-
-  return images && typeof images[key] === 'function'
-    ? ((await images[key]()) as { default: ImageMetadata })['default']
-    : null;
-};
+}
 
 /** */
 export const adaptOpenGraphImages = async (

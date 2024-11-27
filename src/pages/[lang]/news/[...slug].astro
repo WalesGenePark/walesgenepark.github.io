@@ -1,13 +1,16 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '~/layouts/PageLayout.astro';
-import { isValidSection, getAlternateSection, getSectionTitle } from '~/i18n/routes';
+import { getAlternateSection, getSectionTitle } from '~/i18n/routes';
 import type { LanguageCode } from '~/i18n/routes';
 import type { NewsEntry } from '~/types/content';
 
 export async function getStaticPaths() {
   const entries = await getCollection('news');
-  const paths = [];
+  const paths: Array<{
+    params: { lang: string; slug: string };
+    props: { entry: NewsEntry };
+  }> = [];
 
   for (const entry of entries) {
     const [lang, ...slugParts] = entry.slug.split('/');
@@ -18,7 +21,7 @@ export async function getStaticPaths() {
           lang,
           slug: slugParts.join('/')
         },
-        props: { entry }
+        props: { entry } as { entry: NewsEntry }
       });
     }
   }
@@ -58,7 +61,7 @@ const metadata = {
   }
 };
 
-const content = await entry.render();
+const rendered = await entry.render();
 ---
 
 <Layout metadata={metadata}>
@@ -77,7 +80,7 @@ const content = await entry.render();
       />
     )}
     <div class="mx-auto prose dark:prose-invert max-w-4xl">
-      {content}
+      {rendered.Content}
     </div>
   </article>
 </Layout>
