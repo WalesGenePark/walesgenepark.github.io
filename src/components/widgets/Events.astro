@@ -162,21 +162,32 @@ const formatTime = (time: string) => {
 </section>
 
 <script>
-  document.addEventListener('astro:page-load', () => {
+  function initializeEvents() {
     const toggleButton = document.getElementById('togglePastEvents');
     const pastEventsList = document.getElementById('pastEventsList');
-    let isExpanded = false;
-
+    
     if (toggleButton && pastEventsList) {
       const showText = toggleButton.dataset.showText || 'Show Past Events';
       const hideText = toggleButton.dataset.hideText || 'Hide Past Events';
+      const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+      
+      // Set initial state
+      pastEventsList.classList.toggle('hidden', !isExpanded);
+      toggleButton.textContent = isExpanded ? hideText : showText;
 
       toggleButton.addEventListener('click', () => {
-        isExpanded = !isExpanded;
+        const newExpanded = !pastEventsList.classList.contains('hidden');
         pastEventsList.classList.toggle('hidden');
-        toggleButton.setAttribute('aria-expanded', isExpanded.toString());
-        toggleButton.textContent = isExpanded ? hideText : showText;
+        toggleButton.setAttribute('aria-expanded', (!newExpanded).toString());
+        toggleButton.textContent = newExpanded ? showText : hideText;
       });
     }
-  });
+  }
+
+  // Initialize on first load
+  initializeEvents();
+
+  // Re-initialize on view transitions
+  document.addEventListener('astro:page-load', initializeEvents);
+  document.addEventListener('astro:after-swap', initializeEvents);
 </script>

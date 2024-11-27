@@ -1,114 +1,93 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
 import { getCollection } from 'astro:content';
+import Layout from '~/layouts/Layout.astro';
 import { getLangFromUrl, useTranslations } from '~/i18n/utils';
 import { isValidSection, getAlternateSection, getSectionTitle, sectionRoutes } from '~/i18n/routes';
 import type { LanguageCode } from '~/i18n/routes';
+import type { ContentEntry } from '~/types/content';
 
 export async function getStaticPaths() {
-  const collections = {
-    events: await getCollection('events'),
-    news: await getCollection('news'),
-    digwyddiadau: await getCollection('events'),
-    newyddion: await getCollection('news')
-  };
+  const collections = ['news', 'events', 'team', 'policy'];
+  const languages: LanguageCode[] = ['en', 'cy'];
+  const paths: any[] = [];
 
-  const paths = [];
-  
-  for (const [section, items] of Object.entries(collections)) {
-    for (const item of items) {
-      const [itemLang, ...slugParts] = item.slug.split('/');
-      const lang = itemLang === 'cy' ? 'cy' : 'en';
+  for (const collection of collections) {
+    const entries = await getCollection(collection);
+    
+    for (const entry of entries) {
+      // Extract language from the entry's slug (assuming format: lang/rest-of-slug)
+      const [entryLang, ...slugParts] = entry.slug.split('/');
+      const lang = entryLang as LanguageCode;
       
-      // Only include this item in the appropriate section
-      const sectionKey = lang === 'cy' ? 
-        (section === 'events' ? 'digwyddiadau' : 'newyddion') : 
-        (section === 'events' ? 'events' : 'news');
-
-      paths.push({
-        params: { 
-          lang,
-          section: sectionKey,
-          slug: slugParts.join('/')
-        },
-        props: { item }
-      });
+      if (languages.includes(lang)) {
+        paths.push({
+          params: {
+            lang,
+            section: collection,
+            slug: slugParts.join('/')
+          },
+          props: { entry }
+        });
+      }
     }
   }
 
-  // Get all unique sections from the route mappings that support slugs
-  const slugSections = new Set(['events', 'news']);
-  const sections = new Set<string>();
-  
-  // Add English routes
-  Object.keys(sectionRoutes).forEach(route => {
-    if (!sectionRoutes[route].en && slugSections.has(route)) {
-      sections.add(route);
-    }
-  });
-
-  // Generate paths for both languages
-  const additionalPaths = Array.from(sections).flatMap(section => {
-    const paths = [
-      // English route
-      { params: { lang: 'en', section, slug: undefined } },
-      // Welsh route
-      { params: { lang: 'cy', section: sectionRoutes[section].cy || section, slug: undefined } }
-    ];
-    return paths;
-  });
-
-  return [...paths, ...additionalPaths];
+  return paths;
 }
 
 const { lang, section, slug } = Astro.params;
-const { item } = Astro.props;
-const currentLang = lang as LanguageCode;
+const { entry } = Astro.props;
 
-// Validate route
-if (!isValidSection(section)) {
-  return Astro.redirect('/404');
+if (!entry || !isValidSection(section)) {
+  return Astro.redirect(`/${lang}/404`);
 }
 
-const t = useTranslations(currentLang);
-
-// Get alternate language URL for this section
-const alternateSection = getAlternateSection(section, currentLang === 'en' ? 'cy' : 'en');
-const alternateUrl = `/${currentLang === 'en' ? 'cy' : 'en'}/${alternateSection}/${slug}`;
-
-// Get the section title key (always in English for translation purposes)
-const sectionTitleKey = getSectionTitle(section, currentLang);
+const t = useTranslations(lang as LanguageCode);
+const alternateSection = getAlternateSection(section, lang === 'en' ? 'cy' : 'en');
+const sectionTitle = getSectionTitle(section, lang as LanguageCode);
 
 const metadata = {
-  title: `${item?.data.title} | ${t(`nav.${sectionTitleKey}`)}`,
-  description: item?.data.description,
+  title: `${entry.data.title} | ${sectionTitle}`,
+  description: entry.data.description || '',
+  openGraph: {
+    title: entry.data.title,
+    description: entry.data.description || '',
+    image: entry.data.image || '',
+    type: 'article'
+  },
+  twitter: {
+    title: entry.data.title,
+    description: entry.data.description || '',
+    image: entry.data.image || '',
+    card: 'summary_large_image'
+  },
   alternateLinks: [
     {
-      href: alternateUrl,
-      hreflang: currentLang === 'en' ? 'cy' : 'en'
+      href: `/${lang === 'en' ? 'cy' : 'en'}/${alternateSection}/${slug}`,
+      hreflang: lang === 'en' ? 'cy' : 'en'
     }
   ]
 };
 
-const { Content } = await item?.render();
+const { Content } = await entry.render();
 ---
 
 <Layout metadata={metadata}>
   <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
-    <h1 class="text-4xl font-bold leading-tighter tracking-tighter mb-8 font-heading">
-      {item?.data.title}
+    <h1 class="text-center font-bold leading-tighter tracking-tighter font-heading text-4xl md:text-5xl mb-8">
+      {entry.data.title}
     </h1>
-    {item?.data.image && (
+    
+    {entry.data.image && (
       <img
-        src={item.data.image}
-        class="max-w-full lg:max-w-6xl mx-auto mb-6 sm:rounded-md bg-gray-400 dark:bg-slate-700"
-        alt={item.data.description || ''}
-        loading="eager"
-        width={1200}
-        height={675}
+        src={entry.data.image}
+        class="mx-auto rounded-md shadow-lg mb-6"
+        alt={entry.data.description || ''}
+        loading="lazy"
       />
     )}
-    <div class="mx-auto prose prose-lg max-w-4xl dark:prose-invert">
+
+    <div class="mx-auto prose dark:prose-invert max-w-4xl">
       <Content />
     </div>
   </section>

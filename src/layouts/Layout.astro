@@ -1,23 +1,21 @@
 ---
 import '~/assets/styles/tailwind.css';
 
-import { ViewTransitions } from 'astro:transitions';
+import { I18N } from '~/config';
+import { getLangFromUrl } from '~/i18n/utils';
+import type { MetaData } from '~/types/metadata';
+
 import MetaTags from '~/components/common/MetaTags.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
-import ExternalServiceWarning from '~/components/common/ExternalServiceWarning.astro';
-import LanguagePicker from '~/components/common/LanguagePicker.astro';
+import ToggleTheme from '~/components/common/ToggleTheme.astro';
 import ApplyColorMode from '~/components/common/ApplyColorMode.astro';
-import { getLangFromUrl } from '~/i18n/utils';
-import { SITE, I18N } from '~/config';
-import type { LanguageCode } from '~/i18n/routes';
-import type { MetaData } from '~/types/metaData';
 
 export interface Props {
-  metadata?: Partial<MetaData>;
+  metadata?: MetaData;
 }
 
 const { metadata = {} } = Astro.props;
-const lang = getLangFromUrl(Astro.url) as LanguageCode;
+const lang = getLangFromUrl(Astro.url);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // Type-safe theme configuration
@@ -32,73 +30,81 @@ const textDirection: 'ltr' | 'rtl' = I18N.textDirection;
 >
   <head>
     <MetaTags {...metadata} canonical={canonicalURL} />
-    <ViewTransitions />
     <ApplyColorMode />
   </head>
 
   <body class="antialiased text-gray-900 dark:text-white bg-white dark:bg-gray-900 tracking-tight">
     <slot />
-    <ExternalServiceWarning />
-    <LanguagePicker />
     <BasicScripts />
+    <ToggleTheme />
+
+    <style is:global>
+      :root {
+        --aw-color-primary: 239 68 68;
+        --aw-color-secondary: 30 58 138;
+        --aw-color-accent: 109 40 217;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        @apply min-h-screen;
+      }
+
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
+
+      @layer base {
+        :root {
+          --aw-font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+            sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+          --aw-font-serif: Georgia, Cambria, 'Times New Roman', Times, serif;
+          --aw-font-heading: var(--aw-font-sans);
+        }
+
+        html {
+          @apply scroll-smooth;
+        }
+
+        body {
+          @apply font-sans antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+          @apply font-heading text-gray-900 dark:text-white;
+        }
+      }
+
+      @layer components {
+        .text-default {
+          @apply text-gray-900 dark:text-gray-100;
+        }
+
+        .text-muted {
+          @apply text-gray-600 dark:text-gray-400;
+        }
+      }
+
+      @layer utilities {
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+        }
+      }
+
+      .focus-visible:focus-visible {
+        @apply ring-2 ring-offset-2 ring-primary outline-none;
+      }
+    </style>
   </body>
 </html>
-
-<style is:global>
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
-
-  @layer base {
-    :root {
-      --aw-font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-        sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-      --aw-font-serif: Georgia, Cambria, 'Times New Roman', Times, serif;
-      --aw-font-heading: var(--aw-font-sans);
-
-      --aw-color-primary: 220 38 38;
-      --aw-color-secondary: 185 28 28;
-      --aw-color-accent: 109 40 217;
-    }
-
-    html {
-      @apply scroll-smooth;
-    }
-
-    body {
-      @apply font-sans antialiased;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      @apply font-heading text-gray-900 dark:text-white;
-    }
-  }
-
-  @layer components {
-    .text-default {
-      @apply text-gray-900 dark:text-gray-100;
-    }
-
-    .text-muted {
-      @apply text-gray-600 dark:text-gray-400;
-    }
-  }
-
-  @layer utilities {
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-  }
-
-  .focus-visible:focus-visible {
-    @apply ring-2 ring-offset-2 ring-primary outline-none;
-  }
-</style>

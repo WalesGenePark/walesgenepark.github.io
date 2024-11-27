@@ -160,6 +160,7 @@ const numDots = Math.max(1, items.length - slidesPerView + 1);
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 200ms;
+    cursor: pointer;
   }
 
   .dark [data-dot] {
@@ -167,7 +168,7 @@ const numDots = Math.max(1, items.length - slidesPerView + 1);
   }
 
   [data-dot][data-active="true"] {
-    background-color: rgb(var(--aw-color-primary));
+    background-color: rgb(239 68 68); /* Tailwind red-500 */
   }
 </style>
 
@@ -178,6 +179,12 @@ interface CarouselElements {
   dots: NodeListOf<Element>;
   prevButton: HTMLButtonElement;
   nextButton: HTMLButtonElement;
+}
+
+function updateActiveDot(dots: NodeListOf<Element>, activeIndex: number) {
+  dots.forEach((dot, index) => {
+    dot.setAttribute('data-active', (index === activeIndex).toString());
+  });
 }
 
 function initializeCarousel() {
@@ -191,73 +198,40 @@ function initializeCarousel() {
 
     if (!track || !items.length || !dots.length || !prevButton || !nextButton) return;
 
-    const elements: CarouselElements = {
-      track,
-      items,
-      dots,
-      prevButton,
-      nextButton
-    };
-
     let currentIndex = 0;
-    const totalSlides = items.length;
-    const slidesPerView = window.innerWidth >= 768 ? 3 : 1;
-    const maxIndex = Math.max(0, totalSlides - slidesPerView);
+    const maxIndex = Math.max(0, items.length - 3);
 
-    const updateDots = (index: number) => {
-      dots.forEach((dot, i) => {
-        dot.setAttribute('data-active', (i === index).toString());
+    function updateCarousel(newIndex: number) {
+      currentIndex = Math.max(0, Math.min(newIndex, maxIndex));
+      const offset = currentIndex * -33.333;
+      track.style.transform = `translateX(${offset}%)`;
+      updateActiveDot(dots, currentIndex);
+    }
+
+    // Initialize dots
+    updateActiveDot(dots, currentIndex);
+
+    // Add click handlers for dots
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        updateCarousel(index);
       });
-    };
+    });
 
-    const updateSlidePosition = (index: number) => {
-      const slideWidth = 100 / slidesPerView;
-      track.style.transform = `translateX(-${index * slideWidth}%)`;
-      updateDots(index);
-
-      prevButton.disabled = index === 0;
-      nextButton.disabled = index === maxIndex;
-      prevButton.style.opacity = index === 0 ? '0.5' : '1';
-      nextButton.style.opacity = index === maxIndex ? '0.5' : '1';
-    };
-
-    const goToSlide = (index: number) => {
-      currentIndex = Math.max(0, Math.min(index, maxIndex));
-      updateSlidePosition(currentIndex);
-    };
-
+    // Add click handlers for buttons
     prevButton.addEventListener('click', () => {
-      if (currentIndex > 0) {
-        goToSlide(currentIndex - 1);
-      }
+      updateCarousel(currentIndex - 1);
     });
 
     nextButton.addEventListener('click', () => {
-      if (currentIndex < maxIndex) {
-        goToSlide(currentIndex + 1);
-      }
+      updateCarousel(currentIndex + 1);
     });
-
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        goToSlide(index);
-      });
-    });
-
-    let resizeTimeout: number;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = window.setTimeout(() => {
-        const newSlidesPerView = window.innerWidth >= 768 ? 3 : 1;
-        if (newSlidesPerView !== slidesPerView) {
-          goToSlide(0);
-        }
-      }, 100);
-    });
-
-    updateSlidePosition(0);
   });
 }
 
-document.addEventListener('astro:page-load', initializeCarousel);
+// Initialize on page load
+initializeCarousel();
+
+// Re-initialize on view transitions
+document.addEventListener('astro:after-swap', initializeCarousel);
 </script>

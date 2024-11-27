@@ -11,15 +11,27 @@ import { SITE } from '~/config';
     }
   }
 
-  // Apply initial theme
-  if (localStorage.theme === 'dark' || (!localStorage.theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    applyTheme('dark');
-  } else {
-    applyTheme('light');
+  function initTheme() {
+    // Check for stored theme
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+      applyTheme(storedTheme);
+      return;
+    }
+
+    // Check system preference if no stored theme
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      applyTheme('dark');
+    } else {
+      applyTheme('light');
+    }
   }
 
+  // Initialize theme
+  initTheme();
+
   // Listen for system theme changes if no theme is set
-  if (!localStorage.theme) {
+  if (!localStorage.getItem('theme')) {
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
       applyTheme(e.matches ? 'dark' : 'light');
     });

@@ -1,22 +1,28 @@
 ---
-import { getCollection } from 'astro:content';
 import { getLangFromUrl } from '~/i18n/utils';
+import { getCollection } from 'astro:content';
+import type { PolicyEntry } from '~/types/content';
 
 const { section } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 
-const entries = await getCollection(section);
-const content = entries.find(entry => entry.id === `${lang}.md`);
+const entries = await getCollection('policy');
+const content = entries.find(entry => entry.id === `${lang}/${section}.md`) as PolicyEntry | undefined;
 
 if (!content) {
-  return Astro.redirect(`/${lang}/404`);
+  throw new Error(`Policy content not found for ${section} in ${lang}`);
 }
 
 const { Content } = await content.render();
 ---
 
-<div class="px-4 py-16 mx-auto max-w-6xl lg:py-20">
-  <div class="max-w-3xl mx-auto prose dark:prose-invert">
+<div class="mx-auto max-w-4xl px-4 py-16 lg:py-20">
+  <div class="mb-10">
+    <h1 class="text-center font-bold leading-tighter tracking-tighter font-heading text-4xl md:text-5xl">
+      {content.data.title}
+    </h1>
+  </div>
+  <div class="mx-auto prose dark:prose-invert max-w-4xl">
     <Content />
   </div>
 </div>

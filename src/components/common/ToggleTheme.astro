@@ -37,18 +37,22 @@ const {
     } else {
       document.documentElement.classList.remove('dark');
     }
+    localStorage.setItem('theme', theme);
   }
 
-  // Handle theme toggle
-  document.addEventListener('astro:page-load', () => {
+  function initThemeToggle() {
     const themeToggles = document.querySelectorAll<HTMLElement>('[data-aw-toggle-color-scheme]');
     themeToggles.forEach((toggle) => {
       toggle.addEventListener('click', () => {
         const isDark = document.documentElement.classList.contains('dark');
-        const newTheme = isDark ? 'light' : 'dark';
-        localStorage.theme = newTheme;
-        applyTheme(newTheme);
+        applyTheme(isDark ? 'light' : 'dark');
       });
     });
-  });
+  }
+
+  // Initialize on page load
+  initThemeToggle();
+
+  // Re-initialize on view transitions
+  document.addEventListener('astro:after-swap', initThemeToggle);
 </script>

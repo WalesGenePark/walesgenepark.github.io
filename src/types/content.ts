@@ -1,66 +1,62 @@
 import type { z } from 'astro:content';
+import type { LanguageCode } from '~/i18n/routes';
 
-export type LanguageCode = 'en' | 'cy';
-
-export interface BaseContent {
-  title: string;
-  description?: string;
-  image?: string;
-  lang: LanguageCode;
+export interface BaseEntry {
+  id: string;
+  slug: string;
+  body: string;
+  collection: string;
 }
 
-export interface NewsContent extends BaseContent {
-  publishDate: Date;
-  author?: string;
-  fullArticleLink?: string;
-}
-
-export interface EventContent extends BaseContent {
-  date: Date;
-  startTime?: string;
-  endTime?: string;
-  location?: string;
-  type?: string;
-  registrationLink?: string;
-}
-
-export interface TeamContent extends BaseContent {
-  name: string;
-  title: string;
-  department?: string;
-  bio?: string;
-  email?: string;
-  phone?: string;
-  order?: number;
-  category?: string;
-  socialLinks?: {
-    linkedin?: string;
-    twitter?: string;
-    researchgate?: string;
-    orcid?: string;
+export interface NewsEntry extends BaseEntry {
+  data: {
+    publishDate: Date;
+    title: string;
+    description?: string;
+    image?: string;
+    author?: string;
+    category?: string;
+    lang: LanguageCode;
   };
 }
 
-export type NewsEntry = {
-  id: string;
-  slug: string;
-  body: string;
-  collection: 'news';
-  data: NewsContent;
-};
+export interface EventEntry extends BaseEntry {
+  data: {
+    startDate: Date;
+    endDate?: Date;
+    title: string;
+    description?: string;
+    location?: string;
+    image?: string;
+    lang: LanguageCode;
+    order?: number;
+  };
+}
 
-export type EventEntry = {
-  id: string;
-  slug: string;
-  body: string;
-  collection: 'events';
-  data: EventContent;
-};
+export interface TeamEntry extends BaseEntry {
+  data: {
+    name: string;
+    title: string;
+    description?: string;
+    image?: string;
+    lang: LanguageCode;
+    order?: number;
+  };
+}
 
-export type TeamEntry = {
-  id: string;
-  slug: string;
-  body: string;
-  collection: 'team';
-  data: TeamContent;
-};
+export interface PolicyEntry extends BaseEntry {
+  data: {
+    title: string;
+    description?: string;
+    lang: LanguageCode;
+  };
+}
+
+export type ContentEntry = NewsEntry | EventEntry | TeamEntry | PolicyEntry;
+
+export interface ContentEntryMap {
+  'news': NewsEntry;
+  'events': EventEntry;
+  'team': TeamEntry;
+  'policy': PolicyEntry;
+}
