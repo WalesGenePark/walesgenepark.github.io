@@ -2,28 +2,7 @@
 import { SITE } from '~/config';
 ---
 
-<script is:inline define:vars={{ defaultTheme: SITE.defaultTheme }}>
-  function applyTheme(theme) {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }
-
-  function initTheme() {
-    if ((defaultTheme && defaultTheme.endsWith(':only')) || (!localStorage.theme && defaultTheme !== 'system')) {
-      applyTheme(defaultTheme.replace(':only', ''));
-    } else if (
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      applyTheme('dark');
-    } else {
-      applyTheme('light');
-    }
-  }
-
+<script is:inline>
   function attachEvent(selector, event, fn) {
     const matches = typeof selector === 'string' ? document.querySelectorAll(selector) : selector;
     if (matches && matches.length) {
@@ -52,17 +31,6 @@ import { SITE } from '~/config';
       document.body.classList.toggle('overflow-hidden');
       document.getElementById('header')?.classList.toggle('h-screen');
       document.getElementById('header')?.classList.toggle('expanded');
-    });
-
-    attachEvent('[data-aw-toggle-color-scheme]', 'click', function () {
-      if (defaultTheme.endsWith(':only')) {
-        return;
-      }
-      
-      const isDark = document.documentElement.classList.contains('dark');
-      const newTheme = isDark ? 'light' : 'dark';
-      localStorage.theme = newTheme;
-      applyTheme(newTheme);
     });
 
     attachEvent('[data-aw-social-share]', 'click', function (_, elem) {
@@ -123,23 +91,44 @@ import { SITE } from '~/config';
     });
   }
 
-  // Initialize theme on page load
-  initTheme();
-
-  // Handle theme initialization and event attachment on page transitions
-  document.addEventListener('astro:after-swap', initTheme);
+  // Handle event attachment on page transitions
   document.addEventListener('astro:page-load', onLoad);
 </script>
 
 <script>
   // Inspired by: https://github.com/heidkaemper/tailwindcss-intersect
-  const Observer = {
-    observe(elements, callback, options = { root: null, rootMargin: '0px', threshold: 0 }) {
+  interface ObserverOptions {
+    root: Element | null;
+    rootMargin: string;
+    threshold: number;
+  }
+
+  interface ObserverInstance {
+    observe(
+      elements: NodeListOf<Element> | Element[],
+      callback: IntersectionObserverCallback,
+      options?: ObserverOptions
+    ): IntersectionObserver;
+  }
+
+  const Observer: ObserverInstance = {
+    observe(
+      elements: NodeListOf<Element> | Element[],
+      callback: IntersectionObserverCallback,
+      options: ObserverOptions = { root: null, rootMargin: '0px', threshold: 0 }
+    ): IntersectionObserver {
       const observer = new IntersectionObserver(callback, options);
-      elements.forEach((element) => observer.observe(element));
+      elements.forEach((element: Element) => observer.observe(element));
       return observer;
     },
   };
+
+  // Declare the Observer property on the window object
+  declare global {
+    interface Window {
+      Observer: ObserverInstance;
+    }
+  }
 
   window.Observer = Observer;
 </script>

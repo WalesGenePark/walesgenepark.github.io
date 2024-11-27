@@ -25,7 +25,7 @@ const {
   noindex = false,
   nofollow = false,
   alternateLinks = [],
-  openGraph = {},
+  openGraph = { basic: { title: '', type: '', image: '', url: '' } },
   twitter = {},
 } = Astro.props;
 
@@ -38,7 +38,7 @@ const ogData = {
     image: openGraph.basic?.image || image,
     url: openGraph.basic?.url || canonical?.href || Astro.url.href,
   },
-};
+} satisfies MetaData['openGraph'];
 
 const twitterData = {
   card: twitter.card || METADATA.twitter.cardType,
@@ -47,7 +47,7 @@ const twitterData = {
   title: twitter.title || metaTitle,
   description: twitter.description || description,
   image: twitter.image || image,
-};
+} satisfies MetaData['twitter'];
 ---
 
 <meta charset="UTF-8" />

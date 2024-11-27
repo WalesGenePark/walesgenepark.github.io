@@ -1,7 +1,5 @@
 ---
 import { SITE } from '~/config';
-
-// TODO: This code is temporary
 ---
 
 <script is:inline define:vars={{ defaultTheme: SITE.defaultTheme }}>
@@ -13,24 +11,17 @@ import { SITE } from '~/config';
     }
   }
 
-  // Apply theme on initial page load
-  if ((defaultTheme && defaultTheme.endsWith(':only')) || (!localStorage.theme && defaultTheme !== 'system')) {
-    applyTheme(defaultTheme.replace(':only', ''));
-  } else if (
-    localStorage.theme === 'dark' ||
-    (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-  ) {
+  // Apply initial theme
+  if (localStorage.theme === 'dark' || (!localStorage.theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     applyTheme('dark');
   } else {
     applyTheme('light');
   }
 
-  // Listen for system theme changes
-  if (defaultTheme === 'system') {
+  // Listen for system theme changes if no theme is set
+  if (!localStorage.theme) {
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-      if (!localStorage.theme) {
-        applyTheme(e.matches ? 'dark' : 'light');
-      }
+      applyTheme(e.matches ? 'dark' : 'light');
     });
   }
 </script>

@@ -4,19 +4,16 @@ import { getLangFromUrl, useTranslations } from '~/i18n/utils';
 import type { LanguageCode } from '~/i18n/routes';
 import { Icon } from 'astro-icon/components';
 
-const currentLang = getLangFromUrl(Astro.url) as LanguageCode;
-const t = useTranslations(currentLang);
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
-const team = await getCollection('team', ({ id }) => {
-  return id.startsWith(currentLang + '/');
+const team = await getCollection('team', ({ data }) => {
+  return data.lang === lang;
 });
 
 // Sort team by order if available, then by name
 const sortedTeam = team.sort((a, b) => {
-  if (a.data.order && b.data.order) {
-    return a.data.order - b.data.order;
-  }
-  return a.data.name.localeCompare(b.data.name);
+  return (a.data.order || 999) - (b.data.order || 999);
 });
 
 ---
@@ -24,7 +21,7 @@ const sortedTeam = team.sort((a, b) => {
 <section class="px-4 py-16 mx-auto max-w-6xl lg:py-20">
   <div class="flex flex-col mb-6 lg:justify-between lg:flex-row md:mb-8">
     <h2 class="max-w-lg mb-2 text-3xl font-bold tracking-tight sm:text-4xl sm:leading-none lg:mb-5 group font-heading">
-      {t('team.title')}
+      {t('nav.team')}
     </h2>
   </div>
 

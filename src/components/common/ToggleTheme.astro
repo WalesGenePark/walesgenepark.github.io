@@ -1,6 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { UI } from 'astrowind:config';
+import { SITE } from '~/config';
 
 export interface Props {
   label?: string;
@@ -17,7 +17,7 @@ const {
 ---
 
 {
-  !(UI.theme && UI.theme.endsWith(':only')) && (
+  !(SITE.defaultTheme?.endsWith(':only')) && (
     <button
       type="button"
       class={className}
@@ -31,13 +31,23 @@ const {
 }
 
 <script>
-  // Ensure icons update immediately on click
+  function applyTheme(theme: string) {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }
+
+  // Handle theme toggle
   document.addEventListener('astro:page-load', () => {
-    const themeToggles = document.querySelectorAll('[data-aw-toggle-color-scheme]');
+    const themeToggles = document.querySelectorAll<HTMLElement>('[data-aw-toggle-color-scheme]');
     themeToggles.forEach((toggle) => {
       toggle.addEventListener('click', () => {
-        // Force a reflow to ensure the icon transition is smooth
-        toggle.offsetHeight;
+        const isDark = document.documentElement.classList.contains('dark');
+        const newTheme = isDark ? 'light' : 'dark';
+        localStorage.theme = newTheme;
+        applyTheme(newTheme);
       });
     });
   });
