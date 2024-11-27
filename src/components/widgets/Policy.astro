@@ -3,11 +3,15 @@ import { getLangFromUrl } from '~/i18n/utils';
 import { getCollection } from 'astro:content';
 import type { PolicyEntry } from '~/types/content';
 
+interface Props {
+  section: string;
+}
+
 const { section } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 
-const entries = await getCollection('policy');
-const content = entries.find(entry => entry.id === `${lang}/${section}.md`) as PolicyEntry | undefined;
+const entries = await getCollection('policy', entry => entry.id === `${lang}/${section}.md`) as PolicyEntry[];
+const content = entries[0];
 
 if (!content) {
   throw new Error(`Policy content not found for ${section} in ${lang}`);

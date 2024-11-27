@@ -6,6 +6,8 @@ import NewsCarousel from '~/components/widgets/NewsCarousel.astro';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import Button from '~/components/ui/Button.astro';
+import type { NewsEntry, EventEntry } from '~/types/content';
+import type { MetaData } from '~/types/metaData';
 
 export function getStaticPaths() {
   return [
@@ -17,7 +19,7 @@ export function getStaticPaths() {
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const metadata = {
+const metadata: MetaData = {
   title: 'Wales Gene Park',
 };
 
@@ -57,21 +59,20 @@ const pageContent = content[lang as keyof typeof content];
 // Get news and events for the carousel
 const newsEntries = await getCollection('news', ({ id }) => {
   return id.startsWith(lang + '/');
-});
+}) as NewsEntry[];
 
 const eventsEntries = await getCollection('events', ({ id }) => {
   return id.startsWith(lang + '/');
-});
+}) as EventEntry[];
 
 // Get file stats for sorting
-async function getFileStats(collection: string, entry: any) {
+async function getFileStats(collection: string, entry: NewsEntry | EventEntry) {
   const filePath = path.join(process.cwd(), 'src/content', collection, entry.id);
   try {
     const stats = await fs.stat(filePath);
     return stats.mtime;
   } catch (error) {
-    // If there's an error getting stats, use the frontmatter date as fallback
-    return new Date(entry.data.publishDate || entry.data.date);
+    return new Date(entry.data.publishDate || (entry as EventEntry).data.date || new Date());
   }
 }
 
@@ -85,7 +86,7 @@ const entriesWithStats = await Promise.all([
     ...entry,
     mtime: await getFileStats('events', entry),
   })),
-]);
+]) as (NewsEntry | EventEntry & { mtime: Date })[];
 
 // Sort by file modification time
 const allEntries = entriesWithStats.sort((a, b) => {
@@ -93,7 +94,8 @@ const allEntries = entriesWithStats.sort((a, b) => {
 });
 
 // Take the first 15 items
-const carouselItems = allEntries.slice(0, 15);
+const carouselItems = allEntries.slice(0, 15) as (NewsEntry | EventEntry)[];
+
 ---
 
 <Layout metadata={metadata}>

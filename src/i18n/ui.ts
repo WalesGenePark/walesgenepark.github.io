@@ -12,6 +12,7 @@ export type UIKey =
   | 'events.noUpcomingEvents'
   | 'events.time'
   | 'events.location'
+  | 'events.title'
   | 'news.title'
   | 'news.noNews'
   | 'news.noImage'

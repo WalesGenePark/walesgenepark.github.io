@@ -29,10 +29,8 @@ export const routes: Record<string, Route> = {
 export const defaultLang = 'en';
 export const showDefaultLang = false;
 
-export const languages = {
-  en: 'English',
-  cy: 'Cymraeg',
-};
+export const languages = ['en', 'cy'] as const;
+export type Language = typeof languages[number];
 
 export const ui = {
   en: {

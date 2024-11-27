@@ -3,9 +3,10 @@ import { getCollection } from 'astro:content';
 import Layout from '~/layouts/PageLayout.astro';
 import { getLangFromUrl, useTranslations } from '~/i18n/utils';
 import type { LanguageCode } from '~/i18n/routes';
+import type { NewsEntry } from '~/types/content';
 
 export async function getStaticPaths() {
-  const news = await getCollection('news');
+  const news = await getCollection('news') as NewsEntry[];
   return news.map(entry => {
     const [lang, ...slugParts] = entry.slug.split('/');
     return {
@@ -37,10 +38,6 @@ const metadata = {
   title: entry.data.title,
   description: entry.data.description,
 };
-
-// Default category if none specified
-const category = entry.data.category || 'announcement';
----
 
 <Layout metadata={metadata}>
   <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
