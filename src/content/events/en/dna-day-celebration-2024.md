@@ -8,7 +8,7 @@ description: "Join us for an exciting day of hands-on activities, interactive de
 location: "National Museum Cardiff"
 type: "public-event"
 registrationLink: "https://walesgenepark.github.io/events/dna-day-celebration-2024/register"
-image: "/images/events/dna-day.jpg"
+image: "/images/events/dna-day-celebration.jpg"
 ---
 
 Celebrate International DNA Day with Wales Gene Park at our annual public engagement event. This family-friendly celebration brings genetics to life through interactive exhibits, hands-on activities, and fascinating presentations.

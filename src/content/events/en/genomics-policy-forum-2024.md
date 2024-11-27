@@ -8,7 +8,7 @@ description: "A crucial forum bringing together policymakers, healthcare leaders
 location: "Senedd Cymru - Welsh Parliament, Cardiff Bay"
 type: "conference"
 registrationLink: "https://walesgenepark.github.io/events/genomics-policy-forum-2024/register"
-image: "/images/events/policy-forum.jpg"
+image: "/images/events/genomics-policy-forum.jpg"
 ---
 
 Join key stakeholders and decision-makers for a day of strategic discussions and policy development focusing on the implementation of genomic medicine in Wales.

@@ -8,7 +8,7 @@ description: "An evening of networking, knowledge sharing, and collaboration for
 location: "Royal Welsh College of Music & Drama, Cardiff"
 type: "public-event"
 registrationLink: "https://walesgenepark.github.io/events/genomics-networking-2024/register"
-image: "/images/events/networking-evening.jpg"
+image: "/images/events/genomics-networking.jpg"
 ---
 
 Join colleagues from across the Welsh genomics community for an evening of networking, informal presentations, and collaborative discussions in an elegant setting.

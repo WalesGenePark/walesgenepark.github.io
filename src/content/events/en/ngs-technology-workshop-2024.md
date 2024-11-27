@@ -8,7 +8,7 @@ description: "A hands-on workshop exploring the latest advances in NGS technolog
 location: "Wales Gene Park Sequencing Facility, Cardiff"
 type: "workshop"
 registrationLink: "https://walesgenepark.github.io/events/ngs-technology-workshop-2024/register"
-image: "/images/events/ngs-workshop.jpg"
+image: "/images/events/ngs-technology-workshop.jpg"
 ---
 
 An intensive two-day workshop providing hands-on experience with the latest NGS platforms and technologies. Perfect for researchers, clinicians, and laboratory professionals looking to enhance their practical sequencing skills.

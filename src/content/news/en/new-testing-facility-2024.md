@@ -3,7 +3,7 @@ lang: "en"
 title: "Wales Gene Park Opens State-of-the-Art Genomic Testing Facility"
 publishDate: 2024-12-01
 description: "A £15 million investment brings cutting-edge genomic testing capabilities to Wales, enhancing diagnostic services and research capabilities."
-image: "/images/news/testing-facility.jpg"
+image: "/images/news/new-testing-facility.jpg"
 fullArticleLink: "https://walesgenepark.github.io/news/new-testing-facility-2024"
 ---
 

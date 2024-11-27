@@ -8,7 +8,7 @@ description: "A supportive evening for individuals and families affected by rare
 location: "Ty Dysgu Centre, Cardiff"
 type: "public-event"
 registrationLink: "https://walesgenepark.github.io/events/rare-disease-support-2024/register"
-image: "/images/events/support-group.jpg"
+image: "/images/events/rare-disease-support.jpg"
 ---
 
 Join our welcoming community for an evening of support, sharing, and learning. This meeting brings together individuals, families, healthcare professionals, and support organizations in a comfortable and understanding environment.

@@ -7,7 +7,7 @@ title: "Introduction to Clinical Genomics Workshop"
 description: "A comprehensive two-day workshop designed for healthcare professionals looking to enhance their understanding of clinical genomics. This hands-on session covers fundamental concepts, latest technologies, and practical applications in patient care."
 type: "workshop"
 readMoreLink: "https://walesgenepark.github.io/events/genomics-workshop-march-2024"
-image: "/images/events/clinical-genomics-workshop.jpg"
+image: "/images/events/genomics-workshop-march.jpg"
 ---
 
 Join us for an intensive two-day workshop on Clinical Genomics, designed specifically for healthcare professionals who want to integrate genomic medicine into their practice.

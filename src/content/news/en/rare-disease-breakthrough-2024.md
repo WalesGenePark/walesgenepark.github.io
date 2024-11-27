@@ -3,7 +3,7 @@ lang: "en"
 title: "Major Breakthrough in Rare Genetic Disease Research at Wales Gene Park"
 publishDate: 2024-03-01
 description: "Research team identifies novel genetic variants associated with a rare hereditary condition, opening new possibilities for treatment."
-image: "/images/news/research-lab.jpg"
+image: "/images/news/rare-disease-breakthrough.jpg"
 fullArticleLink: "https://walesgenepark.github.io/news/rare-disease-breakthrough-2024"
 ---
 

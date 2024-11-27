@@ -1,7 +1,7 @@
 ---
 title: "New Partnership with Cardiff University"
 description: "Wales Gene Park announces new partnership with Cardiff University to expand genomic research."
-image: "/images/news/partnership-2024.jpg"
+image: "/images/news/partnership-announcement.jpg"
 publishDate: 2024-12-01
 lang: "en"
 ---

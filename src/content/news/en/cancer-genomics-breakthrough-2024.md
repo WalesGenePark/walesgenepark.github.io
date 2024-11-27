@@ -3,7 +3,7 @@ lang: "en"
 title: "Wales Gene Park Research Team Makes Breakthrough in Cancer Genomics"
 publishDate: 2024-01-15
 description: "Researchers identify novel genetic signatures that could revolutionize personalized cancer treatment approaches."
-image: "/images/news/cancer-research.jpg"
+image: "/images/news/cancer-genomics-breakthrough.jpg"
 fullArticleLink: "https://walesgenepark.github.io/news/cancer-genomics-breakthrough-2024"
 category: "research"
 author: "Dr. Sarah Williams"

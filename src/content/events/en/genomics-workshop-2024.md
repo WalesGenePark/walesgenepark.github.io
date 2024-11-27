@@ -6,7 +6,7 @@ lang: "en"
 title: "Genomics Workshop 2024"
 description: "Join us for a comprehensive workshop on the latest advances in genomics research and their applications in healthcare."
 type: "workshop"
-image: "/src/assets/images/events/workshop.jpg"
+image: "/images/events/genomics-workshop.jpg"
 ---
 
 # Genomics Workshop 2024
