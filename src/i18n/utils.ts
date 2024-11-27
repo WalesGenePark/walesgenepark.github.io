@@ -40,25 +40,13 @@ export function getRouteFromUrl(url: URL): string {
 export function getPathWithoutLang(path: string) {
   const segments = path.split('/');
   segments.splice(1, 1); // Remove language segment
-  return segments.join('/') || '/';
+  return segments.join('/');
 }
 
-export function getLocalizedPath(path: string, lang: string) {
-  // Special handling for root path
-  if (path === '/' || path === '/en' || path === '/cy') {
-    return `/${lang}`;
+export function getLocalizedPath(path: string, targetLang: LanguageCode): string {
+  const segments = path.split('/');
+  if (segments.length >= 2) {
+    segments[1] = targetLang;
   }
-
-  // Remove current language prefix if it exists
-  const pathWithoutLang = path.replace(/^\/(en|cy)\//, '/');
-
-  // Handle other routes
-  for (const [key, route] of Object.entries(routes)) {
-    if (pathWithoutLang === route.en || pathWithoutLang === route.cy) {
-      return `/${lang}${route[lang as keyof typeof route]}`;
-    }
-  }
-
-  // Default case: just add language prefix
-  return `/${lang}${pathWithoutLang}`;
+  return segments.join('/');
 }

@@ -20,10 +20,12 @@ export function isValidSection(section: string): section is Section {
 
 export function getAlternateSection(section: string, currentLang: LanguageCode): string {
   if (!isValidSection(section)) return section;
-  return sectionRoutes[section][currentLang];
+  const otherLang = currentLang === 'en' ? 'cy' : 'en';
+  return sectionRoutes[section][otherLang];
 }
 
 export function getSectionTitle(section: string, currentLang: LanguageCode): string {
   if (!isValidSection(section)) return section;
-  return `meta.${section}.title` as UIKey;
+  const key = `nav.${section}` as UIKey;
+  return ui[currentLang][key] || section;
 }

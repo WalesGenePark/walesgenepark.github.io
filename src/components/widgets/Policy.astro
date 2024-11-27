@@ -1,7 +1,7 @@
 ---
-import { getLangFromUrl } from '~/i18n/utils';
 import { getCollection } from 'astro:content';
-import type { PolicyEntry } from '~/types/content';
+import { getLangFromUrl } from '~/i18n/utils';
+import type { CollectionEntry } from 'astro:content';
 
 interface Props {
   section: string;
@@ -10,23 +10,13 @@ interface Props {
 const { section } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 
-const entries = await getCollection('policy', entry => entry.id === `${lang}/${section}.md`) as PolicyEntry[];
-const content = entries[0];
-
-if (!content) {
-  throw new Error(`Policy content not found for ${section} in ${lang}`);
-}
-
-const { Content } = await content.render();
+const entries = await getCollection('policy');
+const entry = entries.find(entry => entry.id === `${lang}/${section}.md`);
+const { Content } = entry ? await entry.render() : { Content: undefined };
 ---
 
-<div class="mx-auto max-w-4xl px-4 py-16 lg:py-20">
-  <div class="mb-10">
-    <h1 class="text-center font-bold leading-tighter tracking-tighter font-heading text-4xl md:text-5xl">
-      {content.data.title}
-    </h1>
-  </div>
-  <div class="mx-auto prose dark:prose-invert max-w-4xl">
+{Content && (
+  <div class="prose prose-lg max-w-none dark:prose-invert">
     <Content />
   </div>
-</div>
+)}

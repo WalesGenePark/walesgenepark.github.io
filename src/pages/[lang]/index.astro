@@ -54,68 +54,60 @@ const content = {
   },
 };
 
-const pageContent = content[lang as keyof typeof content];
-
 // Get news and events for the carousel
 const newsEntries = await getCollection('news', ({ id }) => {
   return id.startsWith(lang + '/');
-}) as NewsEntry[];
+}).then(entries => entries as unknown as NewsEntry[]);
 
 const eventsEntries = await getCollection('events', ({ id }) => {
   return id.startsWith(lang + '/');
-}) as EventEntry[];
+}).then(entries => entries as unknown as EventEntry[]);
 
-// Get file stats for sorting
-async function getFileStats(collection: string, entry: NewsEntry | EventEntry) {
-  const filePath = path.join(process.cwd(), 'src/content', collection, entry.id);
-  try {
-    const stats = await fs.stat(filePath);
-    return stats.mtime;
-  } catch (error) {
-    return new Date(entry.data.publishDate || (entry as EventEntry).data.date || new Date());
-  }
+interface EntryWithMTime {
+  mtime: Date;
+  entry: NewsEntry | EventEntry;
 }
 
 // Add file stats to entries
-const entriesWithStats = await Promise.all([
+const entriesWithStats: EntryWithMTime[] = await Promise.all([
   ...newsEntries.map(async (entry) => ({
-    ...entry,
-    mtime: await getFileStats('news', entry),
+    entry,
+    mtime: new Date(entry.data.publishDate)
   })),
   ...eventsEntries.map(async (entry) => ({
-    ...entry,
-    mtime: await getFileStats('events', entry),
-  })),
-]) as (NewsEntry | EventEntry & { mtime: Date })[];
+    entry,
+    mtime: new Date(entry.data.date)
+  }))
+]);
 
 // Sort by file modification time
-const allEntries = entriesWithStats.sort((a, b) => {
+const sortedEntries = entriesWithStats.sort((a, b) => {
   return b.mtime.getTime() - a.mtime.getTime();
 });
 
 // Take the first 15 items
-const carouselItems = allEntries.slice(0, 15) as (NewsEntry | EventEntry)[];
+const carouselItems = sortedEntries.slice(0, 15).map(item => item.entry);
 
 ---
 
 <Layout metadata={metadata}>
   <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
     <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-8 font-heading">
-      {pageContent.title}
+      {content[lang].title}
     </h1>
     <p class="text-xl text-gray-600 dark:text-gray-400 mb-12">
-      {pageContent.description}
+      {content[lang].description}
     </p>
     <div class="flex flex-col sm:flex-row gap-4">
       <Button
         variant="primary"
-        href={pageContent.cta.primary.href}
-        text={pageContent.cta.primary.text}
+        href={content[lang].cta.primary.href}
+        text={content[lang].cta.primary.text}
       />
       <Button
         variant="secondary"
-        href={pageContent.cta.secondary.href}
-        text={pageContent.cta.secondary.text}
+        href={content[lang].cta.secondary.href}
+        text={content[lang].cta.secondary.text}
       />
     </div>
   </section>

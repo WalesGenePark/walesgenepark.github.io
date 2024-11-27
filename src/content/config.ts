@@ -46,8 +46,17 @@ const team = defineCollection({
   }),
 });
 
+const policy = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    lang: z.enum(['en', 'cy']),
+  }),
+});
+
 export const collections = {
   news,
   events,
   team,
+  policy,
 };

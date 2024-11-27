@@ -98,5 +98,5 @@ export const ui = {
     'contact.address.line5': 'Yr Eglwys Newydd',
     'contact.address.line6': 'CAERDYDD',
     'contact.address.line7': 'CF14 7YU',
-  },
-} as const;
+  }
+};
