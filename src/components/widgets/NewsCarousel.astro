@@ -101,15 +101,10 @@ const getTypeLabel = (type: 'news' | 'events') => {
     </button>
 
     <!-- Dots -->
-    <div class="flex justify-center mt-8 space-x-2">
+    <div class="carousel-dots flex justify-center gap-2 mt-4">
       {items.map((_, index) => (
         <button
-          class="carousel-dot w-3 h-3 rounded-full transition-colors duration-200"
-          class:list={[
-            "bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500",
-            { "!bg-red-600 dark:!bg-red-500": index === 0 }
-          ]}
-          data-index={index}
+          class="carousel-dot w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 transition-colors duration-200"
           aria-label={`Go to slide ${index + 1}`}
         />
       ))}
@@ -138,6 +133,10 @@ const getTypeLabel = (type: 'news' | 'events') => {
     
     let currentSlide = 0;
     const slideCount = dots.length;
+    let autoplayTimer = null;
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const SWIPE_THRESHOLD = 50;
     
     function updateSlide(index) {
       // Ensure index is within bounds
@@ -146,26 +145,93 @@ const getTypeLabel = (type: 'news' | 'events') => {
       // Move track
       track.style.transform = `translateX(-${currentSlide * (100/3)}%)`;
       
-      // Update dots
-      dots.forEach((dot, i) => {
-        if (i === currentSlide) {
-          dot.classList.remove('bg-gray-300', 'dark:bg-gray-600');
-          dot.classList.add('bg-red-600', 'dark:bg-red-500');
-        } else {
-          dot.classList.add('bg-gray-300', 'dark:bg-gray-600');
-          dot.classList.remove('bg-red-600', 'dark:bg-red-500');
-        }
+      // Reset all dots first
+      dots.forEach(dot => {
+        dot.classList.remove('bg-red-600', 'dark:bg-red-500');
+        dot.classList.add('bg-gray-300', 'dark:bg-gray-600');
       });
+      
+      // Then update current dot
+      dots[currentSlide].classList.remove('bg-gray-300', 'dark:bg-gray-600');
+      dots[currentSlide].classList.add('bg-red-600', 'dark:bg-red-500');
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayTimer = setInterval(() => {
+        updateSlide(currentSlide + 1);
+      }, 3000);
+    }
+
+    function stopAutoplay() {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    }
+
+    function handleTouchStart(e) {
+      touchStartX = e.touches[0].clientX;
+    }
+
+    function handleTouchMove(e) {
+      touchEndX = e.touches[0].clientX;
+    }
+
+    function handleTouchEnd() {
+      const swipeDistance = touchEndX - touchStartX;
+      
+      if (Math.abs(swipeDistance) > SWIPE_THRESHOLD) {
+        if (swipeDistance > 0) {
+          // Swiped right - go to previous slide
+          updateSlide(currentSlide - 1);
+        } else {
+          // Swiped left - go to next slide
+          updateSlide(currentSlide + 1);
+        }
+      }
+      
+      // Reset touch coordinates
+      touchStartX = 0;
+      touchEndX = 0;
     }
     
     // Add click handlers
-    prevBtn.onclick = () => updateSlide(currentSlide - 1);
-    nextBtn.onclick = () => updateSlide(currentSlide + 1);
-    dots.forEach((dot, i) => {
-      dot.onclick = () => updateSlide(i);
-    });
+    prevBtn.onclick = () => {
+      updateSlide(currentSlide - 1);
+      stopAutoplay();
+      startAutoplay();
+    };
     
-    // Initialize
+    nextBtn.onclick = () => {
+      updateSlide(currentSlide + 1);
+      stopAutoplay();
+      startAutoplay();
+    };
+    
+    dots.forEach((dot, i) => {
+      dot.onclick = () => {
+        updateSlide(i);
+        stopAutoplay();
+        startAutoplay();
+      };
+    });
+
+    // Add touch handlers
+    track.addEventListener('touchstart', handleTouchStart, { passive: true });
+    track.addEventListener('touchmove', handleTouchMove, { passive: true });
+    track.addEventListener('touchend', handleTouchEnd);
+
+    // Start autoplay
+    startAutoplay();
+
+    // Pause autoplay when user interacts with the carousel
+    track.addEventListener('mouseenter', stopAutoplay);
+    track.addEventListener('mouseleave', startAutoplay);
+    track.addEventListener('touchstart', stopAutoplay);
+    track.addEventListener('touchend', startAutoplay);
+    
+    // Initialize with first slide
     updateSlide(0);
   }
 
