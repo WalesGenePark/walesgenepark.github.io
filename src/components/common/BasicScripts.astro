@@ -11,6 +11,7 @@ import { SITE } from '~/config';
     }
   }
 
+  // Initialize theme
   if ((defaultTheme && defaultTheme.endsWith(':only')) || (!localStorage.theme && defaultTheme !== 'system')) {
     applyTheme(defaultTheme.replace(':only', ''));
   } else if (
@@ -42,12 +43,17 @@ import { SITE } from '~/config';
       document.querySelector('#header nav')?.classList.toggle('hidden');
     });
 
+    // Theme toggle
     attachEvent('[data-aw-toggle-color-scheme]', 'click', function () {
       if (defaultTheme.endsWith(':only')) {
         return;
       }
-      document.documentElement.classList.toggle('dark');
-      localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+      
+      const isDark = document.documentElement.classList.contains('dark');
+      const newTheme = isDark ? 'light' : 'dark';
+      
+      applyTheme(newTheme);
+      localStorage.theme = newTheme;
     });
 
     attachEvent('[data-aw-social-share]', 'click', function (_, elem) {
