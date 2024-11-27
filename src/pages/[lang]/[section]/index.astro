@@ -1,6 +1,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+import { useTranslations } from '~/i18n/utils';
 import { isValidSection, getAlternateSection, getSectionTitle, sectionRoutes } from '~/i18n/routes';
 import { languages } from '~/i18n/config';
 import type { LanguageCode } from '~/i18n/routes';
@@ -15,8 +15,7 @@ import Policy from '~/components/widgets/Policy.astro';
 export function getStaticPaths() {
   return Object.entries(sectionRoutes).flatMap(([section]) =>
     languages.map(lang => ({
-      params: { lang, section },
-      locale: lang
+      params: { lang, section }
     }))
   );
 }
@@ -35,12 +34,11 @@ if (!isValidSection(section)) {
   return Astro.redirect(`/${currentLang}/404`);
 }
 
-const alternateSection = getAlternateSection(section);
-const sectionTitle = getSectionTitle(section);
+const alternateSection = getAlternateSection(section, currentLang);
 
 const metadata: MetaData = {
-  title: t(`meta.${section}.title`),
-  description: t(`meta.${section}.description`),
+  title: getSectionTitle(section, currentLang),
+  description: t('meta.description'),
   alternateLinks: [
     {
       href: `/${currentLang === 'en' ? 'cy' : 'en'}/${alternateSection}`,
@@ -48,19 +46,11 @@ const metadata: MetaData = {
     }
   ],
   openGraph: {
-    title: t(`meta.${section}.title`),
-    description: t(`meta.${section}.description`),
+    title: getSectionTitle(section, currentLang),
+    description: t('meta.description'),
     type: 'website',
-    locale: currentLang === 'en' ? 'en_GB' : 'cy_GB',
-    alternateLocale: currentLang === 'en' ? 'cy_GB' : 'en_GB',
     url: `${Astro.site}${currentLang}/${section}`
-  },
-  twitter: {
-    card: 'summary_large_image',
-    site: '@WalesGenePark',
-    creator: '@WalesGenePark'
-  },
-  canonical: `${Astro.site}${currentLang}/${section}`
+  }
 };
 
 // Map base sections to components
@@ -71,19 +61,18 @@ const baseComponents = {
   team: Team,
   privacy: Policy,
   cookies: Policy
-};
+} as const;
 
 // Redirect /calendar to /events
 if (section === 'calendar') {
   return Astro.redirect(`/${currentLang}/events`);
 }
 
-const SectionComponent = baseComponents[section];
+const SectionComponent = baseComponents[section as keyof typeof baseComponents];
 
 if (!SectionComponent) {
   return Astro.redirect(`/${currentLang}/404`);
 }
-
 ---
 
 <Layout metadata={metadata}>

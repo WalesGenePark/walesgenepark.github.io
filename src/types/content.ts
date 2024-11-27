@@ -1,55 +1,60 @@
 import type { z } from 'astro:content';
 import type { LanguageCode } from '~/i18n/routes';
 
-export interface NewsEntry {
+export interface BaseEntry {
   id: string;
   slug: string;
   body: string;
+  collection: string;
+  data: {
+    title: string;
+    description?: string;
+    image?: string;
+    lang: LanguageCode;
+  };
+  render: () => Promise<{ Content: any }>;
+}
+
+export interface NewsEntry extends BaseEntry {
   collection: 'news';
   data: {
-    publishDate: Date;
     title: string;
     description?: string;
     image?: string;
     author?: string;
     category?: string;
     fullArticleLink?: string;
+    publishDate: Date;
     lang: LanguageCode;
   };
 }
 
-export interface EventEntry {
-  id: string;
-  slug: string;
-  body: string;
+export interface EventEntry extends BaseEntry {
   collection: 'events';
   data: {
-    startDate: Date;
-    endDate?: Date;
-    date?: Date;
     title: string;
     description?: string;
     location?: string;
     startTime?: string;
     endTime?: string;
     image?: string;
+    date: Date;
+    startDate: Date;
+    endDate?: Date;
+    type?: string;
+    registrationLink?: string;
     lang: LanguageCode;
     order?: number;
   };
 }
 
-export interface PolicyEntry {
-  id: string;
-  slug: string;
-  body: string;
+export interface PolicyEntry extends BaseEntry {
   collection: 'policy';
   data: {
     title: string;
     description?: string;
     lang: LanguageCode;
-    order?: number;
   };
-  render: () => Promise<{ Content: any }>;
 }
 
 export interface TeamEntry {

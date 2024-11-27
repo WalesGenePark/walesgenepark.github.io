@@ -1,58 +1,29 @@
+import { ui } from './config';
+
 export type LanguageCode = 'en' | 'cy';
+export type UIKey = keyof typeof ui.en;
 
-export interface RouteDisplay {
-  display: {
-    [K in LanguageCode]: string;
-  };
-  path?: {
-    [K in LanguageCode]: string;
-  };
-}
+export type Section = 'news' | 'events' | 'team' | 'contact' | 'privacy' | 'cookies';
 
-export interface RouteMapping {
-  [key: string]: RouteDisplay;
-}
-
-export const sectionRoutes: RouteMapping = {
-  // Base routes with translations for display/navigation
-  'contact': { 
-    display: { en: 'Contact', cy: 'Cysylltu' },
-    path: { en: 'contact', cy: 'cysylltu' }
-  },
-  'events': { 
-    display: { en: 'Events', cy: 'Digwyddiadau' },
-    path: { en: 'events', cy: 'digwyddiadau' }
-  },
-  'news': { 
-    display: { en: 'News', cy: 'Newyddion' },
-    path: { en: 'news', cy: 'newyddion' }
-  },
-  'team': { 
-    display: { en: 'Team', cy: 'Tîm' },
-    path: { en: 'team', cy: 'tim' }
-  },
-  'privacy': { 
-    display: { en: 'Privacy Policy', cy: 'Polisi Preifatrwydd' },
-    path: { en: 'privacy', cy: 'preifatrwydd' }
-  },
-  'cookies': { 
-    display: { en: 'Cookie Policy', cy: 'Polisi Cwcis' },
-    path: { en: 'cookies', cy: 'cwcis' }
-  }
+export const sectionRoutes: Record<Section, { en: string; cy: string }> = {
+  news: { en: 'news', cy: 'newyddion' },
+  events: { en: 'events', cy: 'digwyddiadau' },
+  team: { en: 'team', cy: 'tim' },
+  contact: { en: 'contact', cy: 'cysylltu' },
+  privacy: { en: 'privacy', cy: 'preifatrwydd' },
+  cookies: { en: 'cookies', cy: 'cwcis' }
 };
 
-export function isValidSection(section: string): boolean {
+export function isValidSection(section: string): section is Section {
   return section in sectionRoutes;
 }
 
-export function getSectionTitle(section: string, lang: LanguageCode): string {
-  return sectionRoutes[section]?.display[lang] || section;
+export function getAlternateSection(section: string, currentLang: LanguageCode): string {
+  if (!isValidSection(section)) return section;
+  return sectionRoutes[section][currentLang];
 }
 
-export function getSectionPath(section: string, lang: LanguageCode): string {
-  return sectionRoutes[section]?.path?.[lang] || sectionRoutes[section]?.display[lang].toLowerCase() || section;
-}
-
-export function getAlternateSection(section: string, targetLang: LanguageCode): string {
-  return sectionRoutes[section]?.path?.[targetLang] || section;
+export function getSectionTitle(section: string, currentLang: LanguageCode): string {
+  if (!isValidSection(section)) return section;
+  return `meta.${section}.title` as UIKey;
 }
