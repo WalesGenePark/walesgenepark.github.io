@@ -1,23 +1,25 @@
 ---
-import { languages, defaultLang, routes } from '~/i18n/config';
-import { getLangFromUrl } from '~/i18n/utils';
+import { languages } from '~/i18n/config';
+import { getLangFromUrl, getLocalizedPath } from '~/i18n/utils';
+import type { LanguageCode } from '~/i18n/routes';
 
-const lang = getLangFromUrl(Astro.url);
-const otherLang = lang === 'en' ? 'cy' : 'en';
-const otherLangName = languages[otherLang];
-
-// Get current path without language prefix
+const currentLang = getLangFromUrl(Astro.url) as LanguageCode;
 const currentPath = Astro.url.pathname;
-
-// Special handling for home page and language-only paths
-const targetUrl = currentPath === `/${lang}` || currentPath === '/' || currentPath === ''
-  ? `/${otherLang}`
-  : `/${otherLang}${currentPath.replace(/^\/(en|cy)/, '')}${Astro.url.search}`;
 ---
 
-<a
-  href={targetUrl}
-  class="text-sm font-medium px-3 py-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
->
-  {otherLangName}
-</a>
+<div class="flex items-center">
+  {
+    Object.entries(languages).map(([lang, label]) => (
+      <a
+        href={getLocalizedPath(currentPath, lang as LanguageCode)}
+        class={`px-3 py-1 text-sm font-medium rounded-full ${
+          currentLang === lang
+            ? 'bg-primary-600 text-white dark:bg-primary-400 dark:text-black'
+            : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
+        }`}
+      >
+        {label}
+      </a>
+    ))
+  }
+</div>

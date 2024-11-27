@@ -1,14 +1,18 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '~/layouts/PageLayout.astro';
-import { getLangFromUrl, useTranslations } from '~/i18n/utils';
 import { isValidSection, getAlternateSection, getSectionTitle } from '~/i18n/routes';
 import type { LanguageCode } from '~/i18n/routes';
 import type { ContentEntry } from '~/types/content';
 
 export async function getStaticPaths() {
-  const collections = ['news', 'events', 'team', 'policy'];
-  const paths = [];
+  const collections = ['news', 'events', 'team', 'policy'] as const;
+  type Collection = typeof collections[number];
+  
+  const paths: {
+    params: { lang: string; section: Collection; slug: string };
+    props: { entry: ContentEntry };
+  }[] = [];
 
   for (const collection of collections) {
     const entries = await getCollection(collection);
@@ -23,7 +27,7 @@ export async function getStaticPaths() {
             section: collection,
             slug: slugParts.join('/')
           },
-          props: { entry }
+          props: { entry: entry as ContentEntry }
         });
       }
     }
@@ -32,14 +36,17 @@ export async function getStaticPaths() {
   return paths;
 }
 
+interface Props {
+  entry: ContentEntry;
+}
+
 const { lang, section, slug } = Astro.params;
-const { entry } = Astro.props;
+const { entry } = Astro.props as Props;
 
 if (!entry || !lang || !section || !isValidSection(section)) {
   return Astro.redirect(`/${lang || 'en'}/404`);
 }
 
-const t = useTranslations(lang as LanguageCode);
 const alternateSection = getAlternateSection(section, lang as LanguageCode);
 const sectionTitle = getSectionTitle(section, lang as LanguageCode);
 
@@ -60,7 +67,8 @@ const metadata = {
   }
 };
 
-const { Content } = await entry.render();
+const content = await entry.render();
+
 ---
 
 <Layout metadata={metadata}>
@@ -70,7 +78,7 @@ const { Content } = await entry.render();
         {entry.data.title}
       </h1>
     </div>
-    {entry.data.image && (
+    {'image' in entry.data && entry.data.image && (
       <img
         src={entry.data.image}
         class="mx-auto rounded-md shadow-lg mb-6"
@@ -79,7 +87,7 @@ const { Content } = await entry.render();
       />
     )}
     <div class="mx-auto prose dark:prose-invert max-w-4xl">
-      <Content />
+      {content}
     </div>
   </article>
 </Layout>

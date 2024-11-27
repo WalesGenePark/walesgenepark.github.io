@@ -65,6 +65,12 @@ export const ui = {
     'contact.address.line5': 'Whitchurch',
     'contact.address.line6': 'CARDIFF',
     'contact.address.line7': 'CF14 7YU',
+    'meta.events.description': 'Discover our upcoming events and activities',
+    'meta.news.description': 'Latest news and updates from Wales Gene Park',
+    'meta.team.description': 'Meet our dedicated team of professionals',
+    'meta.cookies.description': 'Information about how we use cookies',
+    'meta.privacy.description': 'Our privacy policy and data protection information',
+    'meta.contact.description': 'Get in touch with Wales Gene Park',
   },
   cy: {
     'nav.home': 'Hafan',
@@ -98,5 +104,11 @@ export const ui = {
     'contact.address.line5': 'Yr Eglwys Newydd',
     'contact.address.line6': 'CAERDYDD',
     'contact.address.line7': 'CF14 7YU',
+    'meta.events.description': 'Darganfyddwch ein digwyddiadau a gweithgareddau sydd i ddod',
+    'meta.news.description': 'Newyddion a diweddariadau diweddaraf o Barc Genynnau Cymru',
+    'meta.team.description': 'Cwrdd â\'n tîm ymroddedig o weithwyr proffesiynol',
+    'meta.cookies.description': 'Gwybodaeth am sut rydym yn defnyddio cwcis',
+    'meta.privacy.description': 'Ein polisi preifatrwydd a gwybodaeth diogelu data',
+    'meta.contact.description': 'Cysylltwch â Pharc Genynnau Cymru',
   }
 };

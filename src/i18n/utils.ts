@@ -1,4 +1,4 @@
-import { ui, defaultLang, routes, showDefaultLang } from './config';
+import { ui, defaultLang, routes } from './config';
 import type { UIKey } from './ui';
 import type { LanguageCode } from './routes';
 

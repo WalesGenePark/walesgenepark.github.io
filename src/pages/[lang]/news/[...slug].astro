@@ -1,85 +1,83 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '~/layouts/PageLayout.astro';
-import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+import { isValidSection, getAlternateSection, getSectionTitle } from '~/i18n/routes';
 import type { LanguageCode } from '~/i18n/routes';
 import type { NewsEntry } from '~/types/content';
 
 export async function getStaticPaths() {
-  const news = await getCollection('news') as NewsEntry[];
-  return news.map(entry => {
+  const entries = await getCollection('news');
+  const paths = [];
+
+  for (const entry of entries) {
     const [lang, ...slugParts] = entry.slug.split('/');
-    return {
-      params: {
-        lang: lang as LanguageCode,
-        slug: slugParts.join('/')
-      },
-      props: { entry },
-    };
-  });
+    
+    if (lang === 'en' || lang === 'cy') {
+      paths.push({
+        params: {
+          lang,
+          slug: slugParts.join('/')
+        },
+        props: { entry }
+      });
+    }
+  }
+
+  return paths;
 }
 
-const { entry } = Astro.props;
-const { Content } = await entry.render();
+interface Props {
+  entry: NewsEntry;
+}
 
-const currentLang = getLangFromUrl(Astro.url) as LanguageCode;
-const t = useTranslations(currentLang);
+const { lang, slug } = Astro.params;
+const { entry } = Astro.props as Props;
 
-// Format the date
-const date = new Date(entry.data.publishDate);
-const formattedDate = date.toLocaleDateString(currentLang === 'cy' ? 'cy' : 'en-GB', {
-  weekday: 'long',
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
+if (!entry || !lang) {
+  return Astro.redirect(`/${lang || 'en'}/404`);
+}
+
+const section = 'news';
+const alternateSection = getAlternateSection(section, lang as LanguageCode);
+const sectionTitle = getSectionTitle(section, lang as LanguageCode);
 
 const metadata = {
-  title: entry.data.title,
-  description: entry.data.description,
+  title: `${entry.data.title} | ${sectionTitle}`,
+  description: entry.data.description || '',
+  alternateLinks: [
+    {
+      href: `/${lang === 'en' ? 'cy' : 'en'}/${alternateSection}/${slug}`,
+      hreflang: lang === 'en' ? 'cy' : 'en'
+    }
+  ],
+  openGraph: {
+    title: entry.data.title,
+    description: entry.data.description || '',
+    type: 'article',
+    url: `${Astro.site}${lang}/news/${slug}`
+  }
 };
+
+const content = await entry.render();
 ---
 
 <Layout metadata={metadata}>
-  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
-    <div class="mb-8">
-      <div class="inline-block mb-4">
-        <span class="px-3 py-1 text-sm font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-          {t('content.tag.news')}
-        </span>
-      </div>
-      <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter font-heading">
+  <article class="mx-auto max-w-4xl px-4 py-16 lg:py-20">
+    <div class="mb-10">
+      <h1 class="text-center font-bold leading-tighter tracking-tighter font-heading text-4xl md:text-5xl">
         {entry.data.title}
       </h1>
     </div>
-    
-    <div class="flex flex-wrap gap-4 mb-8">
-      <p class="text-lg text-gray-600 dark:text-slate-400 flex items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-        </svg>
-        {formattedDate}
-      </p>
-      {entry.data.author && (
-        <p class="text-lg text-gray-600 dark:text-slate-400 flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-          </svg>
-          {entry.data.author}
-        </p>
-      )}
-    </div>
-    
-    {entry.data.image && (
-      <img 
-        src={entry.data.image} 
-        alt={entry.data.title}
-        class="w-full rounded-lg shadow-lg mb-8"
+    {'image' in entry.data && entry.data.image && (
+      <img
+        src={entry.data.image}
+        class="mx-auto rounded-md shadow-lg mb-6"
+        alt={entry.data.description || ''}
+        loading="lazy"
       />
     )}
-
-    <div class="prose prose-lg max-w-none dark:prose-invert">
-      <Content />
+    <div class="mx-auto prose dark:prose-invert max-w-4xl">
+      {content}
     </div>
-  </section>
+  </article>
 </Layout>

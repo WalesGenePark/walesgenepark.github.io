@@ -1,17 +1,18 @@
 ---
 import { getCollection } from 'astro:content';
-import { getLangFromUrl } from '~/i18n/utils';
-import type { CollectionEntry } from 'astro:content';
+import { useTranslations } from '~/i18n/utils';
+import type { LanguageCode } from '~/i18n/routes';
+import type { PolicyEntry } from '~/types/content';
 
 interface Props {
   section: string;
 }
 
-const { section } = Astro.props;
-const lang = getLangFromUrl(Astro.url);
+const { section, lang } = Astro.props;
+const t = useTranslations(lang as LanguageCode);
 
-const entries = await getCollection('policy');
-const entry = entries.find(entry => entry.id === `${lang}/${section}.md`);
+const policies = await getCollection('policy', (entry) => entry.data.lang === lang) as PolicyEntry[];
+const entry = policies.find(policy => policy.slug === `${lang}/${section}`);
 const { Content } = entry ? await entry.render() : { Content: undefined };
 ---
 
@@ -20,3 +21,33 @@ const { Content } = entry ? await entry.render() : { Content: undefined };
     <Content />
   </div>
 )}
+
+<section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
+  <div class="mb-10 md:mx-auto text-center max-w-3xl">
+    <h2 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading">
+      {t('policy.title')}
+    </h2>
+    <p class="text-xl text-gray-600 dark:text-slate-400">
+      {t('policy.subtitle')}
+    </p>
+  </div>
+  <div class="grid gap-6 row-gap-5 md:grid-cols-2">
+    {
+      policies.map((policy) => (
+        <article class="relative flex flex-col p-6 bg-white dark:bg-slate-900 rounded shadow-lg hover:shadow-md transition border border-transparent dark:border-slate-800">
+          <h3 class="text-xl font-bold leading-snug tracking-tight mb-2">
+            <a
+              href={`/${lang}/policy/${policy.slug.split('/')[1]}`}
+              class="hover:text-primary-600 dark:hover:text-gray-200 transition duration-200"
+            >
+              {policy.data.title}
+            </a>
+          </h3>
+          {policy.data.description && (
+            <p class="text-gray-600 dark:text-gray-400">{policy.data.description}</p>
+          )}
+        </article>
+      ))
+    }
+  </div>
+</section>

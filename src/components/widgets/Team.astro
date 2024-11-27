@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import { getLangFromUrl, useTranslations } from '~/i18n/utils';
 import type { LanguageCode } from '~/i18n/routes';
-import { Icon } from 'astro-icon/components';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -15,7 +14,6 @@ const team = await getCollection('team', ({ data }) => {
 const sortedTeam = team.sort((a, b) => {
   return (a.data.order || 999) - (b.data.order || 999);
 });
-
 ---
 
 <section class="px-4 py-16 mx-auto max-w-6xl lg:py-20">
@@ -59,7 +57,11 @@ const sortedTeam = team.sort((a, b) => {
                 class="text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
                 title="Email"
               >
-                <Icon name="tabler:mail" class="w-5 h-5" />
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                  <polyline points="3 7 12 13 21 7"></polyline>
+                </svg>
               </a>
             )}
             {member.data.socialLinks?.linkedin && (
@@ -70,7 +72,14 @@ const sortedTeam = team.sort((a, b) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Icon name="tabler:brand-linkedin" class="w-5 h-5" />
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                  <line x1="8" y1="11" x2="8" y2="16"></line>
+                  <line x1="8" y1="8" x2="8" y2="8.01"></line>
+                  <line x1="12" y1="16" x2="12" y2="11"></line>
+                  <path d="M16 16v-3a2 2 0 0 0 -4 0"></path>
+                </svg>
               </a>
             )}
             {member.data.socialLinks?.twitter && (
@@ -81,7 +90,10 @@ const sortedTeam = team.sort((a, b) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Icon name="tabler:brand-twitter" class="w-5 h-5" />
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+                </svg>
               </a>
             )}
             {member.data.socialLinks?.researchgate && (
@@ -92,7 +104,13 @@ const sortedTeam = team.sort((a, b) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Icon name="tabler:books" class="w-5 h-5" />
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M12 10v.01"></path>
+                  <path d="M3 19l18 -14"></path>
+                  <path d="M15 5l-3 5.5l3 5.5"></path>
+                  <path d="M9 5l3 5.5l-3 5.5"></path>
+                </svg>
               </a>
             )}
             {member.data.socialLinks?.orcid && (
@@ -103,7 +121,13 @@ const sortedTeam = team.sort((a, b) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Icon name="tabler:fingerprint" class="w-5 h-5" />
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M7 12h3v4h-3z"></path>
+                  <path d="M10.5 6h-6.5v12h6.5"></path>
+                  <path d="M16 21h3v-4h-3z"></path>
+                  <path d="M19.5 17h-6.5v-12h6.5"></path>
+                </svg>
               </a>
             )}
           </div>

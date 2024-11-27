@@ -30,4 +30,10 @@ export type UIKey =
   | 'contact.address.line4'
   | 'contact.address.line5'
   | 'contact.address.line6'
-  | 'contact.address.line7';
+  | 'contact.address.line7'
+  | 'meta.events.description'
+  | 'meta.news.description'
+  | 'meta.team.description'
+  | 'meta.cookies.description'
+  | 'meta.privacy.description'
+  | 'meta.contact.description';
