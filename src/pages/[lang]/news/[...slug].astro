@@ -62,6 +62,9 @@ const metadata = {
 };
 
 const { Content } = await entry.render();
+if (!Content) {
+  return Astro.redirect(`/${lang || 'en'}/404`);
+}
 ---
 
 <Layout metadata={metadata}>
@@ -82,7 +85,7 @@ const { Content } = await entry.render();
       )
     }
     <div class="mx-auto prose dark:prose-invert max-w-4xl">
-      <Content />
+      {Content && <Content />}
     </div>
   </article>
 </Layout>
