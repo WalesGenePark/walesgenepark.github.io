@@ -8,16 +8,18 @@ import type { MetaData } from '~/types/metaData';
 import ContactPage from '~/components/widgets/ContactPage.astro';
 import Events from '~/components/widgets/Events.astro';
 import News from '~/components/widgets/News.astro';
-import Team from '~/components/widgets/Team.astro';
 import Policy from '~/components/widgets/Policy.astro';
 
 // Get static paths
 export function getStaticPaths() {
-  return Object.entries(sectionRoutes).flatMap(([section]) =>
-    languages.map((lang) => ({
-      params: { lang, section },
-    }))
-  );
+  const excludedSections = ['team']; // Exclude team as it has its own route
+  return Object.entries(sectionRoutes)
+    .filter(([section]) => !excludedSections.includes(section))
+    .flatMap(([section]) =>
+      languages.map((lang) => ({
+        params: { lang, section },
+      }))
+    );
 }
 
 const { lang, section } = Astro.params;
@@ -58,9 +60,7 @@ const baseComponents = {
   contact: ContactPage,
   events: Events,
   news: News,
-  team: Team,
-  privacy: Policy,
-  cookies: Policy,
+  policy: Policy,
 } as const;
 
 // Redirect /calendar to /events
