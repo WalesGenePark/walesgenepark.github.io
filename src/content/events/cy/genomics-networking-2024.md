@@ -8,7 +8,7 @@ description: 'Ymunwch â chymuned genomeg Cymru ar gyfer noson o rwydweithio, rh
 location: "Gwesty'r Park Plaza, Caerdydd"
 type: 'networking'
 registrationLink: 'https://walesgenepark.github.io/events/genomics-networking-2024/register'
-image: '/images/events/networking-event.jpg'
+image: '/images/events/genomics-networking.jpg'
 ---
 
 Ymunwch â ni ar gyfer noson o rwydweithio proffesiynol gyda'r gymuned genomeg yng Nghymru. Cyfle gwych i gwrdd â chydweithwyr, rhannu syniadau, a thrafod y datblygiadau diweddaraf ym maes genomeg.

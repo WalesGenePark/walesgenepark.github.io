@@ -8,7 +8,7 @@ description: "Ymunwch â'n cyfarfod misol ar gyfer teuluoedd a phobl sy'n byw gy
 location: 'Canolfan Gymunedol Treganna, Caerdydd'
 type: 'support-group'
 registrationLink: 'https://walesgenepark.github.io/events/rare-disease-support-2024/register'
-image: '/images/events/support-group.jpg'
+image: '/images/events/rare-disease-support.jpg'
 ---
 
 Croeso i Grŵp Cymorth Clefydau Prin Parc Geneteg Cymru. Mae'r grŵp hwn yn cyfarfod yn fisol i ddarparu cymorth, gwybodaeth a chyfeillgarwch i bobl sy'n byw gyda chlefydau prin a'u teuluoedd.

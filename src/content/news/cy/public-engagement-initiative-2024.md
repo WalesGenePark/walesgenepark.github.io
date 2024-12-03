@@ -4,7 +4,6 @@ title: "Parc Geneteg Cymru yn Lansio Menter Ymgysylltu â'r Cyhoedd Arloesol"
 publishDate: 2024-07-01
 description: "Rhaglen gynhwysfawr i ymgysylltu â'r cyhoedd yng Nghymru mewn genomeg trwy arddangosfeydd rhyngweithiol, gweithdai, a llwyfannau digidol."
 image: '/images/news/public-engagement-initiative.jpg'
-fullArticleLink: 'https://walesgenepark.github.io/news/public-engagement-initiative-2024'
 ---
 
 Mae Parc Geneteg Cymru yn falch o gyhoeddi lansiad "Genomeg i Bawb yng Nghymru," menter ymgysylltu â'r cyhoedd uchelgeisiol wedi'i dylunio i wneud genomeg yn hygyrch ac yn berthnasol i gymunedau ledled Cymru. Mae'r rhaglen gynhwysfawr hon yn cyfuno llwyfannau digidol arloesol, arddangosfeydd rhyngweithiol, a gweithdai ymarferol i bontio'r bwlch rhwng ymchwil genetig arloesol a dealltwriaeth y cyhoedd.

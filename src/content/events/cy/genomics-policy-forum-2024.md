@@ -8,7 +8,7 @@ description: "Ymunwch â ni ar gyfer fforwm polisi blynyddol Parc Geneteg Cymru,
 location: 'Senedd Cymru, Bae Caerdydd'
 type: 'conference'
 registrationLink: 'https://walesgenepark.github.io/events/genomics-policy-forum-2024/register'
-image: '/images/events/policy-forum.jpg'
+image: '/images/events/genomics-policy-forum.jpg'
 ---
 
 Croeso i Fforwm Polisi Genomeg Cymru 2024, digwyddiad blynyddol sy'n dwyn ynghyd lunwyr polisi, academyddion, gweithwyr gofal iechyd proffesiynol, a rhanddeiliaid i drafod dyfodol genomeg yng Nghymru.

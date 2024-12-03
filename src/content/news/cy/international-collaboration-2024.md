@@ -4,7 +4,6 @@ title: 'Parc Geneteg Cymru yn Cyhoeddi Cydweithrediad Rhyngwladol Pwysig ar Geno
 publishDate: 2024-10-15
 description: 'Partneriaeth arloesol gyda sefydliadau genomeg blaenllaw ledled y byd i astudio amrywiaeth genetig yn y boblogaeth Gymreig.'
 image: '/images/news/international-collaboration.jpg'
-fullArticleLink: 'https://walesgenepark.github.io/news/international-collaboration-2024'
 ---
 
 Mae Parc Geneteg Cymru yn falch o gyhoeddi cydweithrediad rhyngwladol arwyddocaol gyda'r nod o astudio amrywiaeth genetig o fewn y boblogaeth Gymreig yn gynhwysfawr. Mae'r prosiect uchelgeisiol hwn, sy'n cynnwys partneriaethau â sefydliadau genomeg blaenllaw o draws Ewrop, Gogledd America, ac Asia, yn cynrychioli un o'r mentrau genomeg poblogaeth mwyaf a gynhaliwyd erioed yng Nghymru.

@@ -8,7 +8,7 @@ description: "Ymunwch â ni ar Ddiwrnod Clefydau Prin y Byd ar gyfer cynhadledd 
 location: 'Canolfan Gynadledda Cymru, Caerdydd'
 type: 'conference'
 registrationLink: 'https://walesgenepark.github.io/events/rare-disease-conference-2024/register'
-image: '/images/events/rare-disease-conf.jpg'
+image: '/images/events/rare-disease-conference.jpg'
 ---
 
 Croeso i Gynhadledd Clefydau Prin Cymru 2024, digwyddiad blynyddol sy'n dwyn ynghyd arbenigwyr meddygol, ymchwilwyr, cleifion a theuluoedd i drafod datblygiadau mewn gofal clefydau prin.

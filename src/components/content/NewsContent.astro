@@ -1,0 +1,43 @@
+---
+import type { NewsEntry } from '~/types/content';
+
+interface Props {
+  entry: NewsEntry;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const formatDate = (date: Date, lang: 'en' | 'cy') => {
+  return date.toLocaleDateString(lang === 'cy' ? 'cy' : 'en-GB', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+};
+---
+
+<article class="mx-auto max-w-4xl px-4 py-16 lg:py-20">
+  <div class="mb-10">
+    <h1 class="text-center font-bold leading-tighter tracking-tighter font-heading text-4xl md:text-5xl">
+      {entry.data.title}
+    </h1>
+
+    <div class="text-center mt-4 text-gray-600 dark:text-slate-400">
+      {formatDate(entry.data.publishDate, entry.data.lang)}
+    </div>
+  </div>
+
+  {entry.data.image && (
+    <img
+      src={entry.data.image}
+      class="mx-auto rounded-md shadow-lg mb-6"
+      alt={entry.data.description || ''}
+      loading="lazy"
+    />
+  )}
+
+  <div class="mx-auto prose dark:prose-invert max-w-4xl">
+    <Content />
+  </div>
+</article>

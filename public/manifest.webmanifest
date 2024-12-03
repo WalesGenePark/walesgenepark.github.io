@@ -1,0 +1,16 @@
+{
+  "name": "Wales Gene Park",
+  "short_name": "WGP",
+  "description": "Wales Gene Park - Advancing Genomic Medicine in Wales",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f766e",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

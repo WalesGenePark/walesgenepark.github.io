@@ -1,7 +1,7 @@
 ---
 title: 'Ffair Gyrfaoedd Myfyrwyr 2024'
 description: 'Ymunwch â ni ar gyfer ein ffair gyrfaoedd flynyddol yn arddangos cyfleoedd mewn genomeg a meddygaeth enetig.'
-image: '/images/events/careers-fair-2024.jpg'
+image: '/images/events/student-careers-fair.jpg'
 date: 2024-03-20T00:00:00.000Z
 startTime: '11:00'
 endTime: '16:00'

@@ -5,6 +5,8 @@ const news = defineCollection({
     title: z.string(),
     description: z.string().optional(),
     image: z.string().optional(),
+    author: z.string().optional(),
+    category: z.string().optional(),
     publishDate: z.date(),
     lang: z.enum(['en', 'cy']),
   }),
@@ -14,20 +16,15 @@ const events = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
+    location: z.string().optional(),
+    startTime: z.string().optional(),
+    endTime: z.string().optional(),
     image: z.string().optional(),
     date: z.date(),
-    startTime: z
-      .string()
-      .regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/)
-      .optional(), // Format: "HH:mm" (24-hour)
-    endTime: z
-      .string()
-      .regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/)
-      .optional(), // Format: "HH:mm" (24-hour)
-    lang: z.enum(['en', 'cy']),
-    location: z.string().optional(),
     type: z.string().optional(),
     registrationLink: z.string().optional(),
+    lang: z.enum(['en', 'cy']),
+    order: z.number().optional(),
   }),
 });
 
@@ -54,14 +51,6 @@ const team = defineCollection({
   }),
 });
 
-const policy = defineCollection({
-  schema: z.object({
-    title: z.string(),
-    description: z.string().optional(),
-    lang: z.enum(['en', 'cy']),
-  }),
-});
-
 const privacy = defineCollection({
   schema: z.object({
     title: z.string(),
@@ -82,7 +71,6 @@ export const collections = {
   news,
   events,
   team,
-  policy,
   privacy,
   cookies,
 };

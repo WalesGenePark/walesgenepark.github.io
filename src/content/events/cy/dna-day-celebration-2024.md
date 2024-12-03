@@ -8,7 +8,7 @@ description: "Ymunwch â ni i ddathlu Diwrnod DNA gyda diwrnod llawn o weithgare
 location: 'Techniquest, Caerdydd'
 type: 'public-event'
 registrationLink: 'https://walesgenepark.github.io/events/dna-day-celebration-2024/register'
-image: '/images/events/dna-day.jpg'
+image: '/images/events/dna-day-celebration.jpg'
 ---
 
 Dewch i ddathlu Diwrnod DNA gyda Pharc Geneteg Cymru! Bydd y digwyddiad cyhoeddus hwn yn cynnwys gweithgareddau difyr ac addysgiadol i bob oed, gan ddangos y gwyddoniaeth ryfeddol y tu ôl i DNA.

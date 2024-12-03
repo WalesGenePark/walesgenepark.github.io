@@ -4,7 +4,6 @@ title: 'Wales Gene Park Launches Innovative Public Engagement Initiative'
 publishDate: 2024-07-01
 description: 'A comprehensive program to engage the Welsh public in genomics through interactive exhibitions, workshops, and digital platforms.'
 image: '/images/news/public-engagement-initiative.jpg'
-fullArticleLink: 'https://walesgenepark.github.io/news/public-engagement-initiative-2024'
 ---
 
 Wales Gene Park is excited to announce the launch of "Genomics for All Wales," an ambitious public engagement initiative designed to make genomics accessible and relevant to communities across Wales. This comprehensive program combines innovative digital platforms, interactive exhibitions, and hands-on workshops to bridge the gap between cutting-edge genetic research and public understanding.

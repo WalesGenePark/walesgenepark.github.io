@@ -1,46 +1,62 @@
 ---
+import { getCollection } from 'astro:content';
 import Layout from '~/layouts/PageLayout.astro';
-import { useTranslations } from '~/i18n/utils';
-import { isValidSection, getAlternateSection, getSectionTitle, sectionRoutes, type Section } from '~/i18n/routes';
+import ContentRouter from '~/components/content/ContentRouter.astro';
+import News from '~/components/widgets/News.astro';
+import Events from '~/components/widgets/Events.astro';
+import ContactPage from '~/components/widgets/ContactPage.astro';
+import { getLangFromUrl, useTranslations } from '~/i18n/utils';
 import { languages } from '~/i18n/config';
+import { isValidSection, getAlternateSection, getSectionTitle, sectionRoutes } from '~/i18n/routes';
 import type { LanguageCode } from '~/i18n/routes';
 import type { MetaData } from '~/types/metaData';
-import ContactPage from '~/components/widgets/ContactPage.astro';
-import Events from '~/components/widgets/Events.astro';
-import News from '~/components/widgets/News.astro';
-import Policy from '~/components/widgets/Policy.astro';
+import type { ContentEntry } from '~/types/content';
 
-// Get static paths
-export function getStaticPaths() {
-  const excludedSections = ['team']; // Exclude team as it has its own route
-  return Object.entries(sectionRoutes)
-    .filter(([section]) => !excludedSections.includes(section))
-    .flatMap(([section]) =>
-      languages.map((lang) => ({
-        params: { lang, section },
-      }))
-    );
+// Get static paths for all sections and languages
+export async function getStaticPaths() {
+  const sections = ['privacy', 'cookies', 'news', 'events', 'contact'];
+  return sections.flatMap((section) =>
+    languages.map((lang) => ({
+      params: { lang, section },
+    }))
+  );
 }
 
+// Get current language and section from URL
 const { lang, section } = Astro.params;
 const currentLang = lang as LanguageCode;
+const t = useTranslations(currentLang);
 
 // Validate language
 if (!['en', 'cy'].includes(currentLang)) {
-  return Astro.redirect('/en');
+  return Astro.redirect('/404');
 }
-
-const t = useTranslations(currentLang);
 
 if (!isValidSection(section)) {
   return Astro.redirect(`/${currentLang}/404`);
 }
 
-const alternateSection = getAlternateSection(section, currentLang);
+// Handle different section types
+let entry;
+let entries;
 
+if (section === 'privacy' || section === 'cookies') {
+  entries = await getCollection(section, ({ id }) => {
+    return id.startsWith(`${currentLang}/`);
+  });
+  entry = entries[0];
+  
+  // Handle 404 for policy pages
+  if (!entry) {
+    return Astro.redirect(`/${currentLang}/404`);
+  }
+}
+
+// Set metadata
+const alternateSection = getAlternateSection(section, currentLang);
 const metadata: MetaData = {
-  title: getSectionTitle(section, currentLang),
-  description: t(`meta.${section}.description`),
+  title: entry?.data.title || getSectionTitle(section, currentLang),
+  description: entry?.data.description || t(`meta.${section}.description`),
   alternateLinks: [
     {
       href: `/${currentLang === 'en' ? 'cy' : 'en'}/${alternateSection}`,
@@ -48,33 +64,18 @@ const metadata: MetaData = {
     },
   ],
   openGraph: {
-    title: getSectionTitle(section, currentLang),
-    description: t(`meta.${section}.description`),
+    title: entry?.data.title || getSectionTitle(section, currentLang),
+    description: entry?.data.description || t(`meta.${section}.description`),
     type: 'website',
     url: `${Astro.site}${currentLang}/${section}`,
   },
 };
-
-// Map base sections to components
-const baseComponents = {
-  contact: ContactPage,
-  events: Events,
-  news: News,
-} as const;
-
-// Handle policy sections
-const isPolicySection = section === 'privacy' || section === 'cookies';
-const Component = isPolicySection ? Policy : baseComponents[section as keyof typeof baseComponents];
-
-if (!Component) {
-  return Astro.redirect(`/${currentLang}/404`);
-}
 ---
 
 <Layout metadata={metadata}>
-  {section === 'contact' && <ContactPage />}
-  {section === 'events' && <Events />}
+  {section === 'privacy' && <ContentRouter entry={entry} />}
+  {section === 'cookies' && <ContentRouter entry={entry} />}
   {section === 'news' && <News />}
-  {section === 'privacy' && <Policy section="privacy" />}
-  {section === 'cookies' && <Policy section="cookies" />}
+  {section === 'events' && <Events />}
+  {section === 'contact' && <ContactPage />}
 </Layout>

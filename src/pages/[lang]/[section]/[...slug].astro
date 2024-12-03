@@ -1,25 +1,21 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '~/layouts/PageLayout.astro';
+import ContentRouter from '~/components/content/ContentRouter.astro';
 import { isValidSection, getAlternateSection, getSectionTitle } from '~/i18n/routes';
 import type { LanguageCode } from '~/i18n/routes';
 import type { ContentEntry } from '~/types/content';
 
 export async function getStaticPaths() {
-  const collections = ['news', 'events', 'team', 'policy'] as const;
-  type Collection = (typeof collections)[number];
-
-  const paths: {
-    params: { lang: string; section: Collection; slug: string };
-    props: { entry: ContentEntry };
-  }[] = [];
+  const collections = ['news', 'events', 'team'] as const;
+  const paths = [];
 
   for (const collection of collections) {
     const entries = await getCollection(collection);
-
+    
     for (const entry of entries) {
       const [lang, ...slugParts] = entry.slug.split('/');
-
+      
       if (lang === 'en' || lang === 'cy') {
         paths.push({
           params: {
@@ -27,7 +23,7 @@ export async function getStaticPaths() {
             section: collection,
             slug: slugParts.join('/'),
           },
-          props: { entry: entry as ContentEntry },
+          props: { entry },
         });
       }
     }
@@ -41,54 +37,50 @@ interface Props {
 }
 
 const { lang, section, slug } = Astro.params;
-const { entry } = Astro.props as Props;
+const { entry } = Astro.props;
 
+// Validate parameters
 if (!entry || !lang || !section || !isValidSection(section)) {
   return Astro.redirect(`/${lang || 'en'}/404`);
+}
+
+// Ensure the entry matches the section
+if (entry.collection !== section) {
+  return Astro.redirect(`/${lang}/404`);
+}
+
+// Ensure the language matches
+const [entryLang] = entry.slug.split('/');
+if (entryLang !== lang) {
+  return Astro.redirect(`/${lang}/404`);
 }
 
 const alternateSection = getAlternateSection(section, lang as LanguageCode);
 const sectionTitle = getSectionTitle(section, lang as LanguageCode);
 
+// Generate the alternate language URL
+const alternateSlug = slug;
+const alternateLanguage = lang === 'en' ? 'cy' : 'en';
+
 const metadata = {
-  title: `${entry.data.title} | ${sectionTitle}`,
+  title: `${entry.data.title || entry.data.name} | ${sectionTitle}`,
   description: entry.data.description || '',
   alternateLinks: [
     {
-      href: `/${lang === 'en' ? 'cy' : 'en'}/${alternateSection}/${slug}`,
-      hreflang: lang === 'en' ? 'cy' : 'en',
+      href: `/${alternateLanguage}/${alternateSection}/${alternateSlug}`,
+      hreflang: alternateLanguage,
     },
   ],
   openGraph: {
-    title: entry.data.title,
+    title: entry.data.title || entry.data.name,
     description: entry.data.description || '',
     type: 'article',
     url: `${Astro.site}${lang}/${section}/${slug}`,
+    image: entry.data.image,
   },
 };
-
-const content = await entry.render();
 ---
 
 <Layout metadata={metadata}>
-  <article class="mx-auto max-w-4xl px-4 py-16 lg:py-20">
-    <div class="mb-10">
-      <h1 class="text-center font-bold leading-tighter tracking-tighter font-heading text-4xl md:text-5xl">
-        {entry.data.title}
-      </h1>
-    </div>
-    {
-      'image' in entry.data && entry.data.image && (
-        <img
-          src={entry.data.image}
-          class="mx-auto rounded-md shadow-lg mb-6"
-          alt={entry.data.description || ''}
-          loading="lazy"
-        />
-      )
-    }
-    <div class="mx-auto prose dark:prose-invert max-w-4xl">
-      {content}
-    </div>
-  </article>
+  <ContentRouter entry={entry} />
 </Layout>

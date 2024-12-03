@@ -4,7 +4,6 @@ title: "Parc Geneteg Cymru yn Agor Cyfleuster Profi Genomig o'r Radd Flaenaf"
 publishDate: 2024-12-01
 description: 'Mae buddsoddiad o £15 miliwn yn dwyn galluoedd profi genomig arloesol i Gymru, gan wella gwasanaethau diagnostig a galluoedd ymchwil.'
 image: '/images/news/new-testing-facility.jpg'
-fullArticleLink: 'https://walesgenepark.github.io/news/new-testing-facility-2024'
 ---
 
 Mae Parc Geneteg Cymru yn falch o gyhoeddi agoriad ei Gyfleuster Profi ac Ymchwil Genomig newydd o'r radd flaenaf yng Nghaerdydd. Mae'r buddsoddiad o £15 miliwn hwn yn cynrychioli cam sylweddol ymlaen yng ngalluoedd profi genomig Cymru ac yn gosod y wlad ar flaen y gad ym maes meddygaeth fanwl yn y Deyrnas Unedig.

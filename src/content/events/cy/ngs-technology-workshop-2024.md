@@ -8,7 +8,7 @@ description: 'Gweithdy dwys deuddydd yn canolbwyntio ar dechnolegau dilyniannu c
 location: 'Labordy Genomeg, Prifysgol Caerdydd'
 type: 'workshop'
 registrationLink: 'https://walesgenepark.github.io/events/ngs-technology-workshop-2024/register'
-image: '/images/events/ngs-workshop.jpg'
+image: '/images/events/ngs-technology-workshop.jpg'
 ---
 
 Croeso i Weithdy Technoleg NGS 2024, cwrs dwys deuddydd sy'n cynnig hyfforddiant ymarferol mewn technolegau dilyniannu cenhedlaeth nesaf.

@@ -4,7 +4,6 @@ title: 'Wales Gene Park Announces Major International Collaboration on Populatio
 publishDate: 2024-10-15
 description: 'A groundbreaking partnership with leading genomics institutions worldwide to study genetic diversity in the Welsh population.'
 image: '/images/news/international-collaboration.jpg'
-fullArticleLink: 'https://walesgenepark.github.io/news/international-collaboration-2024'
 ---
 
 Wales Gene Park is thrilled to announce a landmark international collaboration aimed at comprehensively studying genetic diversity within the Welsh population. This ambitious project, involving partnerships with leading genomics institutions from across Europe, North America, and Asia, represents one of the largest population genomics initiatives ever undertaken in Wales.

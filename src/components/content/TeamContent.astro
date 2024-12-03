@@ -1,0 +1,82 @@
+---
+import type { TeamEntry } from '~/types/content';
+
+interface Props {
+  entry: TeamEntry;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<article class="mx-auto max-w-4xl px-4 py-16 lg:py-20">
+  <div class="mb-10">
+    <h1 class="text-center font-bold leading-tighter tracking-tighter font-heading text-4xl md:text-5xl">
+      {entry.data.name}
+    </h1>
+
+    <div class="text-center mt-4 text-gray-600 dark:text-slate-400">
+      <div>{entry.data.title}</div>
+      {entry.data.department && (
+        <div class="mt-1">{entry.data.department}</div>
+      )}
+    </div>
+  </div>
+
+  {entry.data.image && (
+    <img
+      src={entry.data.image}
+      class="mx-auto rounded-md shadow-lg mb-6"
+      alt={entry.data.name}
+      loading="lazy"
+    />
+  )}
+
+  {entry.data.socialLinks && (
+    <div class="flex justify-center gap-4 mb-6">
+      {entry.data.socialLinks.linkedin && (
+        <a href={entry.data.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-primary-600">
+          LinkedIn
+        </a>
+      )}
+      {entry.data.socialLinks.twitter && (
+        <a href={entry.data.socialLinks.twitter} target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-primary-600">
+          Twitter
+        </a>
+      )}
+      {entry.data.socialLinks.researchgate && (
+        <a href={entry.data.socialLinks.researchgate} target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-primary-600">
+          ResearchGate
+        </a>
+      )}
+      {entry.data.socialLinks.orcid && (
+        <a href={entry.data.socialLinks.orcid} target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-primary-600">
+          ORCID
+        </a>
+      )}
+    </div>
+  )}
+
+  {(entry.data.email || entry.data.phone) && (
+    <div class="text-center mb-6">
+      {entry.data.email && (
+        <div>
+          <a href={`mailto:${entry.data.email}`} class="text-primary-600 hover:underline">
+            {entry.data.email}
+          </a>
+        </div>
+      )}
+      {entry.data.phone && (
+        <div class="mt-1">
+          <a href={`tel:${entry.data.phone}`} class="text-primary-600 hover:underline">
+            {entry.data.phone}
+          </a>
+        </div>
+      )}
+    </div>
+  )}
+
+  <div class="mx-auto prose dark:prose-invert max-w-4xl">
+    <Content />
+  </div>
+</article>
