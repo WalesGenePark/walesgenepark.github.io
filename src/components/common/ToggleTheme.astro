@@ -36,11 +36,15 @@ const {
   }
 
   function initThemeToggle() {
-    const themeToggles = document.querySelectorAll<HTMLElement>('[data-aw-toggle-color-scheme]');
+    const themeToggles = document.querySelectorAll('[data-aw-toggle-color-scheme]');
     themeToggles.forEach((toggle) => {
       toggle.addEventListener('click', () => {
-        const isDark = document.documentElement.classList.contains('dark');
-        applyTheme(isDark ? 'light' : 'dark');
+        if (defaultTheme.endsWith(':only')) {
+          return;
+        }
+        const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        applyTheme(newTheme);
       });
     });
   }

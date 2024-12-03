@@ -43,18 +43,6 @@ import { SITE } from '~/config';
       document.querySelector('#header nav')?.classList.toggle('hidden');
     });
 
-    // Theme toggle
-    attachEvent('[data-aw-toggle-color-scheme]', 'click', function () {
-      if (defaultTheme.endsWith(':only')) {
-        return;
-      }
-
-      const isDark = document.documentElement.classList.contains('dark');
-      const newTheme = isDark ? 'light' : 'dark';
-
-      applyTheme(newTheme);
-      localStorage.theme = newTheme;
-    });
 
     attachEvent('[data-aw-social-share]', 'click', function (_, elem) {
       const network = elem.getAttribute('data-aw-social-share');

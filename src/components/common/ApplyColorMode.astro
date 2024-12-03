@@ -22,22 +22,4 @@ import { SITE } from '~/config';
     applyTheme('light');
   }
 
-  function attachEvent(selector, event, fn) {
-    const matches = typeof selector === 'string' ? document.querySelectorAll(selector) : selector;
-    if (matches && matches.length) {
-      matches.forEach((elem) => {
-        elem.addEventListener(event, (e) => fn(e, elem), false);
-      });
-    }
-  }
-
-  window.onload = function () {
-    attachEvent('[data-aw-toggle-color-scheme]', 'click', function () {
-      if (defaultTheme.endsWith(':only')) {
-        return;
-      }
-      document.documentElement.classList.toggle('dark');
-      localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-    });
-  };
 </script>
