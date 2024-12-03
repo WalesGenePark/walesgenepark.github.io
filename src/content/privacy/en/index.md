@@ -1,6 +1,7 @@
 ---
-title: Privacy Policy
-layout: ~/layouts/MarkdownLayout.astro
+lang: 'en'
+title: 'Privacy Policy'
+description: 'Information about how we handle your personal data'
 ---
 
 # Privacy Policy

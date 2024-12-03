@@ -60,21 +60,21 @@ const baseComponents = {
   contact: ContactPage,
   events: Events,
   news: News,
-  policy: Policy,
 } as const;
 
-// Redirect /calendar to /events
-if (section === ('calendar' as Section)) {
-  return Astro.redirect(`/${currentLang}/events`);
-}
+// Handle policy sections
+const isPolicySection = section === 'privacy' || section === 'cookies';
+const Component = isPolicySection ? Policy : baseComponents[section as keyof typeof baseComponents];
 
-const SectionComponent = baseComponents[section as keyof typeof baseComponents];
-
-if (!SectionComponent) {
+if (!Component) {
   return Astro.redirect(`/${currentLang}/404`);
 }
 ---
 
 <Layout metadata={metadata}>
-  <SectionComponent section={section} />
+  {section === 'contact' && <ContactPage />}
+  {section === 'events' && <Events />}
+  {section === 'news' && <News />}
+  {section === 'privacy' && <Policy section="privacy" />}
+  {section === 'cookies' && <Policy section="cookies" />}
 </Layout>

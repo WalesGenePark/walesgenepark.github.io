@@ -62,9 +62,27 @@ const policy = defineCollection({
   }),
 });
 
+const privacy = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    lang: z.enum(['en', 'cy']),
+  }),
+});
+
+const cookies = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    lang: z.enum(['en', 'cy']),
+  }),
+});
+
 export const collections = {
   news,
   events,
   team,
   policy,
+  privacy,
+  cookies,
 };

@@ -1,6 +1,7 @@
 ---
-title: Polisi Preifatrwydd
-layout: ~/layouts/MarkdownLayout.astro
+lang: 'cy'
+title: 'Polisi Preifatrwydd'
+description: 'Gwybodaeth am sut rydym yn trin eich data personol'
 ---
 
 # Polisi Preifatrwydd

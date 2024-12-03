@@ -72,20 +72,32 @@ export interface EventEntry extends BaseEntry {
   };
 }
 
-export interface PolicyEntry extends BaseEntry {
-  collection: 'policy';
-  data: {
-    title: string;
-    description?: string;
-    lang: LanguageCode;
-  };
+export interface PolicyData {
+  title: string;
+  description?: string;
+  lang: LanguageCode;
 }
 
-export type ContentEntry = NewsEntry | EventEntry | TeamEntry | PolicyEntry;
+export type PrivacyEntry = CollectionEntry<'privacy'> & {
+  data: PolicyData;
+};
+
+export type CookiesEntry = CollectionEntry<'cookies'> & {
+  data: PolicyData;
+};
+
+export interface PolicyEntry extends BaseEntry {
+  collection: 'policy';
+  data: PolicyData;
+}
+
+export type ContentEntry = NewsEntry | EventEntry | TeamEntry | PolicyEntry | PrivacyEntry | CookiesEntry;
 
 export interface ContentEntryMap {
   news: NewsEntry;
   events: EventEntry;
   team: TeamEntry;
   policy: PolicyEntry;
+  privacy: PrivacyEntry;
+  cookies: CookiesEntry;
 }

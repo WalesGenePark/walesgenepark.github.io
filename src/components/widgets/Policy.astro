@@ -2,21 +2,25 @@
 import { getCollection } from 'astro:content';
 import { getLangFromUrl, useTranslations } from '~/i18n/utils';
 import type { LanguageCode } from '~/i18n/routes';
-import type { PolicyEntry } from '~/types/content';
+import type { PrivacyEntry, CookiesEntry } from '~/types/content';
 
-interface Props {
-  section: string;
+export interface Props {
+  section: 'privacy' | 'cookies';
 }
 
 const { section } = Astro.props;
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang as LanguageCode);
+const currentLang = getLangFromUrl(Astro.url) as LanguageCode;
+const t = useTranslations(currentLang);
 
-const policies = (await getCollection('policy', (entry) => entry.data.lang === lang)) as PolicyEntry[];
-const entry = policies.find((policy) => policy.slug === `${lang}/${section}`);
-const rendered = entry ? await entry.render() : null;
+// Get the content collection for the current section
+const entries = await getCollection(section, ({ id }) => {
+  return id.startsWith(`${currentLang}/`);
+}) as (PrivacyEntry | CookiesEntry)[];
 
-const policyTitle = entry?.data.title || t('policy.title');
+const entry = entries[0];
+const { Content } = await entry.render();
+
+const policyTitle = entry?.data.title || t(`nav.${section}`);
 ---
 
 <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
@@ -27,5 +31,7 @@ const policyTitle = entry?.data.title || t('policy.title');
     {entry?.data.description && <p class="text-xl text-gray-600 dark:text-slate-400">{entry.data.description}</p>}
   </div>
 
-  {rendered?.Content && <div class="prose prose-lg max-w-none dark:prose-invert">{rendered.Content}</div>}
+  <div class="prose prose-lg max-w-none dark:prose-invert">
+    <Content />
+  </div>
 </section>

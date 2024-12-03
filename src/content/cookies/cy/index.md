@@ -1,6 +1,7 @@
 ---
-title: Polisi Cwcis
-layout: ~/layouts/MarkdownLayout.astro
+lang: 'cy'
+title: 'Polisi Cwcis'
+description: 'Gwybodaeth am sut rydym yn defnyddio cwcis ar ein gwefan'
 ---
 
 # Polisi Cwcis
