@@ -45,3 +45,4 @@ yarn.lock
 # Local development
 local/
 *.local
+*.aider*

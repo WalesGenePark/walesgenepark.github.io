@@ -26,26 +26,26 @@ const {
 }
 
 <script>
-  function applyTheme(theme: string) {
-    if (theme === 'dark') {
+  function toggleTheme() {
+    // Get current theme
+    const isDark = document.documentElement.classList.contains('dark');
+    const newTheme = isDark ? 'light' : 'dark';
+    
+    // Apply the new theme
+    if (newTheme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
     }
-    localStorage.setItem('theme', theme);
+    
+    // Save the preference
+    localStorage.setItem('theme', newTheme);
   }
 
   function initThemeToggle() {
     const themeToggles = document.querySelectorAll('[data-aw-toggle-color-scheme]');
     themeToggles.forEach((toggle) => {
-      toggle.addEventListener('click', () => {
-        if (defaultTheme.endsWith(':only')) {
-          return;
-        }
-        const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        applyTheme(newTheme);
-      });
+      toggle.addEventListener('click', toggleTheme);
     });
   }
 

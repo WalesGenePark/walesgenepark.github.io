@@ -9,17 +9,32 @@ import { SITE } from '~/config';
     } else {
       document.documentElement.classList.remove('dark');
     }
+    localStorage.setItem('theme', theme);
   }
 
-  if ((defaultTheme && defaultTheme.endsWith(':only')) || (!localStorage.theme && defaultTheme !== 'system')) {
-    applyTheme(defaultTheme.replace(':only', ''));
-  } else if (
-    localStorage.theme === 'dark' ||
-    (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-  ) {
-    applyTheme('dark');
-  } else {
-    applyTheme('light');
+  function getInitialTheme() {
+    // Check if there's a saved theme preference
+    if (localStorage.theme) {
+      return localStorage.theme;
+    }
+    
+    // If no saved preference, check system preference
+    if (defaultTheme === 'system') {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    
+    // Fall back to the default theme
+    return defaultTheme;
   }
 
+  // Apply the initial theme
+  const initialTheme = getInitialTheme();
+  applyTheme(initialTheme);
+
+  // Listen for system theme changes if using system preference
+  if (defaultTheme === 'system' && !localStorage.theme) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      applyTheme(e.matches ? 'dark' : 'light');
+    });
+  }
 </script>
