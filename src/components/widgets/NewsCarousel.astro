@@ -147,8 +147,8 @@ const getTypeLabel = (type: 'news' | 'events') => {
 
       // Calculate transform based on viewport width
       const isMobile = window.innerWidth < 768;
-      const slideWidth = isMobile ? 100 : (100 / 3);
-      
+      const slideWidth = isMobile ? 100 : 100 / 3;
+
       // Move track
       track.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
 
