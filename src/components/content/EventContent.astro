@@ -29,28 +29,28 @@ const formatTime = (time: string) => {
 
     <div class="text-center mt-4 text-gray-600 dark:text-slate-400">
       <div>{formatDate(entry.data.date, entry.data.lang)}</div>
-      {entry.data.startTime && (
-        <div class="mt-1">
-          {entry.data.startTime}
-          {entry.data.endTime && ` - ${entry.data.endTime}`}
-        </div>
-      )}
-      {entry.data.location && (
-        <div class="mt-1">
-          {entry.data.location}
-        </div>
-      )}
+      {
+        entry.data.startTime && (
+          <div class="mt-1">
+            {formatTime(entry.data.startTime)}
+            {entry.data.endTime && ` - ${formatTime(entry.data.endTime)}`}
+          </div>
+        )
+      }
+      {entry.data.location && <div class="mt-1">{entry.data.location}</div>}
     </div>
   </div>
 
-  {entry.data.image && (
-    <img
-      src={entry.data.image}
-      class="mx-auto rounded-md shadow-lg mb-6"
-      alt={entry.data.description || ''}
-      loading="lazy"
-    />
-  )}
+  {
+    entry.data.image && (
+      <img
+        src={entry.data.image}
+        class="mx-auto rounded-md shadow-lg mb-6"
+        alt={entry.data.description || ''}
+        loading="lazy"
+      />
+    )
+  }
 
   <div class="mx-auto prose dark:prose-invert max-w-4xl">
     <Content />

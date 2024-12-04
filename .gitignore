@@ -46,3 +46,6 @@ yarn.lock
 local/
 *.local
 *.aider*
+
+# Scripts directory
+scripts/

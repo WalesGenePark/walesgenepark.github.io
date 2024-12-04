@@ -28,14 +28,16 @@ const formatDate = (date: Date, lang: 'en' | 'cy') => {
     </div>
   </div>
 
-  {entry.data.image && (
-    <img
-      src={entry.data.image}
-      class="mx-auto rounded-md shadow-lg mb-6"
-      alt={entry.data.description || ''}
-      loading="lazy"
-    />
-  )}
+  {
+    entry.data.image && (
+      <img
+        src={entry.data.image}
+        class="mx-auto rounded-md shadow-lg mb-6"
+        alt={entry.data.description || ''}
+        loading="lazy"
+      />
+    )
+  }
 
   <div class="mx-auto prose dark:prose-invert max-w-4xl">
     <Content />

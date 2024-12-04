@@ -8,14 +8,21 @@ import type { ContentEntry } from '~/types/content';
 
 export async function getStaticPaths() {
   const collections = ['news', 'events', 'team'] as const;
-  const paths = [];
+  const paths: Array<{
+    params: {
+      lang: 'en' | 'cy';
+      section: (typeof collections)[number];
+      slug: string;
+    };
+    props: { entry: ContentEntry };
+  }> = [];
 
   for (const collection of collections) {
     const entries = await getCollection(collection);
-    
+
     for (const entry of entries) {
       const [lang, ...slugParts] = entry.slug.split('/');
-      
+
       if (lang === 'en' || lang === 'cy') {
         paths.push({
           params: {
@@ -63,8 +70,8 @@ const alternateSlug = slug;
 const alternateLanguage = lang === 'en' ? 'cy' : 'en';
 
 const metadata = {
-  title: `${entry.data.title || entry.data.name} | ${sectionTitle}`,
-  description: entry.data.description || '',
+  title: `${entry.data.title} | ${sectionTitle}`,
+  description: 'description' in entry.data ? entry.data.description : '',
   alternateLinks: [
     {
       href: `/${alternateLanguage}/${alternateSection}/${alternateSlug}`,
@@ -72,13 +79,13 @@ const metadata = {
     },
   ],
   openGraph: {
-    title: entry.data.title || entry.data.name,
-    description: entry.data.description || '',
+    title: entry.data.title,
+    description: 'description' in entry.data ? entry.data.description : '',
     type: 'article',
     url: `${Astro.site}${lang}/${section}/${slug}`,
-    image: entry.data.image,
+    image: 'image' in entry.data ? entry.data.image : undefined,
   },
-};
+} as const;
 ---
 
 <Layout metadata={metadata}>

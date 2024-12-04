@@ -1,5 +1,4 @@
 import type { CollectionEntry } from 'astro:content';
-import type { LanguageCode } from '~/i18n/routes';
 
 export type NewsEntry = CollectionEntry<'news'>;
 export type EventEntry = CollectionEntry<'events'>;
@@ -9,35 +8,35 @@ export type CookiesEntry = CollectionEntry<'cookies'>;
 
 export type ContentEntry = NewsEntry | EventEntry | TeamEntry | PrivacyEntry | CookiesEntry;
 
-export interface NewsData {
+// Common interface for all content types
+interface BaseContentData {
   title: string;
   description?: string;
   image?: string;
+  lang: 'en' | 'cy';
+}
+
+export interface NewsData extends BaseContentData {
   author?: string;
   category?: string;
   publishDate: Date;
-  lang: 'en' | 'cy';
 }
 
-export interface EventData {
-  title: string;
-  description?: string;
+export interface EventData extends BaseContentData {
   location?: string;
   startTime?: string;
   endTime?: string;
-  image?: string;
   date: Date;
+  startDate?: Date; // Added for backward compatibility
   type?: string;
   registrationLink?: string;
-  lang: 'en' | 'cy';
   order?: number;
 }
 
-export interface TeamData {
+export interface TeamData extends BaseContentData {
   name: string;
   title: string;
   department?: string;
-  image?: string;
   bio?: string;
   email?: string;
   phone?: string;
@@ -49,21 +48,18 @@ export interface TeamData {
     researchgate?: string;
     orcid?: string;
   };
-  lang: 'en' | 'cy';
 }
 
-export interface PolicyData {
-  title: string;
-  description?: string;
-  lang: 'en' | 'cy';
-}
+// Since PolicyData doesn't need additional fields beyond BaseContentData,
+// we can use BaseContentData directly instead of creating an empty interface
+export type PolicyData = BaseContentData;
 
 export interface ContentEntryMap {
-  'news': NewsEntry;
-  'events': EventEntry;
-  'team': TeamEntry;
-  'privacy': PrivacyEntry;
-  'cookies': CookiesEntry;
+  news: NewsEntry;
+  events: EventEntry;
+  team: TeamEntry;
+  privacy: PrivacyEntry;
+  cookies: CookiesEntry;
 }
 
 export interface BaseEntry {
@@ -71,11 +67,11 @@ export interface BaseEntry {
   slug: string;
   body: string;
   collection: string;
-  data: {
-    title: string;
-    description?: string;
-    image?: string;
-    lang: 'en' | 'cy';
-  };
+  data: BaseContentData;
+  title: string;
+  description?: string;
+  image?: string;
+  lang: 'en' | 'cy';
   render: () => Promise<{ Content: unknown }>;
+  Content: unknown;
 }

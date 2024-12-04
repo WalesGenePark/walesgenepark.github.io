@@ -15,7 +15,7 @@ const { entry } = Astro.props;
 const isNewsEntry = (entry: ContentEntry): entry is NewsEntry => entry.collection === 'news';
 const isEventEntry = (entry: ContentEntry): entry is EventEntry => entry.collection === 'events';
 const isTeamEntry = (entry: ContentEntry): entry is TeamEntry => entry.collection === 'team';
-const isPolicyEntry = (entry: ContentEntry): entry is PrivacyEntry | CookiesEntry => 
+const isPolicyEntry = (entry: ContentEntry): entry is PrivacyEntry | CookiesEntry =>
   entry.collection === 'privacy' || entry.collection === 'cookies';
 ---
 

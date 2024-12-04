@@ -17,12 +17,12 @@ import { SITE } from '~/config';
     if (localStorage.theme) {
       return localStorage.theme;
     }
-    
+
     // If no saved preference, check system preference
     if (defaultTheme === 'system') {
       return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
-    
+
     // Fall back to the default theme
     return defaultTheme;
   }

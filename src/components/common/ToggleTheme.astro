@@ -30,14 +30,14 @@ const {
     // Get current theme
     const isDark = document.documentElement.classList.contains('dark');
     const newTheme = isDark ? 'light' : 'dark';
-    
+
     // Apply the new theme
     if (newTheme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
     }
-    
+
     // Save the preference
     localStorage.setItem('theme', newTheme);
   }
