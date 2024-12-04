@@ -133,14 +133,14 @@ const socialLinks = [
         </button>
       </div>
 
-      <nav class="flex-grow overflow-y-auto p-4">
-        <ul class="space-y-4">
+      <nav class="flex-grow overflow-y-auto p-4 flex flex-col items-center">
+        <ul class="space-y-6 text-center w-full">
           {
             links.map(({ text, href }) => (
               <li>
                 <a
                   href={href}
-                  class="block text-lg font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                  class="block text-xl font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
                 >
                   {text}
                 </a>
@@ -149,8 +149,8 @@ const socialLinks = [
           }
         </ul>
 
-        <div class="mt-8 pt-8 border-t dark:border-gray-800">
-          <div class="flex justify-center gap-4 mb-4">
+        <div class="mt-12 pt-8 border-t dark:border-gray-800 w-full">
+          <div class="flex justify-center gap-6 mb-8">
             {
               socialLinks.map(({ name, href, icon }) => (
                 <a
@@ -160,30 +160,30 @@ const socialLinks = [
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Icon name={icon} class="w-6 h-6" />
+                  <Icon name={icon} class="w-7 h-7" />
                 </a>
               ))
             }
           </div>
 
-          <div class="flex justify-center items-center gap-1 text-sm mb-4">
+          <div class="flex justify-center items-center gap-2 text-base mb-8">
             <a
               href={enUrl}
-              class={`px-1 ${lang === 'en' ? 'text-primary font-bold' : 'text-gray-600 dark:text-gray-400'}`}
+              class={`px-2 ${lang === 'en' ? 'text-primary font-bold' : 'text-gray-600 dark:text-gray-400'}`}
             >
               EN
             </a>
             <span class="text-gray-400">|</span>
             <a
               href={cyUrl}
-              class={`px-1 ${lang === 'cy' ? 'text-primary font-bold' : 'text-gray-600 dark:text-gray-400'}`}
+              class={`px-2 ${lang === 'cy' ? 'text-primary font-bold' : 'text-gray-600 dark:text-gray-400'}`}
             >
               CY
             </a>
           </div>
 
           <div class="flex justify-center">
-            <ToggleTheme iconClass="w-6 h-6" />
+            <ToggleTheme iconClass="w-7 h-7" />
           </div>
         </div>
       </nav>
@@ -192,7 +192,7 @@ const socialLinks = [
 </header>
 
 <script>
-  document.addEventListener('astro:page-load', () => {
+  function initializeMenu() {
     const toggleMenu = document.querySelector('[data-toggle-menu]');
     const closeMenu = document.querySelector('[data-close-menu]');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -218,5 +218,11 @@ const socialLinks = [
         }
       });
     }
-  });
+  }
+
+  // Initialize on initial page load
+  initializeMenu();
+
+  // Re-initialize on page transitions
+  document.addEventListener('astro:page-load', initializeMenu);
 </script>
