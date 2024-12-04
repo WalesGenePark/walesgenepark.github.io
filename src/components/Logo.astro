@@ -1,10 +1,11 @@
 ---
-import { getAsset } from '~/utils/permalinks';
+import { Image } from 'astro:assets';
+import logo from '~/assets/images/wgp-logo.png';
 ---
 
 <a href="/" class="flex items-center pl-3 md:pl-6">
-  <img
-    src={getAsset('/src/assets/images/wgp-logo.png')}
+  <Image
+    src={logo}
     alt="Wales Gene Park Logo"
     class="h-12 md:h-16 w-auto object-contain"
   />
