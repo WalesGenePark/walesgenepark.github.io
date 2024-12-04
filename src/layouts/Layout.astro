@@ -9,6 +9,7 @@ import MetaTags from '~/components/common/MetaTags.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
 import ToggleTheme from '~/components/common/ToggleTheme.astro';
 import ApplyColorMode from '~/components/common/ApplyColorMode.astro';
+import ExternalServiceWarning from '~/components/common/ExternalServiceWarning.astro';
 
 export interface Props {
   metadata?: MetaData;
@@ -33,6 +34,7 @@ const textDirection: 'ltr' | 'rtl' = I18N.textDirection;
     <slot />
     <BasicScripts />
     <ToggleTheme />
+    <ExternalServiceWarning />
 
     <style is:global>
       :root {
