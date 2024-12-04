@@ -13,10 +13,12 @@ import type { MetaData } from '~/types/metaData';
 import type { CollectionEntry } from 'astro:content';
 
 // Get static paths for all sections and languages
-export async function getStaticPaths() {
-  const sections = ['team', 'news', 'events', 'privacy', 'cookies'];
+export function getStaticPaths() {
+  const sections = ['team', 'news', 'events', 'privacy', 'cookies', 'contact'] as const;
+  const languages = ['en', 'cy'] as const;
+
   return sections.flatMap((section) =>
-    ['en', 'cy'].map((lang) => ({
+    languages.map((lang) => ({
       params: { lang, section },
     }))
   );
@@ -35,12 +37,9 @@ const sectionTitle = getSectionTitle(section, lang as LanguageCode);
 
 let entry: CollectionEntry<'privacy' | 'cookies'> | null = null;
 
-if (section === 'privacy') {
-  const privacyEntries = await getCollection('privacy');
-  entry = privacyEntries.find(({ slug }) => slug.startsWith(lang + '/')) || null;
-} else if (section === 'cookies') {
-  const cookieEntries = await getCollection('cookies');
-  entry = cookieEntries.find(({ slug }) => slug.startsWith(lang + '/')) || null;
+if (section === 'privacy' || section === 'cookies') {
+  const entries = await getCollection(section);
+  entry = entries.find((e) => e.slug.startsWith(lang)) || null;
 }
 
 // Set metadata
@@ -66,7 +65,6 @@ const metadata: MetaData = {
   {section === 'team' && <Team />}
   {section === 'news' && <News />}
   {section === 'events' && <Events />}
-  {section === 'privacy' && entry && <ContentRouter entry={entry} />}
-  {section === 'cookies' && entry && <ContentRouter entry={entry} />}
+  {(section === 'privacy' || section === 'cookies') && entry && <ContentRouter entry={entry} />}
   {section === 'contact' && <ContactPage />}
 </Layout>

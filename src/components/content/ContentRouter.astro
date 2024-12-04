@@ -19,7 +19,12 @@ const isPolicyEntry = (entry: ContentEntry): entry is PrivacyEntry | CookiesEntr
   entry.collection === 'privacy' || entry.collection === 'cookies';
 ---
 
-{isNewsEntry(entry) && <NewsContent entry={entry} />}
-{isEventEntry(entry) && <EventContent entry={entry} />}
-{isTeamEntry(entry) && <TeamContent entry={entry} />}
-{isPolicyEntry(entry) && <PolicyContent entry={entry} />}
+{
+  (() => {
+    if (isNewsEntry(entry)) return <NewsContent entry={entry} />;
+    if (isEventEntry(entry)) return <EventContent entry={entry} />;
+    if (isTeamEntry(entry)) return <TeamContent entry={entry} />;
+    if (isPolicyEntry(entry)) return <PolicyContent entry={entry} />;
+    return null;
+  })()
+}

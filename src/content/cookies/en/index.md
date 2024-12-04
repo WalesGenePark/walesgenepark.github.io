@@ -45,4 +45,17 @@ You can control and/or delete cookies as you wish. You can delete all cookies th
 ## Contact Us
 
 If you have any questions about our cookie policy, please contact us at:
-[Contact Information]
+
+**Email:** walesgenepark@cardiff.ac.uk
+
+**Address:**  
+Institute of Medical Genetics  
+University Hospital of Wales  
+Heath Park  
+Cardiff  
+CF14 4XW
+
+**Social Media:**
+
+- Twitter: [@walesgenepark](https://twitter.com/walesgenepark)
+- LinkedIn: [Wales Gene Park](https://www.linkedin.com/company/wales-gene-park)

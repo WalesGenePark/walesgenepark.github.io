@@ -1,6 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 
 const news = defineCollection({
+  type: 'content',
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
@@ -13,6 +14,7 @@ const news = defineCollection({
 });
 
 const events = defineCollection({
+  type: 'content',
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
@@ -29,6 +31,7 @@ const events = defineCollection({
 });
 
 const team = defineCollection({
+  type: 'content',
   schema: z.object({
     name: z.string(),
     title: z.string(),
@@ -52,6 +55,7 @@ const team = defineCollection({
 });
 
 const privacy = defineCollection({
+  type: 'content',
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
@@ -60,6 +64,7 @@ const privacy = defineCollection({
 });
 
 const cookies = defineCollection({
+  type: 'content',
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),

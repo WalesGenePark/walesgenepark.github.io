@@ -46,4 +46,17 @@ You have the right to:
 ## Contact Us
 
 For any privacy-related questions or concerns, please contact us at:
-[Contact Information]
+
+**Email:** walesgenepark@cardiff.ac.uk
+
+**Address:**  
+Institute of Medical Genetics  
+University Hospital of Wales  
+Heath Park  
+Cardiff  
+CF14 4XW
+
+**Social Media:**
+
+- Twitter: [@walesgenepark](https://twitter.com/walesgenepark)
+- LinkedIn: [Wales Gene Park](https://www.linkedin.com/company/wales-gene-park)
