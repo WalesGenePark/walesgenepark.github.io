@@ -48,4 +48,4 @@ local/
 *.aider*
 
 # Scripts directory
-scripts/
+#scripts/
