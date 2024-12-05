@@ -14,14 +14,14 @@ const sortedTeam = team.sort((a, b) => {
 });
 ---
 
-<section class="px-4 py-16 mx-auto max-w-6xl lg:py-20">
-  <div class="flex flex-col mb-6 lg:justify-between lg:flex-row md:mb-8">
-    <h2 class="max-w-lg mb-2 text-3xl font-bold tracking-tight sm:text-4xl sm:leading-none lg:mb-5 group font-heading">
+<section class="px-4 mx-auto max-w-6xl">
+  <header class="py-16 lg:py-20">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl text-center font-heading">
       {t('nav.team')}
     </h2>
-  </div>
+  </header>
 
-  <div class="grid gap-8 row-gap-8 md:grid-cols-2 lg:grid-cols-3">
+  <div class="grid gap-8 row-gap-8 md:grid-cols-2 lg:grid-cols-3 pb-16 lg:pb-20">
     {
       sortedTeam.map((member) => (
         <article class="flex flex-col items-center text-center mb-6 transition">
