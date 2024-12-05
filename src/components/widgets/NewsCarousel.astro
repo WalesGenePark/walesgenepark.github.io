@@ -77,34 +77,54 @@ const getTypeLabel = (type: 'news' | 'events') => {
       </div>
     </div>
 
-    <!-- Navigation Buttons -->
+    <!-- Desktop Navigation Buttons -->
     <button
-      class="carousel-prev absolute -left-4 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 rounded-full p-2 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 z-10"
+      class="carousel-prev absolute -left-4 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 rounded-full p-2 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 z-10 hidden md:block"
       aria-label="Previous slide"
       type="button"
     >
       <Icon name="tabler:chevron-left" class="w-6 h-6" />
     </button>
     <button
-      class="carousel-next absolute -right-4 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 rounded-full p-2 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 z-10"
+      class="carousel-next absolute -right-4 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 rounded-full p-2 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 z-10 hidden md:block"
       aria-label="Next slide"
       type="button"
     >
       <Icon name="tabler:chevron-right" class="w-6 h-6" />
     </button>
-
-    <!-- Dots -->
-    <div class="carousel-dots flex justify-center gap-2 mt-4">
-      {
-        items.map((_, index) => (
-          <button
-            class="carousel-dot w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 transition-colors duration-200"
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))
-      }
+    <!-- Navigation Controls Container -->
+    <div class="mt-4">
+      <!-- Mobile Navigation Arrows -->
+      <div class="flex justify-center items-center gap-8 md:hidden">
+        <button
+          class="mobile-prev bg-white dark:bg-gray-800 rounded-full p-3 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+          aria-label="Previous slide"
+          type="button"
+        >
+          <Icon name="tabler:chevron-left" class="w-8 h-8" />
+        </button>
+        <button
+          class="mobile-next bg-white dark:bg-gray-800 rounded-full p-3 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+          aria-label="Next slide"
+          type="button"
+        >
+          <Icon name="tabler:chevron-right" class="w-8 h-8" />
+        </button>
+      </div>
+      <!-- Desktop Dots -->
+      <div class="carousel-dots hidden md:flex justify-center gap-4">
+        {
+          Array.from({ length: Math.ceil(items.length / 3) }).map((_, index) => (
+            <button
+              class="carousel-dot w-11 h-11 rounded-full bg-gray-300 dark:bg-gray-600 transition-colors duration-200 hover:bg-gray-400 dark:hover:bg-gray-500"
+              aria-label={`Go to slides ${index * 3 + 1} to ${Math.min((index + 1) * 3, items.length)}`}
+            />
+          ))
+        }
+      </div>
     </div>
   </div>
+  <!-- End of carousel-container -->
 </section>
 
 <style>
@@ -130,43 +150,58 @@ const getTypeLabel = (type: 'news' | 'events') => {
     const track = document.querySelector('.carousel-track');
     const prevBtn = document.querySelector('.carousel-prev');
     const nextBtn = document.querySelector('.carousel-next');
+    const mobilePrevBtn = document.querySelector('.mobile-prev');
+    const mobileNextBtn = document.querySelector('.mobile-next');
     const dots = document.querySelectorAll('.carousel-dot');
+    const slidesPerGroup = 3;
 
-    if (!track || !dots.length) return;
+    if (!track) return;
 
+    let currentGroup = 0;
     let currentSlide = 0;
-    const slideCount = dots.length;
+    const totalSlides = track.children.length;
+    const groupCount = dots.length || Math.ceil(totalSlides / slidesPerGroup);
     let autoplayTimer = null;
     let touchStartX = 0;
     let touchEndX = 0;
     const SWIPE_THRESHOLD = 50;
 
-    function updateSlide(index) {
-      // Ensure index is within bounds
-      currentSlide = ((index % slideCount) + slideCount) % slideCount;
+    function updateSlide(index, isMobile = window.innerWidth < 768) {
+      if (isMobile) {
+        // Single slide navigation for mobile
+        currentSlide = ((index % totalSlides) + totalSlides) % totalSlides;
+        currentGroup = Math.floor(currentSlide / slidesPerGroup);
+        const offset = currentSlide * 100;
+        track.style.transform = `translateX(-${offset}%)`;
+      } else {
+        // Group navigation for desktop
+        currentGroup = ((index % groupCount) + groupCount) % groupCount;
+        currentSlide = currentGroup * slidesPerGroup;
+        const slideWidth = 100 / 3;
+        const offset = currentGroup * slidesPerGroup * slideWidth;
+        track.style.transform = `translateX(-${offset}%)`;
+      }
 
-      // Calculate transform based on viewport width
-      const isMobile = window.innerWidth < 768;
-      const slideWidth = isMobile ? 100 : 100 / 3;
-
-      // Move track
-      track.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
-
-      // Reset all dots first
-      dots.forEach((dot) => {
-        dot.classList.remove('bg-red-500', 'dark:bg-red-500');
-        dot.classList.add('bg-gray-300', 'dark:bg-gray-600');
-      });
-
-      // Then update current dot
-      dots[currentSlide].classList.remove('bg-gray-300', 'dark:bg-gray-600');
-      dots[currentSlide].classList.add('bg-red-500', 'dark:bg-red-500');
+      // Update dots if they exist
+      if (dots.length) {
+        dots.forEach((dot) => {
+          dot.classList.remove('bg-red-500', 'dark:bg-red-500');
+          dot.classList.add('bg-gray-300', 'dark:bg-gray-600');
+        });
+        dots[currentGroup].classList.remove('bg-gray-300', 'dark:bg-gray-600');
+        dots[currentGroup].classList.add('bg-red-500', 'dark:bg-red-500');
+      }
     }
 
     function startAutoplay() {
       stopAutoplay();
       autoplayTimer = setInterval(() => {
-        updateSlide(currentSlide + 1);
+        const isMobile = window.innerWidth < 768;
+        if (isMobile) {
+          updateSlide(currentSlide + 1, true);
+        } else {
+          updateSlide(currentGroup + 1, false);
+        }
       }, 3000);
     }
 
@@ -176,6 +211,52 @@ const getTypeLabel = (type: 'news' | 'events') => {
         autoplayTimer = null;
       }
     }
+
+    // Add click handlers for desktop navigation
+    if (prevBtn && nextBtn) {
+      prevBtn.onclick = () => {
+        updateSlide(currentGroup - 1, false);
+        stopAutoplay();
+        startAutoplay();
+      };
+
+      nextBtn.onclick = () => {
+        updateSlide(currentGroup + 1, false);
+        stopAutoplay();
+        startAutoplay();
+      };
+    }
+
+    // Add click handlers for mobile navigation
+    if (mobilePrevBtn && mobileNextBtn) {
+      mobilePrevBtn.onclick = () => {
+        updateSlide(currentSlide - 1, true);
+        stopAutoplay();
+        startAutoplay();
+      };
+
+      mobileNextBtn.onclick = () => {
+        updateSlide(currentSlide + 1, true);
+        stopAutoplay();
+        startAutoplay();
+      };
+    }
+
+    // Add click handlers for dots
+    if (dots.length) {
+      dots.forEach((dot, index) => {
+        dot.onclick = () => {
+          updateSlide(index, false);
+          stopAutoplay();
+          startAutoplay();
+        };
+      });
+    }
+
+    // Add touch handlers
+    track.addEventListener('touchstart', handleTouchStart);
+    track.addEventListener('touchmove', handleTouchMove);
+    track.addEventListener('touchend', handleTouchEnd);
 
     function handleTouchStart(e) {
       touchStartX = e.touches[0].clientX;
@@ -187,14 +268,23 @@ const getTypeLabel = (type: 'news' | 'events') => {
 
     function handleTouchEnd() {
       const swipeDistance = touchEndX - touchStartX;
+      const isMobile = window.innerWidth < 768;
 
       if (Math.abs(swipeDistance) > SWIPE_THRESHOLD) {
         if (swipeDistance > 0) {
-          // Swiped right - go to previous slide
-          updateSlide(currentSlide - 1);
+          // Swiped right - go to previous
+          if (isMobile) {
+            updateSlide(currentSlide - 1, true);
+          } else {
+            updateSlide(currentGroup - 1, false);
+          }
         } else {
-          // Swiped left - go to next slide
-          updateSlide(currentSlide + 1);
+          // Swiped left - go to next
+          if (isMobile) {
+            updateSlide(currentSlide + 1, true);
+          } else {
+            updateSlide(currentGroup + 1, false);
+          }
         }
       }
 
@@ -203,49 +293,20 @@ const getTypeLabel = (type: 'news' | 'events') => {
       touchEndX = 0;
     }
 
-    // Add click handlers
-    prevBtn.onclick = () => {
-      updateSlide(currentSlide - 1);
-      stopAutoplay();
-      startAutoplay();
-    };
-
-    nextBtn.onclick = () => {
-      updateSlide(currentSlide + 1);
-      stopAutoplay();
-      startAutoplay();
-    };
-
-    dots.forEach((dot, i) => {
-      dot.onclick = () => {
-        updateSlide(i);
-        stopAutoplay();
-        startAutoplay();
-      };
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      const isMobile = window.innerWidth < 768;
+      if (isMobile) {
+        updateSlide(currentSlide, true);
+      } else {
+        updateSlide(currentGroup, false);
+      }
     });
-
-    // Add touch handlers
-    track.addEventListener('touchstart', handleTouchStart, { passive: true });
-    track.addEventListener('touchmove', handleTouchMove, { passive: true });
-    track.addEventListener('touchend', handleTouchEnd);
 
     // Start autoplay
     startAutoplay();
-
-    // Pause autoplay when user interacts with the carousel
-    track.addEventListener('mouseenter', stopAutoplay);
-    track.addEventListener('mouseleave', startAutoplay);
-    track.addEventListener('touchstart', stopAutoplay);
-    track.addEventListener('touchend', startAutoplay);
-
-    // Initialize with first slide
-    updateSlide(0);
   }
 
-  // Run on page load
+  // Setup carousel when DOM is loaded
   document.addEventListener('DOMContentLoaded', setupCarousel);
-
-  // Run after Astro view transitions
-  document.addEventListener('astro:page-load', setupCarousel);
-  document.addEventListener('astro:after-swap', setupCarousel);
 </script>
