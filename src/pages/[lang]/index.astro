@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 import { getLangFromUrl } from '~/i18n/utils';
 import NewsCarousel from '~/components/widgets/NewsCarousel.astro';
 import Button from '~/components/ui/Button.astro';
+import Hero from '~/components/widgets/Hero.astro';
 import type { NewsEntry, EventEntry } from '~/types/content';
 import type { MetaData } from '~/types/metaData';
 
@@ -109,18 +110,22 @@ const carouselItems = sortedEntries.slice(0, 15).map((item) => item.entry);
 
 <Layout metadata={metadata}>
   <div>
-    <section class="px-4 py-12 sm:px-6 mx-auto lg:px-8 lg:py-16 max-w-4xl">
-      <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-8 font-heading text-center">
-        {content[lang].title}
-      </h1>
-      <p class="text-xl text-gray-600 dark:text-gray-400 mb-12 text-center">
-        {content[lang].description}
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <Button variant="primary" href={content[lang].cta.primary.href} text={content[lang].cta.primary.text} />
-        <Button variant="secondary" href={content[lang].cta.secondary.href} text={content[lang].cta.secondary.text} />
-      </div>
-    </section>
+    <Hero
+      title={content[lang].title}
+      subtitle={content[lang].description}
+      actions={[
+        {
+          variant: 'primary',
+          text: content[lang].cta.primary.text,
+          href: content[lang].cta.primary.href,
+        },
+        {
+          variant: 'secondary',
+          text: content[lang].cta.secondary.text,
+          href: content[lang].cta.secondary.href,
+        },
+      ]}
+    />
 
     <section class="px-4 sm:px-6 mx-auto lg:px-8 max-w-4xl mt-8">
       <div class="flex items-center justify-center mb-4">
