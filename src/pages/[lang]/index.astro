@@ -32,6 +32,17 @@ const content = {
         href: '/en/contact',
       },
     },
+    newsAndEvents: {
+      title: 'Latest News & Events',
+      news: {
+        text: 'View All News',
+        href: '/en/news',
+      },
+      events: {
+        text: 'View All Events',
+        href: '/en/events',
+      }
+    }
   },
   cy: {
     title: 'Hyrwyddo Meddygaeth Genomig yng Nghymru',
@@ -47,6 +58,17 @@ const content = {
         href: '/cy/contact',
       },
     },
+    newsAndEvents: {
+      title: 'Newyddion a Digwyddiadau Diweddaraf',
+      news: {
+        text: 'Gweld Pob Newyddion',
+        href: '/cy/news',
+      },
+      events: {
+        text: 'Gweld Pob Digwyddiad',
+        href: '/cy/events',
+      }
+    }
   },
 };
 
@@ -86,18 +108,34 @@ const carouselItems = sortedEntries.slice(0, 15).map((item) => item.entry);
 ---
 
 <Layout metadata={metadata}>
-  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
-    <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-8 font-heading">
-      {content[lang].title}
-    </h1>
-    <p class="text-xl text-gray-600 dark:text-gray-400 mb-12">
-      {content[lang].description}
-    </p>
-    <div class="flex flex-col sm:flex-row gap-4">
-      <Button variant="primary" href={content[lang].cta.primary.href} text={content[lang].cta.primary.text} />
-      <Button variant="secondary" href={content[lang].cta.secondary.href} text={content[lang].cta.secondary.text} />
-    </div>
-  </section>
+  <div>
+    <section class="px-4 py-12 sm:px-6 mx-auto lg:px-8 lg:py-16 max-w-4xl">
+      <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-8 font-heading text-center">
+        {content[lang].title}
+      </h1>
+      <p class="text-xl text-gray-600 dark:text-gray-400 mb-12 text-center">
+        {content[lang].description}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button variant="primary" href={content[lang].cta.primary.href} text={content[lang].cta.primary.text} />
+        <Button variant="secondary" href={content[lang].cta.secondary.href} text={content[lang].cta.secondary.text} />
+      </div>
+    </section>
 
+    <section class="px-4 sm:px-6 mx-auto lg:px-8 max-w-4xl mt-8">
+      <div class="flex items-center justify-center mb-4">
+        <h2 class="text-3xl font-bold">{content[lang].newsAndEvents.title}</h2>
+      </div>
+      <div class="flex gap-4 mb-1 justify-center">
+        <a href={content[lang].newsAndEvents.news.href} class="text-primary-600 hover:underline">
+          {content[lang].newsAndEvents.news.text}
+        </a>
+        <a href={content[lang].newsAndEvents.events.href} class="text-primary-600 hover:underline">
+          {content[lang].newsAndEvents.events.text}
+        </a>
+      </div>
+    </section>
+  </div>
+  
   <NewsCarousel items={carouselItems} />
 </Layout>

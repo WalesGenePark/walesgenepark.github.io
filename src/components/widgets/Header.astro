@@ -65,7 +65,7 @@ const socialLinks = [
             <li>
               <a
                 href={href}
-                class="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                class="text-sm font-medium text-black hover:text-black/80 dark:text-white dark:hover:text-white/80"
               >
                 {text}
               </a>
@@ -81,7 +81,7 @@ const socialLinks = [
         socialLinks.map(({ name, href, icon }) => (
           <a
             href={href}
-            class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+            class="text-black hover:text-black/80 dark:text-white dark:hover:text-white/80"
             title={name}
             target="_blank"
             rel="noopener noreferrer"
@@ -91,11 +91,11 @@ const socialLinks = [
         ))
       }
       <div class="flex items-center gap-1 text-sm">
-        <a href={enUrl} class={`px-1 ${lang === 'en' ? 'text-primary font-bold' : 'text-gray-600 dark:text-gray-400'}`}>
+        <a href={enUrl} class={`px-1 ${lang === 'en' ? 'text-primary font-bold' : 'text-black dark:text-white'}`}>
           EN
         </a>
-        <span class="text-gray-400">|</span>
-        <a href={cyUrl} class={`px-1 ${lang === 'cy' ? 'text-primary font-bold' : 'text-gray-600 dark:text-gray-400'}`}>
+        <span class="text-black/60 dark:text-white/60">|</span>
+        <a href={cyUrl} class={`px-1 ${lang === 'cy' ? 'text-primary font-bold' : 'text-black dark:text-white'}`}>
           CY
         </a>
       </div>
@@ -105,7 +105,7 @@ const socialLinks = [
     <!-- Mobile Menu Button -->
     <button
       type="button"
-      class="xl:hidden text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+      class="xl:hidden text-black hover:text-black/80 dark:text-white dark:hover:text-white/80"
       aria-label="Toggle Menu"
       data-toggle-menu
     >
@@ -123,10 +123,10 @@ const socialLinks = [
   >
     <div class="flex flex-col h-full">
       <div class="flex justify-between items-center p-4 border-b dark:border-gray-800">
-        <span class="text-lg font-bold">Menu</span>
+        <span class="text-lg font-bold text-black dark:text-white">Menu</span>
         <button
           type="button"
-          class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+          class="text-black hover:text-black/80 dark:text-white dark:hover:text-white/80"
           aria-label="Close Menu"
           data-close-menu
         >
@@ -141,7 +141,7 @@ const socialLinks = [
               <li>
                 <a
                   href={href}
-                  class="block text-xl font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                  class="block text-xl font-medium text-black hover:text-black/80 dark:text-white dark:hover:text-white/80"
                 >
                   {text}
                 </a>
@@ -156,7 +156,7 @@ const socialLinks = [
               socialLinks.map(({ name, href, icon }) => (
                 <a
                   href={href}
-                  class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                  class="text-black hover:text-black/80 dark:text-white dark:hover:text-white/80"
                   title={name}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -170,14 +170,14 @@ const socialLinks = [
           <div class="flex justify-center items-center gap-2 text-base mb-8">
             <a
               href={enUrl}
-              class={`px-2 ${lang === 'en' ? 'text-primary font-bold' : 'text-gray-600 dark:text-gray-400'}`}
+              class={`px-2 ${lang === 'en' ? 'text-primary font-bold' : 'text-black dark:text-white'}`}
             >
               EN
             </a>
-            <span class="text-gray-400">|</span>
+            <span class="text-black/60 dark:text-white/60">|</span>
             <a
               href={cyUrl}
-              class={`px-2 ${lang === 'cy' ? 'text-primary font-bold' : 'text-gray-600 dark:text-gray-400'}`}
+              class={`px-2 ${lang === 'cy' ? 'text-primary font-bold' : 'text-black dark:text-white'}`}
             >
               CY
             </a>
