@@ -154,13 +154,13 @@ const getTypeLabel = (type: 'news' | 'events') => {
 
       // Reset all dots first
       dots.forEach((dot) => {
-        dot.classList.remove('bg-red-600', 'dark:bg-red-500');
+        dot.classList.remove('bg-red-500', 'dark:bg-red-500');
         dot.classList.add('bg-gray-300', 'dark:bg-gray-600');
       });
 
       // Then update current dot
       dots[currentSlide].classList.remove('bg-gray-300', 'dark:bg-gray-600');
-      dots[currentSlide].classList.add('bg-red-600', 'dark:bg-red-500');
+      dots[currentSlide].classList.add('bg-red-500', 'dark:bg-red-500');
     }
 
     function startAutoplay() {

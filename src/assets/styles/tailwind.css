@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --aw-color-primary: 239 68 68;
+    --aw-color-primary: 220 53 69;
     --aw-color-secondary: 30 58 138;
     --aw-color-accent: 109 40 217;
   }
@@ -20,7 +20,7 @@
   }
 
   .btn-primary {
-    @apply btn border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white dark:border-red-500 dark:text-red-500 dark:hover:bg-red-500 dark:hover:text-white transition-all duration-200;
+    @apply btn border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white dark:border-red-500 dark:text-red-500 dark:hover:bg-red-500 dark:hover:text-white transition-all duration-200;
   }
 
   .btn-secondary {
@@ -51,7 +51,7 @@
   }
 
   .prose a {
-    @apply text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300;
+    @apply text-red-500 hover:text-red-500 dark:text-red-500 dark:hover:text-red-500;
   }
 }
 
