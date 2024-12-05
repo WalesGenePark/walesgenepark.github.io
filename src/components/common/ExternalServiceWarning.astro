@@ -34,6 +34,40 @@
   </div>
 </div>
 
+<div id="linkedin-warning" class="modal-overlay hidden">
+  <div class="modal-content">
+    <p>
+      You are about to leave our website and visit LinkedIn. Please note that LinkedIn may collect data and use cookies.
+      For more information, visit their <a
+        href="https://www.linkedin.com/legal/privacy-policy"
+        target="_blank"
+        rel="noopener">privacy policy</a
+      >.
+    </p>
+    <div class="modal-buttons">
+      <button class="proceed-button">Proceed to LinkedIn</button>
+      <button class="cancel-button">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div id="twitter-warning" class="modal-overlay hidden">
+  <div class="modal-content">
+    <p>
+      You are about to leave our website and visit X (formerly Twitter). Please note that X may collect data and use cookies.
+      For more information, visit their <a
+        href="https://twitter.com/privacy"
+        target="_blank"
+        rel="noopener">privacy policy</a
+      >.
+    </p>
+    <div class="modal-buttons">
+      <button class="proceed-button">Proceed to X</button>
+      <button class="cancel-button">Cancel</button>
+    </div>
+  </div>
+</div>
+
 <style>
   .modal-overlay {
     position: fixed;
@@ -114,6 +148,14 @@
     spotify: {
       selector: 'a[href*="spotify.com"], a[href*="open.spotify.com"]',
       modalId: 'spotify-warning',
+    },
+    linkedin: {
+      selector: 'a[href*="linkedin.com"]',
+      modalId: 'linkedin-warning',
+    },
+    twitter: {
+      selector: 'a[href*="twitter.com"], a[href*="x.com"]',
+      modalId: 'twitter-warning',
     },
   };
 
