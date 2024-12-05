@@ -1,0 +1,86 @@
+---
+import { Image } from "astro:assets";
+import { getLangFromUrl } from "~/i18n/utils";
+import type { LanguageCode } from "~/i18n/routes";
+
+// Import images
+import ngsImage from "~/assets/images/ngs-service.jpg";
+import bioinformaticsImage from "~/assets/images/bioinformatics-service.jpg";
+import educationImage from "~/assets/images/education-service.jpg";
+
+const currentLang = getLangFromUrl(Astro.url) as LanguageCode;
+
+const services = {
+  en: [
+    {
+      title: "NGS Services",
+      description: "State-of-the-art Next Generation Sequencing services providing comprehensive genomic analysis for research and clinical applications. Our expert team delivers high-quality sequencing data using latest technologies.",
+      image: ngsImage,
+      alt: "Next Generation Sequencing equipment and analysis",
+    },
+    {
+      title: "Bioinformatic Services",
+      description: "Advanced bioinformatics support for genomic data analysis, including custom pipeline development, variant calling, and interpretation. We help transform complex genomic data into meaningful insights.",
+      image: bioinformaticsImage,
+      alt: "Bioinformatics analysis visualization",
+    },
+    {
+      title: "Education & Engagement",
+      description: "Comprehensive educational programs and public engagement initiatives to promote understanding of genetics and genomics. We offer workshops, training sessions, and resources for healthcare professionals and the public.",
+      image: educationImage,
+      alt: "Education and public engagement session",
+    },
+  ],
+  cy: [
+    {
+      title: "Gwasanaethau NGS",
+      description: "Gwasanaethau Dilyniannu Cenhedlaeth Nesaf o\"r radd flaenaf yn darparu dadansoddiad genomig cynhwysfawr ar gyfer ymchwil a chymwysiadau clinigol. Mae ein tim arbenigol yn darparu data dilyniannu o ansawdd uchel gan ddefnyddio\"r technolegau diweddaraf.",
+      image: ngsImage,
+      alt: "Offer Dilyniannu Cenhedlaeth Nesaf a dadansoddiad",
+    },
+    {
+      title: "Gwasanaethau Biowybodeg",
+      description: "Cymorth biowybodeg uwch ar gyfer dadansoddi data genomig, gan gynnwys datblygu piblinell pwrpasol, galw amrywiolion, a dehongli. Rydym yn helpu i drawsnewid data genomig cymhleth yn fewnwelediadau ystyrlon.",
+      image: bioinformaticsImage,
+      alt: "Biowybodeg dadansoddiad delweddu",
+    },
+    {
+      title: "Addysg ac Ymgysylltu",
+      description: "Rhaglenni addysgol cynhwysfawr a mentrau ymgysylltu a\"r cyhoedd i hyrwyddo dealltwriaeth o eneteg a genomeg. Rydym yn cynnig gweithdai, sesiynau hyfforddi, ac adnoddau ar gyfer gweithwyr gofal iechyd proffesiynol a\"r cyhoedd.",
+      image: educationImage,
+      alt: "Sesiwn addysg ac ymgysylltu a\"r cyhoedd",
+    },
+  ],
+};
+---
+
+<section class="scroll-mt-16" id="services">
+  <div class="px-4 py-16 mx-auto max-w-6xl lg:px-8 lg:py-20">
+    <div class="mb-12 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading text-red-500 dark:text-red-500">
+        {currentLang === "en" ? "Our Services" : "Ein Gwasanaethau"}
+      </h1>
+      <p class="text-xl text-gray-600 dark:text-slate-400">
+        {currentLang === "en" 
+          ? "Discover our comprehensive range of genomic services and educational programs"
+          : "Darganfyddwch ein hystod gynhwysfawr o wasanaethau genomig a rhaglenni addysgol"}
+      </p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-3">
+      {services[currentLang].map(service => (
+        <div class="relative flex flex-col p-6 bg-white dark:bg-slate-900 rounded-lg shadow-lg">
+          <div class="flex items-center mb-4">
+            <Image
+              src={service.image}
+              alt={service.alt}
+              class="w-full h-48 object-cover rounded-lg mb-4"
+            />
+          </div>
+          <h3 class="text-xl font-bold mb-2">{service.title}</h3>
+          <p class="text-gray-600 dark:text-slate-400 flex-grow">{service.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

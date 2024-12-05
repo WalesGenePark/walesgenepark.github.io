@@ -1,3 +1,5 @@
+import { sectionRoutes } from './i18n/routes';
+
 export const headerData = {
   en: {
     links: [
@@ -6,20 +8,24 @@ export const headerData = {
         href: '/en/',
       },
       {
+        text: 'Our Services',
+        href: `/en/${sectionRoutes.services.en}`,
+      },
+      {
         text: 'Our Team',
-        href: '/en/team',
+        href: `/en/${sectionRoutes.team.en}`,
       },
       {
         text: 'Events',
-        href: '/en/events',
+        href: `/en/${sectionRoutes.events.en}`,
       },
       {
         text: 'News',
-        href: '/en/news',
+        href: `/en/${sectionRoutes.news.en}`,
       },
       {
         text: 'Contact',
-        href: '/en/contact',
+        href: `/en/${sectionRoutes.contact.en}`,
       },
     ],
   },
@@ -30,20 +36,24 @@ export const headerData = {
         href: '/cy/',
       },
       {
+        text: 'Ein Gwasanaethau',
+        href: `/cy/${sectionRoutes.services.cy}`,
+      },
+      {
         text: 'Ein Tîm',
-        href: '/cy/tim',
+        href: `/cy/${sectionRoutes.team.cy}`,
       },
       {
         text: 'Digwyddiadau',
-        href: '/cy/events',
+        href: `/cy/${sectionRoutes.events.cy}`,
       },
       {
         text: 'Newyddion',
-        href: '/cy/newyddion',
+        href: `/cy/${sectionRoutes.news.cy}`,
       },
       {
         text: 'Cysylltu',
-        href: '/cy/cysylltu',
+        href: `/cy/${sectionRoutes.contact.cy}`,
       },
     ],
   },
@@ -55,8 +65,8 @@ export const footerData = {
       {
         title: 'About',
         links: [
-          { text: 'Our Team', href: '/en/team' },
-          { text: 'Contact', href: '/en/contact' },
+          { text: 'Our Team', href: `/en/${sectionRoutes.team.en}` },
+          { text: 'Contact', href: `/en/${sectionRoutes.contact.en}` },
           { text: 'Privacy Policy', href: '/en/privacy' },
           { text: 'Cookie Policy', href: '/en/cookies' },
         ],
@@ -64,8 +74,8 @@ export const footerData = {
       {
         title: 'News & Events',
         links: [
-          { text: 'News', href: '/en/news' },
-          { text: 'Events', href: '/en/events' },
+          { text: 'News', href: `/en/${sectionRoutes.news.en}` },
+          { text: 'Events', href: `/en/${sectionRoutes.events.en}` },
         ],
       },
     ],
@@ -85,8 +95,8 @@ export const footerData = {
       {
         title: 'Amdanom ni',
         links: [
-          { text: 'Ein Tîm', href: '/cy/tim' },
-          { text: 'Cysylltu', href: '/cy/cysylltu' },
+          { text: 'Ein Tîm', href: `/cy/${sectionRoutes.team.cy}` },
+          { text: 'Cysylltu', href: `/cy/${sectionRoutes.contact.cy}` },
           { text: 'Polisi Preifatrwydd', href: '/cy/privacy' },
           { text: 'Polisi Cwcis', href: '/cy/cookies' },
         ],
@@ -94,8 +104,8 @@ export const footerData = {
       {
         title: 'Newyddion a Digwyddiadau',
         links: [
-          { text: 'Newyddion', href: '/cy/newyddion' },
-          { text: 'Digwyddiadau', href: '/cy/events' },
+          { text: 'Newyddion', href: `/cy/${sectionRoutes.news.cy}` },
+          { text: 'Digwyddiadau', href: `/cy/${sectionRoutes.events.cy}` },
         ],
       },
     ],
