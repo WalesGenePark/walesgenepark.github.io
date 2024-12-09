@@ -1,6 +1,7 @@
 export type UIKey =
   | 'nav.home'
   | 'nav.team'
+  | 'nav.services'
   | 'nav.events'
   | 'nav.news'
   | 'nav.contact'
@@ -47,6 +48,7 @@ export type UIKey =
 export const ui = {
   en: {
     'nav.home': 'Home',
+    'nav.services': 'Services',
     'nav.team': 'Team',
     'nav.events': 'Events',
     'nav.news': 'News',
@@ -93,6 +95,7 @@ export const ui = {
   },
   cy: {
     'nav.home': 'Hafan',
+    'nav.services': 'Gwasanaethau',
     'nav.team': 'Tîm',
     'nav.events': 'Digwyddiadau',
     'nav.news': 'Newyddion',

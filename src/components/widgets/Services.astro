@@ -3,12 +3,17 @@ import { Image } from 'astro:assets';
 import { getLangFromUrl } from '~/i18n/utils';
 import type { LanguageCode } from '~/i18n/routes';
 
+interface Props {
+  lang?: LanguageCode;
+}
+
+const { lang } = Astro.props;
+const currentLang = lang || (getLangFromUrl(Astro.url) as LanguageCode);
+
 // Import images
 import ngsImage from '~/assets/images/ngs-service.jpg';
 import bioinformaticsImage from '~/assets/images/bioinformatics-service.jpg';
 import educationImage from '~/assets/images/education-service.jpg';
-
-const currentLang = getLangFromUrl(Astro.url) as LanguageCode;
 
 const services = {
   en: [
