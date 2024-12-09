@@ -54,22 +54,53 @@ const formatTime = (time: string) => {
 
 <section class="px-4 py-16 mx-auto max-w-4xl lg:py-20">
   <!-- Upcoming Events -->
-  <header class="pb-16 lg:pb-20">
+  <header class="pb-8 lg:pb-12">
     <h2
-      class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading text-red-500 dark:text-red-500 text-center"
+      class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-8 font-heading text-red-500 dark:text-red-500 text-center"
     >
       {t('events.upcomingEvents')}
     </h2>
+
+    <!-- Search Input -->
+    <div class="mb-4">
+      <div class="relative">
+        <input
+          type="text"
+          id="eventSearch"
+          placeholder={t('events.searchPlaceholder')}
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white text-gray-900 dark:text-gray-100 placeholder:text-gray-600 dark:placeholder:text-gray-300"
+        />
+        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+          <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Results Message -->
+    <p id="upcomingNoResults" class="hidden text-center text-gray-600 dark:text-gray-400 text-lg mb-8">
+      {t('events.noSearchResults')}
+    </p>
   </header>
 
-  {
-    upcomingEvents.length === 0 ? (
-      <p class="text-gray-600 dark:text-gray-400">{t('events.noUpcomingEvents')}</p>
-    ) : (
-      <ul class="space-y-8">
-        {upcomingEvents.map((event) => {
-          return (
-            <li class="flex gap-6 items-start pl-4 border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-lg hover:border-primary-300 dark:hover:border-primary-700 transition-all duration-300 ease-in-out">
+  <div id="upcomingEventsList">
+    {
+      upcomingEvents.length === 0 ? (
+        <p class="text-gray-600 dark:text-gray-400">{t('events.noUpcomingEvents')}</p>
+      ) : (
+        <ul class="space-y-8">
+          {upcomingEvents.map((event) => (
+            <li
+              class="flex gap-6 items-start pl-4 border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-lg hover:border-primary-300 dark:hover:border-primary-700 transition-all duration-300 ease-in-out"
+              data-title={event.data.title.toLowerCase()}
+              data-description={event.data.description?.toLowerCase()}
+              data-location={event.data.location?.toLowerCase()}
+            >
               <div class="flex-shrink-0 w-24 text-center">
                 <div class="text-3xl font-bold text-red-500 dark:text-red-500">
                   {formatEventDate(new Date(event.data.date)).day}
@@ -108,11 +139,12 @@ const formatTime = (time: string) => {
                 </div>
               </div>
             </li>
-          );
-        })}
-      </ul>
-    )
-  }
+          ))}
+        </ul>
+      )
+    }
+  </div>
+
   <!-- Past Events -->
   {
     pastEvents.length > 0 && (
@@ -132,10 +164,20 @@ const formatTime = (time: string) => {
           </button>
         </div>
 
-        <ul id="pastEventsList" class="space-y-8 hidden">
-          {pastEvents.map((event) => {
-            return (
-              <li class="flex gap-6 items-start pl-4 border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-lg hover:border-primary-300 dark:hover:border-primary-700 transition-all duration-300 ease-in-out opacity-75">
+        <!-- Past Events No Results Message -->
+        <p id="pastNoResults" class="hidden text-center text-gray-600 dark:text-gray-400 text-lg mb-8">
+          {t('events.noSearchResults')}
+        </p>
+
+        <div id="pastEventsList" class="hidden">
+          <ul class="space-y-8">
+            {pastEvents.map((event) => (
+              <li
+                class="flex gap-6 items-start pl-4 border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-lg hover:border-primary-300 dark:hover:border-primary-700 transition-all duration-300 ease-in-out opacity-75"
+                data-title={event.data.title.toLowerCase()}
+                data-description={event.data.description?.toLowerCase()}
+                data-location={event.data.location?.toLowerCase()}
+              >
                 <div class="flex-shrink-0 w-24 text-center">
                   <div class="text-3xl font-bold text-red-500 dark:text-red-500">
                     {formatEventDate(new Date(event.data.date)).day}
@@ -174,9 +216,9 @@ const formatTime = (time: string) => {
                   </div>
                 </div>
               </li>
-            );
-          })}
-        </ul>
+            ))}
+          </ul>
+        </div>
       </div>
     )
   }
@@ -186,6 +228,61 @@ const formatTime = (time: string) => {
   function initializeEvents() {
     const toggleButton = document.getElementById('togglePastEvents');
     const pastEventsList = document.getElementById('pastEventsList');
+    const searchInput = document.getElementById('eventSearch') as HTMLInputElement;
+    const upcomingNoResults = document.getElementById('upcomingNoResults');
+    const pastNoResults = document.getElementById('pastNoResults');
+
+    function filterEvents(searchTerm: string) {
+      const normalizedSearch = searchTerm.toLowerCase();
+      let upcomingVisible = false;
+      let pastVisible = false;
+
+      // Filter upcoming events
+      document.querySelectorAll('#upcomingEventsList li').forEach((event) => {
+        const element = event as HTMLElement;
+        const title = element.dataset.title || '';
+        const description = element.dataset.description || '';
+        const location = element.dataset.location || '';
+        const matches =
+          title.includes(normalizedSearch) ||
+          description.includes(normalizedSearch) ||
+          location.includes(normalizedSearch);
+        element.style.display = matches ? '' : 'none';
+        if (matches) upcomingVisible = true;
+      });
+
+      // Filter past events if they're visible
+      if (pastEventsList && !pastEventsList.classList.contains('hidden')) {
+        document.querySelectorAll('#pastEventsList li').forEach((event) => {
+          const element = event as HTMLElement;
+          const title = element.dataset.title || '';
+          const description = element.dataset.description || '';
+          const location = element.dataset.location || '';
+          const matches =
+            title.includes(normalizedSearch) ||
+            description.includes(normalizedSearch) ||
+            location.includes(normalizedSearch);
+          element.style.display = matches ? '' : 'none';
+          if (matches) pastVisible = true;
+        });
+      }
+
+      // Show/hide no results messages
+      if (upcomingNoResults) {
+        upcomingNoResults.style.display = !upcomingVisible && searchTerm ? 'block' : 'none';
+      }
+      if (pastNoResults) {
+        pastNoResults.style.display =
+          !pastVisible && searchTerm && !pastEventsList?.classList.contains('hidden') ? 'block' : 'none';
+      }
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const target = e.target as HTMLInputElement;
+        filterEvents(target.value);
+      });
+    }
 
     if (toggleButton && pastEventsList) {
       const showText = toggleButton.dataset.showText || 'Show Past Events';
@@ -201,6 +298,11 @@ const formatTime = (time: string) => {
         pastEventsList.classList.toggle('hidden');
         toggleButton.setAttribute('aria-expanded', (!newExpanded).toString());
         toggleButton.textContent = newExpanded ? showText : hideText;
+
+        // Reapply search filter when showing past events
+        if (!newExpanded && searchInput) {
+          filterEvents(searchInput.value);
+        }
       });
     }
   }

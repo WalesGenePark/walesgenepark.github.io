@@ -15,10 +15,14 @@ export type UIKey =
   | 'events.time'
   | 'events.location'
   | 'events.title'
+  | 'events.searchPlaceholder'
+  | 'events.noSearchResults'
   | 'news.title'
   | 'news.noNews'
   | 'news.noImage'
   | 'news.readMore'
+  | 'news.searchPlaceholder'
+  | 'news.noSearchResults'
   | 'content.tag.news'
   | 'content.tag.event'
   | 'policy.title'
@@ -63,10 +67,14 @@ export const ui = {
     'events.time': 'Time',
     'events.location': 'Location',
     'events.title': 'Events',
+    'events.searchPlaceholder': 'Search by title, description or location...',
+    'events.noSearchResults': 'No events found matching your search',
     'news.title': 'Latest News',
     'news.noNews': 'No news articles available',
     'news.noImage': 'No image available',
     'news.readMore': 'Read More',
+    'news.searchPlaceholder': 'Search news...',
+    'news.noSearchResults': 'No news found matching your search',
     'content.tag.news': 'News',
     'content.tag.event': 'Event',
     'policy.title': 'Policies',
@@ -110,10 +118,14 @@ export const ui = {
     'events.time': 'Amser',
     'events.location': 'Lleoliad',
     'events.title': 'Digwyddiadau',
+    'events.searchPlaceholder': 'Chwilio yn ôl teitl, disgrifiad neu leoliad...',
+    'events.noSearchResults': 'Ni ddaethpwyd o hyd i ddigwyddiadau syn cyfateb âch chwiliad',
     'news.title': 'Newyddion Diweddaraf',
     'news.noNews': 'Dim erthyglau newyddion ar gael',
     'news.noImage': 'Dim delwedd ar gael',
     'news.readMore': 'Darllen Mwy',
+    'news.searchPlaceholder': 'Chwilio newyddion...',
+    'news.noSearchResults': 'Ni ddaethpwyd o hyd i newyddion syn cyfateb âch chwiliad',
     'content.tag.news': 'Newyddion',
     'content.tag.event': 'Digwyddiad',
     'policy.title': 'Polisïau',
