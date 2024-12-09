@@ -1,11 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '~/layouts/PageLayout.astro';
-import Team from '~/components/widgets/Team.astro';
-import News from '~/components/widgets/News.astro';
-import Events from '~/components/widgets/Events.astro';
-import Contact from '~/components/widgets/Contact.astro';
-import Services from '~/components/widgets/Services.astro';
 import ContentRouter from '~/components/content/ContentRouter.astro';
 import { isValidSection, getAlternateSection, getSectionTitle } from '~/i18n/routes';
 import type { LanguageCode } from '~/i18n/routes';
@@ -14,7 +9,7 @@ import type { CollectionEntry } from 'astro:content';
 
 // Get static paths for all sections and languages
 export function getStaticPaths() {
-  const sections = ['team', 'news', 'events', 'privacy', 'cookies', 'contact', 'services'] as const;
+  const sections = ['privacy', 'cookies'] as const;
   const languages = ['en', 'cy'] as const;
 
   return sections.flatMap((section) =>
@@ -61,10 +56,5 @@ const metadata: MetaData = {
 ---
 
 <Layout metadata={metadata}>
-  {section === 'team' && <Team lang={lang} />}
-  {section === 'news' && <News lang={lang} />}
-  {section === 'events' && <Events lang={lang} />}
-  {section === 'contact' && <Contact lang={lang} />}
-  {section === 'services' && <Services lang={lang} />}
   {(section === 'privacy' || section === 'cookies') && entry && <ContentRouter entry={entry} />}
 </Layout>
