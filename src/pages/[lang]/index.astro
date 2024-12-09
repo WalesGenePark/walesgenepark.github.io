@@ -5,6 +5,7 @@ import { getLangFromUrl } from '~/i18n/utils';
 import { sectionRoutes } from '~/i18n/routes';
 import NewsCarousel from '~/components/widgets/NewsCarousel.astro';
 import Hero from '~/components/widgets/Hero.astro';
+import Services from '~/components/widgets/Services.astro';
 import type { NewsEntry, EventEntry } from '~/types/content';
 import type { MetaData } from '~/types/metaData';
 
@@ -117,7 +118,7 @@ const carouselItems = sortedEntries.slice(0, 15).map((item) => item.entry);
         {
           variant: 'primary',
           text: lang === 'en' ? 'Our Services' : 'Ein Gwasanaethau',
-          href: `/${lang}/${sectionRoutes.services[lang]}`,
+          href: '#services', // Changed to anchor link
         },
         {
           variant: 'secondary',
@@ -126,6 +127,8 @@ const carouselItems = sortedEntries.slice(0, 15).map((item) => item.entry);
         },
       ]}
     />
+
+    <Services />
 
     <section class="px-4 sm:px-6 mx-auto lg:px-8 max-w-4xl mt-8">
       <div class="flex items-center justify-center mb-4">

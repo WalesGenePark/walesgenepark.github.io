@@ -21,6 +21,17 @@ const {
 } = Astro.props;
 ---
 
+<script>
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (target.getAttribute('href')?.startsWith('#')) {
+      e.preventDefault();
+      const id = target.getAttribute('href')?.slice(1);
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+</script>
+
 <section class="relative md:-mt-[76px] not-prose">
   <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
     <slot name="bg">
