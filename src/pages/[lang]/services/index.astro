@@ -16,7 +16,7 @@ const t = useTranslations(lang);
 
 const metadata: MetaData = {
   title: t('nav.services'),
-  description: t('meta.services.description'),
+  description: t('nav.services'),
   alternateLinks: [
     {
       href: `/${lang === 'en' ? 'cy' : 'en'}/services`,
@@ -25,7 +25,7 @@ const metadata: MetaData = {
   ],
   openGraph: {
     title: t('nav.services'),
-    description: t('meta.services.description'),
+    description: t('nav.services'),
     type: 'website',
     url: `${Astro.site}${lang}/services`,
   },
