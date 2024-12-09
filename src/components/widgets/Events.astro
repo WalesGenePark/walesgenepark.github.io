@@ -53,7 +53,7 @@ const formatTime = (time: string) => {
 ---
 
 <section class="px-4 py-16 mx-auto max-w-4xl lg:py-20">
-  <!-- Upcoming Events -->
+  {/* Upcoming Events */}
   <header class="pb-8 lg:pb-12">
     <h2
       class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-8 font-heading text-red-500 dark:text-red-500 text-center"
@@ -61,7 +61,7 @@ const formatTime = (time: string) => {
       {t('events.upcomingEvents')}
     </h2>
 
-    <!-- Search Input -->
+    {/* Search Input */}
     <div class="mb-4">
       <div class="relative">
         <input
@@ -82,7 +82,7 @@ const formatTime = (time: string) => {
       </div>
     </div>
 
-    <!-- No Results Message -->
+    {/* No Results Message */}
     <p id="upcomingNoResults" class="hidden text-center text-gray-600 dark:text-gray-400 text-lg mb-8">
       {t('events.noSearchResults')}
     </p>
@@ -145,7 +145,7 @@ const formatTime = (time: string) => {
     }
   </div>
 
-  <!-- Past Events -->
+  {/* Past Events */}
   {
     pastEvents.length > 0 && (
       <div class="border-t border-gray-200 dark:border-gray-700 pt-10">
@@ -164,7 +164,7 @@ const formatTime = (time: string) => {
           </button>
         </div>
 
-        <!-- Past Events No Results Message -->
+        {/* Past Events No Results Message */}
         <p id="pastNoResults" class="hidden text-center text-gray-600 dark:text-gray-400 text-lg mb-8">
           {t('events.noSearchResults')}
         </p>

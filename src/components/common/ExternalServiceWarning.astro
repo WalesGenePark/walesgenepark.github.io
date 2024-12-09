@@ -82,6 +82,7 @@
 
   .modal-content {
     background-color: white;
+    color: #1a1a1a;
     padding: 2rem;
     border-radius: 8px;
     max-width: 500px;
@@ -89,9 +90,18 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
 
+  :global(.dark) .modal-content {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+
   .modal-content a {
     color: #007bff;
-    text-decoration: underline;
+  }
+
+  :global(.dark) .modal-content a {
+    color: #3b82f6;
   }
 
   .modal-content a:hover {
@@ -118,9 +128,17 @@
     color: white;
   }
 
+  :global(.dark) .proceed-button {
+    background-color: #3b82f6;
+  }
+
   .cancel-button {
     background-color: #6c757d;
     color: white;
+  }
+
+  :global(.dark) .cancel-button {
+    background-color: #4b5563;
   }
 
   .hidden {
@@ -160,10 +178,10 @@
   let currentUrl = '';
   let currentModal: HTMLElement | null = null;
 
-  function initExternalWarnings() {
+  function initExternalWarnings(): void {
     // Handle privacy policy links
     document.querySelectorAll<HTMLAnchorElement>('.modal-content a[href*="privacy"]').forEach((link) => {
-      link.addEventListener('click', (e) => {
+      link.addEventListener('click', (e: MouseEvent) => {
         e.preventDefault();
         window.open(link.href, '_blank');
       });
@@ -176,7 +194,7 @@
 
       // Handle links for this service
       document.querySelectorAll<HTMLAnchorElement>(config.selector).forEach((link) => {
-        link.addEventListener('click', (e) => {
+        link.addEventListener('click', (e: MouseEvent) => {
           e.preventDefault();
           currentUrl = link.href;
           currentModal = modal;
