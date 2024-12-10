@@ -1,0 +1,110 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+import type { MetaData } from '~/types/metaData';
+import { languages } from '~/i18n/config';
+import { Image } from 'astro:assets';
+
+// Import images
+import ngsMainImage from '~/assets/images/ngs-service.jpg';
+import ngsLabImage from '~/assets/images/bioinformatics-service.jpg';
+import ngsAnalysisImage from '~/assets/images/education-service.jpg';
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const metadata: MetaData = {
+  title: t('nav.services') + ' - NGS',
+  description: 'Comprehensive Next Generation Sequencing Services',
+  alternateLinks: [
+    {
+      href: `/${lang === 'en' ? 'cy' : 'en'}/services/ngs`,
+      hreflang: lang === 'en' ? 'cy' : 'en',
+    },
+  ],
+};
+
+const content = {
+  en: {
+    title: 'Next Generation Sequencing (NGS) Services',
+    overview: 'Our state-of-the-art Next Generation Sequencing (NGS) services provide cutting-edge genomic analysis for research and clinical applications.',
+    sections: [
+      {
+        title: 'Advanced Sequencing Technologies',
+        description: 'We utilize the latest NGS platforms to deliver high-quality, comprehensive genomic data. Our advanced technologies enable precise and rapid sequencing across various genomic applications.',
+        image: ngsMainImage,
+      },
+      {
+        title: 'Comprehensive Genomic Analysis',
+        description: 'From whole genome sequencing to targeted panel analysis, we offer a wide range of sequencing services tailored to your specific research or clinical needs.',
+        image: ngsLabImage,
+      },
+      {
+        title: 'Expert Data Interpretation',
+        description: 'Our team of expert bioinformaticians and geneticists provide in-depth analysis and interpretation of sequencing data, ensuring meaningful insights for researchers and clinicians.',
+        image: ngsAnalysisImage,
+      }
+    ]
+  },
+  cy: {
+    title: 'Gwasanaethau Dilyniannu Cenhedlaeth Nesaf (NGS)',
+    overview: 'Mae ein gwasanaethau Dilyniannu Cenhedlaeth Nesaf (NGS) o"r radd flaenaf yn darparu dadansoddiad genomig arloesol ar gyfer ymchwil a chymwysiadau clinigol.',
+    sections: [
+      {
+        title: 'Technolegau Dilyniannu Uwch',
+        description: 'Rydym yn defnyddio"r platfformau NGS diweddaraf i ddarparu data genomig cynhwysfawr o ansawdd uchel. Mae ein technolegau uwch yn galluogi dilyniannu manwl a chyflym ar draws gwahanol gymwysiadau genomig.',
+        image: ngsMainImage,
+      },
+      {
+        title: 'Dadansoddiad Genomig Cynhwysfawr',
+        description: 'O ddilyniannu"r genom cyfan i ddadansoddiad panel wedi"i dargedu, rydym yn cynnig ystod eang o wasanaethau dilyniannu wedi"u teilwra i"ch anghenion ymchwil neu glinigol penodol.',
+        image: ngsLabImage,
+      },
+      {
+        title: 'Dehongli Data Arbenigol',
+        description: 'Mae ein tîm o fiowybodegwyr a genetegwyr arbenigol yn darparu dadansoddiad a dehongliad manwl o ddata dilyniannu, gan sicrhau mewnwelediadau ystyrlon i ymchwilwyr a chlinigwyr.',
+        image: ngsAnalysisImage,
+      }
+    ]
+  }
+};
+
+const currentContent = content[lang];
+---
+
+<Layout metadata={metadata}>
+  <section class="scroll-mt-16 px-4 py-16 mx-auto max-w-6xl lg:px-8 lg:py-20">
+    <div class="mb-12 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading text-red-500 dark:text-red-500">
+        {currentContent.title}
+      </h1>
+      <p class="text-xl text-gray-600 dark:text-slate-400">
+        {currentContent.overview}
+      </p>
+    </div>
+
+    <div class="grid gap-8 md:grid-cols-3">
+      {currentContent.sections.map((section) => (
+        <div class="relative flex flex-col p-6 bg-white dark:bg-slate-900 rounded-lg shadow-lg">
+          <div class="flex items-center mb-4">
+            <Image 
+              src={section.image} 
+              alt={section.title} 
+              class="w-full h-48 object-cover rounded-lg mb-4" 
+            />
+          </div>
+          <h3 class="text-xl font-bold mb-2">{section.title}</h3>
+          <p class="text-gray-600 dark:text-slate-400 flex-grow">
+            {section.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>

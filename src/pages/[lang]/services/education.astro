@@ -1,0 +1,110 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+import type { MetaData } from '~/types/metaData';
+import { languages } from '~/i18n/config';
+import { Image } from 'astro:assets';
+
+// Import images
+import educationMainImage from '~/assets/images/education-service.jpg';
+import educationWorkshopImage from '~/assets/images/ngs-service.jpg';
+import educationEngagementImage from '~/assets/images/bioinformatics-service.jpg';
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const metadata: MetaData = {
+  title: t('nav.services') + ' - Education & Engagement',
+  description: 'Comprehensive Genomics Education and Public Engagement Programs',
+  alternateLinks: [
+    {
+      href: `/${lang === 'en' ? 'cy' : 'en'}/services/education`,
+      hreflang: lang === 'en' ? 'cy' : 'en',
+    },
+  ],
+};
+
+const content = {
+  en: {
+    title: 'Education & Engagement Services',
+    overview: 'Empowering understanding of genetics and genomics through innovative educational programs and public engagement initiatives.',
+    sections: [
+      {
+        title: 'Professional Training',
+        description: 'Tailored workshops and training sessions for healthcare professionals, researchers, and students, covering the latest advances in genomic technologies and their clinical applications.',
+        image: educationMainImage,
+      },
+      {
+        title: 'Public Outreach',
+        description: 'Engaging community programs that demystify genomics, including public lectures, interactive workshops, and collaborative events to promote scientific literacy.',
+        image: educationWorkshopImage,
+      },
+      {
+        title: 'School and University Partnerships',
+        description: 'Collaborative educational initiatives with academic institutions to inspire the next generation of genomics researchers and healthcare professionals.',
+        image: educationEngagementImage,
+      }
+    ]
+  },
+  cy: {
+    title: 'Gwasanaethau Addysg ac Ymgysylltu',
+    overview: 'Grymuso dealltwriaeth o eneteg a genomeg drwy raglenni addysgol arloesol a mentrau ymgysylltu cyhoeddus.',
+    sections: [
+      {
+        title: 'Hyfforddiant Proffesiynol',
+        description: 'Gweithdai a sesiynau hyfforddi wedi"u teilwra ar gyfer gweithwyr gofal iechyd, ymchwilwyr, a myfyrwyr, yn cwmpasu"r datblygiadau diweddaraf mewn technolegau genomig a"u cymwysiadau clinigol.',
+        image: educationMainImage,
+      },
+      {
+        title: 'Ymgyrch Gyhoeddus',
+        description: 'Rhaglenni cymunedol sy"n dod â genomeg yn fwy hygyrch, gan gynnwys darlithoedd cyhoeddus, gweithdai rhyngweithiol a digwyddiadau cydweithredol i hyrwyddo llythrennedd gwyddonol.',
+        image: educationWorkshopImage,
+      },
+      {
+        title: 'Partneriaethau Ysgol a Phrifysgol',
+        description: 'Mentrau addysgol cydweithredol gydag sefydliadau academaidd i ysbrydoli"r genhedlaeth nesaf o ymchwilwyr genomig a gweithwyr gofal iechyd proffesiynol.',
+        image: educationEngagementImage,
+      }
+    ]
+  }
+};
+
+const currentContent = content[lang];
+---
+
+<Layout metadata={metadata}>
+  <section class="scroll-mt-16 px-4 py-16 mx-auto max-w-6xl lg:px-8 lg:py-20">
+    <div class="mb-12 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading text-red-500 dark:text-red-500">
+        {currentContent.title}
+      </h1>
+      <p class="text-xl text-gray-600 dark:text-slate-400">
+        {currentContent.overview}
+      </p>
+    </div>
+
+    <div class="grid gap-8 md:grid-cols-3">
+      {currentContent.sections.map((section) => (
+        <div class="relative flex flex-col p-6 bg-white dark:bg-slate-900 rounded-lg shadow-lg">
+          <div class="flex items-center mb-4">
+            <Image 
+              src={section.image} 
+              alt={section.title} 
+              class="w-full h-48 object-cover rounded-lg mb-4" 
+            />
+          </div>
+          <h3 class="text-xl font-bold mb-2">{section.title}</h3>
+          <p class="text-gray-600 dark:text-slate-400 flex-grow">
+            {section.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>

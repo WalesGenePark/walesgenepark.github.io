@@ -1,0 +1,110 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+import type { MetaData } from '~/types/metaData';
+import { languages } from '~/i18n/config';
+import { Image } from 'astro:assets';
+
+// Import images
+import bioinformaticsMainImage from '~/assets/images/bioinformatics-service.jpg';
+import bioinformaticsAnalysisImage from '~/assets/images/ngs-service.jpg';
+import bioinformaticsDataImage from '~/assets/images/education-service.jpg';
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const metadata: MetaData = {
+  title: t('nav.services') + ' - Bioinformatics',
+  description: 'Advanced Bioinformatics Data Analysis and Interpretation',
+  alternateLinks: [
+    {
+      href: `/${lang === 'en' ? 'cy' : 'en'}/services/bioinformatics`,
+      hreflang: lang === 'en' ? 'cy' : 'en',
+    },
+  ],
+};
+
+const content = {
+  en: {
+    title: 'Bioinformatics Services',
+    overview: 'Transforming complex genomic data into meaningful scientific insights through advanced computational techniques.',
+    sections: [
+      {
+        title: 'Custom Pipeline Development',
+        description: 'We design and implement tailored bioinformatics pipelines to meet the unique requirements of your research or clinical project, ensuring efficient and accurate data processing.',
+        image: bioinformaticsMainImage,
+      },
+      {
+        title: 'Genomic Data Analysis',
+        description: 'Our expert team provides comprehensive analysis services including variant calling, annotation, pathway analysis, and advanced statistical modeling of genomic datasets.',
+        image: bioinformaticsAnalysisImage,
+      },
+      {
+        title: 'Data Interpretation & Reporting',
+        description: 'We translate complex genomic data into clear, actionable insights, providing detailed reports and visualizations that support research and clinical decision-making.',
+        image: bioinformaticsDataImage,
+      }
+    ]
+  },
+  cy: {
+    title: 'Gwasanaethau Biowybodeg',
+    overview: 'Trawsnewid data genomig cymhleth yn fewnwelediadau gwyddonol ystyrlon drwy dechnegau cyfrifiadurol uwch.',
+    sections: [
+      {
+        title: 'Datblygu Piblinell Pwrpasol',
+        description: 'Rydym yn dylunio ac yn gweithredu piblinellau biowybodeg wedi"u teilwra i ddiwallu gofynion unigryw eich prosiect ymchwil neu glinigol, gan sicrhau prosesu data effeithlon a chywir.',
+        image: bioinformaticsMainImage,
+      },
+      {
+        title: 'Dadansoddiad Data Genomig',
+        description: 'Mae ein tîm arbenigol yn darparu gwasanaethau dadansoddi cynhwysfawr gan gynnwys galw amrywiolion, anodiad, dadansoddiad llwybr, a modelu ystadegol uwch o setiau data genomig.',
+        image: bioinformaticsAnalysisImage,
+      },
+      {
+        title: 'Dehongli a Adrodd Data',
+        description: 'Rydym yn trosglwyddo data genomig cymhleth yn fewnwelediadau clir a gweithredol, gan ddarparu adroddiadau a delweddu manwl sy"n cefnogi ymchwil a phenderfyniadau clinigol.',
+        image: bioinformaticsDataImage,
+      }
+    ]
+  }
+};
+
+const currentContent = content[lang];
+---
+
+<Layout metadata={metadata}>
+  <section class="scroll-mt-16 px-4 py-16 mx-auto max-w-6xl lg:px-8 lg:py-20">
+    <div class="mb-12 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading text-red-500 dark:text-red-500">
+        {currentContent.title}
+      </h1>
+      <p class="text-xl text-gray-600 dark:text-slate-400">
+        {currentContent.overview}
+      </p>
+    </div>
+
+    <div class="grid gap-8 md:grid-cols-3">
+      {currentContent.sections.map((section) => (
+        <div class="relative flex flex-col p-6 bg-white dark:bg-slate-900 rounded-lg shadow-lg">
+          <div class="flex items-center mb-4">
+            <Image 
+              src={section.image} 
+              alt={section.title} 
+              class="w-full h-48 object-cover rounded-lg mb-4" 
+            />
+          </div>
+          <h3 class="text-xl font-bold mb-2">{section.title}</h3>
+          <p class="text-gray-600 dark:text-slate-400 flex-grow">
+            {section.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>

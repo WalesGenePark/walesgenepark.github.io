@@ -23,6 +23,7 @@ const services = {
         'State-of-the-art Next Generation Sequencing services providing comprehensive genomic analysis for research and clinical applications. Our expert team delivers high-quality sequencing data using latest technologies.',
       image: ngsImage,
       alt: 'Next Generation Sequencing equipment and analysis',
+      link: '/services/ngs',
     },
     {
       title: 'Bioinformatic Services',
@@ -30,6 +31,7 @@ const services = {
         'Advanced bioinformatics support for genomic data analysis, including custom pipeline development, variant calling, and interpretation. We help transform complex genomic data into meaningful insights.',
       image: bioinformaticsImage,
       alt: 'Bioinformatics analysis visualization',
+      link: '/services/bioinformatics',
     },
     {
       title: 'Education & Engagement',
@@ -37,6 +39,7 @@ const services = {
         'Comprehensive educational programs and public engagement initiatives to promote understanding of genetics and genomics. We offer workshops, training sessions, and resources for healthcare professionals and the public.',
       image: educationImage,
       alt: 'Education and public engagement session',
+      link: '/services/education',
     },
   ],
   cy: [
@@ -46,6 +49,7 @@ const services = {
         'Gwasanaethau Dilyniannu Cenhedlaeth Nesaf o"r radd flaenaf yn darparu dadansoddiad genomig cynhwysfawr ar gyfer ymchwil a chymwysiadau clinigol. Mae ein tim arbenigol yn darparu data dilyniannu o ansawdd uchel gan ddefnyddio"r technolegau diweddaraf.',
       image: ngsImage,
       alt: 'Offer Dilyniannu Cenhedlaeth Nesaf a dadansoddiad',
+      link: '/services/ngs',
     },
     {
       title: 'Gwasanaethau Biowybodeg',
@@ -53,6 +57,7 @@ const services = {
         'Cymorth biowybodeg uwch ar gyfer dadansoddi data genomig, gan gynnwys datblygu piblinell pwrpasol, galw amrywiolion, a dehongli. Rydym yn helpu i drawsnewid data genomig cymhleth yn fewnwelediadau ystyrlon.',
       image: bioinformaticsImage,
       alt: 'Biowybodeg dadansoddiad delweddu',
+      link: '/services/bioinformatics',
     },
     {
       title: 'Addysg ac Ymgysylltu',
@@ -60,6 +65,7 @@ const services = {
         'Rhaglenni addysgol cynhwysfawr a mentrau ymgysylltu a"r cyhoedd i hyrwyddo dealltwriaeth o eneteg a genomeg. Rydym yn cynnig gweithdai, sesiynau hyfforddi, ac adnoddau ar gyfer gweithwyr gofal iechyd proffesiynol a"r cyhoedd.',
       image: educationImage,
       alt: 'Sesiwn addysg ac ymgysylltu a"r cyhoedd',
+      link: '/services/education',
     },
   ],
 };
@@ -91,6 +97,12 @@ const services = {
             </div>
             <h3 class="text-xl font-bold mb-2">{service.title}</h3>
             <p class="text-gray-600 dark:text-slate-400 flex-grow">{service.description}</p>
+            <a 
+              href={`/${currentLang}${service.link}`} 
+              class="mt-4 inline-block px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors"
+            >
+              {currentLang === 'en' ? 'Learn More' : 'Dysgu Mwy'}
+            </a>
           </div>
         ))
       }
